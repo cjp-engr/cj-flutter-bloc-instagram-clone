@@ -1,1 +1,1 @@
-# cj-flutter-bloc-instagram-clone
+# cj-flutter-riverpod-instagram-clone
