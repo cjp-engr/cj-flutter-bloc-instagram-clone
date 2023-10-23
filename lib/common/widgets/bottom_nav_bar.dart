@@ -26,6 +26,11 @@ class InstaBottomNavBar extends StatelessWidget {
             onPressed: () {},
           ),
           InstaButton(
+            assetName: IconRes.notification,
+            buttonType: EButtonType.icon,
+            onPressed: () {},
+          ),
+          InstaButton(
             assetName: IconRes.newPost,
             buttonType: EButtonType.icon,
             onPressed: () {},

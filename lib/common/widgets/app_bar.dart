@@ -24,7 +24,7 @@ class InstaAppBar extends StatelessWidget implements PreferredSizeWidget {
           title: appBarTitle,
           actions: appBarActions,
         ),
-        body: body,
+        body: SingleChildScrollView(child: body),
         bottomNavigationBar: const InstaBottomNavBar(),
       ),
     );

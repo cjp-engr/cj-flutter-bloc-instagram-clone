@@ -6,6 +6,7 @@ class IconRes {
   static const String home = '$_iconBase/home.png';
   static const String messenger = '$_iconBase/messenger.png';
   static const String newPost = '$_iconBase/new-post.png';
+  static const String notification = '$_iconBase/notification.png';
   static const String saved = '$_iconBase/saved.png';
   static const String settings = '$_iconBase/settings.png';
   static const String userTagged = '$_iconBase/user-tagged.png';
