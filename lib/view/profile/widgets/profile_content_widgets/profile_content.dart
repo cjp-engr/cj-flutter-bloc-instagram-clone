@@ -52,7 +52,7 @@ class ProfileContentWidget extends StatelessWidget {
   Widget _tab(String assetName) {
     return Tab(
       icon: InstaButton(
-        buttonType: EButtonType.icon,
+        buttonType: InstaButtonType.icon,
         assetName: assetName,
       ),
     );

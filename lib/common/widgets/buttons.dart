@@ -1,26 +1,27 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 
 class InstaButton extends StatelessWidget {
-  final EButtonType buttonType;
+  final InstaButtonType buttonType;
   final String? text;
   final String? assetName;
   final Function()? onPressed;
-  const InstaButton(
-      {super.key,
-      required this.buttonType,
-      this.text,
-      this.assetName,
-      this.onPressed});
+  const InstaButton({
+    super.key,
+    required this.buttonType,
+    this.text,
+    this.assetName,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     switch (buttonType) {
-      case EButtonType.primary:
+      case InstaButtonType.primary:
         return _PrimaryButton(text: text!, onPressed: onPressed);
-      case EButtonType.icon:
+      case InstaButtonType.icon:
         return _IconButton(
           assetName: assetName!,
           onPressed: onPressed,
@@ -85,13 +86,10 @@ class _PrimaryButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
-        child: Text(
-          text,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
+        child: InstaText(
+          text: text,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

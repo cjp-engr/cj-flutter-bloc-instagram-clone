@@ -1,3 +1,5 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 class ProfileCountsWidget extends StatelessWidget {
@@ -11,33 +13,46 @@ class ProfileCountsWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  Text('25'),
-                  Text('posts'),
-                ],
-              ),
+            SizedBox(width: InstaSpacing.tiny),
+            Column(
+              children: [
+                InstaText(
+                  text: '25',
+                  fontWeight: FontWeight.bold,
+                ),
+                InstaText(
+                  text: 'posts',
+                  color: Colors.grey,
+                ),
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  Text('4'),
-                  Text('followers'),
-                ],
-              ),
+            SizedBox(width: InstaSpacing.tiny),
+            Column(
+              children: [
+                InstaText(
+                  text: '4',
+                  fontWeight: FontWeight.bold,
+                ),
+                InstaText(
+                  text: 'followers',
+                  color: Colors.grey,
+                ),
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  Text('54'),
-                  Text('following'),
-                ],
-              ),
+            SizedBox(width: InstaSpacing.tiny),
+            Column(
+              children: [
+                InstaText(
+                  text: '54',
+                  fontWeight: FontWeight.bold,
+                ),
+                InstaText(
+                  text: 'following',
+                  color: Colors.grey,
+                ),
+              ],
             ),
+            SizedBox(width: InstaSpacing.tiny),
           ],
         ),
         Divider(),

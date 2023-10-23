@@ -17,13 +17,13 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return InstaAppBar(
       appBarLeading: InstaButton(
-        buttonType: EButtonType.icon,
+        buttonType: InstaButtonType.icon,
         assetName: IconRes.settings,
         onPressed: () {},
       ),
       appBarActions: const [
         InstaButton(
-          buttonType: EButtonType.icon,
+          buttonType: InstaButtonType.icon,
           assetName: IconRes.discoverPeople,
         )
       ],

@@ -1,5 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 class ProfileHighlightsWidget extends StatelessWidget {
@@ -40,7 +41,7 @@ class ProfileHighlightsWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: InstaSpacing.tiny),
-          Text(text),
+          InstaText(text: text)
         ],
       ),
     );

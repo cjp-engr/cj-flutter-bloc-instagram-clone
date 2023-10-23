@@ -22,22 +22,22 @@ class InstaBottomNavBar extends StatelessWidget {
         children: [
           InstaButton(
             assetName: IconRes.home,
-            buttonType: EButtonType.icon,
+            buttonType: InstaButtonType.icon,
             onPressed: () {},
           ),
           InstaButton(
             assetName: IconRes.notification,
-            buttonType: EButtonType.icon,
+            buttonType: InstaButtonType.icon,
             onPressed: () {},
           ),
           InstaButton(
             assetName: IconRes.newPost,
-            buttonType: EButtonType.icon,
+            buttonType: InstaButtonType.icon,
             onPressed: () {},
           ),
           InstaButton(
             assetName: IconRes.messenger,
-            buttonType: EButtonType.icon,
+            buttonType: InstaButtonType.icon,
             onPressed: () {},
           ),
           _profileIcon()
@@ -51,10 +51,14 @@ class InstaBottomNavBar extends StatelessWidget {
       onTap: () {},
       child: const CircleAvatar(
         backgroundColor: Colors.white,
-        radius: 21,
+        radius: 20,
         child: CircleAvatar(
-          backgroundImage: NetworkImage(IconRes.testOnly),
+          backgroundColor: Colors.black,
           radius: 18,
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(IconRes.testOnly),
+            radius: 16,
+          ),
         ),
       ),
     );

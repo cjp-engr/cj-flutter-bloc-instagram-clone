@@ -1,6 +1,8 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 class ProfileFirstColWidget extends StatelessWidget {
@@ -22,16 +24,14 @@ class ProfileFirstColWidget extends StatelessWidget {
           children: [
             const Row(
               children: [
-                Text(
-                  'user_name',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                InstaText(
+                  text: 'user_name',
+                  fontWeight: FontWeight.bold,
+                  fontSize: InstaFontSize.veryLarge,
                 ),
                 SizedBox(width: 10),
                 InstaButton(
-                  buttonType: EButtonType.icon,
+                  buttonType: InstaButtonType.icon,
                   assetName: IconRes.settings,
                 )
               ],
@@ -40,13 +40,13 @@ class ProfileFirstColWidget extends StatelessWidget {
             Row(
               children: [
                 InstaButton(
-                  buttonType: EButtonType.primary,
+                  buttonType: InstaButtonType.primary,
                   text: 'Edit Profile',
                   onPressed: () {},
                 ),
                 const SizedBox(width: 10),
                 InstaButton(
-                  buttonType: EButtonType.primary,
+                  buttonType: InstaButtonType.primary,
                   text: 'View Archive',
                   onPressed: () {},
                 ),
