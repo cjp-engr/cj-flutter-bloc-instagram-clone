@@ -1,5 +1,5 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/routes.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/app_theme.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/profile/profile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,11 +12,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'Insta Clone App',
       debugShowCheckedModeBanner: false,
       theme: themeData,
-      home: const ProfilePage(),
+      routerConfig: router,
     );
   }
 }

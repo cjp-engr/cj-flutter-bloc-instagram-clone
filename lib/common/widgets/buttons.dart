@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class InstaButton extends StatelessWidget {
         return _PrimaryButton(text: text!, onPressed: onPressed);
       case InstaButtonType.icon:
         return _IconButton(
-          assetName: assetName!,
+          assetName: assetName ?? IconRes.home,
           onPressed: onPressed,
         );
 

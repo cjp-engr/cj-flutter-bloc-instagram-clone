@@ -1,5 +1,6 @@
 class IconRes {
   static const String _iconBase = 'assets/icons';
+  static const String camera = '$_iconBase/camera.png';
   static const String discoverPeople = '$_iconBase/discover-people.png';
   static const String dropdown = '$_iconBase/dropdown.png';
   static const String grid = '$_iconBase/grid.png';
@@ -11,6 +12,7 @@ class IconRes {
   static const String settings = '$_iconBase/settings.png';
   static const String userTagged = '$_iconBase/user-tagged.png';
   static const String video = '$_iconBase/video.png';
+  static const String writeMessage = '$_iconBase/write-message.png';
 
   static const String testOnly = 'https://picsum.photos/300';
   static const String testImage = 'assets/images/test_image.png';

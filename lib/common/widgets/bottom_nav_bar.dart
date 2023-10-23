@@ -1,7 +1,10 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/app_route_name.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class InstaBottomNavBar extends StatelessWidget {
   const InstaBottomNavBar({super.key});
@@ -23,7 +26,9 @@ class InstaBottomNavBar extends StatelessWidget {
           InstaButton(
             assetName: IconRes.home,
             buttonType: InstaButtonType.icon,
-            onPressed: () {},
+            onPressed: () {
+              context.go(AppRouteName.home);
+            },
           ),
           InstaButton(
             assetName: IconRes.notification,
@@ -38,28 +43,24 @@ class InstaBottomNavBar extends StatelessWidget {
           InstaButton(
             assetName: IconRes.messenger,
             buttonType: InstaButtonType.icon,
-            onPressed: () {},
+            onPressed: () {
+              context.go(AppRouteName.messaging);
+            },
           ),
-          _profileIcon()
+          _profileIcon(context)
         ],
       ),
     );
   }
 
-  Widget _profileIcon() {
+  Widget _profileIcon(BuildContext context) {
     return InkWell(
-      onTap: () {},
-      child: const CircleAvatar(
-        backgroundColor: Colors.white,
-        radius: 20,
-        child: CircleAvatar(
-          backgroundColor: Colors.black,
-          radius: 18,
-          child: CircleAvatar(
-            backgroundImage: NetworkImage(IconRes.testOnly),
-            radius: 16,
-          ),
-        ),
+      onTap: () {
+        context.go(AppRouteName.profile);
+      },
+      child: const InstaCircleAvatar(
+        image: IconRes.testOnly,
+        radius: 16,
       ),
     );
   }
