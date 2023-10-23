@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:flutter/material.dart';
 
@@ -6,9 +7,20 @@ class ProfileHighlightsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Row(
+      children: [
+        _highlights('Test Test', false),
+        const SizedBox(width: 10),
+        _highlights('New', true),
+      ],
+    );
+  }
+
+  Widget _highlights(String text, bool isAdd) {
     return InkWell(
       onTap: () {},
-      child: const Column(
+      splashFactory: NoSplash.splashFactory,
+      child: Column(
         children: [
           CircleAvatar(
             backgroundColor: Colors.white,
@@ -16,13 +28,19 @@ class ProfileHighlightsWidget extends StatelessWidget {
             child: CircleAvatar(
               backgroundColor: Colors.black,
               radius: 42,
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(IconRes.testOnly),
-                radius: 40,
-              ),
+              child: isAdd
+                  ? const Icon(
+                      Icons.add,
+                      size: 50,
+                    )
+                  : const CircleAvatar(
+                      backgroundImage: NetworkImage(IconRes.testOnly),
+                      radius: 40,
+                    ),
             ),
           ),
-          Text('Test Test'),
+          const SizedBox(height: InstaSpacing.tiny),
+          Text(text),
         ],
       ),
     );

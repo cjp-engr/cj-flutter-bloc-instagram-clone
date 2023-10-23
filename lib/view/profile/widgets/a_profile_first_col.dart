@@ -22,7 +22,13 @@ class ProfileFirstColWidget extends StatelessWidget {
           children: [
             const Row(
               children: [
-                Text('user_name'),
+                Text(
+                  'user_name',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 SizedBox(width: 10),
                 InstaButton(
                   buttonType: EButtonType.icon,

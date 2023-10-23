@@ -50,7 +50,8 @@ class _IconButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         alignment: Alignment.centerLeft,
-      ),
+        splashFactory: NoSplash.splashFactory,
+      ).copyWith(overlayColor: MaterialStateProperty.all(Colors.transparent)),
       child: Image.asset(
         assetName,
         scale: 2.3,

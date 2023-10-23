@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:flutter/material.dart';
 
 class ProfileSecondColWidget extends StatelessWidget {
@@ -11,7 +12,9 @@ class ProfileSecondColWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('First Name Last Name'),
+            SizedBox(height: InstaSpacing.large),
             Text('Description Lorem Ipsum'),
+            SizedBox(height: InstaSpacing.large),
           ],
         ),
         SizedBox(),

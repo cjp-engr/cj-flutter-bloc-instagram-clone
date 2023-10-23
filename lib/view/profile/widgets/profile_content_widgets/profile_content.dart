@@ -31,6 +31,7 @@ class ProfileContentWidget extends StatelessWidget {
                 ),
               ),
             ),
+            splashFactory: NoSplash.splashFactory,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height,
