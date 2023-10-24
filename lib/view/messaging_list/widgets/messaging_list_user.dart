@@ -1,10 +1,12 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/app_route_name.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MessagingList extends StatelessWidget {
   const MessagingList({super.key});
@@ -16,26 +18,24 @@ class MessagingList extends StatelessWidget {
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            InstaText(
-              text: 'Messages',
-            ),
-            InstaText(
-              text: 'Requests',
-            ),
+            InstaText(text: 'Messages'),
+            InstaText(text: 'Requests'),
           ],
         ),
         const SizedBox(height: InstaSpacing.medium),
         Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _userDetails(),
-                const InstaButton(
-                  buttonType: InstaButtonType.icon,
-                  assetName: IconRes.camera,
-                ),
-              ],
+            InkWell(
+              onTap: () {
+                context.go(AppRouteName.messagingChat);
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _userDetails(),
+                  _action(),
+                ],
+              ),
             ),
           ],
         )
@@ -47,7 +47,7 @@ class MessagingList extends StatelessWidget {
     return const Row(
       children: [
         InstaCircleAvatar(image: IconRes.testOnly),
-        SizedBox(width: InstaSpacing.medium),
+        SizedBox(width: InstaSpacing.small),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -61,6 +61,13 @@ class MessagingList extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+
+  Widget _action() {
+    return const InstaButton(
+      buttonType: InstaButtonType.icon,
+      assetName: IconRes.camera,
     );
   }
 }

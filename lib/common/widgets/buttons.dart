@@ -22,6 +22,8 @@ class InstaButton extends StatelessWidget {
     switch (buttonType) {
       case InstaButtonType.primary:
         return _PrimaryButton(text: text!, onPressed: onPressed);
+      case InstaButtonType.seconday:
+        return _SecondaryButton(text: text!, onPressed: onPressed);
       case InstaButtonType.icon:
         return _IconButton(
           assetName: assetName ?? IconRes.home,
@@ -80,6 +82,40 @@ class _PrimaryButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.grey.shade800,
+          minimumSize: Size.zero,
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+        child: InstaText(
+          text: text,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}
+
+class _SecondaryButton extends StatelessWidget {
+  final String text;
+  final Function()? onPressed;
+  const _SecondaryButton({
+    Key? key,
+    required this.text,
+    this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 100,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue,
           minimumSize: Size.zero,
           padding: const EdgeInsets.symmetric(vertical: 10),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,

@@ -31,8 +31,14 @@ class HomePost extends StatelessWidget {
           radius: InstaCircleAvatarSize.small,
         ),
         SizedBox(width: InstaSpacing.extraSmall),
-        InstaText(
-          text: 'user_name',
+        Column(
+          children: [
+            InstaText(text: 'user_name'),
+            InstaText(
+              text: 'Afghanistan',
+              color: Colors.grey,
+            ),
+          ],
         ),
       ],
     );

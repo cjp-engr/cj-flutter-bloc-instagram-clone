@@ -32,9 +32,11 @@ class InstaBottomNavBar extends StatelessWidget {
             },
           ),
           InstaButton(
-            assetName: IconRes.heart,
+            assetName: IconRes.notification,
             buttonType: InstaButtonType.icon,
-            onPressed: () {},
+            onPressed: () {
+              context.go(AppRouteName.notification);
+            },
           ),
           InstaButton(
             assetName: IconRes.newPost,
@@ -45,7 +47,7 @@ class InstaBottomNavBar extends StatelessWidget {
             assetName: IconRes.messenger,
             buttonType: InstaButtonType.icon,
             onPressed: () {
-              context.go(AppRouteName.messaging);
+              context.go(AppRouteName.messagingList);
             },
           ),
           _profileIcon(context)

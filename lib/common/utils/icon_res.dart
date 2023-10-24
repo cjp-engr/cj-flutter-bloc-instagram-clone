@@ -7,8 +7,10 @@ class IconRes {
   static const String grid = '$_iconBase/grid.png';
   static const String heart = '$_iconBase/heart.png';
   static const String home = '$_iconBase/home.png';
+  static const String menuVertical = '$_iconBase/menu-vertical.png';
   static const String messenger = '$_iconBase/messenger.png';
   static const String newPost = '$_iconBase/new-post.png';
+  static const String notification = '$_iconBase/notification.png';
   static const String paperPlane = '$_iconBase/paper-plane.png';
   static const String saved = '$_iconBase/saved.png';
   static const String settings = '$_iconBase/settings.png';

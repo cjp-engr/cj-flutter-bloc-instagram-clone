@@ -6,12 +6,14 @@ class InstaText extends StatelessWidget {
   final InstaFontSize fontSize;
   final FontWeight fontWeight;
   final Color? color;
+  final int? maxLines;
   const InstaText({
     super.key,
     required this.text,
     this.fontSize = InstaFontSize.medium,
     this.fontWeight = FontWeight.normal,
     this.color,
+    this.maxLines,
   });
 
   @override
@@ -23,6 +25,7 @@ class InstaText extends StatelessWidget {
         fontWeight: fontWeight,
         color: color,
       ),
+      maxLines: maxLines,
     );
   }
 }
