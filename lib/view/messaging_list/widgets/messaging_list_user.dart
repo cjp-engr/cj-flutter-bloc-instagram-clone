@@ -6,8 +6,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-class MessagingListWidget extends StatelessWidget {
-  const MessagingListWidget({super.key});
+class MessagingList extends StatelessWidget {
+  const MessagingList({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
 import 'package:flutter/material.dart';
 
 class InstaCircleAvatar extends StatelessWidget {
@@ -6,7 +7,7 @@ class InstaCircleAvatar extends StatelessWidget {
   const InstaCircleAvatar({
     super.key,
     required this.image,
-    this.radius = 40,
+    this.radius = InstaCircleAvatarSize.large,
   });
 
   @override

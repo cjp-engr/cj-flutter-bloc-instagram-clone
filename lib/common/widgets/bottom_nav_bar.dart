@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/app_route_name.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
@@ -31,7 +32,7 @@ class InstaBottomNavBar extends StatelessWidget {
             },
           ),
           InstaButton(
-            assetName: IconRes.notification,
+            assetName: IconRes.heart,
             buttonType: InstaButtonType.icon,
             onPressed: () {},
           ),
@@ -60,7 +61,7 @@ class InstaBottomNavBar extends StatelessWidget {
       },
       child: const InstaCircleAvatar(
         image: IconRes.testOnly,
-        radius: 16,
+        radius: InstaCircleAvatarSize.small,
       ),
     );
   }

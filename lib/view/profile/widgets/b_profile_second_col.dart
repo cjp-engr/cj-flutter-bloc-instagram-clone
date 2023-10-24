@@ -2,8 +2,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-class ProfileSecondColWidget extends StatelessWidget {
-  const ProfileSecondColWidget({super.key});
+class ProfileSecondCol extends StatelessWidget {
+  const ProfileSecondCol({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/app_route_name.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/home.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/messaging/messaging.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/messaging_list.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +22,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: AppRouteName.messaging,
       builder: (BuildContext context, GoRouterState state) {
-        return const MessagingPage();
+        return const MessagingListPage();
       },
     ),
     GoRoute(

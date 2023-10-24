@@ -2,8 +2,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-class ProfileCountsWidget extends StatelessWidget {
-  const ProfileCountsWidget({super.key});
+class ProfileCounts extends StatelessWidget {
+  const ProfileCounts({super.key});
 
   @override
   Widget build(BuildContext context) {

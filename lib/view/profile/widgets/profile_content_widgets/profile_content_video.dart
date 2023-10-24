@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ProfileContentVideoWidget extends StatelessWidget {
-  const ProfileContentVideoWidget({super.key});
+class ProfileContentVideo extends StatelessWidget {
+  const ProfileContentVideo({super.key});
 
   @override
   Widget build(BuildContext context) {

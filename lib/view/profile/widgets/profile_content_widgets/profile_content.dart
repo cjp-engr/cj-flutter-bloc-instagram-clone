@@ -6,8 +6,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/profile
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/profile_content_widgets/profile_content_video.dart';
 import 'package:flutter/material.dart';
 
-class ProfileContentWidget extends StatelessWidget {
-  const ProfileContentWidget({super.key});
+class ProfileContent extends StatelessWidget {
+  const ProfileContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +37,10 @@ class ProfileContentWidget extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             child: const TabBarView(
               children: [
-                ProfileContentAllWidget(),
-                ProfileContentVideoWidget(),
+                ProfileContentAll(),
+                ProfileContentVideo(),
                 Text("Saved Body"),
-                ProfileContentTaggedWidget(),
+                ProfileContentTagged(),
               ],
             ),
           ),

@@ -7,8 +7,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-class ProfileFirstColWidget extends StatelessWidget {
-  const ProfileFirstColWidget({super.key});
+class ProfileFirstCol extends StatelessWidget {
+  const ProfileFirstCol({super.key});
 
   @override
   Widget build(BuildContext context) {
