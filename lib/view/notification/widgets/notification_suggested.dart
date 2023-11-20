@@ -51,7 +51,7 @@ class NotificationSuggested extends StatelessWidget {
     return Row(
       children: [
         InstaButton(
-          buttonType: InstaButtonType.seconday,
+          buttonType: InstaButtonType.secondary,
           text: 'Follow',
           onPressed: () {},
         ),

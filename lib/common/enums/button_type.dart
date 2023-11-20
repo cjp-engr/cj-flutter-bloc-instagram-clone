@@ -1,1 +1,1 @@
-enum InstaButtonType { primary, seconday, icon }
+enum InstaButtonType { primary, secondary, icon }

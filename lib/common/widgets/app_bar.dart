@@ -1,5 +1,5 @@
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 // ignore: must_be_immutable
 class InstaAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -24,8 +24,20 @@ class InstaAppBar extends StatelessWidget implements PreferredSizeWidget {
           title: appBarTitle,
           actions: appBarActions,
         ),
-        body: SingleChildScrollView(child: body),
-        bottomNavigationBar: const InstaBottomNavBar(),
+        body: AdaptiveLayout(
+          body: SlotLayout(
+            config: <Breakpoint, SlotLayoutConfig>{
+              Breakpoints.small: SlotLayout.from(
+                key: const Key('body_small'),
+                builder: (_) => SingleChildScrollView(child: body!),
+              ),
+              Breakpoints.medium: SlotLayout.from(
+                key: const Key('body_medium'),
+                builder: (_) => SingleChildScrollView(child: body!),
+              )
+            },
+          ),
+        ),
       ),
     );
   }

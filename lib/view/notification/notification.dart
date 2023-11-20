@@ -26,5 +26,21 @@ class NotificationPage extends StatelessWidget {
         ),
       ),
     );
+    // return InstaAppBar(
+    //   appBarTitle: const InstaText(
+    //     text: 'Notifications',
+    //     fontWeight: FontWeight.bold,
+    //   ),
+    //   body: const Padding(
+    //     padding: EdgeInsets.symmetric(horizontal: InstaSpacing.verySmall),
+    //     child: Column(
+    //       children: [
+    //         NotificationList(),
+    //         SizedBox(height: InstaSpacing.medium),
+    //         NotificationSuggested(),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }

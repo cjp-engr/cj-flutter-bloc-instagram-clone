@@ -5,4 +5,5 @@ class AppRouteName {
   static const String messagingChat = '${base}messaging-chat';
   static const String home = '${base}home';
   static const String notification = '${base}notification';
+  static const String posts = '${base}posts';
 }

@@ -1,4 +1,5 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/profile_content_widgets/profile_content_all.dart';
@@ -34,7 +35,7 @@ class ProfileContent extends StatelessWidget {
             splashFactory: NoSplash.splashFactory,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height,
+            height: context.screenHeight,
             child: const TabBarView(
               children: [
                 ProfileContentAll(),

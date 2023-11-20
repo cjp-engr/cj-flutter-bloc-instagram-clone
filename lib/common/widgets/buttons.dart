@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
@@ -9,21 +10,35 @@ class InstaButton extends StatelessWidget {
   final String? text;
   final String? assetName;
   final Function()? onPressed;
+  final double? width;
+  final double? height;
   const InstaButton({
     super.key,
     required this.buttonType,
     this.text,
     this.assetName,
     this.onPressed,
+    this.width,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     switch (buttonType) {
       case InstaButtonType.primary:
-        return _PrimaryButton(text: text!, onPressed: onPressed);
-      case InstaButtonType.seconday:
-        return _SecondaryButton(text: text!, onPressed: onPressed);
+        return _PrimaryButton(
+          text: text!,
+          onPressed: onPressed,
+          width: width,
+          height: height,
+        );
+      case InstaButtonType.secondary:
+        return _SecondaryButton(
+          text: text!,
+          onPressed: onPressed,
+          width: width,
+          height: height,
+        );
       case InstaButtonType.icon:
         return _IconButton(
           assetName: assetName ?? IconRes.home,
@@ -68,16 +83,21 @@ class _IconButton extends StatelessWidget {
 class _PrimaryButton extends StatelessWidget {
   final String text;
   final Function()? onPressed;
+  final double? width;
+  final double? height;
   const _PrimaryButton({
     Key? key,
     required this.text,
     this.onPressed,
+    this.width,
+    this.height,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 120,
+      width: width ?? 120,
+      height: height ?? context.screenHeight * 0.055,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -102,16 +122,21 @@ class _PrimaryButton extends StatelessWidget {
 class _SecondaryButton extends StatelessWidget {
   final String text;
   final Function()? onPressed;
+  final double? width;
+  final double? height;
   const _SecondaryButton({
     Key? key,
     required this.text,
     this.onPressed,
+    this.width,
+    this.height,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100,
+      width: width ?? 120,
+      height: height ?? context.screenHeight * 0.055,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

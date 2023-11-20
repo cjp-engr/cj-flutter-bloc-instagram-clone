@@ -35,5 +35,29 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+
+    // return InstaAppBar(
+    //   appBarTitle: const InstaText(
+    //     text: 'Instaclone',
+    //     fontWeight: FontWeight.w900,
+    //     fontSize: InstaFontSize.veryLarge,
+    //   ),
+    //   body: TapRegion(
+    //     onTapOutside: (event) => FocusScope.of(context).unfocus(),
+    //     child: const Padding(
+    //       padding: EdgeInsets.symmetric(horizontal: InstaSpacing.verySmall),
+    //       child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: [
+    //           HomeHighlights(),
+    //           SizedBox(height: InstaSpacing.medium),
+    //           HomePost(),
+    //           SizedBox(height: InstaSpacing.medium),
+    //           HomeLikesComments(),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
