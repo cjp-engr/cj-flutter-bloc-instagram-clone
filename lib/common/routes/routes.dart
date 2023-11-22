@@ -1,11 +1,12 @@
 // private navigators
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/nav_bar.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/home/home.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_chat/messaging_chat.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/messaging_list.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/notification/notification.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/posts/posts.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/profile/profile.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/add_post_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/home_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_chat/messaging_chat_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/messaging_list_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/notification/notification_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,7 +23,7 @@ final _shellNavigatorProfileKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorProfileKey');
 
 final goRouter = GoRouter(
-  initialLocation: '/profile',
+  initialLocation: '/${InstaRouteNames.profile}',
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   routes: [
@@ -31,72 +32,102 @@ final goRouter = GoRouter(
         return InstaNavigationBar(navigationShell: navigationShell);
       },
       branches: [
-        StatefulShellBranch(
-          navigatorKey: _shellNavigatorHomeKey,
-          routes: [
-            GoRoute(
-              path: '/home',
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: HomePage(),
-              ),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          navigatorKey: _shellNavigatorNotificationKey,
-          routes: [
-            GoRoute(
-              path: '/notification',
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: NotificationPage(),
-              ),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          navigatorKey: _shellNavigatorPostsKey,
-          routes: [
-            GoRoute(
-              path: '/posts',
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: PostsPage(),
-              ),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          navigatorKey: _shellNavigatorMessagingKey,
-          routes: [
-            // Messaging
-            GoRoute(
-              path: '/messaging-list',
-              pageBuilder: (context, state) {
-                return const NoTransitionPage(
-                  child: MessagingListPage(),
-                );
-              },
-            ),
-            GoRoute(
-              path: '/messaging-chat/:id',
-              name: 'messaging-chat',
-              builder: (context, state) {
-                return MessagingChatPage(id: state.pathParameters['id']!);
-              },
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          navigatorKey: _shellNavigatorProfileKey,
-          routes: [
-            GoRoute(
-              path: '/profile',
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: ProfilePage(),
-              ),
-            ),
-          ],
-        ),
+        _home(),
+        _notification(),
+        _post(),
+        _messaging(),
+        _profile(),
       ],
     ),
   ],
 );
+
+StatefulShellBranch _home() {
+  return StatefulShellBranch(
+    navigatorKey: _shellNavigatorHomeKey,
+    routes: [
+      GoRoute(
+        path: '/${InstaRouteNames.home}',
+        name: InstaRouteNames.home,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: HomePage(),
+        ),
+      ),
+      GoRoute(
+        path: '/${InstaRouteNames.userDetails}/:id',
+        name: InstaRouteNames.userDetails,
+        builder: (context, state) {
+          return ProfilePage(id: state.pathParameters['id']!);
+        },
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _notification() {
+  return StatefulShellBranch(
+    navigatorKey: _shellNavigatorNotificationKey,
+    routes: [
+      GoRoute(
+        path: '/${InstaRouteNames.notification}',
+        name: InstaRouteNames.notification,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: NotificationPage(),
+        ),
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _post() {
+  return StatefulShellBranch(
+    navigatorKey: _shellNavigatorPostsKey,
+    routes: [
+      GoRoute(
+        path: '/${InstaRouteNames.addPost}',
+        name: InstaRouteNames.addPost,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: AddPostPage(),
+        ),
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _messaging() {
+  return StatefulShellBranch(
+    navigatorKey: _shellNavigatorMessagingKey,
+    routes: [
+      GoRoute(
+        path: '/${InstaRouteNames.messagingList}',
+        name: InstaRouteNames.messagingList,
+        pageBuilder: (context, state) {
+          return const NoTransitionPage(
+            child: MessagingListPage(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/${InstaRouteNames.messagingChat}/:id',
+        name: InstaRouteNames.messagingChat,
+        builder: (context, state) =>
+            MessagingChatPage(id: state.pathParameters['id']!),
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _profile() {
+  return StatefulShellBranch(
+    navigatorKey: _shellNavigatorProfileKey,
+    routes: [
+      GoRoute(
+        path: '/${InstaRouteNames.profile}',
+        name: InstaRouteNames.profile,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: ProfilePage(),
+        ),
+      ),
+    ],
+  );
+}

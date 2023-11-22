@@ -1,4 +1,5 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/notification/widgets/notification_list.dart';
@@ -13,6 +14,7 @@ class NotificationPage extends StatelessWidget {
     return InstaAppBar(
       appBarTitle: const InstaText(
         text: 'Notifications',
+        fontSize: InstaFontSize.large,
         fontWeight: FontWeight.bold,
       ),
       body: const Padding(
@@ -26,21 +28,5 @@ class NotificationPage extends StatelessWidget {
         ),
       ),
     );
-    // return InstaAppBar(
-    //   appBarTitle: const InstaText(
-    //     text: 'Notifications',
-    //     fontWeight: FontWeight.bold,
-    //   ),
-    //   body: const Padding(
-    //     padding: EdgeInsets.symmetric(horizontal: InstaSpacing.verySmall),
-    //     child: Column(
-    //       children: [
-    //         NotificationList(),
-    //         SizedBox(height: InstaSpacing.medium),
-    //         NotificationSuggested(),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }

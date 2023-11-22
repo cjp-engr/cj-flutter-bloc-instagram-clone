@@ -1,5 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
@@ -26,7 +27,10 @@ class MessagingList extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                context.goNamed('messaging-chat', pathParameters: {'id': '1'});
+                context.goNamed(
+                  InstaRouteNames.messagingChat,
+                  pathParameters: {'id': '1'},
+                );
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
