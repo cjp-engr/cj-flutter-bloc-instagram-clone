@@ -14,10 +14,11 @@ class MessagingListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InstaAppBar(
-      appBarActions: const [
+      appBarActions: [
         InstaButton(
           buttonType: InstaButtonType.icon,
           assetName: IconRes.writeMessage,
+          onPressed: () {},
         ),
       ],
       body: SingleChildScrollView(

@@ -9,18 +9,13 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
 
-class InstaNavBar extends StatefulWidget {
-  final StatefulNavigationShell? child;
-  const InstaNavBar({
-    super.key,
-    this.child,
-  });
+class InstaNavigationBar extends StatelessWidget {
+  final StatefulNavigationShell? navigationShell;
+  const InstaNavigationBar({
+    Key? key,
+    this.navigationShell,
+  }) : super(key: key ?? const ValueKey<String>('InstaNavigationBar'));
 
-  @override
-  State<InstaNavBar> createState() => _InstaNavBarState();
-}
-
-class _InstaNavBarState extends State<InstaNavBar> {
   @override
   Widget build(BuildContext context) {
     return AdaptiveLayout(
@@ -29,7 +24,7 @@ class _InstaNavBarState extends State<InstaNavBar> {
           Breakpoints.small: SlotLayout.from(
             key: const Key('body_small'),
             builder: (_) => SizedBox(
-              child: widget.child,
+              child: navigationShell,
             ),
           ),
         },
@@ -48,13 +43,12 @@ class _InstaNavBarState extends State<InstaNavBar> {
   Widget _smallSizeNavigation(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      currentIndex: widget.child!.currentIndex,
+      currentIndex: navigationShell!.currentIndex,
       onTap: (index) {
-        widget.child!.goBranch(
+        navigationShell!.goBranch(
           index,
-          initialLocation: index == widget.child!.currentIndex,
+          initialLocation: index == navigationShell!.currentIndex,
         );
-        setState(() {});
       },
       selectedItemColor: Colors.red,
       unselectedItemColor: Colors.grey,
@@ -100,9 +94,6 @@ class _InstaNavBarState extends State<InstaNavBar> {
 
   Widget _profileIcon(BuildContext context) {
     return const InkWell(
-      // onTap: () {
-      //   context.go(AppRouteName.profile);
-      // },
       child: InstaCircleAvatar(
         image: IconRes.testOnly,
         radius: InstaCircleAvatarSize.small,

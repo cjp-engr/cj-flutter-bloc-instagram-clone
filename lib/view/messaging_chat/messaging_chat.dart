@@ -5,13 +5,14 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_chat/widgets/
 import 'package:flutter/material.dart';
 
 class MessagingChatPage extends StatelessWidget {
-  const MessagingChatPage({super.key});
+  final String id;
+  const MessagingChatPage({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
     return InstaAppBar(
       appBarTitle: const ChatDetailsStatus(),
-      body: const InstaText(text: 'Messaging Chat Body!!!'),
+      body: InstaText(text: 'Messaging Chat Body!!! - $id'),
     );
   }
 }

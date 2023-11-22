@@ -1,9 +1,12 @@
-import 'package:cj_flutter_riverpod_instagram_clone/common/routes/custom_navigation_helper.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/routes.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
+// ignore: depend_on_referenced_packages
+import 'package:flutter_web_plugins/url_strategy.dart';
+
 void main() {
-  CustomNavigationHelper.instance;
+  usePathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -14,10 +17,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      routerConfig: goRouter,
       title: 'Insta Clone App',
       debugShowCheckedModeBanner: false,
       theme: themeData,
-      routerConfig: CustomNavigationHelper.router,
     );
   }
 }
