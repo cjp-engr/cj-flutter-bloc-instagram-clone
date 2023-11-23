@@ -8,7 +8,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 class UserNameAndButtonsWidget extends StatelessWidget {
-  const UserNameAndButtonsWidget({super.key});
+  final String? id;
+  const UserNameAndButtonsWidget({super.key, this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -24,44 +25,49 @@ class UserNameAndButtonsWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildUserNameAndButton(),
+            _buildUserNameAndButton(id != null),
             const SizedBox(height: InstaSpacing.large),
-            _buildButtons(),
+            _buildButtons(id != null),
           ],
         )
       ],
     );
   }
 
-  Widget _buildUserNameAndButton() {
-    return const Row(
+  Widget _buildUserNameAndButton(bool hasId) {
+    return Row(
       children: [
-        InstaText(
+        const InstaText(
           text: 'user_name',
           fontWeight: FontWeight.bold,
           fontSize: InstaFontSize.veryLarge,
         ),
-        SizedBox(width: InstaSpacing.extraSmall),
-        InstaButton(
-          buttonType: InstaButtonType.icon,
-          assetName: IconRes.settings,
-        )
+        const SizedBox(width: InstaSpacing.verySmall),
+        hasId
+            ? const InstaButton(
+                buttonType: InstaButtonType.icon,
+                assetName: IconRes.ellipsis,
+              )
+            : const InstaButton(
+                buttonType: InstaButtonType.icon,
+                assetName: IconRes.settings,
+              )
       ],
     );
   }
 
-  Widget _buildButtons() {
+  Widget _buildButtons(bool hasId) {
     return Row(
       children: [
         InstaButton(
           buttonType: InstaButtonType.primary,
-          text: 'Edit Profile',
+          text: hasId ? 'Following' : 'Edit Profile',
           onPressed: () {},
         ),
         const SizedBox(width: InstaSpacing.extraSmall),
         InstaButton(
           buttonType: InstaButtonType.primary,
-          text: 'View Archive',
+          text: hasId ? 'Message' : 'View Archive',
           onPressed: () {},
         ),
       ],

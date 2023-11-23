@@ -125,7 +125,7 @@ StatefulShellBranch _profile() {
         path: '/${InstaRouteNames.profile}',
         name: InstaRouteNames.profile,
         pageBuilder: (context, state) => const NoTransitionPage(
-          child: ProfilePage(id: ''),
+          child: ProfilePage(),
         ),
       ),
     ],

@@ -28,46 +28,45 @@ class AddPostMobilePage extends StatelessWidget {
           ),
         ),
       ],
-      body: Expanded(
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              height: context.screenHeight / 2,
-              color: Colors.blue,
-            ),
-            Column(
-              children: [
-                const SizedBox(height: InstaSpacing.extraSmall),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.grey,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(InstaSpacing.verySmall),
-                        child: SizedBox(
-                          height: InstaSpacing.large,
-                          child: InstaButton(
-                            buttonType: InstaButtonType.icon,
-                            assetName: IconRes.camera,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: InstaSpacing.verySmall),
+        child: Expanded(
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                height: context.screenHeight / 2,
+                color: Colors.blue,
+              ),
+              Column(
+                children: [
+                  const SizedBox(height: InstaSpacing.extraSmall),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.grey,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(InstaSpacing.verySmall),
+                          child: SizedBox(
+                            height: InstaSpacing.large,
+                            child: InstaButton(
+                              buttonType: InstaButtonType.icon,
+                              assetName: IconRes.camera,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: InstaSpacing.extraSmall),
-                  ],
-                ),
-                const SizedBox(height: InstaSpacing.extraSmall),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: InstaSpacing.extraSmall),
-              child: GridView.builder(
+                      const SizedBox(width: InstaSpacing.extraSmall),
+                    ],
+                  ),
+                  const SizedBox(height: InstaSpacing.extraSmall),
+                ],
+              ),
+              GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -84,8 +83,8 @@ class AddPostMobilePage extends StatelessWidget {
                   );
                 },
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
