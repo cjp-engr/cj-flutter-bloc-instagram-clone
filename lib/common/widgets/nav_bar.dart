@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
@@ -97,70 +98,38 @@ class InstaNavigationBar extends StatelessWidget {
 
   List<NavigationRailDestination> _sideNavigationList(BuildContext context) {
     return [
-      const NavigationRailDestination(
-        icon: InstaButton(
-          assetName: IconRes.home,
-          buttonType: InstaButtonType.icon,
-        ),
-        label: Text('Home'),
+      NavigationRailDestination(
+        icon: _homeIcon(),
+        label: const InstaText(text: 'Home'),
       ),
-      const NavigationRailDestination(
-        icon: InstaButton(
-          assetName: IconRes.notification,
-          buttonType: InstaButtonType.icon,
-        ),
-        label: Text('Notification'),
+      NavigationRailDestination(
+        icon: _notificationIcon(),
+        label: const InstaText(text: 'Notification'),
       ),
-      const NavigationRailDestination(
-        icon: InstaButton(
-          assetName: IconRes.newPost,
-          buttonType: InstaButtonType.icon,
-        ),
-        label: Text('Add Post'),
+      NavigationRailDestination(
+        icon: _newPostIcon(),
+        label: const InstaText(text: 'Add Post'),
       ),
-      const NavigationRailDestination(
-        icon: InstaButton(
-          assetName: IconRes.messenger,
-          buttonType: InstaButtonType.icon,
-        ),
-        label: Text('Message'),
+      NavigationRailDestination(
+        icon: _messageIcon(),
+        label: const InstaText(text: 'Message'),
       ),
       NavigationRailDestination(
         icon: _profileIcon(context),
-        label: const Text('Profile'),
+        label: const InstaText(text: 'Profile'),
       )
     ];
   }
 
   List<BottomNavigationBarItem> _bottomNavigationList(BuildContext context) {
     return [
-      const BottomNavigationBarItem(
-          icon: InstaButton(
-            assetName: IconRes.home,
-            buttonType: InstaButtonType.icon,
-          ),
-          label: ""),
-      const BottomNavigationBarItem(
-          icon: InstaButton(
-            assetName: IconRes.notification,
-            buttonType: InstaButtonType.icon,
-          ),
-          label: ""),
-      const BottomNavigationBarItem(
-          icon: InstaButton(
-            assetName: IconRes.newPost,
-            buttonType: InstaButtonType.icon,
-          ),
-          label: ""),
-      const BottomNavigationBarItem(
-          icon: InstaButton(
-            assetName: IconRes.messenger,
-            buttonType: InstaButtonType.icon,
-          ),
-          label: ""),
+      BottomNavigationBarItem(icon: _homeIcon(), label: ''),
+      BottomNavigationBarItem(icon: _notificationIcon(), label: ''),
+      BottomNavigationBarItem(icon: _newPostIcon(), label: ''),
+      BottomNavigationBarItem(icon: _messageIcon(), label: ''),
       BottomNavigationBarItem(
         icon: _profileIcon(context),
-        label: "",
+        label: '',
       ),
     ];
   }
@@ -173,4 +142,24 @@ class InstaNavigationBar extends StatelessWidget {
       ),
     );
   }
+
+  Widget _homeIcon() => const InstaButton(
+        assetName: IconRes.home,
+        buttonType: InstaButtonType.icon,
+      );
+
+  Widget _notificationIcon() => const InstaButton(
+        assetName: IconRes.notification,
+        buttonType: InstaButtonType.icon,
+      );
+
+  Widget _newPostIcon() => const InstaButton(
+        assetName: IconRes.newPost,
+        buttonType: InstaButtonType.icon,
+      );
+
+  Widget _messageIcon() => const InstaButton(
+        assetName: IconRes.messenger,
+        buttonType: InstaButtonType.icon,
+      );
 }
