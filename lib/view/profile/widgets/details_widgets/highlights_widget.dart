@@ -4,21 +4,21 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-class ProfileHighlights extends StatelessWidget {
-  const ProfileHighlights({super.key});
+class HighlightsWidget extends StatelessWidget {
+  const HighlightsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _highlights('Test Test'),
+        _buildHighlight('Test Test'),
         const SizedBox(width: 10),
-        _highlights('New'),
+        _buildHighlight('New'),
       ],
     );
   }
 
-  Widget _highlights(String text) {
+  Widget _buildHighlight(String text) {
     return InkWell(
       onTap: () {},
       splashFactory: NoSplash.splashFactory,

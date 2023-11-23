@@ -73,7 +73,7 @@ class _IconButton extends StatelessWidget {
       ).copyWith(overlayColor: MaterialStateProperty.all(Colors.transparent)),
       child: Image.asset(
         assetName,
-        scale: 2.3,
+        scale: 2.7,
         color: Colors.white,
       ),
     );

@@ -2,12 +2,12 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dar
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/details_widgets/counts_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/details_widgets/highlights_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/details_widgets/name_description_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/details_widgets/username_buttons_widget.dart';
 
-import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/a_profile_first_col.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/b_profile_second_col.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/profile_content_widgets/profile_content.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/profile_counts.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/profile_highlights.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/content_widgets/contents_widget.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -28,15 +28,15 @@ class ProfilePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: InstaSpacing.verySmall),
-            ProfileFirstCol(),
+            UserNameAndButtonsWidget(),
             SizedBox(height: InstaSpacing.veryLarge),
-            ProfileSecondCol(),
+            NameAndDescriptionWidget(),
             SizedBox(height: InstaSpacing.verySmall),
-            ProfileHighlights(),
+            HighlightsWidget(),
             SizedBox(height: InstaSpacing.verySmall),
-            ProfileCounts(),
+            CountsWidget(),
             SizedBox(height: InstaSpacing.verySmall),
-            ProfileContent(),
+            ContentsWidget(),
           ],
         ),
       ),

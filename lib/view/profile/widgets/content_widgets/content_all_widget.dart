@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ProfileContentTagged extends StatelessWidget {
-  const ProfileContentTagged({super.key});
+class ContentAllWidget extends StatelessWidget {
+  const ContentAllWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return _buildContentAll();
+  }
+
+  Widget _buildContentAll() {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -16,7 +20,7 @@ class ProfileContentTagged extends StatelessWidget {
       itemCount: 20,
       itemBuilder: (context, index) {
         return Container(
-          color: Colors.red,
+          color: Colors.blueAccent,
           alignment: Alignment.center,
           child: Text('Item $index'),
         );

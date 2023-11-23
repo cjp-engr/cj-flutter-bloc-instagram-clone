@@ -7,8 +7,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-class ProfileFirstCol extends StatelessWidget {
-  const ProfileFirstCol({super.key});
+class UserNameAndButtonsWidget extends StatelessWidget {
+  const UserNameAndButtonsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +24,16 @@ class ProfileFirstCol extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _userNameAndSettings(),
+            _buildUserNameAndButton(),
             const SizedBox(height: InstaSpacing.large),
-            _buttons(),
+            _buildButtons(),
           ],
         )
       ],
     );
   }
 
-  Widget _userNameAndSettings() {
+  Widget _buildUserNameAndButton() {
     return const Row(
       children: [
         InstaText(
@@ -50,7 +50,7 @@ class ProfileFirstCol extends StatelessWidget {
     );
   }
 
-  Widget _buttons() {
+  Widget _buildButtons() {
     return Row(
       children: [
         InstaButton(
