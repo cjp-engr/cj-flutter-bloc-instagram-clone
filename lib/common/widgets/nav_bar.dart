@@ -19,25 +19,38 @@ class InstaNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AdaptiveLayout(
-      body: SlotLayout(
-        config: <Breakpoint, SlotLayoutConfig>{
-          Breakpoints.small: SlotLayout.from(
-            key: const Key('body_small'),
-            builder: (_) => SizedBox(
-              child: navigationShell,
+        body: SlotLayout(
+          config: <Breakpoint, SlotLayoutConfig>{
+            Breakpoints.small: SlotLayout.from(
+              key: const Key('body_small1'),
+              builder: (_) => SizedBox(
+                child: navigationShell,
+              ),
             ),
-          ),
-        },
-      ),
-      bottomNavigation: SlotLayout(
-        config: <Breakpoint, SlotLayoutConfig>{
-          Breakpoints.small: SlotLayout.from(
-            key: const Key('body_small'),
-            builder: (_) => _smallSizeNavigation(context),
-          ),
-        },
-      ),
-    );
+            Breakpoints.medium: SlotLayout.from(
+              key: const Key('body_medium1'),
+              builder: (_) => SizedBox(
+                child: navigationShell,
+              ),
+            ),
+          },
+        ),
+        bottomNavigation: SlotLayout(
+          config: <Breakpoint, SlotLayoutConfig>{
+            Breakpoints.small: SlotLayout.from(
+              key: const Key('body_small2'),
+              builder: (_) => _smallSizeNavigation(context),
+            ),
+          },
+        ),
+        primaryNavigation: SlotLayout(
+          config: <Breakpoint, SlotLayoutConfig>{
+            Breakpoints.medium: SlotLayout.from(
+              key: const Key('body_medium2'),
+              builder: (_) => _mediumSizeNavigation(context),
+            ),
+          },
+        ));
   }
 
   Widget _smallSizeNavigation(BuildContext context) {
@@ -52,14 +65,74 @@ class InstaNavigationBar extends StatelessWidget {
       },
       selectedItemColor: Colors.red,
       unselectedItemColor: Colors.grey,
-      items: _navigationList(context),
+      items: _bottomNavigationList(context),
       selectedFontSize: 0,
       unselectedFontSize: 0,
       iconSize: 0,
     );
   }
 
-  List<BottomNavigationBarItem> _navigationList(BuildContext context) {
+//https://stackoverflow.com/questions/71499560/renderflex-overflowing-in-navigationrail-and-navigationraildestination-on-window
+
+  Widget _mediumSizeNavigation(BuildContext context) {
+    return IntrinsicWidth(
+      child: Row(
+        children: [
+          NavigationRail(
+            destinations: _sideNavigationList(context),
+            selectedIndex: navigationShell!.currentIndex,
+            onDestinationSelected: (int index) {
+              navigationShell!.goBranch(
+                index,
+                initialLocation: index == navigationShell!.currentIndex,
+              );
+            },
+            labelType: NavigationRailLabelType.all,
+            useIndicator: false,
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<NavigationRailDestination> _sideNavigationList(BuildContext context) {
+    return [
+      const NavigationRailDestination(
+        icon: InstaButton(
+          assetName: IconRes.home,
+          buttonType: InstaButtonType.icon,
+        ),
+        label: Text('Home'),
+      ),
+      const NavigationRailDestination(
+        icon: InstaButton(
+          assetName: IconRes.notification,
+          buttonType: InstaButtonType.icon,
+        ),
+        label: Text('Notification'),
+      ),
+      const NavigationRailDestination(
+        icon: InstaButton(
+          assetName: IconRes.newPost,
+          buttonType: InstaButtonType.icon,
+        ),
+        label: Text('Add Post'),
+      ),
+      const NavigationRailDestination(
+        icon: InstaButton(
+          assetName: IconRes.messenger,
+          buttonType: InstaButtonType.icon,
+        ),
+        label: Text('Message'),
+      ),
+      NavigationRailDestination(
+        icon: _profileIcon(context),
+        label: const Text('Profile'),
+      )
+    ];
+  }
+
+  List<BottomNavigationBarItem> _bottomNavigationList(BuildContext context) {
     return [
       const BottomNavigationBarItem(
           icon: InstaButton(

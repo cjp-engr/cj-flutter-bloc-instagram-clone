@@ -30,61 +30,59 @@ class AddPostMobilePage extends StatelessWidget {
       ],
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: InstaSpacing.verySmall),
-        child: Expanded(
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                height: context.screenHeight / 2,
-                color: Colors.blue,
-              ),
-              Column(
-                children: [
-                  const SizedBox(height: InstaSpacing.extraSmall),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.grey,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(InstaSpacing.verySmall),
-                          child: SizedBox(
-                            height: InstaSpacing.large,
-                            child: InstaButton(
-                              buttonType: InstaButtonType.icon,
-                              assetName: IconRes.camera,
-                            ),
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: context.screenHeight / 2,
+              color: Colors.blue,
+            ),
+            Column(
+              children: [
+                const SizedBox(height: InstaSpacing.extraSmall),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.grey,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(InstaSpacing.verySmall),
+                        child: SizedBox(
+                          height: InstaSpacing.large,
+                          child: InstaButton(
+                            buttonType: InstaButtonType.icon,
+                            assetName: IconRes.camera,
                           ),
                         ),
                       ),
-                      const SizedBox(width: InstaSpacing.extraSmall),
-                    ],
-                  ),
-                  const SizedBox(height: InstaSpacing.extraSmall),
-                ],
-              ),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
+                    ),
+                    const SizedBox(width: InstaSpacing.extraSmall),
+                  ],
                 ),
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return Container(
-                    color: Colors.blueAccent,
-                    alignment: Alignment.center,
-                    child: Text('Item $index'),
-                  );
-                },
+                const SizedBox(height: InstaSpacing.extraSmall),
+              ],
+            ),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
               ),
-            ],
-          ),
+              itemCount: 20,
+              itemBuilder: (context, index) {
+                return Container(
+                  color: Colors.blueAccent,
+                  alignment: Alignment.center,
+                  child: Text('Item $index'),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
