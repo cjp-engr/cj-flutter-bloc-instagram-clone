@@ -2,11 +2,15 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radi
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:flutter/material.dart';
 
-class MessagingSearch extends StatelessWidget {
-  const MessagingSearch({super.key});
+class SearchWidget extends StatelessWidget {
+  const SearchWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return _buildSearchField();
+  }
+
+  Widget _buildSearchField() {
     return const TextField(
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.never,

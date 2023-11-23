@@ -27,7 +27,6 @@ class AddPostMobilePage extends StatelessWidget {
             color: Colors.blue,
           ),
         ),
-        const SizedBox(width: InstaSpacing.extraSmall)
       ],
       body: Expanded(
         child: Column(

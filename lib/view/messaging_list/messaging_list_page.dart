@@ -3,9 +3,9 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dar
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/widgets/messaging_list_user.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/widgets/messaging_note.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/widgets/messaging_search.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/widgets/users_list_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/widgets/note_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
 
 class MessagingListPage extends StatelessWidget {
@@ -30,11 +30,11 @@ class MessagingListPage extends StatelessWidget {
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MessagingSearch(),
+                SearchWidget(),
                 SizedBox(height: InstaSpacing.medium),
-                MessagingNote(),
+                NoteWidget(),
                 SizedBox(height: InstaSpacing.medium),
-                MessagingList(),
+                UsersListWidget(),
               ],
             ),
           ),

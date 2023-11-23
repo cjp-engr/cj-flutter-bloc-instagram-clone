@@ -8,40 +8,48 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class MessagingList extends StatelessWidget {
-  const MessagingList({super.key});
+class UsersListWidget extends StatelessWidget {
+  const UsersListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InstaText(text: 'Messages'),
-            InstaText(text: 'Requests'),
-          ],
-        ),
+        _buildSubHeaders(),
         const SizedBox(height: InstaSpacing.medium),
-        Column(
-          children: [
-            InkWell(
-              onTap: () {
-                context.goNamed(
-                  InstaRouteNames.messagingChat,
-                  pathParameters: {'id': '1'},
-                );
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _userDetails(),
-                  _action(),
-                ],
-              ),
-            ),
-          ],
-        )
+        _buildDisplayDetails(context),
+      ],
+    );
+  }
+
+  Widget _buildSubHeaders() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        InstaText(text: 'Messages'),
+        InstaText(text: 'Requests'),
+      ],
+    );
+  }
+
+  Widget _buildDisplayDetails(BuildContext context) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            context.goNamed(
+              InstaRouteNames.messagingChat,
+              pathParameters: {'id': '1'},
+            );
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _userDetails(),
+              _actionButton(),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -67,7 +75,7 @@ class MessagingList extends StatelessWidget {
     );
   }
 
-  Widget _action() {
+  Widget _actionButton() {
     return const InstaButton(
       buttonType: InstaButtonType.icon,
       assetName: IconRes.camera,

@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
@@ -22,7 +23,10 @@ class InstaAppBar extends StatelessWidget implements PreferredSizeWidget {
         appBar: AppBar(
           leading: appBarLeading,
           title: appBarTitle,
-          actions: appBarActions,
+          actions: [
+            ...appBarActions ?? [],
+            const SizedBox(width: InstaSpacing.extraSmall)
+          ],
         ),
         body: AdaptiveLayout(
           body: SlotLayout(
