@@ -5,8 +5,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-class NotificationList extends StatelessWidget {
-  const NotificationList({super.key});
+class ListWidget extends StatelessWidget {
+  const ListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +18,15 @@ class NotificationList extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _leftDetails(),
-            _rightDetails(),
+            _buildLeftDetails(),
+            _buildRightDetails(),
           ],
         ),
       ],
     );
   }
 
-  Widget _leftDetails() {
+  Widget _buildLeftDetails() {
     return const Row(
       children: [
         InstaCircleAvatar(
@@ -45,7 +45,7 @@ class NotificationList extends StatelessWidget {
     );
   }
 
-  Widget _rightDetails() {
+  Widget _buildRightDetails() {
     return SizedBox(
       child: Image.network(
         IconRes.testOnly,

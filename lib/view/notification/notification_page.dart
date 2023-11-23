@@ -2,8 +2,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dar
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/notification/widgets/notification_list.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/notification/widgets/notification_suggested.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/notification/widgets/list_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/notification/widgets/suggested_widget.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -21,9 +21,9 @@ class NotificationPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: InstaSpacing.verySmall),
         child: Column(
           children: [
-            NotificationList(),
+            ListWidget(),
             SizedBox(height: InstaSpacing.medium),
-            NotificationSuggested(),
+            SuggestedWidget(),
           ],
         ),
       ),

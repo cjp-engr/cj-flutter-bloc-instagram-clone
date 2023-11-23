@@ -7,6 +7,7 @@ class IconRes {
   static const String dropdown = '$_iconBase/dropdown.png';
   static const String grid = '$_iconBase/grid.png';
   static const String heart = '$_iconBase/heart.png';
+  static const String heartFilled = '$_iconBase/heart-filled.png';
   static const String home = '$_iconBase/home.png';
   static const String menuVertical = '$_iconBase/menu-vertical.png';
   static const String messenger = '$_iconBase/messenger.png';
@@ -14,6 +15,7 @@ class IconRes {
   static const String notification = '$_iconBase/notification.png';
   static const String paperPlane = '$_iconBase/paper-plane.png';
   static const String saved = '$_iconBase/saved.png';
+  static const String savedFilled = '$_iconBase/saved-filled.png';
   static const String settings = '$_iconBase/settings.png';
   static const String userTagged = '$_iconBase/user-tagged.png';
   static const String video = '$_iconBase/video.png';
