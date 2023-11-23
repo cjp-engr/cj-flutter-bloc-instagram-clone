@@ -5,8 +5,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avat
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 
-class ChatDetailsStatus extends StatelessWidget {
-  const ChatDetailsStatus({super.key});
+class StatusDetailsWidget extends StatelessWidget {
+  const StatusDetailsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

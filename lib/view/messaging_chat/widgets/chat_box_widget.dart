@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ChatTextField extends StatelessWidget {
-  const ChatTextField({super.key});
+class ChatBoxWidget extends StatelessWidget {
+  const ChatBoxWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

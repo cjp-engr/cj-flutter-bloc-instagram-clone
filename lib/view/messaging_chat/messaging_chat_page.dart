@@ -1,6 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_chat/widgets/chat_details_status.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_chat/widgets/status_details_widget.dart';
 
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class MessagingChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InstaAppBar(
-      appBarTitle: const ChatDetailsStatus(),
+      appBarTitle: const StatusDetailsWidget(),
       body: InstaText(text: 'Messaging Chat Body!!! - $id'),
     );
   }

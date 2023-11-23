@@ -9,23 +9,23 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class HomePost extends StatelessWidget {
-  const HomePost({super.key});
+class PostWidget extends StatelessWidget {
+  const PostWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _userDetails(context),
+        _buildUserDetails(context),
         const SizedBox(height: InstaSpacing.extraSmall),
-        _content(),
+        _buildContent(),
         const SizedBox(height: InstaSpacing.extraSmall),
-        _icons(),
+        _buildIcons(),
       ],
     );
   }
 
-  Widget _userDetails(BuildContext context) {
+  Widget _buildUserDetails(BuildContext context) {
     return InkWell(
       onTap: () {
         context.goNamed(
@@ -54,7 +54,7 @@ class HomePost extends StatelessWidget {
     );
   }
 
-  Widget _content() {
+  Widget _buildContent() {
     return Image.network(
       IconRes.testOnly,
       width: double.infinity,
@@ -63,7 +63,7 @@ class HomePost extends StatelessWidget {
     );
   }
 
-  Widget _icons() {
+  Widget _buildIcons() {
     return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
