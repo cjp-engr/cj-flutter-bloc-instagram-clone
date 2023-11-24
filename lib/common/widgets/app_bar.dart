@@ -1,6 +1,7 @@
-import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
+
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 
 // ignore: must_be_immutable
 class InstaAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -17,16 +18,16 @@ class InstaAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Widget build(Object context) {
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           leading: appBarLeading,
-          title: appBarTitle,
-          actions: [
-            ...appBarActions ?? [],
-            const SizedBox(width: InstaSpacing.extraSmall)
-          ],
+          title: Padding(
+            padding: EdgeInsets.only(left: context.title),
+            child: appBarTitle,
+          ),
+          actions: [...appBarActions ?? [], SizedBox(width: context.padding)],
         ),
         body: AdaptiveLayout(
           body: SlotLayout(

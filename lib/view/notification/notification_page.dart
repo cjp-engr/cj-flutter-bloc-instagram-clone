@@ -1,5 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/notification/widgets/list_widget.dart';
@@ -17,9 +18,9 @@ class NotificationPage extends StatelessWidget {
         fontSize: InstaFontSize.large,
         fontWeight: FontWeight.bold,
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: InstaSpacing.verySmall),
-        child: Column(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: context.padding),
+        child: const Column(
           children: [
             ListWidget(),
             SizedBox(height: InstaSpacing.medium),

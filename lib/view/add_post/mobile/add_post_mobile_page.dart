@@ -29,7 +29,7 @@ class AddPostMobilePage extends StatelessWidget {
         ),
       ],
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: InstaSpacing.verySmall),
+        padding: EdgeInsets.symmetric(horizontal: context.padding),
         child: Column(
           children: [
             Container(

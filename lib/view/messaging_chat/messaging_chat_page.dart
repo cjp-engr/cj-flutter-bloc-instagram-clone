@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_chat/widgets/status_details_widget.dart';
@@ -12,7 +13,10 @@ class MessagingChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return InstaAppBar(
       appBarTitle: const StatusDetailsWidget(),
-      body: InstaText(text: 'Messaging Chat Body!!! - $id'),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: context.padding),
+        child: InstaText(text: 'Messaging Chat Body!!! - $id'),
+      ),
     );
   }
 }

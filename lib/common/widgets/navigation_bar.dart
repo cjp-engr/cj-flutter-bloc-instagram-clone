@@ -76,8 +76,6 @@ class InstaNavigationBar extends StatelessWidget {
     );
   }
 
-//https://stackoverflow.com/questions/71499560/renderflex-overflowing-in-navigationrail-and-navigationraildestination-on-window
-
   Widget _buildNavigationRail(BuildContext context) {
     return IntrinsicWidth(
       child: Row(
