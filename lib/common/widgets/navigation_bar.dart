@@ -1,4 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
@@ -23,13 +26,13 @@ class InstaNavigationBar extends StatelessWidget {
         body: SlotLayout(
           config: <Breakpoint, SlotLayoutConfig>{
             Breakpoints.small: SlotLayout.from(
-              key: const Key('body_small1'),
+              key: const Key('smallNavigationShell'),
               builder: (_) => SizedBox(
                 child: navigationShell,
               ),
             ),
             Breakpoints.medium: SlotLayout.from(
-              key: const Key('body_medium1'),
+              key: const Key('mediumNavigationShell'),
               builder: (_) => SizedBox(
                 child: navigationShell,
               ),
@@ -39,22 +42,22 @@ class InstaNavigationBar extends StatelessWidget {
         bottomNavigation: SlotLayout(
           config: <Breakpoint, SlotLayoutConfig>{
             Breakpoints.small: SlotLayout.from(
-              key: const Key('body_small2'),
-              builder: (_) => _smallSizeNavigation(context),
+              key: const Key('smallBottomNavigation'),
+              builder: (_) => _buildBottomNavigation(context),
             ),
           },
         ),
         primaryNavigation: SlotLayout(
           config: <Breakpoint, SlotLayoutConfig>{
             Breakpoints.medium: SlotLayout.from(
-              key: const Key('body_medium2'),
-              builder: (_) => _mediumSizeNavigation(context),
+              key: const Key('mediumNavigationRail'),
+              builder: (_) => _buildNavigationRail(context),
             ),
           },
         ));
   }
 
-  Widget _smallSizeNavigation(BuildContext context) {
+  Widget _buildBottomNavigation(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: navigationShell!.currentIndex,
@@ -75,7 +78,7 @@ class InstaNavigationBar extends StatelessWidget {
 
 //https://stackoverflow.com/questions/71499560/renderflex-overflowing-in-navigationrail-and-navigationraildestination-on-window
 
-  Widget _mediumSizeNavigation(BuildContext context) {
+  Widget _buildNavigationRail(BuildContext context) {
     return IntrinsicWidth(
       child: Row(
         children: [
@@ -90,6 +93,16 @@ class InstaNavigationBar extends StatelessWidget {
             },
             labelType: NavigationRailLabelType.all,
             useIndicator: false,
+            leading: const SizedBox(height: InstaSpacing.veryLarge),
+            trailing: Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: InstaSpacing.large),
+                  child: _profileIcon(context),
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -100,24 +113,36 @@ class InstaNavigationBar extends StatelessWidget {
     return [
       NavigationRailDestination(
         icon: _homeIcon(),
-        label: const InstaText(text: 'Home'),
+        label: const InstaText(
+            text: 'Home',
+            fontSize: InstaFontSize.small,
+            fontWeight: FontWeight.bold),
       ),
       NavigationRailDestination(
         icon: _notificationIcon(),
-        label: const InstaText(text: 'Notification'),
+        label: const InstaText(
+            text: 'Notification',
+            fontSize: InstaFontSize.small,
+            fontWeight: FontWeight.bold),
       ),
       NavigationRailDestination(
         icon: _newPostIcon(),
-        label: const InstaText(text: 'Add Post'),
+        label: const InstaText(
+            text: 'Add Post',
+            fontSize: InstaFontSize.small,
+            fontWeight: FontWeight.bold),
       ),
       NavigationRailDestination(
         icon: _messageIcon(),
-        label: const InstaText(text: 'Message'),
+        label: const InstaText(
+            text: 'Message',
+            fontSize: InstaFontSize.small,
+            fontWeight: FontWeight.bold),
       ),
-      NavigationRailDestination(
-        icon: _profileIcon(context),
-        label: const InstaText(text: 'Profile'),
-      )
+      const NavigationRailDestination(
+        icon: SizedBox(),
+        label: InstaText(text: ''),
+      ),
     ];
   }
 
@@ -135,8 +160,11 @@ class InstaNavigationBar extends StatelessWidget {
   }
 
   Widget _profileIcon(BuildContext context) {
-    return const InkWell(
-      child: InstaCircleAvatar(
+    return InkWell(
+      onTap: () {
+        context.goNamed(InstaRouteNames.profile);
+      },
+      child: const InstaCircleAvatar(
         image: IconRes.testOnly,
         radius: InstaCircleAvatarSize.small,
       ),

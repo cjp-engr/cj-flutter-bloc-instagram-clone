@@ -1,6 +1,6 @@
 // private navigators
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/nav_bar.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/navigation_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/add_post_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/home_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_chat/messaging_chat_page.dart';
@@ -19,8 +19,6 @@ final _shellNavigatorPostsKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorPostsKey');
 final _shellNavigatorMessagingKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorMessagingKey');
-final _shellNavigatorProfileKey =
-    GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorProfileKey');
 
 final goRouter = GoRouter(
   initialLocation: '/${InstaRouteNames.profile}',
@@ -36,7 +34,6 @@ final goRouter = GoRouter(
         _notification(),
         _post(),
         _messaging(),
-        _profile(),
       ],
     ),
   ],
@@ -59,6 +56,13 @@ StatefulShellBranch _home() {
         builder: (context, state) {
           return ProfilePage(id: state.pathParameters['id']!);
         },
+      ),
+      GoRoute(
+        path: '/${InstaRouteNames.profile}',
+        name: InstaRouteNames.profile,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: ProfilePage(),
+        ),
       ),
     ],
   );
@@ -112,21 +116,6 @@ StatefulShellBranch _messaging() {
         name: InstaRouteNames.messagingChat,
         builder: (context, state) =>
             MessagingChatPage(id: state.pathParameters['id']!),
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _profile() {
-  return StatefulShellBranch(
-    navigatorKey: _shellNavigatorProfileKey,
-    routes: [
-      GoRoute(
-        path: '/${InstaRouteNames.profile}',
-        name: InstaRouteNames.profile,
-        pageBuilder: (context, state) => const NoTransitionPage(
-          child: ProfilePage(),
-        ),
       ),
     ],
   );
