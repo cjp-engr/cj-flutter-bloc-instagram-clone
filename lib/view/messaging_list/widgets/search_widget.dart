@@ -11,25 +11,29 @@ class SearchWidget extends StatelessWidget {
   }
 
   Widget _buildSearchField() {
-    return const TextField(
-      decoration: InputDecoration(
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        contentPadding: EdgeInsets.symmetric(vertical: InstaSpacing.verySmall),
-        prefixIcon: Icon(Icons.search),
-        labelText: 'Search',
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(InstaBorderRadius.small),
+    return const SizedBox(
+      height: InstaSpacing.extraLarge,
+      child: TextField(
+        decoration: InputDecoration(
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+          contentPadding:
+              EdgeInsets.symmetric(vertical: InstaSpacing.verySmall),
+          prefixIcon: Icon(Icons.search),
+          labelText: 'Search',
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(InstaBorderRadius.small),
+            ),
+            borderSide: BorderSide(
+              color: Colors.grey,
+            ),
           ),
-          borderSide: BorderSide(
-            color: Colors.grey,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(InstaBorderRadius.small),
+            ),
+            borderSide: BorderSide(color: Colors.blue),
           ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(InstaBorderRadius.small),
-          ),
-          borderSide: BorderSide(color: Colors.blue),
         ),
       ),
     );

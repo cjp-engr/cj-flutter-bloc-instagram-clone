@@ -11,4 +11,7 @@ ThemeData themeData = ThemeData.dark(
   textTheme: ThemeData()
       .textTheme
       .apply(fontFamily: _fontFamily, bodyColor: Colors.white),
+  splashColor: Colors.transparent,
+  highlightColor: Colors.transparent,
+  hoverColor: Colors.transparent,
 );

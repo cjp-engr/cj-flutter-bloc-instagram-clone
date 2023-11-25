@@ -37,6 +37,12 @@ class InstaNavigationBar extends StatelessWidget {
                 child: navigationShell,
               ),
             ),
+            Breakpoints.large: SlotLayout.from(
+              key: const Key('largeNavigationShell'),
+              builder: (_) => SizedBox(
+                child: navigationShell,
+              ),
+            ),
           },
         ),
         bottomNavigation: SlotLayout(
@@ -61,12 +67,7 @@ class InstaNavigationBar extends StatelessWidget {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: navigationShell!.currentIndex,
-      onTap: (index) {
-        navigationShell!.goBranch(
-          index,
-          initialLocation: index == navigationShell!.currentIndex,
-        );
-      },
+      onTap: (index) => _onDestinationSelected(index),
       selectedItemColor: Colors.red,
       unselectedItemColor: Colors.grey,
       items: _bottomNavigationList(context),
@@ -83,12 +84,7 @@ class InstaNavigationBar extends StatelessWidget {
           NavigationRail(
             destinations: _sideNavigationList(context),
             selectedIndex: navigationShell!.currentIndex,
-            onDestinationSelected: (int index) {
-              navigationShell!.goBranch(
-                index,
-                initialLocation: index == navigationShell!.currentIndex,
-              );
-            },
+            onDestinationSelected: (int index) => _onDestinationSelected(index),
             labelType: NavigationRailLabelType.all,
             useIndicator: false,
             leading: const SizedBox(height: InstaSpacing.veryLarge),
@@ -107,53 +103,41 @@ class InstaNavigationBar extends StatelessWidget {
     );
   }
 
+  void _onDestinationSelected(int index) {
+    navigationShell!.goBranch(
+      index,
+      initialLocation: index == navigationShell!.currentIndex,
+    );
+  }
+
   List<NavigationRailDestination> _sideNavigationList(BuildContext context) {
     return [
       NavigationRailDestination(
-        icon: _homeIcon(),
-        label: const InstaText(
-            text: 'Home',
-            fontSize: InstaFontSize.small,
-            fontWeight: FontWeight.bold),
+        icon: _icon(IconRes.home),
+        label: _text('Home'),
       ),
       NavigationRailDestination(
-        icon: _notificationIcon(),
-        label: const InstaText(
-            text: 'Notification',
-            fontSize: InstaFontSize.small,
-            fontWeight: FontWeight.bold),
+        icon: _icon(IconRes.notification),
+        label: _text('Notification'),
       ),
       NavigationRailDestination(
-        icon: _newPostIcon(),
-        label: const InstaText(
-            text: 'Add Post',
-            fontSize: InstaFontSize.small,
-            fontWeight: FontWeight.bold),
+        icon: _icon(IconRes.newPost),
+        label: _text('Add Post'),
       ),
       NavigationRailDestination(
-        icon: _messageIcon(),
-        label: const InstaText(
-            text: 'Message',
-            fontSize: InstaFontSize.small,
-            fontWeight: FontWeight.bold),
-      ),
-      const NavigationRailDestination(
-        icon: SizedBox(),
-        label: InstaText(text: ''),
+        icon: _icon(IconRes.messenger),
+        label: _text('Message'),
       ),
     ];
   }
 
   List<BottomNavigationBarItem> _bottomNavigationList(BuildContext context) {
     return [
-      BottomNavigationBarItem(icon: _homeIcon(), label: ''),
-      BottomNavigationBarItem(icon: _notificationIcon(), label: ''),
-      BottomNavigationBarItem(icon: _newPostIcon(), label: ''),
-      BottomNavigationBarItem(icon: _messageIcon(), label: ''),
-      BottomNavigationBarItem(
-        icon: _profileIcon(context),
-        label: '',
-      ),
+      BottomNavigationBarItem(icon: _icon(IconRes.home), label: ''),
+      BottomNavigationBarItem(icon: _icon(IconRes.notification), label: ''),
+      BottomNavigationBarItem(icon: _icon(IconRes.newPost), label: ''),
+      BottomNavigationBarItem(icon: _icon(IconRes.messenger), label: ''),
+      BottomNavigationBarItem(icon: _profileIcon(context), label: ''),
     ];
   }
 
@@ -169,23 +153,9 @@ class InstaNavigationBar extends StatelessWidget {
     );
   }
 
-  Widget _homeIcon() => const InstaButton(
-        assetName: IconRes.home,
-        buttonType: InstaButtonType.icon,
-      );
+  Widget _icon(String? assetName) =>
+      InstaButton(assetName: assetName, buttonType: InstaButtonType.icon);
 
-  Widget _notificationIcon() => const InstaButton(
-        assetName: IconRes.notification,
-        buttonType: InstaButtonType.icon,
-      );
-
-  Widget _newPostIcon() => const InstaButton(
-        assetName: IconRes.newPost,
-        buttonType: InstaButtonType.icon,
-      );
-
-  Widget _messageIcon() => const InstaButton(
-        assetName: IconRes.messenger,
-        buttonType: InstaButtonType.icon,
-      );
+  Widget _text(String text) => InstaText(
+      text: text, fontSize: InstaFontSize.small, fontWeight: FontWeight.bold);
 }

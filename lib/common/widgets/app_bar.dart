@@ -33,11 +33,11 @@ class InstaAppBar extends StatelessWidget implements PreferredSizeWidget {
           body: SlotLayout(
             config: <Breakpoint, SlotLayoutConfig>{
               Breakpoints.small: SlotLayout.from(
-                key: const Key('body_small'),
+                key: const Key('smallBody'),
                 builder: (_) => SingleChildScrollView(child: body!),
               ),
               Breakpoints.medium: SlotLayout.from(
-                key: const Key('body_medium'),
+                key: const Key('mediumBody'),
                 builder: (_) => SingleChildScrollView(child: body!),
               )
             },
