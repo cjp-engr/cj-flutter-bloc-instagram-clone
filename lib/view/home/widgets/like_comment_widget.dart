@@ -34,7 +34,8 @@ class LikeAndCommentWidget extends StatelessWidget {
   Widget _buildDescription() {
     return const InstaText(
         text:
-            'description descriptiondescription descriptiondescription descriptiondescription descriptiondescription description');
+            'description descriptiondescription descriptiondescription descriptiondescription descriptiondescription description',
+        textAlign: TextAlign.start);
   }
 
   Widget _buildViewComment() {

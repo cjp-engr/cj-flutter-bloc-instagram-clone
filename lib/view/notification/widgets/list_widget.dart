@@ -39,6 +39,7 @@ class ListWidget extends StatelessWidget {
           child: InstaText(
             text: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum',
             maxLines: 2,
+            textAlign: TextAlign.start,
           ),
         )
       ],

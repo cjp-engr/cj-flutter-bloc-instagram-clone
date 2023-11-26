@@ -7,6 +7,7 @@ class InstaText extends StatelessWidget {
   final FontWeight fontWeight;
   final Color? color;
   final int? maxLines;
+  final TextAlign? textAlign;
   const InstaText({
     super.key,
     required this.text,
@@ -14,6 +15,7 @@ class InstaText extends StatelessWidget {
     this.fontWeight = FontWeight.normal,
     this.color,
     this.maxLines,
+    this.textAlign = TextAlign.center,
   });
 
   @override
@@ -26,6 +28,7 @@ class InstaText extends StatelessWidget {
         color: color,
       ),
       maxLines: maxLines,
+      textAlign: textAlign,
     );
   }
 }

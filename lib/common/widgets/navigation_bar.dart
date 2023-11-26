@@ -28,7 +28,7 @@ class InstaNavigationBar extends StatelessWidget {
               ),
             ),
             Breakpoints.mediumAndUp: SlotLayout.from(
-              key: const Key('mediumNavigationShell'),
+              key: const Key('mediumAndUpNavigationShell'),
               builder: (_) => SizedBox(
                 child: navigationShell,
               ),
@@ -46,7 +46,7 @@ class InstaNavigationBar extends StatelessWidget {
         primaryNavigation: SlotLayout(
           config: <Breakpoint, SlotLayoutConfig>{
             Breakpoints.mediumAndUp: SlotLayout.from(
-              key: const Key('mediumNavigationRail'),
+              key: const Key('mediumAndUpNavigationRail'),
               builder: (_) => _buildNavigationRail(context),
             ),
           },

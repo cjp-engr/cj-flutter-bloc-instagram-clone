@@ -3,10 +3,12 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.da
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/navigation_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/add_post_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/home_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/login/login_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_chat/messaging_chat_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/messaging_list_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/notification/notification_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/profile_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/register/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,6 +27,20 @@ final goRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   routes: [
+    GoRoute(
+      path: '/${InstaRouteNames.login}',
+      name: InstaRouteNames.login,
+      pageBuilder: (context, state) => const NoTransitionPage(
+        child: LoginPage(),
+      ),
+    ),
+    GoRoute(
+      path: '/${InstaRouteNames.register}',
+      name: InstaRouteNames.register,
+      pageBuilder: (context, state) => const NoTransitionPage(
+        child: RegisterPage(),
+      ),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return InstaNavigationBar(navigationShell: navigationShell);
