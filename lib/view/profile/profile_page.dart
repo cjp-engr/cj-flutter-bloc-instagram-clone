@@ -10,6 +10,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/details
 
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/content_widgets/contents_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 class ProfilePage extends StatelessWidget {
   final String? id;
@@ -18,11 +19,13 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InstaAppBar(
-      appBarTitle: const InstaText(
-        text: 'Instaclone',
-        fontSize: InstaFontSize.veryLarge,
-        fontWeight: FontWeight.bold,
-      ),
+      appBarTitle: Breakpoints.mediumAndUp.isActive(context)
+          ? const SizedBox()
+          : const InstaText(
+              text: 'Instaclone',
+              fontSize: InstaFontSize.veryLarge,
+              fontWeight: FontWeight.bold,
+            ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: context.padding),
         child: Column(

@@ -1,14 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
@@ -31,14 +27,8 @@ class InstaNavigationBar extends StatelessWidget {
                 child: navigationShell,
               ),
             ),
-            Breakpoints.medium: SlotLayout.from(
+            Breakpoints.mediumAndUp: SlotLayout.from(
               key: const Key('mediumNavigationShell'),
-              builder: (_) => SizedBox(
-                child: navigationShell,
-              ),
-            ),
-            Breakpoints.large: SlotLayout.from(
-              key: const Key('largeNavigationShell'),
               builder: (_) => SizedBox(
                 child: navigationShell,
               ),
@@ -55,7 +45,7 @@ class InstaNavigationBar extends StatelessWidget {
         ),
         primaryNavigation: SlotLayout(
           config: <Breakpoint, SlotLayoutConfig>{
-            Breakpoints.medium: SlotLayout.from(
+            Breakpoints.mediumAndUp: SlotLayout.from(
               key: const Key('mediumNavigationRail'),
               builder: (_) => _buildNavigationRail(context),
             ),
@@ -87,7 +77,11 @@ class InstaNavigationBar extends StatelessWidget {
             onDestinationSelected: (int index) => _onDestinationSelected(index),
             labelType: NavigationRailLabelType.all,
             useIndicator: false,
-            leading: const SizedBox(height: InstaSpacing.veryLarge),
+            leading: Padding(
+              padding: const EdgeInsets.only(
+                  top: InstaSpacing.large, bottom: InstaSpacing.veryLarge * 2),
+              child: _instacloneIcon(context),
+            ),
             trailing: Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -114,19 +108,19 @@ class InstaNavigationBar extends StatelessWidget {
     return [
       NavigationRailDestination(
         icon: _icon(IconRes.home),
-        label: _text('Home'),
+        label: const SizedBox(),
       ),
       NavigationRailDestination(
         icon: _icon(IconRes.notification),
-        label: _text('Notification'),
+        label: const SizedBox(),
       ),
       NavigationRailDestination(
         icon: _icon(IconRes.newPost),
-        label: _text('Add Post'),
+        label: const SizedBox(),
       ),
       NavigationRailDestination(
         icon: _icon(IconRes.messenger),
-        label: _text('Message'),
+        label: const SizedBox(),
       ),
     ];
   }
@@ -153,9 +147,15 @@ class InstaNavigationBar extends StatelessWidget {
     );
   }
 
-  Widget _icon(String? assetName) =>
-      InstaButton(assetName: assetName, buttonType: InstaButtonType.icon);
+  Widget _instacloneIcon(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        context.goNamed(InstaRouteNames.home);
+      },
+      child: _icon(IconRes.instagram),
+    );
+  }
 
-  Widget _text(String text) => InstaText(
-      text: text, fontSize: InstaFontSize.small, fontWeight: FontWeight.bold);
+  Widget _icon(String assetName) =>
+      Image.asset(assetName, color: Colors.white, scale: 2.3);
 }

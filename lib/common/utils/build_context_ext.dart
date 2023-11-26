@@ -7,6 +7,4 @@ extension BuildContextExtension on BuildContext {
   double get padding => screenWidth > 400 && screenWidth < 640
       ? InstaSpacing.small
       : screenWidth * 0.12;
-  double get title =>
-      screenWidth > 400 && screenWidth < 640 ? 0 : screenWidth * 0.10;
 }

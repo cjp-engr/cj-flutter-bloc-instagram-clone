@@ -23,10 +23,7 @@ class InstaAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: appBarLeading,
-          title: Padding(
-            padding: EdgeInsets.only(left: context.title),
-            child: appBarTitle,
-          ),
+          title: appBarTitle,
           actions: [...appBarActions ?? [], SizedBox(width: context.padding)],
         ),
         body: AdaptiveLayout(

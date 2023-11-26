@@ -7,6 +7,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/highlight_
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/like_comment_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/post_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,11 +15,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InstaAppBar(
-      appBarTitle: const InstaText(
-        text: 'Instaclone',
-        fontWeight: FontWeight.w900,
-        fontSize: InstaFontSize.veryLarge,
-      ),
+      appBarTitle: Breakpoints.mediumAndUp.isActive(context)
+          ? const SizedBox()
+          : const InstaText(
+              text: 'Instaclone',
+              fontSize: InstaFontSize.veryLarge,
+              fontWeight: FontWeight.bold,
+            ),
       body: TapRegion(
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
         child: Padding(
