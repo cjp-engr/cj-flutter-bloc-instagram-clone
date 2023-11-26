@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.symmetric(
             horizontal: context.padding +
                 (Breakpoints.small.isActive(context)
-                    ? InstaSpacing.extraLarge
+                    ? InstaSpacing.verySmall
                     : InstaSpacing.small)),
         child: Column(
           children: [

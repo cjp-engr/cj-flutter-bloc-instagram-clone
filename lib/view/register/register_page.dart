@@ -1,8 +1,10 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: EdgeInsets.symmetric(
             horizontal: context.padding +
                 (Breakpoints.small.isActive(context)
-                    ? InstaSpacing.extraLarge
+                    ? InstaSpacing.verySmall
                     : InstaSpacing.small)),
         child: Column(
           children: [
@@ -49,6 +51,8 @@ class _RegisterPageState extends State<RegisterPage> {
             _buildLearnMore(),
             const SizedBox(height: InstaSpacing.small),
             _buildPolicy(),
+            const SizedBox(height: InstaSpacing.small),
+            _buildSignUp(),
             const SizedBox(height: InstaSpacing.large),
             _buildLoginRoute(),
           ],
@@ -105,6 +109,13 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget _buildPolicy() => const InstaText(
         text: 'Mauris eget neque at sem venenatis eleifend.',
         color: Colors.grey,
+      );
+
+  Widget _buildSignUp() => InstaButton(
+        width: double.infinity,
+        buttonType: InstaButtonType.secondary,
+        text: 'Sign up',
+        onPressed: () {},
       );
 
   Widget _buildLoginRoute() => Row(
