@@ -122,6 +122,11 @@ class InstaNavigationBar extends StatelessWidget {
         icon: _icon(IconRes.messenger),
         label: const SizedBox(),
       ),
+      const NavigationRailDestination(
+        disabled: true,
+        icon: SizedBox(),
+        label: SizedBox(),
+      ),
     ];
   }
 
@@ -136,14 +141,9 @@ class InstaNavigationBar extends StatelessWidget {
   }
 
   Widget _profileIcon(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.goNamed(InstaRouteNames.profile);
-      },
-      child: const InstaCircleAvatar(
-        image: IconRes.testOnly,
-        radius: InstaCircleAvatarSize.small,
-      ),
+    return const InstaCircleAvatar(
+      image: IconRes.testOnly,
+      radius: InstaCircleAvatarSize.small,
     );
   }
 

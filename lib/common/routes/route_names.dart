@@ -7,5 +7,6 @@ class InstaRouteNames {
   static const String notification = 'notification';
   static const String profile = 'profile';
   static const String register = 'register';
-  static const String userDetails = 'user-details';
+  static const String settings = 'settings';
+  static const String userDetails = 'user';
 }

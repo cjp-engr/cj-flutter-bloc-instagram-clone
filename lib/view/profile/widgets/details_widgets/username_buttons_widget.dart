@@ -1,11 +1,13 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class UserNameAndButtonsWidget extends StatelessWidget {
   final String? id;
@@ -25,7 +27,7 @@ class UserNameAndButtonsWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildUserNameAndButton(id != null),
+            _buildUserNameAndButton(id != null, context),
             const SizedBox(height: InstaSpacing.large),
             _buildButtons(id != null),
           ],
@@ -34,7 +36,7 @@ class UserNameAndButtonsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildUserNameAndButton(bool hasId) {
+  Widget _buildUserNameAndButton(bool hasId, BuildContext context) {
     return Row(
       children: [
         const InstaText(
@@ -48,9 +50,10 @@ class UserNameAndButtonsWidget extends StatelessWidget {
                 buttonType: InstaButtonType.icon,
                 assetName: IconRes.ellipsis,
               )
-            : const InstaButton(
+            : InstaButton(
                 buttonType: InstaButtonType.icon,
                 assetName: IconRes.settings,
+                onPressed: () => context.goNamed(InstaRouteNames.settings),
               )
       ],
     );
