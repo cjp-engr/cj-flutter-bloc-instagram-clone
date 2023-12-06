@@ -2,6 +2,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class CountsWidget extends StatelessWidget {
   const CountsWidget({super.key});
 
@@ -14,11 +16,17 @@ class CountsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(width: InstaSpacing.tiny),
-            _buildCount(count: '25', text: 'posts'),
+            _buildCount(
+                count: '25',
+                text: AppLocalizations.of(context)!.posts.toLowerCase()),
             const SizedBox(width: InstaSpacing.tiny),
-            _buildCount(count: '4', text: 'followers'),
+            _buildCount(
+                count: '4',
+                text: AppLocalizations.of(context)!.followers.toLowerCase()),
             const SizedBox(width: InstaSpacing.tiny),
-            _buildCount(count: '54', text: 'following'),
+            _buildCount(
+                count: '54',
+                text: AppLocalizations.of(context)!.following.toLowerCase()),
             const SizedBox(width: InstaSpacing.tiny),
           ],
         ),

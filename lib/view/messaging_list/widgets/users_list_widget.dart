@@ -1,16 +1,21 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class UsersListWidget extends StatelessWidget {
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class UsersListWidget extends StatefulWidget {
   const UsersListWidget({super.key});
 
+  @override
+  State<UsersListWidget> createState() => _UsersListWidgetState();
+}
+
+class _UsersListWidgetState extends State<UsersListWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,11 +28,9 @@ class UsersListWidget extends StatelessWidget {
   }
 
   Widget _buildSubHeaders() {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Row(
       children: [
-        InstaText(text: 'Messages'),
-        InstaText(text: 'Requests'),
+        InstaText(text: AppLocalizations.of(context)!.messages),
       ],
     );
   }
@@ -43,10 +46,8 @@ class UsersListWidget extends StatelessWidget {
             );
           },
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _userDetails(),
-              _actionButton(),
             ],
           ),
         ),
@@ -55,30 +56,23 @@ class UsersListWidget extends StatelessWidget {
   }
 
   Widget _userDetails() {
-    return const Row(
+    return Row(
       children: [
-        InstaCircleAvatar(image: IconRes.testOnly),
-        SizedBox(width: InstaSpacing.small),
+        const InstaCircleAvatar(image: IconRes.testOnly),
+        const SizedBox(width: InstaSpacing.small),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InstaText(
+            const InstaText(
               text: 'user_name',
             ),
             InstaText(
-              text: 'Active 4h ago',
+              text: AppLocalizations.of(context)!.activeTimeAgo('5h'),
               color: Colors.grey,
             ),
           ],
         ),
       ],
-    );
-  }
-
-  Widget _actionButton() {
-    return const InstaButton(
-      buttonType: InstaButtonType.icon,
-      assetName: IconRes.camera,
     );
   }
 }

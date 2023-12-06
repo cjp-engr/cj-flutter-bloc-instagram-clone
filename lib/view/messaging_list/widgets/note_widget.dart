@@ -4,9 +4,16 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-class NoteWidget extends StatelessWidget {
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class NoteWidget extends StatefulWidget {
   const NoteWidget({super.key});
 
+  @override
+  State<NoteWidget> createState() => _NoteWidgetState();
+}
+
+class _NoteWidgetState extends State<NoteWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,9 +47,9 @@ class NoteWidget extends StatelessWidget {
         ),
         height: 30,
         width: 50,
-        child: const Center(
+        child: Center(
           child: InstaText(
-            text: 'Note...',
+            text: AppLocalizations.of(context)!.note,
           ),
         ),
       ),
@@ -50,8 +57,8 @@ class NoteWidget extends StatelessWidget {
   }
 
   Widget _buildName() {
-    return const InstaText(
-      text: 'Your Note',
+    return InstaText(
+      text: AppLocalizations.of(context)!.yourNote,
       color: Colors.grey,
     );
   }

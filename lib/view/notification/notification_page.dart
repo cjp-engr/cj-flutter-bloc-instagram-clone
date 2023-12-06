@@ -7,14 +7,16 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/notification/widgets/li
 import 'package:cj_flutter_riverpod_instagram_clone/view/notification/widgets/suggested_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return InstaAppBar(
-      appBarTitle: const InstaText(
-        text: 'Notifications',
+      appBarTitle: InstaText(
+        text: AppLocalizations.of(context)!.notifications,
         fontSize: InstaFontSize.large,
         fontWeight: FontWeight.bold,
       ),

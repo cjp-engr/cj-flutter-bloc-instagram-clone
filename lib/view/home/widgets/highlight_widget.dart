@@ -4,16 +4,18 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class HighlightWidget extends StatelessWidget {
   const HighlightWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        InstaCircleAvatar(image: IconRes.testOnly),
-        SizedBox(height: InstaSpacing.tiny),
-        InstaText(text: 'Your story')
+        const InstaCircleAvatar(image: IconRes.testOnly),
+        const SizedBox(height: InstaSpacing.tiny),
+        InstaText(text: AppLocalizations.of(context)!.yourStory)
       ],
     );
   }

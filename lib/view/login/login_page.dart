@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -55,14 +57,14 @@ class _LoginPageState extends State<LoginPage> {
       );
 
   Widget _buildLoginIdentifiers() => InstaTextField(
-        label: 'Phone number, user, or email',
+        label: AppLocalizations.of(context)!.userNameOrEmail,
         onChanged: (text) {
           loginIdentifier = text;
         },
       );
 
   Widget _buildPassword() => InstaTextField(
-        label: 'Password',
+        label: AppLocalizations.of(context)!.password,
         onChanged: (text) {
           password = text;
         },
@@ -71,18 +73,19 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildLogin() => InstaButton(
         width: double.infinity,
         buttonType: InstaButtonType.secondary,
-        text: 'Log in',
+        text: AppLocalizations.of(context)!.login,
         onPressed: () {},
       );
 
   Widget _buildRegisterRoute() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const InstaText(text: 'Don\'t have an account? '),
+          InstaText(
+              text: '${AppLocalizations.of(context)!.dontHaveAnAccount} '),
           InkWell(
             onTap: () => context.goNamed(InstaRouteNames.register),
-            child: const InstaText(
-              text: 'Sign up',
+            child: InstaText(
+              text: AppLocalizations.of(context)!.signUp,
               color: Colors.blue,
               fontWeight: FontWeight.bold,
             ),

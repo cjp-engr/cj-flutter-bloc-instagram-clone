@@ -65,26 +65,12 @@ class PostWidget extends StatelessWidget {
 
   Widget _buildIcons() {
     return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            InstaButton(
-              buttonType: InstaButtonType.icon,
-              assetName: IconRes.heart,
-            ),
-            SizedBox(width: InstaSpacing.verySmall),
-            InstaButton(
-              buttonType: InstaButtonType.icon,
-              assetName: IconRes.comment,
-            ),
-            SizedBox(width: InstaSpacing.verySmall),
-            InstaButton(
-              buttonType: InstaButtonType.icon,
-              assetName: IconRes.paperPlane,
-            ),
-          ],
+        InstaButton(
+          buttonType: InstaButtonType.icon,
+          assetName: IconRes.heart,
         ),
+        SizedBox(width: InstaSpacing.small),
         InstaButton(
           buttonType: InstaButtonType.icon,
           assetName: IconRes.saved,

@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -36,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: [
             const SizedBox(height: InstaSpacing.small),
-            _buildHeader(),
+            _buildAppName(),
             const SizedBox(height: InstaSpacing.extraLarge),
             _buildSubHeader(),
             const SizedBox(height: InstaSpacing.extraLarge),
@@ -61,71 +63,69 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildHeader() => const InstaText(
+  Widget _buildAppName() => const InstaText(
         text: 'Instaclone',
         fontSize: InstaFontSize.extraLarge,
         fontWeight: FontWeight.bold,
       );
 
-  Widget _buildSubHeader() => const InstaText(
-        text:
-            'Curabitur non elit ut libero tristique sodales. Mauris a lacus. Donec mattis semper leo.',
+  Widget _buildSubHeader() => InstaText(
+        text: AppLocalizations.of(context)!.registerSubHeader,
       );
 
   Widget _buildRegisterIdentifier() => InstaTextField(
-        label: 'Mobile Number or Email',
+        label: AppLocalizations.of(context)!.email,
         onChanged: (text) {
           registerIdentifiers = text;
         },
       );
 
   Widget _buildFullName() => InstaTextField(
-        label: 'Full Name',
+        label: AppLocalizations.of(context)!.fullName,
         onChanged: (text) {
           fullName = text;
         },
       );
 
   Widget _buildUserName() => InstaTextField(
-        label: 'Username',
+        label: AppLocalizations.of(context)!.userName,
         onChanged: (text) {
           userName = text;
         },
       );
 
   Widget _buildPassword() => InstaTextField(
-        label: 'Password',
+        label: AppLocalizations.of(context)!.password,
         onChanged: (text) {
           password = text;
         },
       );
 
-  Widget _buildLearnMore() => const InstaText(
-        text:
-            'Morbi vestibulum volutpat enim. Duis lobortis. In turpis. Donec at ante non massa id feugiat.',
+  Widget _buildLearnMore() => InstaText(
+        text: AppLocalizations.of(context)!.registerLearnMore,
         color: Colors.grey,
       );
 
-  Widget _buildPolicy() => const InstaText(
-        text: 'Mauris eget neque at sem venenatis eleifend.',
+  Widget _buildPolicy() => InstaText(
+        text: AppLocalizations.of(context)!.registerPolicy,
         color: Colors.grey,
       );
 
   Widget _buildSignUp() => InstaButton(
         width: double.infinity,
         buttonType: InstaButtonType.secondary,
-        text: 'Sign up',
+        text: AppLocalizations.of(context)!.signUp,
         onPressed: () {},
       );
 
   Widget _buildLoginRoute() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const InstaText(text: 'Have an account? '),
+          InstaText(text: '${AppLocalizations.of(context)!.haveAnAccount} '),
           InkWell(
             onTap: () => context.goNamed(InstaRouteNames.login),
-            child: const InstaText(
-              text: 'Log in',
+            child: InstaText(
+              text: AppLocalizations.of(context)!.login,
               color: Colors.blue,
               fontWeight: FontWeight.bold,
             ),

@@ -7,15 +7,22 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-class SuggestedWidget extends StatelessWidget {
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class SuggestedWidget extends StatefulWidget {
   const SuggestedWidget({super.key});
 
+  @override
+  State<SuggestedWidget> createState() => _SuggestedWidgetState();
+}
+
+class _SuggestedWidgetState extends State<SuggestedWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const InstaText(text: 'Suggested for you'),
+        InstaText(text: AppLocalizations.of(context)!.suggestedForYou),
         const SizedBox(height: InstaSpacing.medium),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,18 +36,18 @@ class SuggestedWidget extends StatelessWidget {
   }
 
   Widget _buildDetails() {
-    return const Row(
+    return Row(
       children: [
-        InstaCircleAvatar(
+        const InstaCircleAvatar(
           image: IconRes.testOnly,
           radius: InstaCircleAvatarSize.medium,
         ),
-        SizedBox(width: InstaSpacing.verySmall),
+        const SizedBox(width: InstaSpacing.verySmall),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InstaText(text: 'user_name'),
-            InstaText(text: 'Suggested for you')
+            const InstaText(text: 'user_name'),
+            InstaText(text: AppLocalizations.of(context)!.suggestedForYou)
           ],
         )
       ],
@@ -52,7 +59,7 @@ class SuggestedWidget extends StatelessWidget {
       children: [
         InstaButton(
           buttonType: InstaButtonType.secondary,
-          text: 'Follow',
+          text: AppLocalizations.of(context)!.follow,
           onPressed: () {},
         ),
         const InstaButton(

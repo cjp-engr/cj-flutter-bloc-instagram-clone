@@ -5,6 +5,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ListWidget extends StatelessWidget {
   const ListWidget({super.key});
 
@@ -13,7 +15,7 @@ class ListWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const InstaText(text: 'New'),
+        InstaText(text: AppLocalizations.of(context)!.newText),
         const SizedBox(height: InstaSpacing.verySmall),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -5,9 +5,16 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-class LikeAndCommentWidget extends StatelessWidget {
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class LikeAndCommentWidget extends StatefulWidget {
   const LikeAndCommentWidget({super.key});
 
+  @override
+  State<LikeAndCommentWidget> createState() => _LikeAndCommentWidgetState();
+}
+
+class _LikeAndCommentWidgetState extends State<LikeAndCommentWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +31,7 @@ class LikeAndCommentWidget extends StatelessWidget {
   }
 
   Widget _buildLike() {
-    return const InstaText(text: '1,1135 likes');
+    return InstaText(text: AppLocalizations.of(context)!.likesCount(1234));
   }
 
   Widget _buildUserName() {
@@ -40,7 +47,9 @@ class LikeAndCommentWidget extends StatelessWidget {
 
   Widget _buildViewComment() {
     return InkWell(
-        child: const InstaText(text: 'View all 1,447 comments'), onTap: () {});
+        child: InstaText(
+            text: AppLocalizations.of(context)!.viewAllCountComment(3000)),
+        onTap: () {});
   }
 
   Widget _buildAddComment() {
@@ -62,8 +71,8 @@ class LikeAndCommentWidget extends StatelessWidget {
 
   Widget _displayAddComment() {
     return InkWell(
-      child: const InstaText(
-        text: 'Add a comment...',
+      child: InstaText(
+        text: AppLocalizations.of(context)!.addAComment,
         color: Colors.grey,
       ),
       onTap: () {},

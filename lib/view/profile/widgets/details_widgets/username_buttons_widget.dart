@@ -9,10 +9,18 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class UserNameAndButtonsWidget extends StatelessWidget {
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class UserNameAndButtonsWidget extends StatefulWidget {
   final String? id;
   const UserNameAndButtonsWidget({super.key, this.id});
 
+  @override
+  State<UserNameAndButtonsWidget> createState() =>
+      _UserNameAndButtonsWidgetState();
+}
+
+class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -27,16 +35,16 @@ class UserNameAndButtonsWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildUserNameAndButton(id != null, context),
+            _buildUserNameAndButton(widget.id != null),
             const SizedBox(height: InstaSpacing.large),
-            _buildButtons(id != null),
+            _buildButtons(widget.id != null),
           ],
         )
       ],
     );
   }
 
-  Widget _buildUserNameAndButton(bool hasId, BuildContext context) {
+  Widget _buildUserNameAndButton(bool hasId) {
     return Row(
       children: [
         const InstaText(
@@ -64,13 +72,17 @@ class UserNameAndButtonsWidget extends StatelessWidget {
       children: [
         InstaButton(
           buttonType: InstaButtonType.primary,
-          text: hasId ? 'Following' : 'Edit Profile',
+          text: hasId
+              ? AppLocalizations.of(context)!.following
+              : AppLocalizations.of(context)!.editProfile,
           onPressed: () {},
         ),
         const SizedBox(width: InstaSpacing.extraSmall),
         InstaButton(
           buttonType: InstaButtonType.primary,
-          text: hasId ? 'Message' : 'View Archive',
+          text: hasId
+              ? AppLocalizations.of(context)!.message
+              : AppLocalizations.of(context)!.viewArchive,
           onPressed: () {},
         ),
       ],
