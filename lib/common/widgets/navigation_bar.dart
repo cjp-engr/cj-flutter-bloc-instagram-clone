@@ -118,10 +118,10 @@ class InstaNavigationBar extends StatelessWidget {
         icon: _icon(IconRes.newPost),
         label: const SizedBox(),
       ),
-      NavigationRailDestination(
-        icon: _icon(IconRes.messenger),
-        label: const SizedBox(),
-      ),
+      // NavigationRailDestination(
+      //   icon: _icon(IconRes.messenger),
+      //   label: const SizedBox(),
+      // ),
       const NavigationRailDestination(
         disabled: true,
         icon: SizedBox(),
@@ -135,7 +135,7 @@ class InstaNavigationBar extends StatelessWidget {
       BottomNavigationBarItem(icon: _icon(IconRes.home), label: ''),
       BottomNavigationBarItem(icon: _icon(IconRes.notification), label: ''),
       BottomNavigationBarItem(icon: _icon(IconRes.newPost), label: ''),
-      BottomNavigationBarItem(icon: _icon(IconRes.messenger), label: ''),
+      // BottomNavigationBarItem(icon: _icon(IconRes.messenger), label: ''),
       BottomNavigationBarItem(icon: _profileIcon(context), label: ''),
     ];
   }

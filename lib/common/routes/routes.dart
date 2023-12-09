@@ -4,8 +4,6 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/navigation_ba
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/add_post_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/home_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/login/login_page.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_chat/messaging_chat_page.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/messaging_list/messaging_list_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/notification/notification_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/profile_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/register/register_page.dart';
@@ -20,8 +18,8 @@ final _shellNavigatorNotificationKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorNotificationKey');
 final _shellNavigatorPostsKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorPostsKey');
-final _shellNavigatorMessagingKey =
-    GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorMessagingKey');
+// final _shellNavigatorMessagingKey =
+//     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorMessagingKey');
 final _shellNavigatorProfileKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorProfileKey');
 
@@ -40,7 +38,6 @@ final goRouter = GoRouter(
         _home(),
         _notification(),
         _post(),
-        _messaging(),
         _profile(),
       ],
     ),
@@ -116,29 +113,6 @@ StatefulShellBranch _post() {
         pageBuilder: (context, state) => const NoTransitionPage(
           child: AddPostPage(),
         ),
-      ),
-    ],
-  );
-}
-
-StatefulShellBranch _messaging() {
-  return StatefulShellBranch(
-    navigatorKey: _shellNavigatorMessagingKey,
-    routes: [
-      GoRoute(
-        path: '/${InstaRouteNames.messagingList}',
-        name: InstaRouteNames.messagingList,
-        pageBuilder: (context, state) {
-          return const NoTransitionPage(
-            child: MessagingListPage(),
-          );
-        },
-      ),
-      GoRoute(
-        path: '/${InstaRouteNames.messagingChat}/:id',
-        name: InstaRouteNames.messagingChat,
-        builder: (context, state) =>
-            MessagingChatPage(id: state.pathParameters['id']!),
       ),
     ],
   );

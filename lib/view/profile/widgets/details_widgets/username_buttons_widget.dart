@@ -31,7 +31,7 @@ class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
           image: IconRes.testOnly,
           radius: 50,
         ),
-        const SizedBox(width: InstaSpacing.large),
+        const SizedBox(width: InstaSpacing.small),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,14 +45,15 @@ class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
   }
 
   Widget _buildUserNameAndButton(bool hasId) {
-    return Row(
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 4.0,
       children: [
         const InstaText(
           text: 'user_name',
           fontWeight: FontWeight.bold,
           fontSize: InstaFontSize.veryLarge,
         ),
-        const SizedBox(width: InstaSpacing.verySmall),
         hasId
             ? const InstaButton(
                 buttonType: InstaButtonType.icon,
@@ -68,7 +69,9 @@ class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
   }
 
   Widget _buildButtons(bool hasId) {
-    return Row(
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 4.0,
       children: [
         InstaButton(
           buttonType: InstaButtonType.primary,
@@ -77,14 +80,13 @@ class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
               : AppLocalizations.of(context)!.editProfile,
           onPressed: () {},
         ),
-        const SizedBox(width: InstaSpacing.extraSmall),
-        InstaButton(
-          buttonType: InstaButtonType.primary,
-          text: hasId
-              ? AppLocalizations.of(context)!.message
-              : AppLocalizations.of(context)!.viewArchive,
-          onPressed: () {},
-        ),
+        hasId
+            ? const SizedBox()
+            : InstaButton(
+                buttonType: InstaButtonType.primary,
+                text: AppLocalizations.of(context)!.viewArchive,
+                onPressed: () {},
+              ),
       ],
     );
   }

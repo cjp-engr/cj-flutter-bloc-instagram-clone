@@ -55,10 +55,9 @@ class _IconButton extends StatelessWidget {
   final String assetName;
   final Function()? onPressed;
   const _IconButton({
-    Key? key,
     required this.assetName,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -86,12 +85,11 @@ class _PrimaryButton extends StatelessWidget {
   final double? width;
   final double? height;
   const _PrimaryButton({
-    Key? key,
     required this.text,
     this.onPressed,
     this.width,
     this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -125,12 +123,11 @@ class _SecondaryButton extends StatelessWidget {
   final double? width;
   final double? height;
   const _SecondaryButton({
-    Key? key,
     required this.text,
     this.onPressed,
     this.width,
     this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
