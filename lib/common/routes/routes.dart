@@ -18,8 +18,6 @@ final _shellNavigatorNotificationKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorNotificationKey');
 final _shellNavigatorPostsKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorPostsKey');
-// final _shellNavigatorMessagingKey =
-//     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorMessagingKey');
 final _shellNavigatorProfileKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorProfileKey');
 
