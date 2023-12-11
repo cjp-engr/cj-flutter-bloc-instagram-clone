@@ -6,10 +6,10 @@ class RegisterState {
   final String password;
 
   RegisterState({
-    required this.email,
-    required this.fullName,
-    required this.userName,
-    required this.password,
+    this.email = '',
+    this.fullName = '',
+    this.userName = '',
+    this.password = '',
   });
 
   RegisterState copyWith({

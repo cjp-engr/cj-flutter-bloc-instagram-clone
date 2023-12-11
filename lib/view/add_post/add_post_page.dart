@@ -1,4 +1,4 @@
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/add_post_mobile_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/web/add_post_web_page.dart';
 import 'package:flutter/material.dart';
 
 class AddPostPage extends StatelessWidget {
@@ -6,6 +6,7 @@ class AddPostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AddPostMobilePage();
+    // return kIsWeb ? const AddPostWebPage() : const AddPostMobilePage();
+    return const AddPostWebPage();
   }
 }
