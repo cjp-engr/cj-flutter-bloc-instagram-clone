@@ -6,6 +6,7 @@ class IconRes {
   static const String discoverPeople = '$_iconBase/discover-people.png';
   static const String dropdown = '$_iconBase/dropdown.png';
   static const String ellipsis = '$_iconBase/ellipsis.png';
+  static const String gallery = '$_iconBase/gallery.png';
   static const String grid = '$_iconBase/grid.png';
   static const String heart = '$_iconBase/heart.png';
   static const String heartFilled = '$_iconBase/heart-filled.png';

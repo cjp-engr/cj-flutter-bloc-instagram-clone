@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
@@ -35,6 +36,14 @@ class InstaButton extends StatelessWidget {
       case InstaButtonType.secondary:
         return _SecondaryButton(
           text: text!,
+          onPressed: onPressed,
+          width: width,
+          height: height,
+        );
+      case InstaButtonType.tertiary:
+        return _TertiaryButton(
+          text: text!,
+          assetName: assetName ?? IconRes.home,
           onPressed: onPressed,
           width: width,
           height: height,
@@ -149,6 +158,57 @@ class _SecondaryButton extends StatelessWidget {
           text: text,
           color: Colors.white,
           fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}
+
+class _TertiaryButton extends StatelessWidget {
+  final String text;
+  final String assetName;
+  final Function()? onPressed;
+  final double? width;
+  final double? height;
+  const _TertiaryButton({
+    required this.text,
+    required this.assetName,
+    this.onPressed,
+    this.width,
+    this.height,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width ?? 120,
+      height: height ?? context.screenHeight * 0.055,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.grey.shade800,
+          minimumSize: Size.zero,
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              assetName,
+              scale: 2.7,
+              color: Colors.white,
+            ),
+            const SizedBox(width: InstaSpacing.verySmall),
+            InstaText(
+              text: text,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ],
         ),
       ),
     );

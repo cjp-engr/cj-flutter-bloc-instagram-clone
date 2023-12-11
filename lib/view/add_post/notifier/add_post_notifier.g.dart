@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'register_notifier.dart';
+part of 'add_post_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$registerNotifierHash() => r'10a2d5ba18b7ed37933d057f91ba7e9887bc73b7';
+String _$addPostNotifierHash() => r'7eeaebb658b286da08713befd1a5a81157775a82';
 
-/// See also [RegisterNotifier].
-@ProviderFor(RegisterNotifier)
-final registerNotifierProvider =
-    AutoDisposeNotifierProvider<RegisterNotifier, RegisterState>.internal(
-  RegisterNotifier.new,
-  name: r'registerNotifierProvider',
+/// See also [AddPostNotifier].
+@ProviderFor(AddPostNotifier)
+final addPostNotifierProvider =
+    AutoDisposeNotifierProvider<AddPostNotifier, AddPostState>.internal(
+  AddPostNotifier.new,
+  name: r'addPostNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$registerNotifierHash,
+      : _$addPostNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$RegisterNotifier = AutoDisposeNotifier<RegisterState>;
+typedef _$AddPostNotifier = AutoDisposeNotifier<AddPostState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
