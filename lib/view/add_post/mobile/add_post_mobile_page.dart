@@ -8,23 +8,36 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/widgets/add_post_test.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/controller/add_post_controller.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widget/video_player_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
-import 'package:video_player/video_player.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddPostMobilePage extends StatefulWidget {
+class AddPostMobilePage extends ConsumerStatefulWidget {
   const AddPostMobilePage({super.key});
 
   @override
-  State<AddPostMobilePage> createState() => _AddPostMobilePageState();
+  ConsumerState<AddPostMobilePage> createState() => _AddPostMobilePageState();
 }
 
-class _AddPostMobilePageState extends State<AddPostMobilePage> {
-  List<XFile>? _mediaFileList;
-  final ImagePicker _picker = ImagePicker();
-  dynamic _pickImageError;
+class _AddPostMobilePageState extends ConsumerState<AddPostMobilePage> {
+  late AddPostController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AddPostController(ref: ref);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.disposeVideoController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +81,7 @@ class _AddPostMobilePageState extends State<AddPostMobilePage> {
                       text: 'Gallery',
                       assetName: IconRes.gallery,
                       onPressed: () {
-                        _onImageButtonPressed(ImageSource.gallery,
-                            context: context);
+                        _controller.selectMedia();
                       },
                     ),
                   ],
@@ -77,15 +89,50 @@ class _AddPostMobilePageState extends State<AddPostMobilePage> {
                 const SizedBox(height: InstaSpacing.verySmall),
               ],
             ),
-            _previewImages(),
+            // !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+            //     ? FutureBuilder<void>(
+            //         future: _controller.retrieveLostData(),
+            //         builder:
+            //             (BuildContext context, AsyncSnapshot<void> snapshot) {
+            //           switch (snapshot.connectionState) {
+            //             case ConnectionState.none:
+            //             case ConnectionState.waiting:
+            //               return const Text(
+            //                 'You have not yet picked an image.',
+            //                 textAlign: TextAlign.center,
+            //               );
+            //             case ConnectionState.done:
+            //               if (snapshot.hasData) {
+            //                 return _buildPreviewMedia();
+            //               } else {
+            //                 return const SizedBox();
+            //               }
+
+            //             case ConnectionState.active:
+            //               if (snapshot.hasError) {
+            //                 return Text(
+            //                   'Pick image/video error: ${snapshot.error}}',
+            //                   textAlign: TextAlign.center,
+            //                 );
+            //               } else {
+            //                 return const Text(
+            //                   'You have not yet picked an image.',
+            //                   textAlign: TextAlign.center,
+            //                 );
+            //               }
+            //           }
+            //         },
+            //       )
+            //     :
+            _buildPreviewMedia(),
           ],
         ),
       ),
     );
   }
 
-  Widget _previewImages() {
-    if (_mediaFileList != null) {
+  Widget _buildPreviewMedia() {
+    if (mediaFileList != null) {
       return Semantics(
         label: 'image_picker_example_picked_images',
         child: GridView.builder(
@@ -97,62 +144,33 @@ class _AddPostMobilePageState extends State<AddPostMobilePage> {
             crossAxisSpacing: 8.0,
             mainAxisSpacing: 8.0,
           ),
-          itemCount: _mediaFileList!.length,
+          itemCount: mediaFileList?.length,
           itemBuilder: (context, index) {
-            final mime = lookupMimeType(_mediaFileList![index].path);
+            final mime = lookupMimeType(mediaFileList![index].path);
             return Semantics(
               label: 'image_picker_example_picked_image',
               child: (mime == null || mime.startsWith('image/')
                   ? Image.file(
-                      File(_mediaFileList![index].path),
+                      File(mediaFileList![index].path),
                       errorBuilder: (BuildContext context, Object error,
                           StackTrace? stackTrace) {
                         return const Center(
                             child: Text('This image type is not supported'));
                       },
                     )
-                  : _buildInlineVideoPlayer(index)),
+                  : VideoPlayerWidget(index)),
             );
           },
         ),
       );
-    } else if (_pickImageError != null) {
-      return Text(
-        'Pick image error: $_pickImageError',
-        textAlign: TextAlign.center,
-      );
     } else {
       return const Text(
-        'You have not yet picked an image.',
+        'You have not yet picked an imagehello.',
         textAlign: TextAlign.center,
       );
     }
   }
 
-  Widget _buildInlineVideoPlayer(int index) {
-    final VideoPlayerController controller =
-        VideoPlayerController.file(File(_mediaFileList![index].path));
-    controller.initialize();
-    controller.setLooping(true);
-    controller.play();
-    return Center(child: AspectRatioVideo(controller));
-  }
-
-  Future<void> _onImageButtonPressed(
-    ImageSource source, {
-    required BuildContext context,
-  }) async {
-    if (context.mounted) {
-      try {
-        final pickedFileList = await _picker.pickMultipleMedia();
-        setState(() {
-          _mediaFileList = pickedFileList;
-        });
-      } catch (e) {
-        setState(() {
-          _pickImageError = e;
-        });
-      }
-    }
-  }
+  List<XFile>? get mediaFileList =>
+      ref.watch(addPostNotifierProvider).mediaFileList;
 }

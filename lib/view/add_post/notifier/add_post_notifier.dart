@@ -13,11 +13,15 @@ class AddPostNotifier extends _$AddPostNotifier {
     return const AddPostState();
   }
 
-  void getMediaFileList(List<XFile> mediaFileList) {
+  void pickMediaFileList(List<XFile> mediaFileList) {
     state = state.copyWith(mediaFileList: mediaFileList);
   }
 
-  void getErrorMessage(String errorMessage) {
+  void pickErrorMessage(String errorMessage) {
     state = state.copyWith(errorMessage: errorMessage);
+  }
+
+  void checkVideo(bool isVideo) {
+    state = state.copyWith(isVideo: isVideo);
   }
 }
