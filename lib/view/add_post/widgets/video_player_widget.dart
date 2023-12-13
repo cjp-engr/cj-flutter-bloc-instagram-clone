@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widget/aspect_ratio_video_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/aspect_ratio_video_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';

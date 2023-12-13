@@ -1,123 +1,29 @@
-import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/controller/add_post_controller.dart';
-import 'package:dotted_border/dotted_border.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/web/widgets/added_media_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/web/widgets/no_added_media_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
-import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddPostWebPage extends ConsumerStatefulWidget {
+class AddPostWebPage extends ConsumerWidget {
   const AddPostWebPage({super.key});
 
   @override
-  ConsumerState<AddPostWebPage> createState() => _AddPostWebPageState();
-}
-
-class _AddPostWebPageState extends ConsumerState<AddPostWebPage> {
-  late AddPostController _controller;
-  late DropzoneViewController _dropZoneController;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AddPostController(ref: ref);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
     return InstaAppBar(
-      appBarTitle: Breakpoints.mediumAndUp.isActive(context)
-          ? const SizedBox()
-          : const InstaText(
-              text: 'Instaclone',
-              fontSize: InstaFontSize.veryLarge,
-              fontWeight: FontWeight.bold,
-            ),
-      body: SizedBox(
-        height: 400,
-        child: Stack(
-          children: [
-            _buildDropZoneArea(),
-            _buildDropZoneComponents(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDropZoneArea() => Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: InstaSpacing.small,
-          horizontal: InstaSpacing.extraLarge,
-        ),
-        child: DottedBorder(
-          radius: const Radius.circular(InstaBorderRadius.small),
-          color: Colors.white,
-          borderType: BorderType.RRect,
-          strokeWidth: 2,
-          dashPattern: const [
-            10,
-            10,
-          ],
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(InstaBorderRadius.small * 2),
-            ),
-            child: DropzoneView(
-              operation: DragOperation.move,
-              mime: const ['image/jpeg'],
-              onCreated: (ctrl) => _dropZoneController = ctrl,
-              onLoaded: () {},
-              onError: (ev) {},
-              onHover: () {},
-              onLeave: () {},
-              onDrop: (ev) {},
-              onDropInvalid: (ev) {},
-              onDropMultiple: (ev) async {},
-            ),
-          ),
-        ),
-      );
-
-  Widget _buildDropZoneComponents() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: InstaSpacing.veryLarge),
-          const InstaText(
-            text: 'Create new post',
-            fontSize: InstaFontSize.large,
-          ),
-          const SizedBox(height: InstaSpacing.large),
-          Image.asset(
-            IconRes.camera,
-            color: Colors.white,
-          ),
-          const InstaText(
-            text: 'Drag photos and videos here',
-            fontSize: InstaFontSize.veryLarge,
-          ),
-          const SizedBox(height: InstaSpacing.large),
-          InstaButton(
-            buttonType: InstaButtonType.secondary,
-            width: 220,
-            height: 40,
-            text: 'Select from Computer',
-            onPressed: () async {
-              _controller.selectMedia();
-            },
-          ),
-        ],
-      ),
-    );
+        appBarTitle: Breakpoints.mediumAndUp.isActive(context)
+            ? const SizedBox()
+            : const InstaText(
+                text: 'Instaclone',
+                fontSize: InstaFontSize.veryLarge,
+                fontWeight: FontWeight.bold,
+              ),
+        body: mediaFileList == null
+            ? const NoAddedMediaWidget()
+            : AddedMediaWidget());
   }
 }

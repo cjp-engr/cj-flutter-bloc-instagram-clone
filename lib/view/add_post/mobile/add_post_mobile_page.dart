@@ -10,7 +10,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart'
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/controller/add_post_controller.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widget/video_player_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/video_player_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
