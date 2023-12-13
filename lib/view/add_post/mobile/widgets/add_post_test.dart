@@ -25,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
   dynamic _pickImageError;
   bool isVideo = false;
 
-  VideoPlayerController? _controller;
+  VideoPlayerController? _videoPlayerController;
   VideoPlayerController? _toBeDisposed;
   String? _retrieveDataError;
 
@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         controller = VideoPlayerController.file(File(file.path));
       }
-      _controller = controller;
+      _videoPlayerController = controller;
       // In web, most browsers won't honor a programmatic call to .play
       // if the video has a sound track (and is not muted).
       // Mute the video so it auto-plays in web!
@@ -68,8 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
     bool isMultiImage = false,
     bool isMedia = false,
   }) async {
-    if (_controller != null) {
-      await _controller!.setVolume(0.0);
+    if (_videoPlayerController != null) {
+      await _videoPlayerController!.setVolume(0.0);
     }
     if (context.mounted) {
       if (isVideo) {
@@ -147,9 +147,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void deactivate() {
-    if (_controller != null) {
-      _controller!.setVolume(0.0);
-      _controller!.pause();
+    if (_videoPlayerController != null) {
+      _videoPlayerController!.setVolume(0.0);
+      _videoPlayerController!.pause();
     }
     super.deactivate();
   }
@@ -167,8 +167,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_toBeDisposed != null) {
       await _toBeDisposed!.dispose();
     }
-    _toBeDisposed = _controller;
-    _controller = null;
+    _toBeDisposed = _videoPlayerController;
+    _videoPlayerController = null;
   }
 
   Widget _previewVideo() {
@@ -176,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (retrieveError != null) {
       return retrieveError;
     }
-    if (_controller == null) {
+    if (_videoPlayerController == null) {
       return const Text(
         'You have not yet picked a video',
         textAlign: TextAlign.center,
@@ -184,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: AspectRatioVideo(_controller),
+      child: AspectRatioVideo(_videoPlayerController),
     );
   }
 

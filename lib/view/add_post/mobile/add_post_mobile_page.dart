@@ -11,7 +11,6 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/controller/add_post_controller.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widget/video_player_widget.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
@@ -34,12 +33,6 @@ class _AddPostMobilePageState extends ConsumerState<AddPostMobilePage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    _controller.disposeVideoController();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return InstaAppBar(
       appBarTitle: const InstaText(
@@ -48,13 +41,7 @@ class _AddPostMobilePageState extends ConsumerState<AddPostMobilePage> {
         fontWeight: FontWeight.bold,
       ),
       appBarActions: [
-        InkWell(
-          onTap: () {},
-          child: const InstaText(
-            text: 'Next',
-            color: Colors.blue,
-          ),
-        ),
+        _buildNextButton(),
       ],
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: context.padding),
@@ -71,63 +58,46 @@ class _AddPostMobilePageState extends ConsumerState<AddPostMobilePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const InstaButton(
-                      buttonType: InstaButtonType.tertiary,
-                      text: 'Camera',
-                      assetName: IconRes.camera,
-                    ),
-                    InstaButton(
-                      buttonType: InstaButtonType.tertiary,
-                      text: 'Gallery',
-                      assetName: IconRes.gallery,
-                      onPressed: () {
-                        _controller.selectMedia();
-                      },
-                    ),
+                    _buildCameraButton(),
+                    _buildGalleryButton(),
                   ],
                 ),
                 const SizedBox(height: InstaSpacing.verySmall),
               ],
             ),
-            // !kIsWeb && defaultTargetPlatform == TargetPlatform.android
-            //     ? FutureBuilder<void>(
-            //         future: _controller.retrieveLostData(),
-            //         builder:
-            //             (BuildContext context, AsyncSnapshot<void> snapshot) {
-            //           switch (snapshot.connectionState) {
-            //             case ConnectionState.none:
-            //             case ConnectionState.waiting:
-            //               return const Text(
-            //                 'You have not yet picked an image.',
-            //                 textAlign: TextAlign.center,
-            //               );
-            //             case ConnectionState.done:
-            //               if (snapshot.hasData) {
-            //                 return _buildPreviewMedia();
-            //               } else {
-            //                 return const SizedBox();
-            //               }
-
-            //             case ConnectionState.active:
-            //               if (snapshot.hasError) {
-            //                 return Text(
-            //                   'Pick image/video error: ${snapshot.error}}',
-            //                   textAlign: TextAlign.center,
-            //                 );
-            //               } else {
-            //                 return const Text(
-            //                   'You have not yet picked an image.',
-            //                   textAlign: TextAlign.center,
-            //                 );
-            //               }
-            //           }
-            //         },
-            //       )
-            //     :
             _buildPreviewMedia(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildNextButton() {
+    return InkWell(
+      onTap: () {},
+      child: const InstaText(
+        text: 'Next',
+        color: Colors.blue,
+      ),
+    );
+  }
+
+  Widget _buildCameraButton() {
+    return const InstaButton(
+      buttonType: InstaButtonType.tertiary,
+      text: 'Camera',
+      assetName: IconRes.camera,
+    );
+  }
+
+  Widget _buildGalleryButton() {
+    return InstaButton(
+      buttonType: InstaButtonType.tertiary,
+      text: 'Gallery',
+      assetName: IconRes.gallery,
+      onPressed: () {
+        _controller.selectMedia();
+      },
     );
   }
 

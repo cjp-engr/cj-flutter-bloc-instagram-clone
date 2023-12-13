@@ -20,8 +20,4 @@ class AddPostNotifier extends _$AddPostNotifier {
   void pickErrorMessage(String errorMessage) {
     state = state.copyWith(errorMessage: errorMessage);
   }
-
-  void checkVideo(bool isVideo) {
-    state = state.copyWith(isVideo: isVideo);
-  }
 }
