@@ -63,14 +63,15 @@ class _NoAddedMediaWidgetState extends ConsumerState<NoAddedMediaWidget> {
             ),
             //TODO: https://github.com/RajatPalankar8/flutter_drag_drop_example/tree/master/lib
             child: DropzoneView(
-                operation: DragOperation.move,
-                mime: const ['image/jpeg'],
-                onCreated: (ctrl) => _dropZoneController = ctrl,
-                onDropMultiple: (event) async {
-                  for (var i in event!) {
-                    _controller.droppedFile(i, _dropZoneController);
-                  }
-                }),
+              operation: DragOperation.move,
+              mime: const ['image/jpeg'],
+              onCreated: (ctrl) => _dropZoneController = ctrl,
+              onDropMultiple: (event) async {
+                for (var i in event!) {
+                  _controller.droppedFile(i, _dropZoneController);
+                }
+              },
+            ),
           ),
         ),
       );

@@ -4,18 +4,24 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_p
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddedMediaWidget extends ConsumerWidget {
-  AddedMediaWidget({super.key});
+class AddedMediaWidget extends ConsumerStatefulWidget {
+  const AddedMediaWidget({super.key});
 
+  @override
+  ConsumerState<AddedMediaWidget> createState() => _AddedMediaWidgetState();
+}
+
+class _AddedMediaWidgetState extends ConsumerState<AddedMediaWidget> {
   final PageController _pageController = PageController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return _buildDisplayAddedMedia(ref);
+  Widget build(BuildContext context) {
+    return _buildDisplayAddedMedia();
   }
 
-  Widget _buildDisplayAddedMedia(WidgetRef ref) {
+  Widget _buildDisplayAddedMedia() {
     final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
+    final droppedFiles = ref.watch(addPostNotifierProvider).droppedFiles;
     return Column(
       children: [
         Padding(
@@ -29,17 +35,19 @@ class AddedMediaWidget extends ConsumerWidget {
             child: PageView(
               physics: const ClampingScrollPhysics(),
               controller: _pageController,
-              // children: List.generate(droppedFiles!.length,
-              //     (index) => Image.network(droppedFiles[index].url)),
-              children: List.generate(mediaFileList!.length,
-                  (index) => Image.network(mediaFileList[index].path)),
+              children: mediaFileList != null
+                  ? List.generate(mediaFileList.length,
+                      (index) => Image.network(mediaFileList[index].path))
+                  : List.generate(droppedFiles!.length,
+                      (index) => Image.network(droppedFiles[index].url)),
             ),
           ),
         ),
         InstaDotsIndicator(
           controller: _pageController,
-          // count: droppedFiles.length,
-          count: mediaFileList.length,
+          count: mediaFileList != null
+              ? mediaFileList.length
+              : droppedFiles?.length ?? 0,
         ),
       ],
     );

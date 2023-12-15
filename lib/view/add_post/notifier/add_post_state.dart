@@ -5,23 +5,23 @@ import 'package:cj_flutter_riverpod_instagram_clone/model/dropped_file.dart';
 
 class AddPostState {
   final List<XFile>? mediaFileList;
-  final DroppedFile? droppedFile;
+  final List<DroppedFile>? droppedFiles;
   final String errorMessage;
 
   const AddPostState({
     this.mediaFileList,
-    this.droppedFile,
+    this.droppedFiles,
     this.errorMessage = '',
   });
 
   AddPostState copyWith({
     List<XFile>? mediaFileList,
-    DroppedFile? droppedFile,
+    List<DroppedFile>? droppedFiles,
     String? errorMessage,
   }) {
     return AddPostState(
       mediaFileList: mediaFileList ?? this.mediaFileList,
-      droppedFile: droppedFile ?? this.droppedFile,
+      droppedFiles: droppedFiles ?? this.droppedFiles,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

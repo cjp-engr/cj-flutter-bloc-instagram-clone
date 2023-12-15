@@ -13,7 +13,8 @@ class AddPostWebPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
+    // final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
+    final droppedFiles = ref.watch(addPostNotifierProvider).droppedFiles;
     return InstaAppBar(
         appBarTitle: Breakpoints.mediumAndUp.isActive(context)
             ? const SizedBox()
@@ -22,8 +23,8 @@ class AddPostWebPage extends ConsumerWidget {
                 fontSize: InstaFontSize.veryLarge,
                 fontWeight: FontWeight.bold,
               ),
-        body: mediaFileList == null
+        body: droppedFiles == null
             ? const NoAddedMediaWidget()
-            : AddedMediaWidget());
+            : const AddedMediaWidget());
   }
 }

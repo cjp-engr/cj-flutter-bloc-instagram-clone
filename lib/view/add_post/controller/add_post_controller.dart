@@ -23,7 +23,11 @@ class AddPostController {
   }
 
   Future<void> droppedFile(
-      dynamic event, DropzoneViewController dropZoneController) async {
+    dynamic event,
+    DropzoneViewController dropZoneController,
+  ) async {
+    final updateState = ref.read(addPostNotifierProvider.notifier);
+
     final name = event.name;
     final mime = await dropZoneController.getFileMIME(event);
     final bytes = await dropZoneController.getFileSize(event);
@@ -36,6 +40,9 @@ class AddPostController {
       bytes: bytes,
     );
 
-    ref.read(addPostNotifierProvider.notifier).pickDroppedFiles(droppedFile);
+    updateState.pickDroppedFiles([
+      ...ref.watch(addPostNotifierProvider).droppedFiles ?? [],
+      droppedFile
+    ]);
   }
 }

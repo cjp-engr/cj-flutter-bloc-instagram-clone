@@ -18,8 +18,8 @@ class AddPostNotifier extends _$AddPostNotifier {
     state = state.copyWith(mediaFileList: mediaFileList);
   }
 
-  void pickDroppedFiles(DroppedFile droppedFile) {
-    state = state.copyWith(droppedFile: droppedFile);
+  void pickDroppedFiles(List<DroppedFile> droppedFiles) {
+    state = state.copyWith(droppedFiles: droppedFiles);
   }
 
   void pickErrorMessage(String errorMessage) {
