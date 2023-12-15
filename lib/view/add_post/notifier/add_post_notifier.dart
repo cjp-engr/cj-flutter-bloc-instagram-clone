@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/model/dropped_file.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_state.dart';
 
@@ -15,6 +16,10 @@ class AddPostNotifier extends _$AddPostNotifier {
 
   void pickMediaFileList(List<XFile> mediaFileList) {
     state = state.copyWith(mediaFileList: mediaFileList);
+  }
+
+  void pickDroppedFiles(DroppedFile droppedFile) {
+    state = state.copyWith(droppedFile: droppedFile);
   }
 
   void pickErrorMessage(String errorMessage) {

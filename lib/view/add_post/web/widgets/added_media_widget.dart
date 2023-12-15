@@ -11,6 +11,10 @@ class AddedMediaWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    return _buildDisplayAddedMedia(ref);
+  }
+
+  Widget _buildDisplayAddedMedia(WidgetRef ref) {
     final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
     return Column(
       children: [
@@ -25,14 +29,17 @@ class AddedMediaWidget extends ConsumerWidget {
             child: PageView(
               physics: const ClampingScrollPhysics(),
               controller: _pageController,
-              children: List.generate(mediaFileList?.length ?? 0,
-                  (index) => Image.network(mediaFileList![index].path)),
+              // children: List.generate(droppedFiles!.length,
+              //     (index) => Image.network(droppedFiles[index].url)),
+              children: List.generate(mediaFileList!.length,
+                  (index) => Image.network(mediaFileList[index].path)),
             ),
           ),
         ),
         InstaDotsIndicator(
           controller: _pageController,
-          count: mediaFileList!.length,
+          // count: droppedFiles.length,
+          count: mediaFileList.length,
         ),
       ],
     );

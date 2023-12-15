@@ -11,7 +11,7 @@ class AddPostPage extends StatelessWidget {
     final isAndroid = defaultTargetPlatform == TargetPlatform.android;
     final isIos = defaultTargetPlatform == TargetPlatform.iOS;
 
-    return kIsWeb && !isAndroid && !isIos
+    return kIsWeb && (!isAndroid || !isIos)
         ? const AddPostWebPage()
         : const AddPostMobilePage();
     // return const MyHomePage();

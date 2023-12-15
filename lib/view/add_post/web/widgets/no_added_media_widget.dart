@@ -12,7 +12,9 @@ import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NoAddedMediaWidget extends ConsumerStatefulWidget {
-  const NoAddedMediaWidget({super.key});
+  const NoAddedMediaWidget({
+    super.key,
+  });
 
   @override
   ConsumerState<NoAddedMediaWidget> createState() => _NoAddedMediaWidgetState();
@@ -61,17 +63,14 @@ class _NoAddedMediaWidgetState extends ConsumerState<NoAddedMediaWidget> {
             ),
             //TODO: https://github.com/RajatPalankar8/flutter_drag_drop_example/tree/master/lib
             child: DropzoneView(
-              operation: DragOperation.move,
-              mime: const ['image/jpeg'],
-              onCreated: (ctrl) => _dropZoneController = ctrl,
-              onLoaded: () {},
-              onError: (ev) {},
-              onHover: () {},
-              onLeave: () {},
-              onDrop: (ev) => {},
-              onDropInvalid: (ev) {},
-              onDropMultiple: (ev) async {},
-            ),
+                operation: DragOperation.move,
+                mime: const ['image/jpeg'],
+                onCreated: (ctrl) => _dropZoneController = ctrl,
+                onDropMultiple: (event) async {
+                  for (var i in event!) {
+                    _controller.droppedFile(i, _dropZoneController);
+                  }
+                }),
           ),
         ),
       );
