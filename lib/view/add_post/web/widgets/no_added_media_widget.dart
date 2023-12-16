@@ -61,7 +61,6 @@ class _NoAddedMediaWidgetState extends ConsumerState<NoAddedMediaWidget> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(InstaBorderRadius.small * 2),
             ),
-            //TODO: https://github.com/RajatPalankar8/flutter_drag_drop_example/tree/master/lib
             child: DropzoneView(
               operation: DragOperation.move,
               mime: const ['image/jpeg'],
