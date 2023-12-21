@@ -11,10 +11,10 @@ class AddPostController {
 
   final ImagePicker _picker = ImagePicker();
 
-  Future<void> selectMedia() async {
+  Future<void> pickImages() async {
     final updateState = ref.read(addPostNotifierProvider.notifier);
     try {
-      final pickedFileList = await _picker.pickMultipleMedia();
+      final pickedFileList = await _picker.pickMultiImage();
 
       updateState.pickMediaFileList(pickedFileList);
     } catch (e) {
@@ -22,7 +22,20 @@ class AddPostController {
     }
   }
 
-  Future<void> droppedFile(
+  Future<void> pickVideo(ImageSource source) async {
+    List<XFile> video = [];
+    final updateState = ref.read(addPostNotifierProvider.notifier);
+
+    try {
+      final pickedFileList = await _picker.pickVideo(source: source);
+      video.add(pickedFileList!);
+      updateState.pickMediaFileList(video);
+    } catch (e) {
+      updateState.pickErrorMessage(e.toString());
+    }
+  }
+
+  Future<void> droppedImages(
     dynamic event,
     DropzoneViewController dropZoneController,
   ) async {

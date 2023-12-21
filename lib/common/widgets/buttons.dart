@@ -13,6 +13,7 @@ class InstaButton extends StatelessWidget {
   final Function()? onPressed;
   final double? width;
   final double? height;
+  final double? iconScale;
   const InstaButton({
     super.key,
     required this.buttonType,
@@ -21,6 +22,7 @@ class InstaButton extends StatelessWidget {
     this.onPressed,
     this.width,
     this.height,
+    this.iconScale,
   });
 
   @override
@@ -52,6 +54,7 @@ class InstaButton extends StatelessWidget {
         return _IconButton(
           assetName: assetName ?? IconRes.home,
           onPressed: onPressed,
+          scale: iconScale,
         );
 
       default:
@@ -62,9 +65,11 @@ class InstaButton extends StatelessWidget {
 
 class _IconButton extends StatelessWidget {
   final String assetName;
+  final double? scale;
   final Function()? onPressed;
   const _IconButton({
     required this.assetName,
+    this.scale,
     this.onPressed,
   });
 
@@ -81,7 +86,7 @@ class _IconButton extends StatelessWidget {
       ).copyWith(overlayColor: MaterialStateProperty.all(Colors.transparent)),
       child: Image.asset(
         assetName,
-        scale: 2.7,
+        scale: scale ?? 2.7,
         color: Colors.white,
       ),
     );

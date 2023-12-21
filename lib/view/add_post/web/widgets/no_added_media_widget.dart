@@ -63,11 +63,11 @@ class _NoAddedMediaWidgetState extends ConsumerState<NoAddedMediaWidget> {
             ),
             child: DropzoneView(
               operation: DragOperation.move,
-              mime: const ['image/jpeg'],
+              mime: const ['image/jpeg', 'image/png'],
               onCreated: (ctrl) => _dropZoneController = ctrl,
               onDropMultiple: (event) async {
                 for (var i in event!) {
-                  _controller.droppedFile(i, _dropZoneController);
+                  _controller.droppedImages(i, _dropZoneController);
                 }
               },
             ),
@@ -102,7 +102,7 @@ class _NoAddedMediaWidgetState extends ConsumerState<NoAddedMediaWidget> {
             height: 40,
             text: 'Select from Computer',
             onPressed: () async {
-              _controller.selectMedia();
+              _controller.pickImages();
             },
           ),
         ],
