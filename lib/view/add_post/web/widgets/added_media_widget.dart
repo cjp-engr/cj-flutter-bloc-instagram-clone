@@ -22,6 +22,7 @@ class _AddedMediaWidgetState extends ConsumerState<AddedMediaWidget> {
   Widget _buildDisplayAddedMedia() {
     final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
     final droppedFiles = ref.watch(addPostNotifierProvider).droppedFiles;
+
     return Column(
       children: [
         Padding(
@@ -36,8 +37,9 @@ class _AddedMediaWidgetState extends ConsumerState<AddedMediaWidget> {
               physics: const ClampingScrollPhysics(),
               controller: _pageController,
               children: mediaFileList != null
-                  ? List.generate(mediaFileList.length,
-                      (index) => Image.network(mediaFileList[index].path))
+                  ? List.generate(mediaFileList.length, (index) {
+                      return Image.network(mediaFileList[index].path);
+                    })
                   : List.generate(droppedFiles!.length,
                       (index) => Image.network(droppedFiles[index].url)),
             ),
