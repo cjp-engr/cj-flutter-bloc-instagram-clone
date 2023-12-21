@@ -7,20 +7,24 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_e
 class InstaAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? appBarLeading;
   final Widget? appBarTitle;
-  List<Widget>? appBarActions;
+  final Widget? floatingActionButton;
+
   final Widget? body;
+  List<Widget>? appBarActions;
   InstaAppBar({
     super.key,
     this.appBarLeading,
     this.appBarTitle,
-    this.appBarActions,
+    this.floatingActionButton,
     this.body,
+    this.appBarActions,
   });
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: floatingActionButton,
         appBar: AppBar(
           leading: appBarLeading,
           title: appBarTitle,

@@ -14,7 +14,7 @@ class AddPostWebPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
-    final droppedFiles = ref.watch(addPostNotifierProvider).droppedFiles;
+    final droppedFiles = ref.watch(addPostNotifierProvider).droppedImages;
     return InstaAppBar(
         appBarTitle: Breakpoints.mediumAndUp.isActive(context)
             ? const SizedBox()

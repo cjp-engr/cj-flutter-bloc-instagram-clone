@@ -30,23 +30,12 @@ class _AddPostButtonWidgetState extends ConsumerState<AddPostButtonWidget> {
       children: [
         const SizedBox(height: InstaSpacing.verySmall),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                _buildCameraButton(),
-                const SizedBox(width: InstaSpacing.large),
-                _buildImageButton(),
-                const SizedBox(width: InstaSpacing.large),
-                _buildVideoButton(),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                _buildDeleteButton(),
-              ],
-            ),
+            _buildCameraButton(),
+            const SizedBox(width: InstaSpacing.large),
+            _buildImageButton(),
+            const SizedBox(width: InstaSpacing.large),
+            _buildVideoButton(),
           ],
         ),
         const SizedBox(height: InstaSpacing.small),
@@ -81,15 +70,6 @@ class _AddPostButtonWidgetState extends ConsumerState<AddPostButtonWidget> {
       onPressed: () {
         _controller.pickVideo(ImageSource.gallery);
       },
-    );
-  }
-
-  Widget _buildDeleteButton() {
-    return InstaButton(
-      buttonType: InstaButtonType.icon,
-      assetName: IconRes.delete,
-      iconScale: 2,
-      onPressed: () {},
     );
   }
 }

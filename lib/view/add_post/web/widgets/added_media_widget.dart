@@ -1,4 +1,5 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/scroll_behavior.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/dots_indicator.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _AddedMediaWidgetState extends ConsumerState<AddedMediaWidget> {
 
   Widget _buildDisplayAddedMedia() {
     final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
-    final droppedFiles = ref.watch(addPostNotifierProvider).droppedFiles;
+    final droppedFiles = ref.watch(addPostNotifierProvider).droppedImages;
 
     return Column(
       children: [
@@ -32,16 +33,19 @@ class _AddedMediaWidgetState extends ConsumerState<AddedMediaWidget> {
           ),
           child: SizedBox(
             width: double.infinity,
-            height: 300.0,
-            child: PageView(
-              physics: const ClampingScrollPhysics(),
-              controller: _pageController,
-              children: mediaFileList != null
-                  ? List.generate(mediaFileList.length, (index) {
-                      return Image.network(mediaFileList[index].path);
-                    })
-                  : List.generate(droppedFiles!.length,
-                      (index) => Image.network(droppedFiles[index].url)),
+            height: 350.0,
+            child: ScrollConfiguration(
+              behavior: InstaScrollBehavior(),
+              child: PageView(
+                physics: const ClampingScrollPhysics(),
+                controller: _pageController,
+                children: mediaFileList != null
+                    ? List.generate(mediaFileList.length, (index) {
+                        return Image.network(mediaFileList[index].path);
+                      })
+                    : List.generate(droppedFiles!.length,
+                        (index) => Image.network(droppedFiles[index].url)),
+              ),
             ),
           ),
         ),

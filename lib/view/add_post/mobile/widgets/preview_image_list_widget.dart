@@ -7,11 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mime/mime.dart';
 
-class PreviewMediaListWidget extends ConsumerWidget {
-  const PreviewMediaListWidget({super.key});
+class PreviewImageListWidget extends ConsumerStatefulWidget {
+  const PreviewImageListWidget({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PreviewImageListWidget> createState() =>
+      _PreviewMediaListWidgetState();
+}
+
+class _PreviewMediaListWidgetState
+    extends ConsumerState<PreviewImageListWidget> {
+  @override
+  Widget build(BuildContext context) {
     final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
     if (mediaFileList != null) {
       return Semantics(
@@ -31,21 +38,35 @@ class PreviewMediaListWidget extends ConsumerWidget {
             return Semantics(
               label: 'image_picker_example_picked_image',
               child: (mime == null || mime.startsWith('image/')
-                  ? Image.file(
-                      File(mediaFileList[index].path),
-                      errorBuilder: (BuildContext context, Object error,
-                          StackTrace? stackTrace) {
-                        return const InstaText(
-                            text: 'This image type is not supported');
-                      },
-                    )
+                  ? _buildImageDisplay(index, mediaFileList[index].path)
                   : VideoPlayerWidget(index)),
             );
           },
         ),
       );
     } else {
-      return const InstaText(text: 'You have not yet picked an imagehello.');
+      return const InstaText(text: 'You have not yet picked an image.');
     }
+  }
+
+  Widget _buildImageDisplay(int index, String path) {
+    return GestureDetector(
+      onTap: () {
+        ref.read(addPostNotifierProvider.notifier).pickPathImageSelected(path);
+      },
+      child: ColorFiltered(
+        colorFilter: ColorFilter.mode(
+          Colors.black.withOpacity(0.9),
+          BlendMode.dstATop,
+        ),
+        child: Image.file(
+          File(path),
+          errorBuilder:
+              (BuildContext context, Object error, StackTrace? stackTrace) {
+            return const InstaText(text: 'This image type is not supported');
+          },
+        ),
+      ),
+    );
   }
 }

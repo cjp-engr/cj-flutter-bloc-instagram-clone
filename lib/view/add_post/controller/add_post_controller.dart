@@ -46,16 +46,16 @@ class AddPostController {
     final bytes = await dropZoneController.getFileSize(event);
     final url = await dropZoneController.createFileUrl(event);
 
-    final droppedFile = DroppedFile(
+    final droppedImage = DroppedFile(
       url: url,
       name: name,
       mime: mime,
       bytes: bytes,
     );
 
-    updateState.pickDroppedFiles([
-      ...ref.watch(addPostNotifierProvider).droppedFiles ?? [],
-      droppedFile
+    updateState.pickDroppedImages([
+      ...ref.watch(addPostNotifierProvider).droppedImages ?? [],
+      droppedImage
     ]);
   }
 }

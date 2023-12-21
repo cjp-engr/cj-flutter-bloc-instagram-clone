@@ -14,6 +14,7 @@ class InstaButton extends StatelessWidget {
   final double? width;
   final double? height;
   final double? iconScale;
+  final Color? color;
   const InstaButton({
     super.key,
     required this.buttonType,
@@ -23,6 +24,7 @@ class InstaButton extends StatelessWidget {
     this.width,
     this.height,
     this.iconScale,
+    this.color,
   });
 
   @override
@@ -30,21 +32,21 @@ class InstaButton extends StatelessWidget {
     switch (buttonType) {
       case InstaButtonType.primary:
         return _PrimaryButton(
-          text: text!,
+          text: text ?? 'Home',
           onPressed: onPressed,
           width: width,
           height: height,
         );
       case InstaButtonType.secondary:
         return _SecondaryButton(
-          text: text!,
+          text: text ?? 'Home',
           onPressed: onPressed,
           width: width,
           height: height,
         );
       case InstaButtonType.tertiary:
         return _TertiaryButton(
-          text: text!,
+          text: text ?? 'Home',
           assetName: assetName ?? IconRes.home,
           onPressed: onPressed,
           width: width,
@@ -55,6 +57,7 @@ class InstaButton extends StatelessWidget {
           assetName: assetName ?? IconRes.home,
           onPressed: onPressed,
           scale: iconScale,
+          color: color,
         );
 
       default:
@@ -66,10 +69,12 @@ class InstaButton extends StatelessWidget {
 class _IconButton extends StatelessWidget {
   final String assetName;
   final double? scale;
+  final Color? color;
   final Function()? onPressed;
   const _IconButton({
     required this.assetName,
     this.scale,
+    this.color,
     this.onPressed,
   });
 
@@ -87,7 +92,7 @@ class _IconButton extends StatelessWidget {
       child: Image.asset(
         assetName,
         scale: scale ?? 2.7,
-        color: Colors.white,
+        color: color ?? Colors.white,
       ),
     );
   }
