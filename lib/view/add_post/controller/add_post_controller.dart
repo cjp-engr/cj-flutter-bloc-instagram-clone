@@ -58,4 +58,14 @@ class AddPostController {
       droppedImage
     ]);
   }
+
+  void removeMedia(int index) {
+    final updateState = ref.read(addPostNotifierProvider.notifier);
+    final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
+
+    if (mediaFileList != null) {
+      mediaFileList.removeAt(index);
+      updateState.pickMediaFileList(mediaFileList);
+    }
+  }
 }

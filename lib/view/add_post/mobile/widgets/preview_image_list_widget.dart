@@ -1,14 +1,18 @@
 import 'dart:io';
 
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/video_player_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 
 class PreviewImageListWidget extends ConsumerStatefulWidget {
   const PreviewImageListWidget({super.key});
+
+  final int selectedImageIndex = 0;
 
   @override
   ConsumerState<PreviewImageListWidget> createState() =>
@@ -35,10 +39,11 @@ class _PreviewMediaListWidgetState
           itemCount: mediaFileList.length,
           itemBuilder: (context, index) {
             final mime = lookupMimeType(mediaFileList[index].path);
+
             return Semantics(
               label: 'image_picker_example_picked_image',
               child: (mime == null || mime.startsWith('image/')
-                  ? _buildImageDisplay(index, mediaFileList[index].path)
+                  ? _buildImageDisplay(index, mediaFileList[index])
                   : VideoPlayerWidget(index)),
             );
           },
@@ -49,24 +54,42 @@ class _PreviewMediaListWidgetState
     }
   }
 
-  Widget _buildImageDisplay(int index, String path) {
+  Widget _buildImageDisplay(int index, XFile image) {
     return GestureDetector(
       onTap: () {
-        ref.read(addPostNotifierProvider.notifier).pickPathImageSelected(path);
+        ref
+            .read(addPostNotifierProvider.notifier)
+            .pickPreviewImage(image, index);
       },
-      child: ColorFiltered(
-        colorFilter: ColorFilter.mode(
-          Colors.black.withOpacity(0.9),
-          BlendMode.dstATop,
-        ),
-        child: Image.file(
-          File(path),
-          errorBuilder:
-              (BuildContext context, Object error, StackTrace? stackTrace) {
-            return const InstaText(text: 'This image type is not supported');
-          },
-        ),
-      ),
+      child: index == ref.watch(addPostNotifierProvider).previewImageIndex
+          ? Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blueAccent),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(InstaBorderRadius.small),
+                ),
+              ),
+              child: ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                  Colors.blue.withOpacity(0.3),
+                  BlendMode.darken,
+                ),
+                child: _image(image.path),
+              ),
+            )
+          : SizedBox(
+              child: _image(image.path),
+            ),
+    );
+  }
+
+  Widget _image(String path) {
+    return Image.file(
+      File(path),
+      errorBuilder:
+          (BuildContext context, Object error, StackTrace? stackTrace) {
+        return const InstaText(text: 'This image type is not supported');
+      },
     );
   }
 }

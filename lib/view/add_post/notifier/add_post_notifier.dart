@@ -22,8 +22,9 @@ class AddPostNotifier extends _$AddPostNotifier {
     state = state.copyWith(droppedImages: droppedImages);
   }
 
-  void pickPathImageSelected(String path) {
-    state = state.copyWith(pathImageSelected: path);
+  void pickPreviewImage(XFile previewImage, int index) {
+    state =
+        state.copyWith(previewImage: previewImage, previewImageIndex: index);
   }
 
   void pickErrorMessage(String errorMessage) {

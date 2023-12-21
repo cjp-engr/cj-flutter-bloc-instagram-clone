@@ -6,27 +6,31 @@ import 'package:cj_flutter_riverpod_instagram_clone/model/dropped_file.dart';
 class AddPostState {
   final List<XFile>? mediaFileList;
   final List<DroppedFile>? droppedImages;
+  final XFile? previewImage;
+  final int previewImageIndex;
   final String errorMessage;
-  final String pathImageSelected;
 
   const AddPostState({
     this.mediaFileList,
     this.droppedImages,
+    this.previewImage,
+    this.previewImageIndex = 0,
     this.errorMessage = '',
-    this.pathImageSelected = '',
   });
 
   AddPostState copyWith({
     List<XFile>? mediaFileList,
     List<DroppedFile>? droppedImages,
+    XFile? previewImage,
+    int? previewImageIndex,
     String? errorMessage,
-    String? pathImageSelected,
   }) {
     return AddPostState(
       mediaFileList: mediaFileList ?? this.mediaFileList,
       droppedImages: droppedImages ?? this.droppedImages,
+      previewImage: previewImage ?? this.previewImage,
+      previewImageIndex: previewImageIndex ?? this.previewImageIndex,
       errorMessage: errorMessage ?? this.errorMessage,
-      pathImageSelected: pathImageSelected ?? this.pathImageSelected,
     );
   }
 }
