@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "824733696034",
+    "project_id": "cj-flutter-riverpod-instagram",
+    "storage_bucket": "cj-flutter-riverpod-instagram.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824733696034:android:85b236c710453b4dd60a7b",
+        "android_client_info": {
+          "package_name": "com.example.cj_flutter_riverpod_instagram_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVv-8MONKAB-jknZpkcekjg2PApQgEHxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
