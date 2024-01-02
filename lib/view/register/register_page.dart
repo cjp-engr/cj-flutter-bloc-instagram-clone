@@ -7,24 +7,38 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart'
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/register/provider/register_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  String registerIdentifiers = '';
-  String fullName = '';
-  String userName = '';
-  String password = '';
+class _RegisterPageState extends ConsumerState<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
+  AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
+  final _emailController = TextEditingController();
+  final _fullNameController = TextEditingController();
+  final _userNameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _fullNameController.dispose();
+    _userNameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,29 +49,35 @@ class _RegisterPageState extends State<RegisterPage> {
                 (Breakpoints.small.isActive(context)
                     ? InstaSpacing.verySmall
                     : InstaSpacing.small)),
-        child: Column(
-          children: [
-            const SizedBox(height: InstaSpacing.small),
-            _buildAppName(),
-            const SizedBox(height: InstaSpacing.extraLarge),
-            _buildSubHeader(),
-            const SizedBox(height: InstaSpacing.extraLarge),
-            _buildRegisterIdentifier(),
-            const SizedBox(height: InstaSpacing.small),
-            _buildFullName(),
-            const SizedBox(height: InstaSpacing.small),
-            _buildUserName(),
-            const SizedBox(height: InstaSpacing.small),
-            _buildPassword(),
-            const SizedBox(height: InstaSpacing.small),
-            _buildLearnMore(),
-            const SizedBox(height: InstaSpacing.small),
-            _buildPolicy(),
-            const SizedBox(height: InstaSpacing.small),
-            _buildSignUp(),
-            const SizedBox(height: InstaSpacing.large),
-            _buildLoginRoute(),
-          ],
+        child: Form(
+          key: _formKey,
+          autovalidateMode: _autovalidateMode,
+          child: ListView(
+            shrinkWrap: true,
+            reverse: true,
+            children: [
+              const SizedBox(height: InstaSpacing.small),
+              _buildAppName(),
+              const SizedBox(height: InstaSpacing.extraLarge),
+              _buildSubHeader(),
+              const SizedBox(height: InstaSpacing.extraLarge),
+              _buildRegisterIdentifier(),
+              const SizedBox(height: InstaSpacing.small),
+              _buildFullName(),
+              const SizedBox(height: InstaSpacing.small),
+              _buildUserName(),
+              const SizedBox(height: InstaSpacing.small),
+              _buildPassword(),
+              const SizedBox(height: InstaSpacing.small),
+              _buildLearnMore(),
+              const SizedBox(height: InstaSpacing.small),
+              _buildPolicy(),
+              const SizedBox(height: InstaSpacing.small),
+              _buildSignUp(),
+              const SizedBox(height: InstaSpacing.large),
+              _buildLoginRoute(),
+            ].reversed.toList(),
+          ),
         ),
       ),
     );
@@ -75,30 +95,23 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _buildRegisterIdentifier() => InstaTextField(
         label: AppLocalizations.of(context)!.email,
-        onChanged: (text) {
-          registerIdentifiers = text;
-        },
+        controller: _emailController,
       );
 
   Widget _buildFullName() => InstaTextField(
         label: AppLocalizations.of(context)!.fullName,
-        onChanged: (text) {
-          fullName = text;
-        },
+        controller: _fullNameController,
       );
 
   Widget _buildUserName() => InstaTextField(
         label: AppLocalizations.of(context)!.userName,
-        onChanged: (text) {
-          userName = text;
-        },
+        controller: _userNameController,
       );
 
   Widget _buildPassword() => InstaTextField(
         label: AppLocalizations.of(context)!.password,
-        onChanged: (text) {
-          password = text;
-        },
+        obscureText: true,
+        controller: _passwordController,
       );
 
   Widget _buildLearnMore() => InstaText(
@@ -115,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
         width: double.infinity,
         buttonType: InstaButtonType.secondary,
         text: AppLocalizations.of(context)!.signUp,
-        onPressed: () {},
+        onPressed: _submit,
       );
 
   Widget _buildLoginRoute() => Row(
@@ -132,4 +145,25 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ],
       );
+
+  void _submit() {
+    setState(() {
+      _autovalidateMode = AutovalidateMode.always;
+    });
+    final form = _formKey.currentState;
+
+    if (form == null || !form.validate()) return;
+
+    ref.read(registerProvider.notifier).signUp(
+          user: UserItem(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
+            details: UserDetails(
+              fullName: _fullNameController.text.trim(),
+              userName: _userNameController.text.trim(),
+            ),
+          ),
+        );
+    context.goNamed(InstaRouteNames.profile);
+  }
 }

@@ -5,18 +5,24 @@ import 'package:flutter/material.dart';
 
 class InstaTextField extends StatelessWidget {
   final String label;
+  final bool obscureText;
+  final TextEditingController? controller;
   final Widget? prefixIcon;
   final Function(String)? onChanged;
   const InstaTextField({
     super.key,
     required this.label,
-    this.onChanged,
+    this.obscureText = false,
+    this.controller,
     this.prefixIcon,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
+      obscureText: obscureText,
       onChanged: onChanged,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.auto,

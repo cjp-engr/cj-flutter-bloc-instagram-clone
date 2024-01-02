@@ -7,22 +7,34 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart'
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/login/provider/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  String loginIdentifier = '';
-  String password = '';
+class _LoginPageState extends ConsumerState<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return InstaAppBar(
@@ -32,19 +44,25 @@ class _LoginPageState extends State<LoginPage> {
                 (Breakpoints.small.isActive(context)
                     ? InstaSpacing.verySmall
                     : InstaSpacing.small)),
-        child: Column(
-          children: [
-            const SizedBox(height: InstaSpacing.small),
-            _buildHeader(),
-            const SizedBox(height: InstaSpacing.extraLarge * 2),
-            _buildLoginIdentifiers(),
-            const SizedBox(height: InstaSpacing.small),
-            _buildPassword(),
-            const SizedBox(height: InstaSpacing.medium),
-            _buildLogin(),
-            const SizedBox(height: InstaSpacing.extraLarge * 4),
-            _buildRegisterRoute(),
-          ],
+        child: Form(
+          key: _formKey,
+          autovalidateMode: _autovalidateMode,
+          child: ListView(
+            shrinkWrap: true,
+            reverse: true,
+            children: [
+              const SizedBox(height: InstaSpacing.small),
+              _buildHeader(),
+              const SizedBox(height: InstaSpacing.extraLarge * 2),
+              _buildLoginIdentifiers(),
+              const SizedBox(height: InstaSpacing.small),
+              _buildPassword(),
+              const SizedBox(height: InstaSpacing.medium),
+              _buildLogin(),
+              const SizedBox(height: InstaSpacing.extraLarge * 4),
+              _buildRegisterRoute(),
+            ].reversed.toList(),
+          ),
         ),
       ),
     );
@@ -58,24 +76,38 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLoginIdentifiers() => InstaTextField(
         label: AppLocalizations.of(context)!.userNameOrEmail,
-        onChanged: (text) {
-          loginIdentifier = text;
-        },
+        controller: _emailController,
       );
 
   Widget _buildPassword() => InstaTextField(
         label: AppLocalizations.of(context)!.password,
-        onChanged: (text) {
-          password = text;
-        },
+        obscureText: true,
+        controller: _passwordController,
       );
 
   Widget _buildLogin() => InstaButton(
         width: double.infinity,
         buttonType: InstaButtonType.secondary,
         text: AppLocalizations.of(context)!.login,
-        onPressed: () {},
+        onPressed: _submit,
       );
+
+  void _submit() {
+    setState(() {
+      _autovalidateMode = AutovalidateMode.always;
+    });
+
+    final form = _formKey.currentState;
+
+    if (form == null || !form.validate()) return;
+
+    ref.read(loginProvider.notifier).signin(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+    //TODO
+    // context.goNamed(InstaRouteNames.profile);
+  }
 
   Widget _buildRegisterRoute() => Row(
         mainAxisAlignment: MainAxisAlignment.center,

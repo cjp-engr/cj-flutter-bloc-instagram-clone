@@ -22,7 +22,7 @@ final _shellNavigatorProfileKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorProfileKey');
 
 final goRouter = GoRouter(
-  initialLocation: '/${InstaRouteNames.profile}',
+  initialLocation: '/${InstaRouteNames.login}',
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   routes: [
