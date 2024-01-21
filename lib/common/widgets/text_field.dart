@@ -8,14 +8,14 @@ class InstaTextField extends StatelessWidget {
   final bool obscureText;
   final TextEditingController? controller;
   final Widget? prefixIcon;
-  final Function(String)? onChanged;
+  final Function(String)? onSubmitted;
   const InstaTextField({
     super.key,
     required this.label,
     this.obscureText = false,
     this.controller,
     this.prefixIcon,
-    this.onChanged,
+    this.onSubmitted,
   });
 
   @override
@@ -23,7 +23,7 @@ class InstaTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: obscureText,
-      onChanged: onChanged,
+      onSubmitted: onSubmitted,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         floatingLabelStyle: const TextStyle(color: Colors.grey),

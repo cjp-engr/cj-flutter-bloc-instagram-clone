@@ -45,40 +45,43 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   Widget build(BuildContext context) {
     _registerListener();
     return InstaAppBar(
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: context.padding +
-                (Breakpoints.small.isActive(context)
-                    ? InstaSpacing.verySmall
-                    : InstaSpacing.small)),
-        child: Form(
-          key: _formKey,
-          autovalidateMode: _autovalidateMode,
-          child: ListView(
-            shrinkWrap: true,
-            reverse: true,
-            children: [
-              const SizedBox(height: InstaSpacing.small),
-              _buildAppName(),
-              const SizedBox(height: InstaSpacing.extraLarge),
-              _buildSubHeader(),
-              const SizedBox(height: InstaSpacing.extraLarge),
-              _buildRegisterIdentifier(),
-              const SizedBox(height: InstaSpacing.small),
-              _buildFullName(),
-              const SizedBox(height: InstaSpacing.small),
-              _buildUserName(),
-              const SizedBox(height: InstaSpacing.small),
-              _buildPassword(),
-              const SizedBox(height: InstaSpacing.small),
-              _buildLearnMore(),
-              const SizedBox(height: InstaSpacing.small),
-              _buildPolicy(),
-              const SizedBox(height: InstaSpacing.small),
-              _buildSignUp(),
-              const SizedBox(height: InstaSpacing.large),
-              _buildLoginRoute(),
-            ].reversed.toList(),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: context.padding +
+                  (Breakpoints.small.isActive(context)
+                      ? InstaSpacing.verySmall
+                      : InstaSpacing.small)),
+          child: Form(
+            key: _formKey,
+            autovalidateMode: _autovalidateMode,
+            child: ListView(
+              shrinkWrap: true,
+              reverse: true,
+              children: [
+                const SizedBox(height: InstaSpacing.small),
+                _buildAppName(),
+                const SizedBox(height: InstaSpacing.extraLarge),
+                _buildSubHeader(),
+                const SizedBox(height: InstaSpacing.extraLarge),
+                _buildRegisterIdentifier(),
+                const SizedBox(height: InstaSpacing.small),
+                _buildFullName(),
+                const SizedBox(height: InstaSpacing.small),
+                _buildUserName(),
+                const SizedBox(height: InstaSpacing.small),
+                _buildPassword(),
+                const SizedBox(height: InstaSpacing.small),
+                _buildLearnMore(),
+                const SizedBox(height: InstaSpacing.small),
+                _buildPolicy(),
+                const SizedBox(height: InstaSpacing.small),
+                _buildSignUp(),
+                const SizedBox(height: InstaSpacing.large),
+                _buildLoginRoute(),
+              ].reversed.toList(),
+            ),
           ),
         ),
       ),

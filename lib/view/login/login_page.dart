@@ -25,7 +25,7 @@ class LoginPage extends ConsumerStatefulWidget {
 
 class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
+  final _autovalidateMode = AutovalidateMode.always;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -40,30 +40,33 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     _loginListener();
     return InstaAppBar(
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: context.padding +
-                (Breakpoints.small.isActive(context)
-                    ? InstaSpacing.verySmall
-                    : InstaSpacing.small)),
-        child: Form(
-          key: _formKey,
-          autovalidateMode: _autovalidateMode,
-          child: ListView(
-            shrinkWrap: true,
-            reverse: true,
-            children: [
-              const SizedBox(height: InstaSpacing.small),
-              _buildHeader(),
-              const SizedBox(height: InstaSpacing.extraLarge * 2),
-              _buildLoginIdentifiers(),
-              const SizedBox(height: InstaSpacing.small),
-              _buildPassword(),
-              const SizedBox(height: InstaSpacing.medium),
-              _buildLogin(),
-              const SizedBox(height: InstaSpacing.extraLarge * 4),
-              _buildRegisterRoute(),
-            ].reversed.toList(),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: context.padding +
+                  (Breakpoints.small.isActive(context)
+                      ? InstaSpacing.verySmall
+                      : InstaSpacing.small)),
+          child: Form(
+            key: _formKey,
+            autovalidateMode: _autovalidateMode,
+            child: ListView(
+              shrinkWrap: true,
+              reverse: true,
+              children: [
+                const SizedBox(height: InstaSpacing.small),
+                _buildHeader(),
+                const SizedBox(height: InstaSpacing.extraLarge * 2),
+                _buildLoginIdentifiers(),
+                const SizedBox(height: InstaSpacing.small),
+                _buildPassword(),
+                const SizedBox(height: InstaSpacing.medium),
+                _buildLogin(),
+                const SizedBox(height: InstaSpacing.extraLarge * 4),
+                _buildRegisterRoute(),
+              ].reversed.toList(),
+            ),
           ),
         ),
       ),
@@ -95,15 +98,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       text: AppLocalizations.of(context)!.login,
       onPressed: loginState.maybeWhen(
         orElse: () => _submit,
+        loading: null,
       ),
     );
   }
 
   void _submit() {
-    setState(() {
-      _autovalidateMode = AutovalidateMode.always;
-    });
-
     final form = _formKey.currentState;
 
     if (form == null || !form.validate()) return;

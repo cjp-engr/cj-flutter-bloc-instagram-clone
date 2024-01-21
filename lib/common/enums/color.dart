@@ -1,1 +1,1 @@
-enum InstaColor { primary, secondary }
+enum InstaColor { primary, secondary, disabled }

@@ -10,7 +10,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dar
 const Map<InstaColor, Color> buttonColor = {
   InstaColor.primary: Color.fromRGBO(66, 66, 66, 1),
   InstaColor.secondary: Color.fromRGBO(33, 150, 243, 1),
-  // InstaButtonColor.tertiary: "Element 3",
+  InstaColor.disabled: Color.fromRGBO(205, 203, 203, 1),
   // InstaButtonColor.icon: "Element 4",
 };
 
@@ -116,7 +116,9 @@ class TextOnlyButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: buttonColor[color],
+          backgroundColor: onPressed == null
+              ? buttonColor[InstaColor.disabled]
+              : buttonColor[color],
           minimumSize: Size.zero,
           padding: const EdgeInsets.symmetric(vertical: 10),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
