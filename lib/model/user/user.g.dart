@@ -29,11 +29,11 @@ _$UserDetailsImpl _$$UserDetailsImplFromJson(Map<String, dynamic> json) =>
       followerCount: json['followerCount'] as String? ?? '',
       followingCount: json['followingCount'] as String? ?? '',
       images: (json['images'] as List<dynamic>?)
-              ?.map((e) => ImageItem.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => ImageDetails.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       videos: (json['videos'] as List<dynamic>?)
-              ?.map((e) => VideoItem.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => VideoDetails.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       highlights: (json['highlights'] as List<dynamic>?)

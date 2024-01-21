@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'image_item.dart';
+part of 'image_details.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ImageItemImpl _$$ImageItemImplFromJson(Map<String, dynamic> json) =>
-    _$ImageItemImpl(
+_$ImageDetailsImpl _$$ImageDetailsImplFromJson(Map<String, dynamic> json) =>
+    _$ImageDetailsImpl(
       userId: json['userId'] as String?,
       imageId: json['imageId'] as String?,
       image: json['image'] as String?,
@@ -17,7 +17,7 @@ _$ImageItemImpl _$$ImageItemImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$ImageItemImplToJson(_$ImageItemImpl instance) =>
+Map<String, dynamic> _$$ImageDetailsImplToJson(_$ImageDetailsImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
       'imageId': instance.imageId,

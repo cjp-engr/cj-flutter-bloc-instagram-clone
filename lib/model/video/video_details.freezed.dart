@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'image_item.dart';
+part of 'video_details.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,41 +14,42 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ImageItem _$ImageItemFromJson(Map<String, dynamic> json) {
-  return _ImageItem.fromJson(json);
+VideoDetails _$VideoDetailsFromJson(Map<String, dynamic> json) {
+  return _VideoDetails.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ImageItem {
+mixin _$VideoDetails {
   String? get userId => throw _privateConstructorUsedError;
-  String? get imageId => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
+  String? get videoId => throw _privateConstructorUsedError;
+  String? get video => throw _privateConstructorUsedError;
   String? get likeCount => throw _privateConstructorUsedError;
   List<String>? get comments => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ImageItemCopyWith<ImageItem> get copyWith =>
+  $VideoDetailsCopyWith<VideoDetails> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ImageItemCopyWith<$Res> {
-  factory $ImageItemCopyWith(ImageItem value, $Res Function(ImageItem) then) =
-      _$ImageItemCopyWithImpl<$Res, ImageItem>;
+abstract class $VideoDetailsCopyWith<$Res> {
+  factory $VideoDetailsCopyWith(
+          VideoDetails value, $Res Function(VideoDetails) then) =
+      _$VideoDetailsCopyWithImpl<$Res, VideoDetails>;
   @useResult
   $Res call(
       {String? userId,
-      String? imageId,
-      String? image,
+      String? videoId,
+      String? video,
       String? likeCount,
       List<String>? comments});
 }
 
 /// @nodoc
-class _$ImageItemCopyWithImpl<$Res, $Val extends ImageItem>
-    implements $ImageItemCopyWith<$Res> {
-  _$ImageItemCopyWithImpl(this._value, this._then);
+class _$VideoDetailsCopyWithImpl<$Res, $Val extends VideoDetails>
+    implements $VideoDetailsCopyWith<$Res> {
+  _$VideoDetailsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -59,8 +60,8 @@ class _$ImageItemCopyWithImpl<$Res, $Val extends ImageItem>
   @override
   $Res call({
     Object? userId = freezed,
-    Object? imageId = freezed,
-    Object? image = freezed,
+    Object? videoId = freezed,
+    Object? video = freezed,
     Object? likeCount = freezed,
     Object? comments = freezed,
   }) {
@@ -69,13 +70,13 @@ class _$ImageItemCopyWithImpl<$Res, $Val extends ImageItem>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageId: freezed == imageId
-          ? _value.imageId
-          : imageId // ignore: cast_nullable_to_non_nullable
+      videoId: freezed == videoId
+          ? _value.videoId
+          : videoId // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      video: freezed == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
               as String?,
       likeCount: freezed == likeCount
           ? _value.likeCount
@@ -90,50 +91,50 @@ class _$ImageItemCopyWithImpl<$Res, $Val extends ImageItem>
 }
 
 /// @nodoc
-abstract class _$$ImageItemImplCopyWith<$Res>
-    implements $ImageItemCopyWith<$Res> {
-  factory _$$ImageItemImplCopyWith(
-          _$ImageItemImpl value, $Res Function(_$ImageItemImpl) then) =
-      __$$ImageItemImplCopyWithImpl<$Res>;
+abstract class _$$VideoDetailsImplCopyWith<$Res>
+    implements $VideoDetailsCopyWith<$Res> {
+  factory _$$VideoDetailsImplCopyWith(
+          _$VideoDetailsImpl value, $Res Function(_$VideoDetailsImpl) then) =
+      __$$VideoDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String? userId,
-      String? imageId,
-      String? image,
+      String? videoId,
+      String? video,
       String? likeCount,
       List<String>? comments});
 }
 
 /// @nodoc
-class __$$ImageItemImplCopyWithImpl<$Res>
-    extends _$ImageItemCopyWithImpl<$Res, _$ImageItemImpl>
-    implements _$$ImageItemImplCopyWith<$Res> {
-  __$$ImageItemImplCopyWithImpl(
-      _$ImageItemImpl _value, $Res Function(_$ImageItemImpl) _then)
+class __$$VideoDetailsImplCopyWithImpl<$Res>
+    extends _$VideoDetailsCopyWithImpl<$Res, _$VideoDetailsImpl>
+    implements _$$VideoDetailsImplCopyWith<$Res> {
+  __$$VideoDetailsImplCopyWithImpl(
+      _$VideoDetailsImpl _value, $Res Function(_$VideoDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? userId = freezed,
-    Object? imageId = freezed,
-    Object? image = freezed,
+    Object? videoId = freezed,
+    Object? video = freezed,
     Object? likeCount = freezed,
     Object? comments = freezed,
   }) {
-    return _then(_$ImageItemImpl(
+    return _then(_$VideoDetailsImpl(
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageId: freezed == imageId
-          ? _value.imageId
-          : imageId // ignore: cast_nullable_to_non_nullable
+      videoId: freezed == videoId
+          ? _value.videoId
+          : videoId // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      video: freezed == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
               as String?,
       likeCount: freezed == likeCount
           ? _value.likeCount
@@ -149,24 +150,24 @@ class __$$ImageItemImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ImageItemImpl implements _ImageItem {
-  const _$ImageItemImpl(
+class _$VideoDetailsImpl implements _VideoDetails {
+  const _$VideoDetailsImpl(
       {this.userId,
-      this.imageId,
-      this.image,
+      this.videoId,
+      this.video,
       this.likeCount,
       final List<String>? comments})
       : _comments = comments;
 
-  factory _$ImageItemImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ImageItemImplFromJson(json);
+  factory _$VideoDetailsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VideoDetailsImplFromJson(json);
 
   @override
   final String? userId;
   @override
-  final String? imageId;
+  final String? videoId;
   @override
-  final String? image;
+  final String? video;
   @override
   final String? likeCount;
   final List<String>? _comments;
@@ -181,17 +182,17 @@ class _$ImageItemImpl implements _ImageItem {
 
   @override
   String toString() {
-    return 'ImageItem(userId: $userId, imageId: $imageId, image: $image, likeCount: $likeCount, comments: $comments)';
+    return 'VideoDetails(userId: $userId, videoId: $videoId, video: $video, likeCount: $likeCount, comments: $comments)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ImageItemImpl &&
+            other is _$VideoDetailsImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.imageId, imageId) || other.imageId == imageId) &&
-            (identical(other.image, image) || other.image == image) &&
+            (identical(other.videoId, videoId) || other.videoId == videoId) &&
+            (identical(other.video, video) || other.video == video) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
             const DeepCollectionEquality().equals(other._comments, _comments));
@@ -199,46 +200,46 @@ class _$ImageItemImpl implements _ImageItem {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, imageId, image,
+  int get hashCode => Object.hash(runtimeType, userId, videoId, video,
       likeCount, const DeepCollectionEquality().hash(_comments));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ImageItemImplCopyWith<_$ImageItemImpl> get copyWith =>
-      __$$ImageItemImplCopyWithImpl<_$ImageItemImpl>(this, _$identity);
+  _$$VideoDetailsImplCopyWith<_$VideoDetailsImpl> get copyWith =>
+      __$$VideoDetailsImplCopyWithImpl<_$VideoDetailsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ImageItemImplToJson(
+    return _$$VideoDetailsImplToJson(
       this,
     );
   }
 }
 
-abstract class _ImageItem implements ImageItem {
-  const factory _ImageItem(
+abstract class _VideoDetails implements VideoDetails {
+  const factory _VideoDetails(
       {final String? userId,
-      final String? imageId,
-      final String? image,
+      final String? videoId,
+      final String? video,
       final String? likeCount,
-      final List<String>? comments}) = _$ImageItemImpl;
+      final List<String>? comments}) = _$VideoDetailsImpl;
 
-  factory _ImageItem.fromJson(Map<String, dynamic> json) =
-      _$ImageItemImpl.fromJson;
+  factory _VideoDetails.fromJson(Map<String, dynamic> json) =
+      _$VideoDetailsImpl.fromJson;
 
   @override
   String? get userId;
   @override
-  String? get imageId;
+  String? get videoId;
   @override
-  String? get image;
+  String? get video;
   @override
   String? get likeCount;
   @override
   List<String>? get comments;
   @override
   @JsonKey(ignore: true)
-  _$$ImageItemImplCopyWith<_$ImageItemImpl> get copyWith =>
+  _$$VideoDetailsImplCopyWith<_$VideoDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

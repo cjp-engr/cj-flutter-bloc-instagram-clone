@@ -1,6 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/model/highlight/highlight_item.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_item.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/model/video/video_item.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/model/video/video_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
@@ -27,8 +27,8 @@ class UserDetails with _$UserDetails {
     @Default('') String? postCount,
     @Default('') String? followerCount,
     @Default('') String? followingCount,
-    @Default([]) List<ImageItem>? images,
-    @Default([]) List<VideoItem>? videos,
+    @Default([]) List<ImageDetails>? images,
+    @Default([]) List<VideoDetails>? videos,
     @Default([]) List<HighlightItem>? highlights,
   }) = _UserDetails;
 

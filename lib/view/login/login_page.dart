@@ -37,6 +37,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<AsyncValue<void>>(
+      loginProvider,
+      (prev, next) {
+        next.whenOrNull(
+          error: (e, st) {
+            print('Got an error!');
+          },
+        );
+      },
+    );
     return InstaAppBar(
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -85,12 +95,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         controller: _passwordController,
       );
 
-  Widget _buildLogin() => InstaButton(
-        width: double.infinity,
-        buttonType: InstaButtonType.secondary,
-        text: AppLocalizations.of(context)!.login,
-        onPressed: _submit,
-      );
+  Widget _buildLogin() {
+    final loginState = ref.watch(loginProvider);
+    return InstaButton(
+      width: double.infinity,
+      buttonType: InstaButtonType.secondary,
+      text: AppLocalizations.of(context)!.login,
+      onPressed: loginState.maybeWhen(
+        loading: () => null,
+        orElse: () => _submit,
+      ),
+    );
+  }
 
   void _submit() {
     setState(() {
@@ -105,8 +121,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-    //TODO
-    // context.goNamed(InstaRouteNames.profile);
+
+    context.goNamed(InstaRouteNames.profile);
   }
 
   Widget _buildRegisterRoute() => Row(

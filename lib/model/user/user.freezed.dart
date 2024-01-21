@@ -211,8 +211,8 @@ mixin _$UserDetails {
   String? get postCount => throw _privateConstructorUsedError;
   String? get followerCount => throw _privateConstructorUsedError;
   String? get followingCount => throw _privateConstructorUsedError;
-  List<ImageItem>? get images => throw _privateConstructorUsedError;
-  List<VideoItem>? get videos => throw _privateConstructorUsedError;
+  List<ImageDetails>? get images => throw _privateConstructorUsedError;
+  List<VideoDetails>? get videos => throw _privateConstructorUsedError;
   List<HighlightItem>? get highlights => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -234,8 +234,8 @@ abstract class $UserDetailsCopyWith<$Res> {
       String? postCount,
       String? followerCount,
       String? followingCount,
-      List<ImageItem>? images,
-      List<VideoItem>? videos,
+      List<ImageDetails>? images,
+      List<VideoDetails>? videos,
       List<HighlightItem>? highlights});
 }
 
@@ -290,11 +290,11 @@ class _$UserDetailsCopyWithImpl<$Res, $Val extends UserDetails>
       images: freezed == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<ImageItem>?,
+              as List<ImageDetails>?,
       videos: freezed == videos
           ? _value.videos
           : videos // ignore: cast_nullable_to_non_nullable
-              as List<VideoItem>?,
+              as List<VideoDetails>?,
       highlights: freezed == highlights
           ? _value.highlights
           : highlights // ignore: cast_nullable_to_non_nullable
@@ -318,8 +318,8 @@ abstract class _$$UserDetailsImplCopyWith<$Res>
       String? postCount,
       String? followerCount,
       String? followingCount,
-      List<ImageItem>? images,
-      List<VideoItem>? videos,
+      List<ImageDetails>? images,
+      List<VideoDetails>? videos,
       List<HighlightItem>? highlights});
 }
 
@@ -372,11 +372,11 @@ class __$$UserDetailsImplCopyWithImpl<$Res>
       images: freezed == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<ImageItem>?,
+              as List<ImageDetails>?,
       videos: freezed == videos
           ? _value._videos
           : videos // ignore: cast_nullable_to_non_nullable
-              as List<VideoItem>?,
+              as List<VideoDetails>?,
       highlights: freezed == highlights
           ? _value._highlights
           : highlights // ignore: cast_nullable_to_non_nullable
@@ -395,8 +395,8 @@ class _$UserDetailsImpl implements _UserDetails {
       this.postCount = '',
       this.followerCount = '',
       this.followingCount = '',
-      final List<ImageItem>? images = const [],
-      final List<VideoItem>? videos = const [],
+      final List<ImageDetails>? images = const [],
+      final List<VideoDetails>? videos = const [],
       final List<HighlightItem>? highlights = const []})
       : _images = images,
         _videos = videos,
@@ -423,10 +423,10 @@ class _$UserDetailsImpl implements _UserDetails {
   @override
   @JsonKey()
   final String? followingCount;
-  final List<ImageItem>? _images;
+  final List<ImageDetails>? _images;
   @override
   @JsonKey()
-  List<ImageItem>? get images {
+  List<ImageDetails>? get images {
     final value = _images;
     if (value == null) return null;
     if (_images is EqualUnmodifiableListView) return _images;
@@ -434,10 +434,10 @@ class _$UserDetailsImpl implements _UserDetails {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<VideoItem>? _videos;
+  final List<VideoDetails>? _videos;
   @override
   @JsonKey()
-  List<VideoItem>? get videos {
+  List<VideoDetails>? get videos {
     final value = _videos;
     if (value == null) return null;
     if (_videos is EqualUnmodifiableListView) return _videos;
@@ -520,8 +520,8 @@ abstract class _UserDetails implements UserDetails {
       final String? postCount,
       final String? followerCount,
       final String? followingCount,
-      final List<ImageItem>? images,
-      final List<VideoItem>? videos,
+      final List<ImageDetails>? images,
+      final List<VideoDetails>? videos,
       final List<HighlightItem>? highlights}) = _$UserDetailsImpl;
 
   factory _UserDetails.fromJson(Map<String, dynamic> json) =
@@ -540,9 +540,9 @@ abstract class _UserDetails implements UserDetails {
   @override
   String? get followingCount;
   @override
-  List<ImageItem>? get images;
+  List<ImageDetails>? get images;
   @override
-  List<VideoItem>? get videos;
+  List<VideoDetails>? get videos;
   @override
   List<HighlightItem>? get highlights;
   @override

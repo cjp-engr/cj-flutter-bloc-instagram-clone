@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'video_item.dart';
+part of 'video_details.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$VideoItemImpl _$$VideoItemImplFromJson(Map<String, dynamic> json) =>
-    _$VideoItemImpl(
+_$VideoDetailsImpl _$$VideoDetailsImplFromJson(Map<String, dynamic> json) =>
+    _$VideoDetailsImpl(
       userId: json['userId'] as String?,
       videoId: json['videoId'] as String?,
       video: json['video'] as String?,
@@ -17,7 +17,7 @@ _$VideoItemImpl _$$VideoItemImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$VideoItemImplToJson(_$VideoItemImpl instance) =>
+Map<String, dynamic> _$$VideoDetailsImplToJson(_$VideoDetailsImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
       'videoId': instance.videoId,

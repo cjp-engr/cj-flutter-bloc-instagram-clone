@@ -27,19 +27,22 @@ class AuthRepository {
     }
   }
 
-  Future<void> signin({
+  Future<fb_auth.User?> signin({
     required String email,
     required String password,
   }) async {
     try {
-      await fbAuth.signInWithEmailAndPassword(
+      final response = await fbAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-    } catch (e) {
+      print(response.user);
+      return response.user;
+    } on fb_auth.FirebaseAuthException catch (e) {
       // throw handleException(e);
       print(e.toString());
     }
+    return null;
   }
 
   Future<void> signout() async {
