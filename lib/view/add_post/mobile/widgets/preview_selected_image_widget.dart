@@ -12,20 +12,33 @@ class PreviewSelectedImageWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(addPostNotifierProvider);
+
     return Container(
       width: double.infinity,
       height: context.screenHeight / 2.5,
       color: Colors.transparent,
       child: state.mediaFileList == null
           ? const SizedBox()
-          : Image.file(
-              File(state.previewImage?.path ?? state.mediaFileList![0].path),
-              errorBuilder:
-                  (BuildContext context, Object error, StackTrace? stackTrace) {
-                return const InstaText(
-                    text: 'This image type is not supported');
-              },
-            ),
+          : state.mediaFileList?.isNotEmpty ?? false
+              ? Image.file(
+                  File(state.mediaFileList![0].path),
+                  errorBuilder: (BuildContext context, Object error,
+                      StackTrace? stackTrace) {
+                    return _errorText();
+                  },
+                )
+              : state.previewImage?.path.isNotEmpty ?? false
+                  ? Image.file(
+                      File(state.previewImage!.path),
+                      errorBuilder: (BuildContext context, Object error,
+                          StackTrace? stackTrace) {
+                        return _errorText();
+                      },
+                    )
+                  : const SizedBox(),
     );
   }
+
+  Widget _errorText() =>
+      const InstaText(text: 'This image type is not supported');
 }
