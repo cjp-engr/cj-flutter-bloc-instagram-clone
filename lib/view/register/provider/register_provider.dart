@@ -13,10 +13,6 @@ class Register extends _$Register {
   @override
   FutureOr<void> build() {
     _key = Object();
-    ref.onDispose(() {
-      print('[signupProvider] disposed');
-      _key = null;
-    });
   }
 
   Future<void> signUp({

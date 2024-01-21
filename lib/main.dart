@@ -1,4 +1,4 @@
-import 'package:cj_flutter_riverpod_instagram_clone/common/routes/routes.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/routes_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/app_theme.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,17 +16,22 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   usePathUrlStrategy();
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    const ProviderScope(
+      child: InstaCloneApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class InstaCloneApp extends ConsumerWidget {
+  const InstaCloneApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
     return MaterialApp.router(
-      routerConfig: goRouter,
+      routerConfig: router,
       title: 'Insta Clone App',
       debugShowCheckedModeBanner: false,
       theme: themeData,

@@ -1,0 +1,1 @@
+enum InstaColor { primary, secondary }

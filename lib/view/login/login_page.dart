@@ -1,10 +1,11 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/login/provider/login_provider.dart';
@@ -37,16 +38,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<AsyncValue<void>>(
-      loginProvider,
-      (prev, next) {
-        next.whenOrNull(
-          error: (e, st) {
-            print('Got an error!');
-          },
-        );
-      },
-    );
+    _loginListener();
     return InstaAppBar(
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -97,12 +89,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   Widget _buildLogin() {
     final loginState = ref.watch(loginProvider);
-    return InstaButton(
+    return TextOnlyButton(
+      color: InstaColor.secondary,
       width: double.infinity,
-      buttonType: InstaButtonType.secondary,
       text: AppLocalizations.of(context)!.login,
       onPressed: loginState.maybeWhen(
-        loading: () => null,
         orElse: () => _submit,
       ),
     );
@@ -121,8 +112,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-
-    context.goNamed(InstaRouteNames.profile);
   }
 
   Widget _buildRegisterRoute() => Row(
@@ -140,4 +129,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           ),
         ],
       );
+
+  void _loginListener() {
+    ref.listen<AsyncValue<void>>(
+      loginProvider,
+      (prev, next) {
+        next.whenOrNull(
+          error: (e, st) {
+            showAlertDialog(
+              context,
+              title: e.toString(),
+              buttonCancelText: 'OK',
+            );
+          },
+        );
+      },
+    );
+  }
 }

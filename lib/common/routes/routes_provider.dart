@@ -1,3 +1,7 @@
+import 'package:cj_flutter_riverpod_instagram_clone/repository/auth/auth_repository_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 // private navigators
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/navigation_bar.dart';
@@ -8,8 +12,11 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/notification/notificati
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/profile_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/register/register_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/settings/settings_page.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
+// ignore: depend_on_referenced_packages
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'routes_provider.g.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey =
@@ -21,26 +28,43 @@ final _shellNavigatorPostsKey =
 final _shellNavigatorProfileKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorProfileKey');
 
-final goRouter = GoRouter(
-  initialLocation: '/${InstaRouteNames.login}',
-  navigatorKey: _rootNavigatorKey,
-  debugLogDiagnostics: true,
-  routes: [
-    _login(),
-    _register(),
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) {
-        return InstaNavigationBar(navigationShell: navigationShell);
-      },
-      branches: [
-        _home(),
-        _notification(),
-        _post(),
-        _profile(),
-      ],
-    ),
-  ],
-);
+@riverpod
+GoRouter router(RouterRef ref) {
+  final authState = ref.watch(authStateStreamProvider);
+  return GoRouter(
+    initialLocation: '/${InstaRouteNames.login}',
+    redirect: (context, state) {
+      if (state.matchedLocation != '/${InstaRouteNames.register}') {
+        final authenticated = authState.valueOrNull != null;
+        final authenticating =
+            (state.matchedLocation == '/${InstaRouteNames.login}');
+
+        if (authenticated == false) {
+          return authenticating ? null : '/${InstaRouteNames.login}';
+        }
+        return authenticating ? '/${InstaRouteNames.profile}' : null;
+      }
+      return null;
+    },
+    navigatorKey: _rootNavigatorKey,
+    debugLogDiagnostics: true,
+    routes: [
+      _login(),
+      _register(),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return InstaNavigationBar(navigationShell: navigationShell);
+        },
+        branches: [
+          _home(),
+          _notification(),
+          _post(),
+          _profile(),
+        ],
+      ),
+    ],
+  );
+}
 
 StatefulShellBranch _profile() {
   return StatefulShellBranch(

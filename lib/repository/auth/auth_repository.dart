@@ -1,5 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/firebase_constant.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/repository/auth/auth_exception.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 
 class AuthRepository {
@@ -22,35 +23,29 @@ class AuthRepository {
         'fullName': user.details.fullName,
       });
     } catch (e) {
-      // throw handleException(e);
-      print(e.toString());
+      throw handleException(e);
     }
   }
 
-  Future<fb_auth.User?> signin({
+  Future<void> signin({
     required String email,
     required String password,
   }) async {
     try {
-      final response = await fbAuth.signInWithEmailAndPassword(
+      await fbAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      print(response.user);
-      return response.user;
-    } on fb_auth.FirebaseAuthException catch (e) {
-      // throw handleException(e);
-      print(e.toString());
+    } catch (e) {
+      throw handleException(e);
     }
-    return null;
   }
 
   Future<void> signout() async {
     try {
       await fbAuth.signOut();
     } catch (e) {
-      // throw handleException(e);
-      print(e.toString());
+      throw handleException(e);
     }
   }
 }

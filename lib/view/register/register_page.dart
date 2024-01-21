@@ -1,10 +1,11 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
@@ -42,6 +43,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    _registerListener();
     return InstaAppBar(
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -124,9 +126,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
         color: Colors.grey,
       );
 
-  Widget _buildSignUp() => InstaButton(
+  Widget _buildSignUp() => TextOnlyButton(
+        color: InstaColor.secondary,
         width: double.infinity,
-        buttonType: InstaButtonType.secondary,
         text: AppLocalizations.of(context)!.signUp,
         onPressed: _submit,
       );
@@ -164,6 +166,22 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             ),
           ),
         );
-    context.goNamed(InstaRouteNames.profile);
+  }
+
+  void _registerListener() {
+    ref.listen<AsyncValue<void>>(
+      registerProvider,
+      (prev, next) {
+        next.whenOrNull(
+          error: (e, st) {
+            showAlertDialog(
+              context,
+              title: e.toString(),
+              buttonCancelText: 'OK',
+            );
+          },
+        );
+      },
+    );
   }
 }

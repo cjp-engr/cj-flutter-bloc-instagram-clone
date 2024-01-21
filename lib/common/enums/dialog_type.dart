@@ -1,1 +1,0 @@
-enum InstaDialogType { primary, secondary }
