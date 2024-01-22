@@ -61,11 +61,26 @@ class AddPostController {
 
   void removeMedia(int index) {
     final updateState = ref.read(addPostNotifierProvider.notifier);
-    final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
+    final state = ref.watch(addPostNotifierProvider);
 
-    if (mediaFileList != null) {
-      mediaFileList.removeAt(index);
-      updateState.pickMediaFileList(mediaFileList);
+    if (state.mediaFileList != null) {
+      state.mediaFileList?.removeAt(index);
+      updateState.pickMediaFileList(state.mediaFileList!);
+    }
+
+    int? length = state.mediaFileList?.length ?? 0;
+    int? newIndex;
+
+    if (state.previewImageIndex == length && length != 0) {
+      newIndex = state.previewImageIndex - 1;
+    } else {
+      newIndex = state.previewImageIndex;
+    }
+
+    if (state.mediaFileList?.isNotEmpty ?? false) {
+      ref
+          .read(addPostNotifierProvider.notifier)
+          .pickPreviewImage(state.mediaFileList![newIndex], newIndex);
     }
   }
 }

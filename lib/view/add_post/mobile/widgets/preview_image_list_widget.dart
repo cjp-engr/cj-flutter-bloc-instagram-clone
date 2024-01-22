@@ -23,8 +23,8 @@ class _PreviewMediaListWidgetState
     extends ConsumerState<PreviewImageListWidget> {
   @override
   Widget build(BuildContext context) {
-    final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
-    if (mediaFileList != null) {
+    final state = ref.watch(addPostNotifierProvider);
+    if (state.mediaFileList?.isNotEmpty ?? false) {
       return Semantics(
         label: 'image_picker_example_picked_images',
         child: GridView.builder(
@@ -36,14 +36,14 @@ class _PreviewMediaListWidgetState
             crossAxisSpacing: 8.0,
             mainAxisSpacing: 8.0,
           ),
-          itemCount: mediaFileList.length,
+          itemCount: state.mediaFileList?.length ?? 0,
           itemBuilder: (context, index) {
-            final mime = lookupMimeType(mediaFileList[index].path);
+            final mime = lookupMimeType(state.mediaFileList![index].path);
 
             return Semantics(
               label: 'image_picker_example_picked_image',
               child: (mime == null || mime.startsWith('image/')
-                  ? _buildImageDisplay(index, mediaFileList[index])
+                  ? _buildImageDisplay(index, state.mediaFileList![index])
                   : VideoPlayerWidget(index)),
             );
           },
@@ -55,6 +55,7 @@ class _PreviewMediaListWidgetState
   }
 
   Widget _buildImageDisplay(int index, XFile image) {
+    print('index $index');
     return GestureDetector(
       onTap: () {
         ref

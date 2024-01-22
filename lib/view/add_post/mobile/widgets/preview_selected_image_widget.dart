@@ -17,25 +17,25 @@ class PreviewSelectedImageWidget extends ConsumerWidget {
       width: double.infinity,
       height: context.screenHeight / 2.5,
       color: Colors.transparent,
-      child: state.mediaFileList == null
-          ? const SizedBox()
-          : state.mediaFileList?.isNotEmpty ?? false
+      child: state.previewImage == null &&
+              (state.mediaFileList?.isNotEmpty ?? false)
+          ? Image.file(
+              File(state.mediaFileList![0].path),
+              errorBuilder:
+                  (BuildContext context, Object error, StackTrace? stackTrace) {
+                return _errorText();
+              },
+            )
+          : (state.previewImage?.path.isNotEmpty ?? false) &&
+                  (state.mediaFileList?.isNotEmpty ?? false)
               ? Image.file(
-                  File(state.mediaFileList![0].path),
+                  File(state.mediaFileList![state.previewImageIndex].path),
                   errorBuilder: (BuildContext context, Object error,
                       StackTrace? stackTrace) {
                     return _errorText();
                   },
                 )
-              : state.previewImage?.path.isNotEmpty ?? false
-                  ? Image.file(
-                      File(state.previewImage!.path),
-                      errorBuilder: (BuildContext context, Object error,
-                          StackTrace? stackTrace) {
-                        return _errorText();
-                      },
-                    )
-                  : const SizedBox(),
+              : const SizedBox(),
     );
   }
 
