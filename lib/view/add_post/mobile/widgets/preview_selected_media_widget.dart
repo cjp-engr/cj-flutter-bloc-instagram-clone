@@ -6,8 +6,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_p
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PreviewSelectedImageWidget extends ConsumerWidget {
-  const PreviewSelectedImageWidget({super.key});
+class PreviewSelectedMediaWidget extends ConsumerWidget {
+  const PreviewSelectedMediaWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

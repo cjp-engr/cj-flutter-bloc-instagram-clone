@@ -31,3 +31,8 @@ class AddPostNotifier extends _$AddPostNotifier {
     state = state.copyWith(errorMessage: errorMessage);
   }
 }
+
+@Riverpod(dependencies: [])
+int previewMediaIndex(PreviewMediaIndexRef ref) {
+  throw UnimplementedError();
+}

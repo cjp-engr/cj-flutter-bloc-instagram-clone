@@ -3,47 +3,58 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_e
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/widgets/add_post_button_widget.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/widgets/preview_image_list_widget.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/widgets/preview_selected_image_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/widgets/preview_media_list_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/widgets/preview_selected_media_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/widgets/remove_post_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddPostMobilePage extends ConsumerWidget {
+class AddPostMobilePage extends StatelessWidget {
   const AddPostMobilePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return InstaAppBar(
       appBarTitle: const InstaText(
         text: 'New Post',
         fontSize: InstaFontSize.large,
         fontWeight: FontWeight.bold,
       ),
-      appBarActions: [
-        _buildNextButton(),
+      appBarActions: const [
+        NextButton(),
       ],
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: context.padding),
         child: const Column(
           children: [
-            PreviewSelectedImageWidget(),
+            PreviewSelectedMediaWidget(),
             AddPostButtonWidget(),
-            PreviewImageListWidget(),
+            PreviewMediaListWidget(),
           ],
         ),
       ),
       floatingActionButton: const RemovePostWidget(),
     );
   }
+}
 
-  Widget _buildNextButton() {
-    return InkWell(
-      onTap: () {},
-      child: const InstaText(
-        text: 'Next',
-        color: Colors.blue,
-      ),
-    );
+class NextButton extends ConsumerWidget {
+  const NextButton({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(addPostNotifierProvider);
+    final hasMedia = state.mediaFileList?.isNotEmpty ??
+        false || (state.droppedImages?.isNotEmpty ?? false);
+    return hasMedia
+        ? InkWell(
+            onTap: () {},
+            child: const InstaText(
+              text: 'Next',
+              color: Colors.blue,
+            ),
+          )
+        : const SizedBox();
   }
 }

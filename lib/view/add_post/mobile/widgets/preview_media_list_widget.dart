@@ -1,28 +1,21 @@
 import 'dart:io';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/video_player_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 
-class PreviewImageListWidget extends ConsumerStatefulWidget {
-  const PreviewImageListWidget({super.key});
+class PreviewMediaListWidget extends ConsumerWidget {
+  const PreviewMediaListWidget({super.key});
 
   final int selectedImageIndex = 0;
 
   @override
-  ConsumerState<PreviewImageListWidget> createState() =>
-      _PreviewMediaListWidgetState();
-}
-
-class _PreviewMediaListWidgetState
-    extends ConsumerState<PreviewImageListWidget> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(addPostNotifierProvider);
     if (state.mediaFileList?.isNotEmpty ?? false) {
       return Semantics(
@@ -40,27 +33,41 @@ class _PreviewMediaListWidgetState
           itemBuilder: (context, index) {
             final mime = lookupMimeType(state.mediaFileList![index].path);
 
-            return Semantics(
-              label: 'image_picker_example_picked_image',
-              child: (mime == null || mime.startsWith('image/')
-                  ? _buildImageDisplay(index, state.mediaFileList![index])
-                  : VideoPlayerWidget(index)),
+            return ProviderScope(
+              overrides: [previewMediaIndexProvider.overrideWithValue(index)],
+              child: Semantics(
+                label: 'image_picker_example_picked_image',
+                child: (mime == null || mime.startsWith('image/')
+                    ? const ImageListWidget()
+                    : const VideoPlayerWidget()),
+              ),
             );
           },
         ),
       );
     } else {
-      return const InstaText(text: 'You have not yet picked an image.');
+      return const Column(
+        children: [
+          SizedBox(height: InstaSpacing.extraLarge * 3.2),
+          InstaText(text: 'You have not yet picked an image.'),
+        ],
+      );
     }
   }
+}
 
-  Widget _buildImageDisplay(int index, XFile image) {
-    print('index $index');
+class ImageListWidget extends ConsumerWidget {
+  const ImageListWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(addPostNotifierProvider);
+    final index = ref.watch(previewMediaIndexProvider);
     return GestureDetector(
       onTap: () {
         ref
             .read(addPostNotifierProvider.notifier)
-            .pickPreviewImage(image, index);
+            .pickPreviewImage(state.mediaFileList![index], index);
       },
       child: index == ref.watch(addPostNotifierProvider).previewImageIndex
           ? Container(
@@ -75,11 +82,11 @@ class _PreviewMediaListWidgetState
                   Colors.blue.withOpacity(0.3),
                   BlendMode.darken,
                 ),
-                child: _image(image.path),
+                child: _image(state.mediaFileList![index].path),
               ),
             )
           : SizedBox(
-              child: _image(image.path),
+              child: _image(state.mediaFileList![index].path),
             ),
     );
   }

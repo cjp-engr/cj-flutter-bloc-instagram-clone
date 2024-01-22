@@ -7,12 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends ConsumerWidget {
-  final int index;
-  const VideoPlayerWidget(this.index, {super.key});
+  const VideoPlayerWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
+    final index = ref.watch(previewMediaIndexProvider);
     final VideoPlayerController controller =
         VideoPlayerController.file(File(mediaFileList![index].path));
     controller.initialize();

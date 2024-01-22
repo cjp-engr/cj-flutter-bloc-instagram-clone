@@ -6,6 +6,21 @@ part of 'add_post_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$previewMediaIndexHash() => r'6ceecec488c38f14d0bb76257367ecd54b8f5f5a';
+
+/// See also [previewMediaIndex].
+@ProviderFor(previewMediaIndex)
+final previewMediaIndexProvider = AutoDisposeProvider<int>.internal(
+  previewMediaIndex,
+  name: r'previewMediaIndexProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$previewMediaIndexHash,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
+);
+
+typedef PreviewMediaIndexRef = AutoDisposeProviderRef<int>;
 String _$addPostNotifierHash() => r'06cab21e2d5253f023dfa1fd3d502e04591d3196';
 
 /// See also [AddPostNotifier].
