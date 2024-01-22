@@ -22,12 +22,13 @@ class AddPostController {
     }
   }
 
-  Future<void> pickVideo(ImageSource source) async {
+  Future<void> pickVideo() async {
     List<XFile> video = [];
     final updateState = ref.read(addPostNotifierProvider.notifier);
 
     try {
-      final pickedFileList = await _picker.pickVideo(source: source);
+      final pickedFileList =
+          await _picker.pickVideo(source: ImageSource.gallery);
       video.add(pickedFileList!);
       updateState.pickMediaFileList(video);
     } catch (e) {

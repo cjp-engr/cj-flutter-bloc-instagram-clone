@@ -13,6 +13,7 @@ class IconRes {
   static const String heartFilled = '$_iconBase/heart-filled.png';
   static const String home = '$_iconBase/home.png';
   static const String instagram = '$_iconBase/instagram.png';
+  static const String image = '$_iconBase/image.png';
   static const String menuVertical = '$_iconBase/menu-vertical.png';
   static const String messenger = '$_iconBase/messenger.png';
   static const String newPost = '$_iconBase/new-post.png';

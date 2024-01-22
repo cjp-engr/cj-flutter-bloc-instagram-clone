@@ -5,7 +5,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.da
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/dialog.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
