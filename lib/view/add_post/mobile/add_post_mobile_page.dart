@@ -25,7 +25,7 @@ class AddPostMobilePage extends StatelessWidget {
         fontWeight: FontWeight.bold,
       ),
       appBarActions: const [
-        NextButton(),
+        _NextButtonWidget(),
       ],
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: context.padding),
@@ -42,8 +42,8 @@ class AddPostMobilePage extends StatelessWidget {
   }
 }
 
-class NextButton extends ConsumerWidget {
-  const NextButton({super.key});
+class _NextButtonWidget extends ConsumerWidget {
+  const _NextButtonWidget();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

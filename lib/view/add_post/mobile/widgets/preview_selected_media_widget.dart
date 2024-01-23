@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
@@ -60,6 +59,22 @@ class PreviewSelectedMediaWidget extends ConsumerWidget {
     );
   }
 
-  Widget _errorText() =>
-      const InstaText(text: 'This image type is not supported');
+  Widget _errorText() => SizedBox(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              IconRes.close,
+              color: applyColor[InstaColor.alert],
+              scale: 0.9,
+            ),
+            const SizedBox(height: InstaSpacing.medium),
+            InstaText(
+              text: 'This media type is not supported',
+              color: applyColor[InstaColor.disabled],
+              fontWeight: FontWeight.bold,
+            )
+          ],
+        ),
+      );
 }

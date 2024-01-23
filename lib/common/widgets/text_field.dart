@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 class InstaTextField extends StatelessWidget {
   final String label;
   final bool obscureText;
+  final int maxLines;
   final TextEditingController? controller;
   final Widget? prefixIcon;
   final Function(String)? onSubmitted;
@@ -14,6 +15,7 @@ class InstaTextField extends StatelessWidget {
     super.key,
     required this.label,
     this.obscureText = false,
+    this.maxLines = 1,
     this.controller,
     this.prefixIcon,
     this.onSubmitted,
@@ -25,6 +27,7 @@ class InstaTextField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       onSubmitted: onSubmitted,
+      maxLines: maxLines,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         floatingLabelStyle: TextStyle(color: applyColor[InstaColor.disabled]),

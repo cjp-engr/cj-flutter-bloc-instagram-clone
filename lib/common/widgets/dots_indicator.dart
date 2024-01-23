@@ -1,4 +1,5 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -19,7 +20,11 @@ class InstaDotsIndicator extends StatelessWidget {
       controller: controller,
       onDotClicked: (index) {},
       count: count,
-      effect: ExpandingDotsEffect(dotHeight: dotHeight),
+      effect: ExpandingDotsEffect(
+        dotHeight: dotHeight,
+        activeDotColor: applyColor[InstaColor.secondary]!,
+        dotColor: applyColor[InstaColor.disabled]!,
+      ),
     );
   }
 }

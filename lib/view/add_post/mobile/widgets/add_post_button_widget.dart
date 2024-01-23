@@ -15,7 +15,7 @@ class AddPostButtonWidget extends StatelessWidget {
         Row(
           children: [
             SizedBox(width: InstaSpacing.large),
-            MediaButton(),
+            _MediaButtonWidget(),
             SizedBox(width: InstaSpacing.large),
           ],
         ),
@@ -25,10 +25,8 @@ class AddPostButtonWidget extends StatelessWidget {
   }
 }
 
-class MediaButton extends StatelessWidget {
-  const MediaButton({
-    super.key,
-  });
+class _MediaButtonWidget extends StatelessWidget {
+  const _MediaButtonWidget();
 
   @override
   Widget build(BuildContext context) {
