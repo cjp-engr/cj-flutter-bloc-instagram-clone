@@ -1,7 +1,10 @@
 import 'dart:io';
 
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +39,24 @@ class PreviewSelectedMediaWidget extends ConsumerWidget {
                     return _errorText();
                   },
                 )
-              : const SizedBox(),
+              : SizedBox(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        IconRes.emptyGallery,
+                        color: applyColor[InstaColor.disabled],
+                        scale: 0.9,
+                      ),
+                      const SizedBox(height: InstaSpacing.medium),
+                      InstaText(
+                        text: 'Pick an image or video',
+                        color: applyColor[InstaColor.disabled],
+                        fontWeight: FontWeight.bold,
+                      )
+                    ],
+                  ),
+                ),
     );
   }
 

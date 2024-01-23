@@ -67,25 +67,29 @@ class _InstaDialogState extends ConsumerState<_InstaDialog> {
           ),
           actionsAlignment: MainAxisAlignment.center,
           actions: [
-            PrimaryButton(
-              color: InstaColor.secondary,
-              text: 'Confirm',
-              onPressed: () {
-                if (selected == 0) {
-                  _controller.pickImages();
-                } else {
-                  _controller.pickVideo();
-                }
+            selected != -1
+                ? PrimaryButton(
+                    color: InstaColor.secondary,
+                    text: 'Confirm',
+                    onPressed: () {
+                      if (selected == 0) {
+                        _controller.pickImages();
+                      } else if (selected == 1) {
+                        _controller.pickVideo();
+                      }
 
-                Navigator.of(context).pop();
-              },
-            ),
+                      Navigator.of(context).pop();
+                    },
+                  )
+                : const PrimaryButton(
+                    color: InstaColor.disabled,
+                    text: 'Confirm',
+                    onPressed: null,
+                  ),
             PrimaryButton(
               color: InstaColor.primary,
               text: 'Cancel',
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ],
         ),

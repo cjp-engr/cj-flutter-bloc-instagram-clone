@@ -1,5 +1,6 @@
 class IconRes {
   static const String _iconBase = 'assets/icons';
+  static const String back = '$_iconBase/back.png';
   static const String camera = '$_iconBase/camera.png';
   static const String close = '$_iconBase/close.png';
   static const String comment = '$_iconBase/comment.png';
@@ -7,6 +8,7 @@ class IconRes {
   static const String discoverPeople = '$_iconBase/discover-people.png';
   static const String dropdown = '$_iconBase/dropdown.png';
   static const String ellipsis = '$_iconBase/ellipsis.png';
+  static const String emptyGallery = '$_iconBase/empty-gallery.png';
   static const String gallery = '$_iconBase/gallery.png';
   static const String grid = '$_iconBase/grid.png';
   static const String heart = '$_iconBase/heart.png';

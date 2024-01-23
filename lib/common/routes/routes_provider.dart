@@ -1,4 +1,5 @@
 import 'package:cj_flutter_riverpod_instagram_clone/repository/auth/auth_repository_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/write_post/write_post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -135,6 +136,11 @@ StatefulShellBranch _post() {
         pageBuilder: (context, state) => const NoTransitionPage(
           child: AddPostPage(),
         ),
+      ),
+      GoRoute(
+        path: '/${InstaRouteNames.writePost}',
+        name: InstaRouteNames.writePost,
+        builder: (context, state) => const WritePostPage(),
       ),
     ],
   );

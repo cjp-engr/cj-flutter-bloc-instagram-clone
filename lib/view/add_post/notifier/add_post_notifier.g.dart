@@ -21,12 +21,12 @@ final previewMediaIndexProvider = AutoDisposeProvider<int>.internal(
 );
 
 typedef PreviewMediaIndexRef = AutoDisposeProviderRef<int>;
-String _$addPostNotifierHash() => r'06cab21e2d5253f023dfa1fd3d502e04591d3196';
+String _$addPostNotifierHash() => r'6c0649392714809d1552f8c6686b42462016992d';
 
 /// See also [AddPostNotifier].
 @ProviderFor(AddPostNotifier)
 final addPostNotifierProvider =
-    AutoDisposeNotifierProvider<AddPostNotifier, AddPostState>.internal(
+    NotifierProvider<AddPostNotifier, AddPostState>.internal(
   AddPostNotifier.new,
   name: r'addPostNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -36,6 +36,6 @@ final addPostNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$AddPostNotifier = AutoDisposeNotifier<AddPostState>;
+typedef _$AddPostNotifier = Notifier<AddPostState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

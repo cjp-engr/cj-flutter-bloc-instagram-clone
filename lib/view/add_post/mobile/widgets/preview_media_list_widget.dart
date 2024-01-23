@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
@@ -47,12 +46,7 @@ class PreviewMediaListWidget extends ConsumerWidget {
         ),
       );
     } else {
-      return const Column(
-        children: [
-          SizedBox(height: InstaSpacing.extraLarge * 3.2),
-          InstaText(text: 'You have not yet picked an image.'),
-        ],
-      );
+      return const SizedBox();
     }
   }
 }

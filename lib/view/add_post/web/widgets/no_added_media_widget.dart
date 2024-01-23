@@ -11,71 +11,72 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NoAddedMediaWidget extends ConsumerStatefulWidget {
+class NoAddedMediaWidget extends ConsumerWidget {
   const NoAddedMediaWidget({
     super.key,
   });
 
   @override
-  ConsumerState<NoAddedMediaWidget> createState() => _NoAddedMediaWidgetState();
-}
-
-class _NoAddedMediaWidgetState extends ConsumerState<NoAddedMediaWidget> {
-  late AddPostController _controller;
-  late DropzoneViewController _dropZoneController;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AddPostController(ref: ref);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return const SizedBox(
       height: 400,
       child: Stack(
         children: [
-          _buildDropZoneArea(),
-          _buildDropZoneComponents(),
+          _DropZoneAreaWidget(),
+          _NoMediaDropZoneWidget(),
         ],
       ),
     );
   }
+}
 
-  Widget _buildDropZoneArea() => Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: InstaSpacing.small,
-          horizontal: InstaSpacing.extraLarge,
-        ),
-        child: DottedBorder(
-          radius: const Radius.circular(InstaBorderRadius.small),
-          color: applyColor[InstaColor.tertiary]!,
-          borderType: BorderType.RRect,
-          strokeWidth: 2,
-          dashPattern: const [
-            10,
-            10,
-          ],
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(InstaBorderRadius.small * 2),
-            ),
-            child: DropzoneView(
-              operation: DragOperation.move,
-              mime: const ['image/jpeg', 'image/png'],
-              onCreated: (ctrl) => _dropZoneController = ctrl,
-              onDropMultiple: (event) async {
-                for (var i in event!) {
-                  _controller.droppedImages(i, _dropZoneController);
-                }
-              },
-            ),
+class _DropZoneAreaWidget extends ConsumerWidget {
+  const _DropZoneAreaWidget();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = AddPostController(ref: ref);
+    late DropzoneViewController dropZoneController;
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: InstaSpacing.small,
+        horizontal: InstaSpacing.extraLarge,
+      ),
+      child: DottedBorder(
+        radius: const Radius.circular(InstaBorderRadius.small),
+        color: applyColor[InstaColor.tertiary]!,
+        borderType: BorderType.RRect,
+        strokeWidth: 2,
+        dashPattern: const [
+          10,
+          10,
+        ],
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(InstaBorderRadius.small * 2),
+          ),
+          child: DropzoneView(
+            operation: DragOperation.move,
+            mime: const ['image/jpeg', 'image/png'],
+            onCreated: (ctrl) => dropZoneController = ctrl,
+            onDropMultiple: (event) async {
+              for (var i in event!) {
+                controller.droppedImages(i, dropZoneController);
+              }
+            },
           ),
         ),
-      );
+      ),
+    );
+  }
+}
 
-  Widget _buildDropZoneComponents() {
+class _NoMediaDropZoneWidget extends ConsumerWidget {
+  const _NoMediaDropZoneWidget();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = AddPostController(ref: ref);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +103,7 @@ class _NoAddedMediaWidgetState extends ConsumerState<NoAddedMediaWidget> {
             height: 40,
             text: 'Select from Computer',
             onPressed: () async {
-              _controller.pickImages();
+              controller.pickImages();
             },
           ),
         ],

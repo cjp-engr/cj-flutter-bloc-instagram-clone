@@ -1,5 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
@@ -10,6 +11,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/widgets
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class AddPostMobilePage extends StatelessWidget {
   const AddPostMobilePage({super.key});
@@ -50,7 +52,7 @@ class NextButton extends ConsumerWidget {
         false || (state.droppedImages?.isNotEmpty ?? false);
     return hasMedia
         ? InkWell(
-            onTap: () {},
+            onTap: () => context.goNamed(InstaRouteNames.writePost),
             child: InstaText(
               text: 'Next',
               color: applyColor[InstaColor.secondary],

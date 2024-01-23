@@ -6,32 +6,20 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_p
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RemovePostWidget extends ConsumerStatefulWidget {
+class RemovePostWidget extends ConsumerWidget {
   const RemovePostWidget({super.key});
 
   @override
-  ConsumerState<RemovePostWidget> createState() => _RemovePostWidgetState();
-}
-
-class _RemovePostWidgetState extends ConsumerState<RemovePostWidget> {
-  late AddPostController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AddPostController(ref: ref);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SecondaryButton(
-      assetName: IconRes.delete,
-      color: applyColor[InstaColor.alert],
-      scale: 2,
-      onPressed: () {
-        _controller
-            .removeMedia(ref.watch(addPostNotifierProvider).previewImageIndex);
-      },
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = AddPostController(ref: ref);
+    final state = ref.watch(addPostNotifierProvider);
+    return state.mediaFileList?.isNotEmpty ?? false
+        ? SecondaryButton(
+            assetName: IconRes.delete,
+            color: applyColor[InstaColor.alert],
+            scale: 2,
+            onPressed: () => controller.removeMedia(state.previewImageIndex),
+          )
+        : const SizedBox();
   }
 }

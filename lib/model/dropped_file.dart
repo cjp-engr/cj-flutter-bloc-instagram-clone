@@ -4,11 +4,12 @@ class DroppedFile {
   final String mime;
   final int bytes;
 
-  DroppedFile(
-      {required this.url,
-      required this.name,
-      required this.mime,
-      required this.bytes});
+  DroppedFile({
+    required this.url,
+    required this.name,
+    required this.mime,
+    required this.bytes,
+  });
 
   String get size {
     final kb = bytes / 1024;
