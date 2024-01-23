@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
@@ -16,7 +17,7 @@ class PreviewSelectedMediaWidget extends ConsumerWidget {
     return Container(
       width: double.infinity,
       height: context.screenHeight / 2.5,
-      color: Colors.transparent,
+      color: applyColor[InstaColor.transparent],
       child: state.previewImage == null &&
               (state.mediaFileList?.isNotEmpty ?? false)
           ? Image.file(

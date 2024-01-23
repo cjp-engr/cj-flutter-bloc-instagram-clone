@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:flutter/material.dart';
 
 class ContentAllWidget extends StatelessWidget {
@@ -20,7 +21,7 @@ class ContentAllWidget extends StatelessWidget {
       itemCount: 20,
       itemBuilder: (context, index) {
         return Container(
-          color: Colors.blueAccent,
+          color: applyColor[InstaColor.secondary],
           alignment: Alignment.center,
           child: Text('Item $index'),
         );

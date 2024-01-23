@@ -123,7 +123,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             onTap: () => context.goNamed(InstaRouteNames.register),
             child: InstaText(
               text: AppLocalizations.of(context)!.signUp,
-              color: Colors.blue,
+              color: applyColor[InstaColor.secondary],
               fontWeight: FontWeight.bold,
             ),
           ),

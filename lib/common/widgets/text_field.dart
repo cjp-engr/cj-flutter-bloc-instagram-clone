@@ -1,5 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class InstaTextField extends StatelessWidget {
       onSubmitted: onSubmitted,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.auto,
-        floatingLabelStyle: const TextStyle(color: Colors.grey),
+        floatingLabelStyle: TextStyle(color: applyColor[InstaColor.disabled]),
         contentPadding: const EdgeInsets.symmetric(
           vertical: InstaSpacing.verySmall,
           horizontal: InstaSpacing.verySmall,
@@ -34,19 +35,19 @@ class InstaTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         labelText: label,
         labelStyle: TextStyle(fontSize: InstaFontSize.medium.value),
-        enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
             Radius.circular(InstaBorderRadius.verySmall),
           ),
           borderSide: BorderSide(
-            color: Colors.grey,
+            color: applyColor[InstaColor.disabled]!,
           ),
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
             Radius.circular(InstaBorderRadius.verySmall),
           ),
-          borderSide: BorderSide(color: Colors.grey),
+          borderSide: BorderSide(color: applyColor[InstaColor.disabled]!),
         ),
       ),
     );

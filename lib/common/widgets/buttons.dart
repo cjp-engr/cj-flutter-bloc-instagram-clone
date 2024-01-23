@@ -30,8 +30,8 @@ class PrimaryButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: onPressed == null
-              ? buttonColor[InstaColor.disabled]
-              : buttonColor[color],
+              ? applyColor[InstaColor.disabled]
+              : applyColor[color],
           minimumSize: Size.zero,
           padding: const EdgeInsets.symmetric(vertical: 10),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -41,7 +41,7 @@ class PrimaryButton extends StatelessWidget {
         ),
         child: InstaText(
           text: text,
-          color: Colors.white,
+          color: applyColor[InstaColor.tertiary],
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -73,11 +73,13 @@ class SecondaryButton extends StatelessWidget {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         alignment: Alignment.centerLeft,
         splashFactory: NoSplash.splashFactory,
-      ).copyWith(overlayColor: MaterialStateProperty.all(Colors.transparent)),
+      ).copyWith(
+          overlayColor:
+              MaterialStateProperty.all(applyColor[InstaColor.transparent])),
       child: Image.asset(
         assetName,
         scale: scale ?? 2.7,
-        color: color ?? Colors.white,
+        color: color ?? applyColor[InstaColor.tertiary],
       ),
     );
   }
@@ -107,7 +109,7 @@ class TertiaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey.shade800,
+          backgroundColor: applyColor[InstaColor.primary],
           minimumSize: Size.zero,
           padding: const EdgeInsets.symmetric(vertical: 10),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -121,12 +123,12 @@ class TertiaryButton extends StatelessWidget {
             Image.asset(
               assetName,
               scale: 2.7,
-              color: Colors.white,
+              color: applyColor[InstaColor.tertiary],
             ),
             const SizedBox(width: InstaSpacing.verySmall),
             InstaText(
               text: text,
-              color: Colors.white,
+              color: applyColor[InstaColor.tertiary],
               fontWeight: FontWeight.bold,
             ),
           ],

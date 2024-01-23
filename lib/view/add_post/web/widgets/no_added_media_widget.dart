@@ -50,7 +50,7 @@ class _NoAddedMediaWidgetState extends ConsumerState<NoAddedMediaWidget> {
         ),
         child: DottedBorder(
           radius: const Radius.circular(InstaBorderRadius.small),
-          color: Colors.white,
+          color: applyColor[InstaColor.tertiary]!,
           borderType: BorderType.RRect,
           strokeWidth: 2,
           dashPattern: const [
@@ -89,7 +89,7 @@ class _NoAddedMediaWidgetState extends ConsumerState<NoAddedMediaWidget> {
           const SizedBox(height: InstaSpacing.large),
           Image.asset(
             IconRes.camera,
-            color: Colors.white,
+            color: applyColor[InstaColor.tertiary],
           ),
           const InstaText(
             text: 'Drag photos and videos here',

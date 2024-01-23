@@ -79,7 +79,14 @@ class _InstaDialogState extends ConsumerState<_InstaDialog> {
 
                 Navigator.of(context).pop();
               },
-            )
+            ),
+            PrimaryButton(
+              color: InstaColor.primary,
+              text: 'Cancel',
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
           ],
         ),
       );
@@ -90,8 +97,8 @@ class _InstaDialogState extends ConsumerState<_InstaDialog> {
     required int index,
   }) {
     final color = selected == index
-        ? buttonColor[InstaColor.secondary]!
-        : buttonColor[InstaColor.tertiary]!;
+        ? applyColor[InstaColor.secondary]!
+        : applyColor[InstaColor.tertiary]!;
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: InstaSpacing.veryLarge,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-enum InstaColor { primary, secondary, tertiary, disabled }
+enum InstaColor { primary, secondary, tertiary, disabled, alert, transparent }
 
-const Map<InstaColor, Color> buttonColor = {
-  InstaColor.primary: Color.fromRGBO(66, 66, 66, 1),
-  InstaColor.secondary: Color.fromRGBO(33, 150, 243, 1),
+const Map<InstaColor, Color> applyColor = {
+  InstaColor.primary: Color.fromRGBO(33, 19, 13, 1),
+  InstaColor.secondary: Color.fromRGBO(30, 129, 176, 1),
   InstaColor.tertiary: Color.fromRGBO(252, 252, 252, 1),
-  InstaColor.disabled: Color.fromRGBO(205, 203, 203, 1),
-  // InstaButtonColor.icon: "Element 4",
+  InstaColor.disabled: Color.fromRGBO(223, 207, 190, 1),
+  InstaColor.alert: Color.fromRGBO(221, 65, 36, 1),
+  InstaColor.transparent: Color.fromARGB(0, 0, 0, 0),
 };

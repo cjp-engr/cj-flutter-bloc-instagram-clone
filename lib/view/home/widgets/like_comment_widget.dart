@@ -1,5 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
@@ -73,7 +74,7 @@ class _LikeAndCommentWidgetState extends State<LikeAndCommentWidget> {
     return InkWell(
       child: InstaText(
         text: AppLocalizations.of(context)!.addAComment,
-        color: Colors.grey,
+        color: applyColor[InstaColor.disabled],
       ),
       onTap: () {},
     );

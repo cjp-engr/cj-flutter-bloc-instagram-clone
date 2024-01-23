@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
@@ -50,9 +51,9 @@ class NextButton extends ConsumerWidget {
     return hasMedia
         ? InkWell(
             onTap: () {},
-            child: const InstaText(
+            child: InstaText(
               text: 'Next',
-              color: Colors.blue,
+              color: applyColor[InstaColor.secondary],
             ),
           )
         : const SizedBox();

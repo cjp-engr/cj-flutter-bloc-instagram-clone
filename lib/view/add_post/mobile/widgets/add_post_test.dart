@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -396,7 +397,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
             child: FloatingActionButton(
-              backgroundColor: Colors.red,
+              backgroundColor: applyColor[InstaColor.alert],
               onPressed: () {
                 isVideo = true;
                 _onImageButtonPressed(ImageSource.gallery, context: context);

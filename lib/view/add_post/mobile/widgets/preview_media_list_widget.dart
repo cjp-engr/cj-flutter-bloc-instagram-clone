@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/video_player_widget.dart';
@@ -38,7 +39,7 @@ class PreviewMediaListWidget extends ConsumerWidget {
               child: Semantics(
                 label: 'image_picker_example_picked_image',
                 child: (mime == null || mime.startsWith('image/')
-                    ? const ImageListWidget()
+                    ? const _ImageListWidget()
                     : const VideoPlayerWidget()),
               ),
             );
@@ -56,8 +57,8 @@ class PreviewMediaListWidget extends ConsumerWidget {
   }
 }
 
-class ImageListWidget extends ConsumerWidget {
-  const ImageListWidget({super.key});
+class _ImageListWidget extends ConsumerWidget {
+  const _ImageListWidget();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -69,31 +70,48 @@ class ImageListWidget extends ConsumerWidget {
             .read(addPostNotifierProvider.notifier)
             .pickPreviewImage(state.mediaFileList![index], index);
       },
-      child: index == ref.watch(addPostNotifierProvider).previewImageIndex
+      child: index == state.previewImageIndex
           ? Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.blueAccent),
+                border: Border.all(color: applyColor[InstaColor.secondary]!),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(InstaBorderRadius.small),
                 ),
               ),
               child: ColorFiltered(
                 colorFilter: ColorFilter.mode(
-                  Colors.blue.withOpacity(0.3),
+                  applyColor[InstaColor.secondary]!,
                   BlendMode.darken,
                 ),
-                child: _image(state.mediaFileList![index].path),
+                child: ProviderScope(
+                  overrides: [
+                    previewMediaIndexProvider.overrideWithValue(index)
+                  ],
+                  child: const _DisplayImageWidget(),
+                ),
               ),
             )
           : SizedBox(
-              child: _image(state.mediaFileList![index].path),
+              child: ProviderScope(
+                overrides: [
+                  previewMediaIndexProvider.overrideWithValue(index),
+                ],
+                child: const _DisplayImageWidget(),
+              ),
             ),
     );
   }
+}
 
-  Widget _image(String path) {
+class _DisplayImageWidget extends ConsumerWidget {
+  const _DisplayImageWidget();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final list = ref.watch(addPostNotifierProvider).mediaFileList;
+    final index = ref.watch(previewMediaIndexProvider);
     return Image.file(
-      File(path),
+      File(list![index].path),
       errorBuilder:
           (BuildContext context, Object error, StackTrace? stackTrace) {
         return const InstaText(text: 'This image type is not supported');

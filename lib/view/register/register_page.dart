@@ -121,12 +121,12 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
   Widget _buildLearnMore() => InstaText(
         text: AppLocalizations.of(context)!.registerLearnMore,
-        color: Colors.grey,
+        color: applyColor[InstaColor.disabled],
       );
 
   Widget _buildPolicy() => InstaText(
         text: AppLocalizations.of(context)!.registerPolicy,
-        color: Colors.grey,
+        color: applyColor[InstaColor.disabled],
       );
 
   Widget _buildSignUp() => PrimaryButton(
@@ -144,7 +144,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             onTap: () => context.goNamed(InstaRouteNames.login),
             child: InstaText(
               text: AppLocalizations.of(context)!.login,
-              color: Colors.blue,
+              color: applyColor[InstaColor.secondary],
               fontWeight: FontWeight.bold,
             ),
           ),

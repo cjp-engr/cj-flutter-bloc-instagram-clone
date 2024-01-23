@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
@@ -58,8 +59,8 @@ class InstaNavigationBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       currentIndex: navigationShell!.currentIndex,
       onTap: (index) => _onDestinationSelected(index),
-      selectedItemColor: Colors.red,
-      unselectedItemColor: Colors.grey,
+      selectedItemColor: applyColor[InstaColor.alert],
+      unselectedItemColor: applyColor[InstaColor.disabled],
       items: _bottomNavigationList(context),
       selectedFontSize: 0,
       unselectedFontSize: 0,
@@ -152,6 +153,6 @@ class InstaNavigationBar extends StatelessWidget {
     );
   }
 
-  Widget _icon(String assetName) =>
-      Image.asset(assetName, color: Colors.white, scale: 2.3);
+  Widget _icon(String assetName) => Image.asset(assetName,
+      color: applyColor[InstaColor.tertiary], scale: 2.3);
 }

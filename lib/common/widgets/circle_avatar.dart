@@ -1,4 +1,5 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:flutter/material.dart';
 
 class InstaCircleAvatar extends StatelessWidget {
@@ -13,10 +14,10 @@ class InstaCircleAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: Colors.white,
+      backgroundColor: applyColor[InstaColor.tertiary],
       radius: (radius! + 4.0),
       child: CircleAvatar(
-        backgroundColor: Colors.black,
+        backgroundColor: applyColor[InstaColor.primary],
         radius: (radius! + 2.0),
         child: CircleAvatar(
           backgroundImage: NetworkImage(image),

@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/content_widgets/content_all_widget.dart';
@@ -37,10 +38,10 @@ class _ContentsWidgetState extends State<ContentsWidget> {
           _selectedTabBar = index;
         },
       ),
-      indicator: const BoxDecoration(
+      indicator: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: Colors.white,
+            color: applyColor[InstaColor.tertiary]!,
             width: 3.0,
           ),
         ),

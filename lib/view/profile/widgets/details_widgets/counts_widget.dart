@@ -1,4 +1,5 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,7 @@ class CountsWidget extends StatelessWidget {
         ),
         InstaText(
           text: text,
-          color: Colors.grey,
+          color: applyColor[InstaColor.disabled],
         ),
       ],
     );
