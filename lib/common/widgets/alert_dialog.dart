@@ -38,14 +38,14 @@ class _InstaDialog extends StatelessWidget {
           ),
           actionsAlignment: MainAxisAlignment.center,
           actions: [
-            TextOnlyButton(
+            PrimaryButton(
               color: InstaColor.primary,
               text: buttonCancelText ?? '',
               onPressed: () => Navigator.of(context).pop(),
             ),
             onPressed == null
                 ? const SizedBox()
-                : TextOnlyButton(
+                : PrimaryButton(
                     color: InstaColor.secondary,
                     text: buttonConfirmText ?? 'Confirm',
                     onPressed: () {},

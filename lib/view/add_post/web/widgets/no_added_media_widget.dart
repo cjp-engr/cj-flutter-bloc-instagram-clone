@@ -1,6 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
@@ -96,8 +96,8 @@ class _NoAddedMediaWidgetState extends ConsumerState<NoAddedMediaWidget> {
             fontSize: InstaFontSize.veryLarge,
           ),
           const SizedBox(height: InstaSpacing.large),
-          InstaButton(
-            buttonType: InstaButtonType.secondary,
+          PrimaryButton(
+            color: InstaColor.secondary,
             width: 220,
             height: 40,
             text: 'Select from Computer',

@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/controller/add_post_controller.dart';
@@ -68,7 +67,7 @@ class _InstaDialogState extends ConsumerState<_InstaDialog> {
           ),
           actionsAlignment: MainAxisAlignment.center,
           actions: [
-            TextOnlyButton(
+            PrimaryButton(
               color: InstaColor.secondary,
               text: 'Confirm',
               onPressed: () {
@@ -106,10 +105,9 @@ class _InstaDialogState extends ConsumerState<_InstaDialog> {
       ),
       child: Column(
         children: [
-          InstaButton(
-            buttonType: InstaButtonType.icon,
+          SecondaryButton(
             assetName: asset,
-            iconScale: 1.5,
+            scale: 1.5,
             color: color,
             onPressed: () {
               setState(() {

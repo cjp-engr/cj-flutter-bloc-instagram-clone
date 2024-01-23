@@ -129,7 +129,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
         color: Colors.grey,
       );
 
-  Widget _buildSignUp() => TextOnlyButton(
+  Widget _buildSignUp() => PrimaryButton(
         color: InstaColor.secondary,
         width: double.infinity,
         text: AppLocalizations.of(context)!.signUp,

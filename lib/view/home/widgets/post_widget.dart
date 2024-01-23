@@ -1,6 +1,5 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
@@ -66,13 +65,11 @@ class PostWidget extends StatelessWidget {
   Widget _buildIcons() {
     return const Row(
       children: [
-        InstaButton(
-          buttonType: InstaButtonType.icon,
+        SecondaryButton(
           assetName: IconRes.heart,
         ),
         SizedBox(width: InstaSpacing.small),
-        InstaButton(
-          buttonType: InstaButtonType.icon,
+        SecondaryButton(
           assetName: IconRes.saved,
         ),
       ],

@@ -1,4 +1,3 @@
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/controller/add_post_controller.dart';
@@ -24,11 +23,10 @@ class _RemovePostWidgetState extends ConsumerState<RemovePostWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return InstaButton(
-      buttonType: InstaButtonType.icon,
+    return SecondaryButton(
       assetName: IconRes.delete,
       color: Colors.red,
-      iconScale: 2,
+      scale: 2,
       onPressed: () {
         _controller
             .removeMedia(ref.watch(addPostNotifierProvider).previewImageIndex);

@@ -1,98 +1,18 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
-
-class InstaButton extends StatelessWidget {
-  final InstaButtonType buttonType;
-  final String? text;
-  final String? assetName;
-  final Function()? onPressed;
-  final double? width;
-  final double? height;
-  final double? iconScale;
-  final Color? color;
-  const InstaButton({
-    super.key,
-    required this.buttonType,
-    this.text,
-    this.assetName,
-    this.onPressed,
-    this.width,
-    this.height,
-    this.iconScale,
-    this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    switch (buttonType) {
-      case InstaButtonType.tertiary:
-        return _TertiaryButton(
-          text: text ?? 'Home',
-          assetName: assetName ?? IconRes.home,
-          onPressed: onPressed,
-          width: width,
-          height: height,
-        );
-      case InstaButtonType.icon:
-        return _IconButton(
-          assetName: assetName ?? IconRes.home,
-          onPressed: onPressed,
-          scale: iconScale,
-          color: color,
-        );
-
-      default:
-        return const Placeholder();
-    }
-  }
-}
-
-class _IconButton extends StatelessWidget {
-  final String assetName;
-  final double? scale;
-  final Color? color;
-  final Function()? onPressed;
-  const _IconButton({
-    required this.assetName,
-    this.scale,
-    this.color,
-    this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onPressed,
-      style: TextButton.styleFrom(
-        minimumSize: Size.zero,
-        padding: EdgeInsets.zero,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        alignment: Alignment.centerLeft,
-        splashFactory: NoSplash.splashFactory,
-      ).copyWith(overlayColor: MaterialStateProperty.all(Colors.transparent)),
-      child: Image.asset(
-        assetName,
-        scale: scale ?? 2.7,
-        color: color ?? Colors.white,
-      ),
-    );
-  }
-}
-
-class TextOnlyButton extends StatelessWidget {
+// * Button with Text only
+class PrimaryButton extends StatelessWidget {
   final String text;
   final InstaColor color;
   final Function()? onPressed;
   final double? width;
   final double? height;
 
-  const TextOnlyButton({
+  const PrimaryButton({
     super.key,
     required this.text,
     required this.color,
@@ -129,13 +49,49 @@ class TextOnlyButton extends StatelessWidget {
   }
 }
 
-class _TertiaryButton extends StatelessWidget {
+// * Button with Icon only
+class SecondaryButton extends StatelessWidget {
+  final String assetName;
+  final double? scale;
+  final Color? color;
+  final Function()? onPressed;
+  const SecondaryButton({
+    super.key,
+    required this.assetName,
+    this.scale,
+    this.color,
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        minimumSize: Size.zero,
+        padding: EdgeInsets.zero,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        alignment: Alignment.centerLeft,
+        splashFactory: NoSplash.splashFactory,
+      ).copyWith(overlayColor: MaterialStateProperty.all(Colors.transparent)),
+      child: Image.asset(
+        assetName,
+        scale: scale ?? 2.7,
+        color: color ?? Colors.white,
+      ),
+    );
+  }
+}
+
+// * Button with Text and Icon
+class TertiaryButton extends StatelessWidget {
   final String text;
   final String assetName;
   final Function()? onPressed;
   final double? width;
   final double? height;
-  const _TertiaryButton({
+  const TertiaryButton({
+    super.key,
     required this.text,
     required this.assetName,
     this.onPressed,

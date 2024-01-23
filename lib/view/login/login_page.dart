@@ -92,7 +92,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   Widget _buildLogin() {
     final loginState = ref.watch(loginProvider);
-    return TextOnlyButton(
+    return PrimaryButton(
       color: InstaColor.secondary,
       width: double.infinity,
       text: AppLocalizations.of(context)!.login,

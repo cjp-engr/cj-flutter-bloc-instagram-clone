@@ -1,5 +1,4 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/button_type.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
@@ -56,12 +55,10 @@ class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
           fontSize: InstaFontSize.veryLarge,
         ),
         hasId
-            ? const InstaButton(
-                buttonType: InstaButtonType.icon,
+            ? const SecondaryButton(
                 assetName: IconRes.ellipsis,
               )
-            : InstaButton(
-                buttonType: InstaButtonType.icon,
+            : SecondaryButton(
                 assetName: IconRes.settings,
                 onPressed: () => context.goNamed(InstaRouteNames.settings),
               )
@@ -74,7 +71,7 @@ class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
       spacing: 8.0,
       runSpacing: 4.0,
       children: [
-        TextOnlyButton(
+        PrimaryButton(
           color: InstaColor.primary,
           text: hasId
               ? AppLocalizations.of(context)!.following
@@ -83,7 +80,7 @@ class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
         ),
         hasId
             ? const SizedBox()
-            : TextOnlyButton(
+            : PrimaryButton(
                 color: InstaColor.primary,
                 text: AppLocalizations.of(context)!.viewArchive,
                 onPressed: () {},

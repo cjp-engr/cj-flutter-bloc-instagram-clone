@@ -23,7 +23,7 @@ class SettingsPage extends ConsumerWidget {
       body: Center(
         child: Column(
           children: [
-            TextOnlyButton(
+            PrimaryButton(
               color: InstaColor.primary,
               text: 'Log out',
               onPressed: () async {
