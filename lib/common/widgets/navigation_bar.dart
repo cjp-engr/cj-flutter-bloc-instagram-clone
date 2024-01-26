@@ -132,7 +132,6 @@ class InstaNavigationBar extends StatelessWidget {
       BottomNavigationBarItem(icon: _icon(IconRes.home), label: ''),
       BottomNavigationBarItem(icon: _icon(IconRes.notification), label: ''),
       BottomNavigationBarItem(icon: _icon(IconRes.newPost), label: ''),
-      // BottomNavigationBarItem(icon: _icon(IconRes.messenger), label: ''),
       BottomNavigationBarItem(icon: _profileIcon(context), label: ''),
     ];
   }

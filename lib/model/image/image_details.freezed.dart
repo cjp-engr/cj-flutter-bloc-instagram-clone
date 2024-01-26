@@ -21,9 +21,10 @@ ImageDetails _$ImageDetailsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ImageDetails {
   String? get userId => throw _privateConstructorUsedError;
-  String? get imageId => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
-  String? get likeCount => throw _privateConstructorUsedError;
+  String? get imagesId => throw _privateConstructorUsedError;
+  List<String>? get images => throw _privateConstructorUsedError;
+  int? get likeCount => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   List<String>? get comments => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,9 +41,10 @@ abstract class $ImageDetailsCopyWith<$Res> {
   @useResult
   $Res call(
       {String? userId,
-      String? imageId,
-      String? image,
-      String? likeCount,
+      String? imagesId,
+      List<String>? images,
+      int? likeCount,
+      String? description,
       List<String>? comments});
 }
 
@@ -60,9 +62,10 @@ class _$ImageDetailsCopyWithImpl<$Res, $Val extends ImageDetails>
   @override
   $Res call({
     Object? userId = freezed,
-    Object? imageId = freezed,
-    Object? image = freezed,
+    Object? imagesId = freezed,
+    Object? images = freezed,
     Object? likeCount = freezed,
+    Object? description = freezed,
     Object? comments = freezed,
   }) {
     return _then(_value.copyWith(
@@ -70,17 +73,21 @@ class _$ImageDetailsCopyWithImpl<$Res, $Val extends ImageDetails>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageId: freezed == imageId
-          ? _value.imageId
-          : imageId // ignore: cast_nullable_to_non_nullable
+      imagesId: freezed == imagesId
+          ? _value.imagesId
+          : imagesId // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       likeCount: freezed == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String?,
       comments: freezed == comments
           ? _value.comments
@@ -100,9 +107,10 @@ abstract class _$$ImageDetailsImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? userId,
-      String? imageId,
-      String? image,
-      String? likeCount,
+      String? imagesId,
+      List<String>? images,
+      int? likeCount,
+      String? description,
       List<String>? comments});
 }
 
@@ -118,9 +126,10 @@ class __$$ImageDetailsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = freezed,
-    Object? imageId = freezed,
-    Object? image = freezed,
+    Object? imagesId = freezed,
+    Object? images = freezed,
     Object? likeCount = freezed,
+    Object? description = freezed,
     Object? comments = freezed,
   }) {
     return _then(_$ImageDetailsImpl(
@@ -128,17 +137,21 @@ class __$$ImageDetailsImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageId: freezed == imageId
-          ? _value.imageId
-          : imageId // ignore: cast_nullable_to_non_nullable
+      imagesId: freezed == imagesId
+          ? _value.imagesId
+          : imagesId // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       likeCount: freezed == likeCount
           ? _value.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String?,
       comments: freezed == comments
           ? _value._comments
@@ -153,11 +166,13 @@ class __$$ImageDetailsImplCopyWithImpl<$Res>
 class _$ImageDetailsImpl implements _ImageDetails {
   const _$ImageDetailsImpl(
       {this.userId,
-      this.imageId,
-      this.image,
+      this.imagesId,
+      final List<String>? images,
       this.likeCount,
+      this.description,
       final List<String>? comments})
-      : _comments = comments;
+      : _images = images,
+        _comments = comments;
 
   factory _$ImageDetailsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ImageDetailsImplFromJson(json);
@@ -165,11 +180,21 @@ class _$ImageDetailsImpl implements _ImageDetails {
   @override
   final String? userId;
   @override
-  final String? imageId;
+  final String? imagesId;
+  final List<String>? _images;
   @override
-  final String? image;
+  List<String>? get images {
+    final value = _images;
+    if (value == null) return null;
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
-  final String? likeCount;
+  final int? likeCount;
+  @override
+  final String? description;
   final List<String>? _comments;
   @override
   List<String>? get comments {
@@ -182,7 +207,7 @@ class _$ImageDetailsImpl implements _ImageDetails {
 
   @override
   String toString() {
-    return 'ImageDetails(userId: $userId, imageId: $imageId, image: $image, likeCount: $likeCount, comments: $comments)';
+    return 'ImageDetails(userId: $userId, imagesId: $imagesId, images: $images, likeCount: $likeCount, description: $description, comments: $comments)';
   }
 
   @override
@@ -191,17 +216,26 @@ class _$ImageDetailsImpl implements _ImageDetails {
         (other.runtimeType == runtimeType &&
             other is _$ImageDetailsImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.imageId, imageId) || other.imageId == imageId) &&
-            (identical(other.image, image) || other.image == image) &&
+            (identical(other.imagesId, imagesId) ||
+                other.imagesId == imagesId) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             const DeepCollectionEquality().equals(other._comments, _comments));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, imageId, image,
-      likeCount, const DeepCollectionEquality().hash(_comments));
+  int get hashCode => Object.hash(
+      runtimeType,
+      userId,
+      imagesId,
+      const DeepCollectionEquality().hash(_images),
+      likeCount,
+      description,
+      const DeepCollectionEquality().hash(_comments));
 
   @JsonKey(ignore: true)
   @override
@@ -220,9 +254,10 @@ class _$ImageDetailsImpl implements _ImageDetails {
 abstract class _ImageDetails implements ImageDetails {
   const factory _ImageDetails(
       {final String? userId,
-      final String? imageId,
-      final String? image,
-      final String? likeCount,
+      final String? imagesId,
+      final List<String>? images,
+      final int? likeCount,
+      final String? description,
       final List<String>? comments}) = _$ImageDetailsImpl;
 
   factory _ImageDetails.fromJson(Map<String, dynamic> json) =
@@ -231,11 +266,13 @@ abstract class _ImageDetails implements ImageDetails {
   @override
   String? get userId;
   @override
-  String? get imageId;
+  String? get imagesId;
   @override
-  String? get image;
+  List<String>? get images;
   @override
-  String? get likeCount;
+  int? get likeCount;
+  @override
+  String? get description;
   @override
   List<String>? get comments;
   @override

@@ -7,7 +7,10 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart'
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/scroll_added_media.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/write_post/provider/post_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class WritePostPage extends StatelessWidget {
@@ -27,11 +30,11 @@ class WritePostPage extends StatelessWidget {
             const ScrollDisplayAddedMediaWidget(),
             const SizedBox(height: InstaSpacing.medium),
             InstaText(
-              text: 'Write a description...',
+              text: 'Write something...',
               color: applyColor[InstaColor.disabled],
               fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: InstaSpacing.verySmall),
+            const SizedBox(height: InstaSpacing.extraSmall),
             const InstaTextField(
               label: '',
               maxLines: 4,
@@ -61,13 +64,15 @@ class _BackButtonWidget extends StatelessWidget {
   }
 }
 
-class _PostButtonWidget extends StatelessWidget {
+class _PostButtonWidget extends ConsumerWidget {
   const _PostButtonWidget();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
-      onTap: () {},
+      onTap: () async {
+        ref.read(postProvider.notifier).addPost(const ImageDetails());
+      },
       child: InstaText(
         text: 'Post',
         color: applyColor[InstaColor.secondary],

@@ -15,6 +15,8 @@ class ScrollDisplayAddedMediaWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final PageController pageController = PageController();
+    final isAndroid = defaultTargetPlatform == TargetPlatform.android;
+    final isIos = defaultTargetPlatform == TargetPlatform.iOS;
     final state = ref.watch(addPostNotifierProvider);
     return Column(
       children: [
@@ -36,7 +38,7 @@ class ScrollDisplayAddedMediaWidget extends ConsumerWidget {
                 controller: pageController,
                 children: state.mediaFileList?.isNotEmpty ?? false
                     ? List.generate(state.mediaFileList!.length, (index) {
-                        return kIsWeb
+                        return kIsWeb && (!isAndroid || !isIos)
                             ? Image.network(
                                 state.mediaFileList![index].path,
                               )
