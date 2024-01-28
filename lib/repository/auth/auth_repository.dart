@@ -1,6 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/firebase_constant.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/repository/auth/auth_exception.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/firebase_exception.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 
 class AuthRepository {
@@ -23,7 +23,7 @@ class AuthRepository {
         'fullName': user.details.fullName,
       });
     } catch (e) {
-      throw handleException(e);
+      throw firebaseHandleException(e);
     }
   }
 
@@ -37,7 +37,7 @@ class AuthRepository {
         password: password,
       );
     } catch (e) {
-      throw handleException(e);
+      throw firebaseHandleException(e);
     }
   }
 
@@ -45,7 +45,7 @@ class AuthRepository {
     try {
       await fbAuth.signOut();
     } catch (e) {
-      throw handleException(e);
+      throw firebaseHandleException(e);
     }
   }
 }

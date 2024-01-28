@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-String handleException(e) {
+String firebaseHandleException(e) {
   try {
     throw e;
   } on FirebaseAuthException catch (e) {
