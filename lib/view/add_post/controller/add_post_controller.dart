@@ -1,5 +1,5 @@
 import 'package:cj_flutter_riverpod_instagram_clone/model/dropped_file.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/provider/add_post_provider.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,7 +12,7 @@ class AddPostController {
   final ImagePicker _picker = ImagePicker();
 
   Future<void> pickImages() async {
-    final updateState = ref.read(addPostNotifierProvider.notifier);
+    final updateState = ref.read(addPostProvider.notifier);
     try {
       final pickedFileList = await _picker.pickMultiImage();
 
@@ -24,7 +24,7 @@ class AddPostController {
 
   Future<void> pickVideo() async {
     List<XFile> video = [];
-    final updateState = ref.read(addPostNotifierProvider.notifier);
+    final updateState = ref.read(addPostProvider.notifier);
 
     try {
       final pickedFileList =
@@ -40,7 +40,7 @@ class AddPostController {
     dynamic event,
     DropzoneViewController dropZoneController,
   ) async {
-    final updateState = ref.read(addPostNotifierProvider.notifier);
+    final updateState = ref.read(addPostProvider.notifier);
 
     final name = event.name;
     final mime = await dropZoneController.getFileMIME(event);
@@ -54,15 +54,13 @@ class AddPostController {
       bytes: bytes,
     );
 
-    updateState.pickDroppedImages([
-      ...ref.watch(addPostNotifierProvider).droppedImages ?? [],
-      droppedImage
-    ]);
+    updateState.pickDroppedImages(
+        [...ref.watch(addPostProvider).droppedImages ?? [], droppedImage]);
   }
 
   void removeMedia(int index) {
-    final updateState = ref.read(addPostNotifierProvider.notifier);
-    final state = ref.watch(addPostNotifierProvider);
+    final updateState = ref.read(addPostProvider.notifier);
+    final state = ref.watch(addPostProvider);
 
     if (state.mediaFileList != null) {
       state.mediaFileList?.removeAt(index);
@@ -80,7 +78,7 @@ class AddPostController {
 
     if (state.mediaFileList?.isNotEmpty ?? false) {
       ref
-          .read(addPostNotifierProvider.notifier)
+          .read(addPostProvider.notifier)
           .pickPreviewImage(state.mediaFileList![newIndex], newIndex);
     }
   }

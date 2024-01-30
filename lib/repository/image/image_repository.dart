@@ -43,13 +43,8 @@ class ImageRepository {
 
   Future<void> fetchImageSet() async {
     try {
-      await usersCollection.doc(fbUserId).collection('images').add({
-        'userId': 'test',
-        'imageId': 'test',
-        'image': 'test',
-        'likeCount': 'test',
-        'description': 'test',
-      });
+      // final snapshot =
+      //     await storageReference.child('users/$fbUserId').getData();
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {

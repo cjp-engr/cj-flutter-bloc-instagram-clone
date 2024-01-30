@@ -7,7 +7,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/repository/image/image_repos
 
 part 'post_provider.g.dart';
 
-@Riverpod(keepAlive: false)
+@riverpod
 class Post extends _$Post {
   @override
   FutureOr<void> build() {}

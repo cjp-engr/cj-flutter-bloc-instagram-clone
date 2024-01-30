@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/provider/add_post_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/aspect_ratio_video_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +11,7 @@ class VideoPlayerWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mediaFileList = ref.watch(addPostNotifierProvider).mediaFileList;
+    final mediaFileList = ref.watch(addPostProvider).mediaFileList;
     final index = ref.watch(previewMediaIndexProvider);
     final VideoPlayerController controller =
         VideoPlayerController.file(File(mediaFileList![index].path));

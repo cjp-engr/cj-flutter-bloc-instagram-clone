@@ -1,14 +1,14 @@
 import 'package:cj_flutter_riverpod_instagram_clone/model/dropped_file.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_state.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/provider/add_post_state.dart';
 
 // ignore: depend_on_referenced_packages
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'add_post_notifier.g.dart';
+part 'add_post_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-class AddPostNotifier extends _$AddPostNotifier {
+class AddPost extends _$AddPost {
   @override
   AddPostState build() {
     return const AddPostState();

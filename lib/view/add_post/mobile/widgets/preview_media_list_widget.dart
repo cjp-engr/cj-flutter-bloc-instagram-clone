@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/notifier/add_post_notifier.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/provider/add_post_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/video_player_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +16,7 @@ class PreviewMediaListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(addPostNotifierProvider);
+    final state = ref.watch(addPostProvider);
     if (state.mediaFileList?.isNotEmpty ?? false) {
       return Semantics(
         label: 'image_picker_example_picked_images',
@@ -56,12 +56,12 @@ class _ImageListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(addPostNotifierProvider);
+    final state = ref.watch(addPostProvider);
     final index = ref.watch(previewMediaIndexProvider);
     return GestureDetector(
       onTap: () {
         ref
-            .read(addPostNotifierProvider.notifier)
+            .read(addPostProvider.notifier)
             .pickPreviewImage(state.mediaFileList![index], index);
       },
       child: index == state.previewImageIndex
@@ -102,7 +102,7 @@ class _DisplayImageWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final list = ref.watch(addPostNotifierProvider).mediaFileList;
+    final list = ref.watch(addPostProvider).mediaFileList;
     final index = ref.watch(previewMediaIndexProvider);
     return Image.file(
       File(list![index].path),

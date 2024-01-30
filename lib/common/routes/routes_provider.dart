@@ -1,12 +1,12 @@
 import 'package:cj_flutter_riverpod_instagram_clone/repository/auth/auth_repository_provider.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/write_post/write_post_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/add_post_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post_preview/add_post_preview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 // private navigators
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/navigation_bar.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/add_post_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/home_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/login/login_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/notification/notification_page.dart';
@@ -19,14 +19,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'routes_provider.g.dart';
 
-final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _shellNavigatorHomeKey =
+GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> _shellNavigatorHomeKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorHomeKey');
-final _shellNavigatorNotificationKey =
+GlobalKey<NavigatorState> _shellNavigatorNotificationKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorNotificationKey');
-final _shellNavigatorPostsKey =
+GlobalKey<NavigatorState> _shellNavigatorPostsKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorPostsKey');
-final _shellNavigatorProfileKey =
+GlobalKey<NavigatorState> _shellNavigatorProfileKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorProfileKey');
 
 @riverpod
@@ -43,7 +43,7 @@ GoRouter router(RouterRef ref) {
         if (authenticated == false) {
           return authenticating ? null : '/${InstaRouteNames.login}';
         }
-        return authenticating ? '/${InstaRouteNames.profile}' : null;
+        return authenticating ? '/${InstaRouteNames.home}' : null;
       }
       return null;
     },
@@ -138,9 +138,11 @@ StatefulShellBranch _post() {
         ),
       ),
       GoRoute(
-        path: '/${InstaRouteNames.writePost}',
-        name: InstaRouteNames.writePost,
-        builder: (context, state) => const WritePostPage(),
+        path: '/${InstaRouteNames.addPostPreview}',
+        name: InstaRouteNames.addPostPreview,
+        builder: (context, state) {
+          return const AddPostPreviewPage();
+        },
       ),
     ],
   );

@@ -6,12 +6,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class InstaDotsIndicator extends StatelessWidget {
   final PageController controller;
   final int count;
-  final double dotHeight;
+  final double dotSize;
   const InstaDotsIndicator({
     super.key,
     required this.controller,
-    required this.count,
-    this.dotHeight = InstaSpacing.small,
+    this.count = 0,
+    this.dotSize = InstaSpacing.extraSmall,
   });
 
   @override
@@ -20,8 +20,9 @@ class InstaDotsIndicator extends StatelessWidget {
       controller: controller,
       onDotClicked: (index) {},
       count: count,
-      effect: ExpandingDotsEffect(
-        dotHeight: dotHeight,
+      effect: ScrollingDotsEffect(
+        dotHeight: dotSize,
+        dotWidth: dotSize,
         activeDotColor: applyColor[InstaColor.secondary]!,
         dotColor: applyColor[InstaColor.disabled]!,
       ),

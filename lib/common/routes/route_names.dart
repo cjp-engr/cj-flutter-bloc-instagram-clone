@@ -1,4 +1,5 @@
 class InstaRouteNames {
+  static const String addPostPreview = 'add-post-preview';
   static const String addPost = 'add-post';
   static const String home = 'home';
   static const String login = 'login';
@@ -7,5 +8,4 @@ class InstaRouteNames {
   static const String register = 'register';
   static const String settings = 'settings';
   static const String userDetails = 'user';
-  static const String writePost = 'write_post';
 }

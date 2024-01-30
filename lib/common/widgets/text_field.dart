@@ -40,15 +40,15 @@ class InstaTextField extends StatelessWidget {
         labelStyle: TextStyle(fontSize: InstaFontSize.medium.value),
         enabledBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
-            Radius.circular(InstaBorderRadius.verySmall),
+            Radius.circular(InstaBorderRadius.small),
           ),
           borderSide: BorderSide(
-            color: applyColor[InstaColor.disabled]!,
+            color: applyColor[InstaColor.tertiary]!,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
-            Radius.circular(InstaBorderRadius.verySmall),
+            Radius.circular(InstaBorderRadius.small),
           ),
           borderSide: BorderSide(color: applyColor[InstaColor.disabled]!),
         ),
