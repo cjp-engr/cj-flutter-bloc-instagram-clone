@@ -10,8 +10,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/scroll_added_
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/provider/add_post_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/provider/add_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/select_dialog_widget.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/write_post/provider/post_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -62,7 +62,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
 
   void _addPostListener() {
     ref.listen<AsyncValue<void>>(
-      postProvider,
+      addImagesProvider,
       (prev, next) {
         next.whenOrNull(
           data: (data) {
@@ -152,10 +152,13 @@ class _PostButtonWidget extends ConsumerStatefulWidget {
 class _PostButtonWidgetState extends ConsumerState<_PostButtonWidget> {
   @override
   Widget build(BuildContext context) {
-    final postState = ref.watch(postProvider);
+    final postState = ref.watch(addImagesProvider);
     return postState.maybeWhen(
       orElse: () => InkWell(
-        onTap: _submit,
+        // onTap: _submit,
+        onTap: () {
+          ref.read(addImagesProvider.notifier).getImages();
+        },
         child: InstaText(
           text: 'Post',
           color: applyColor[InstaColor.secondary],
@@ -176,7 +179,7 @@ class _PostButtonWidgetState extends ConsumerState<_PostButtonWidget> {
       }
     }
 
-    ref.read(postProvider.notifier).addPost(
+    ref.read(addImagesProvider.notifier).addImages(
           ImageDetails(
             images: path,
             description: 'Hardcoded description only!!!',

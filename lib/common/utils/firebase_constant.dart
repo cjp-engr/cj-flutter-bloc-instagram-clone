@@ -6,3 +6,5 @@ final usersCollection = FirebaseFirestore.instance.collection('users');
 final fbAuth = FirebaseAuth.instance;
 final fbUserId = fbAuth.currentUser!.uid;
 final storageReference = FirebaseStorage.instance.ref();
+
+final imagesCollection = FirebaseFirestore.instance.collection('images');
