@@ -14,17 +14,8 @@ class AddImages extends _$AddImages {
 
   Future<void> addImages(ImageDetails details) async {
     state = const AsyncLoading<void>();
-
     state = await AsyncValue.guard<void>(
       () => ref.read(imageRepositoryProvider).addImagesSet(details),
-    );
-  }
-
-  Future<void> getImages() async {
-    state = const AsyncLoading<void>();
-
-    state = await AsyncValue.guard<void>(
-      () => ref.read(imageRepositoryProvider).getImagesUrl(),
     );
   }
 }

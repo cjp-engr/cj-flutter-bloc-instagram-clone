@@ -155,10 +155,7 @@ class _PostButtonWidgetState extends ConsumerState<_PostButtonWidget> {
     final postState = ref.watch(addImagesProvider);
     return postState.maybeWhen(
       orElse: () => InkWell(
-        // onTap: _submit,
-        onTap: () {
-          ref.read(addImagesProvider.notifier).getImages();
-        },
+        onTap: _submit,
         child: InstaText(
           text: 'Post',
           color: applyColor[InstaColor.secondary],
