@@ -37,27 +37,18 @@ class ImageRepository {
   FutureOr<List<ImageDetails>?> getImagesSet() async {
     List<ImageDetails> imageDetails = [];
     List<String> imageUrl = [];
-    String? userId;
-    int? likeCount;
-    String? description;
-    List<String> comments = [];
     try {
       QuerySnapshot images = await imagesCollection.get();
       for (var image in images.docs) {
         var data = image.data() as Map<String, dynamic>;
-        String folderName = data['folderName'];
-        userId = data['userId'];
-        likeCount = data['likeCount'];
-        description = data['description'];
-        comments = data['comments'];
-        imageUrl = (await _getImageUrls(folderName));
+        imageUrl = await _getImageUrls(data['folderName']);
         imageDetails.add(
           ImageDetails(
-            userId: userId,
+            userId: data['userId'],
             images: imageUrl,
-            likeCount: likeCount,
-            description: description,
-            comments: comments,
+            likeCount: data['likeCount'],
+            description: data['description'],
+            comments: _getComments(data['comments']),
           ),
         );
       }
@@ -68,6 +59,15 @@ class ImageRepository {
       firebaseHandleException(e);
     }
     return null;
+  }
+
+  List<String> _getComments(Iterable<dynamic> elements) {
+    List<String> comments = [];
+
+    for (var comment in List.from(elements)) {
+      comments.add(comment);
+    }
+    return comments;
   }
 
   FutureOr<List<String>> _getImageUrls(String folderName) async {

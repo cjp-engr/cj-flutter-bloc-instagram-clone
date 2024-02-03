@@ -8,15 +8,8 @@ class ContentImageWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final image = ref.watch(displayImagesProvider);
-
     return image.when(
       data: (data) {
-        String imageUrl = '';
-        if (data?.isNotEmpty ?? false) {
-          for (var element in data!) {
-            print(element);
-          }
-        }
         return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -25,11 +18,11 @@ class ContentImageWidget extends ConsumerWidget {
             crossAxisSpacing: 8.0,
             mainAxisSpacing: 8.0,
           ),
-          itemCount: image.value?.length ?? 0,
+          itemCount: data?.length ?? 0,
           itemBuilder: (context, index) {
             return Container(
               alignment: Alignment.center,
-              child: Text(imageUrl),
+              child: Image.network(data![index].images![0]),
             );
           },
         );
