@@ -1,5 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/add_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
@@ -10,7 +11,6 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/scroll_added_
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/provider/add_post_provider.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/provider/add_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/select_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

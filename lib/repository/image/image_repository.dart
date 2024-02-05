@@ -13,6 +13,7 @@ final fbUserId = fbAuth.currentUser!.uid;
 final imagesCollection = FirebaseFirestore.instance.collection('images');
 
 class ImageRepository {
+  //! START - Add operation
   Future<void> addImagesSet(ImageDetails d) async {
     String folderName = 'uploads/images_${randomName()}';
     try {
@@ -34,6 +35,22 @@ class ImageRepository {
     }
   }
 
+  Future<void> _uploadImage(String path, String folderName) async {
+    File image = File(path);
+    int dotIndex = path.lastIndexOf('.');
+    String fileName = '${randomName()}${path.substring(dotIndex, path.length)}';
+
+    try {
+      Reference storageRef = storageReference.child('$folderName/$fileName');
+      await storageRef.putFile(image);
+    } on FirebaseException catch (e) {
+      firebaseHandleException(e);
+    }
+  }
+
+  //! END - Add operation
+
+  //! START - Read operation
   FutureOr<List<ImageDetails>?> getImagesSet() async {
     List<ImageDetails> imageDetails = [];
     List<String> imageUrl = [];
@@ -85,16 +102,5 @@ class ImageRepository {
     return [IconRes.testOnly];
   }
 
-  Future<void> _uploadImage(String path, String folderName) async {
-    File image = File(path);
-    int dotIndex = path.lastIndexOf('.');
-    String fileName = '${randomName()}${path.substring(dotIndex, path.length)}';
-
-    try {
-      Reference storageRef = storageReference.child('$folderName/$fileName');
-      await storageRef.putFile(image);
-    } on FirebaseException catch (e) {
-      firebaseHandleException(e);
-    }
-  }
+  //! END - Read operation
 }

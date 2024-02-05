@@ -25,6 +25,7 @@ class IconRes {
   static const String saved = '$_iconBase/saved.png';
   static const String savedFilled = '$_iconBase/saved-filled.png';
   static const String settings = '$_iconBase/settings.png';
+  static const String stack = '$_iconBase/stack.png';
   static const String userTagged = '$_iconBase/user-tagged.png';
   static const String video = '$_iconBase/video.png';
   static const String writeMessage = '$_iconBase/write-message.png';

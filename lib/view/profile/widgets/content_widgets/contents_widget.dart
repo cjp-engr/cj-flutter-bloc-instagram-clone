@@ -1,8 +1,8 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/profile/provider/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/content_widgets/content_image_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/content_widgets/content_saved_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/content_widgets/content_tagged_widget.dart';

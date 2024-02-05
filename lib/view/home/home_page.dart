@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
             children: [
               HighlightWidget(),
               SizedBox(height: InstaSpacing.medium),
-              PostWidget(),
+              PostedMediaWidget(),
               SizedBox(height: InstaSpacing.medium),
               LikeAndCommentWidget(),
             ],

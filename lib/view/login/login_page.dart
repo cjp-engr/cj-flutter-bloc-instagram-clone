@@ -1,6 +1,7 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/auth/auth_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
@@ -8,7 +9,6 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart'
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/login/provider/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -91,7 +91,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       );
 
   Widget _buildLogin() {
-    final loginState = ref.watch(loginProvider);
+    final loginState = ref.watch(authProvider);
     return PrimaryButton(
       color: InstaColor.secondary,
       width: double.infinity,
@@ -108,7 +108,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     if (form == null || !form.validate()) return;
 
-    ref.read(loginProvider.notifier).signin(
+    ref.read(authProvider.notifier).signin(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
@@ -132,7 +132,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   void _loginListener() {
     ref.listen<AsyncValue<void>>(
-      loginProvider,
+      authProvider,
       (prev, next) {
         next.whenOrNull(
           error: (e, st) {

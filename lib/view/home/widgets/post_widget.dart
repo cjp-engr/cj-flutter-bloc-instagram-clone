@@ -9,23 +9,28 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class PostWidget extends StatelessWidget {
-  const PostWidget({super.key});
+class PostedMediaWidget extends StatelessWidget {
+  const PostedMediaWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        _buildUserDetails(context),
-        const SizedBox(height: InstaSpacing.extraSmall),
-        _buildContent(),
-        const SizedBox(height: InstaSpacing.extraSmall),
-        _buildIcons(),
+        _UserDetailsWidget(),
+        SizedBox(height: InstaSpacing.extraSmall),
+        _ContentMediaWidget(),
+        SizedBox(height: InstaSpacing.extraSmall),
+        _IconsWidget(),
       ],
     );
   }
+}
 
-  Widget _buildUserDetails(BuildContext context) {
+class _UserDetailsWidget extends StatelessWidget {
+  const _UserDetailsWidget();
+
+  @override
+  Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         context.goNamed(
@@ -53,8 +58,13 @@ class PostWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildContent() {
+class _ContentMediaWidget extends StatelessWidget {
+  const _ContentMediaWidget();
+
+  @override
+  Widget build(BuildContext context) {
     return Image.network(
       IconRes.testOnly,
       width: double.infinity,
@@ -62,8 +72,13 @@ class PostWidget extends StatelessWidget {
       fit: BoxFit.fill,
     );
   }
+}
 
-  Widget _buildIcons() {
+class _IconsWidget extends StatelessWidget {
+  const _IconsWidget();
+
+  @override
+  Widget build(BuildContext context) {
     return const Row(
       children: [
         SecondaryButton(

@@ -1,6 +1,7 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/auth/auth_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
@@ -9,7 +10,6 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/register/provider/register_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -159,7 +159,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
     if (form == null || !form.validate()) return;
 
-    ref.read(registerProvider.notifier).signUp(
+    ref.read(authProvider.notifier).signUp(
           user: UserItem(
             email: _emailController.text.trim(),
             password: _passwordController.text.trim(),
@@ -173,7 +173,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
   void _registerListener() {
     ref.listen<AsyncValue<void>>(
-      registerProvider,
+      authProvider,
       (prev, next) {
         next.whenOrNull(
           error: (e, st) {
