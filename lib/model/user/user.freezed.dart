@@ -208,9 +208,8 @@ mixin _$UserDetails {
   String? get fullName => throw _privateConstructorUsedError;
   String? get userName => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  String? get postCount => throw _privateConstructorUsedError;
-  String? get followerCount => throw _privateConstructorUsedError;
-  String? get followingCount => throw _privateConstructorUsedError;
+  List<String>? get followers => throw _privateConstructorUsedError;
+  List<String>? get followings => throw _privateConstructorUsedError;
   List<ImageDetails>? get images => throw _privateConstructorUsedError;
   List<VideoDetails>? get videos => throw _privateConstructorUsedError;
   List<HighlightItem>? get highlights => throw _privateConstructorUsedError;
@@ -231,9 +230,8 @@ abstract class $UserDetailsCopyWith<$Res> {
       {String? fullName,
       String? userName,
       String? description,
-      String? postCount,
-      String? followerCount,
-      String? followingCount,
+      List<String>? followers,
+      List<String>? followings,
       List<ImageDetails>? images,
       List<VideoDetails>? videos,
       List<HighlightItem>? highlights});
@@ -255,9 +253,8 @@ class _$UserDetailsCopyWithImpl<$Res, $Val extends UserDetails>
     Object? fullName = freezed,
     Object? userName = freezed,
     Object? description = freezed,
-    Object? postCount = freezed,
-    Object? followerCount = freezed,
-    Object? followingCount = freezed,
+    Object? followers = freezed,
+    Object? followings = freezed,
     Object? images = freezed,
     Object? videos = freezed,
     Object? highlights = freezed,
@@ -275,18 +272,14 @@ class _$UserDetailsCopyWithImpl<$Res, $Val extends UserDetails>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      postCount: freezed == postCount
-          ? _value.postCount
-          : postCount // ignore: cast_nullable_to_non_nullable
-              as String?,
-      followerCount: freezed == followerCount
-          ? _value.followerCount
-          : followerCount // ignore: cast_nullable_to_non_nullable
-              as String?,
-      followingCount: freezed == followingCount
-          ? _value.followingCount
-          : followingCount // ignore: cast_nullable_to_non_nullable
-              as String?,
+      followers: freezed == followers
+          ? _value.followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      followings: freezed == followings
+          ? _value.followings
+          : followings // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       images: freezed == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
@@ -315,9 +308,8 @@ abstract class _$$UserDetailsImplCopyWith<$Res>
       {String? fullName,
       String? userName,
       String? description,
-      String? postCount,
-      String? followerCount,
-      String? followingCount,
+      List<String>? followers,
+      List<String>? followings,
       List<ImageDetails>? images,
       List<VideoDetails>? videos,
       List<HighlightItem>? highlights});
@@ -337,9 +329,8 @@ class __$$UserDetailsImplCopyWithImpl<$Res>
     Object? fullName = freezed,
     Object? userName = freezed,
     Object? description = freezed,
-    Object? postCount = freezed,
-    Object? followerCount = freezed,
-    Object? followingCount = freezed,
+    Object? followers = freezed,
+    Object? followings = freezed,
     Object? images = freezed,
     Object? videos = freezed,
     Object? highlights = freezed,
@@ -357,18 +348,14 @@ class __$$UserDetailsImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      postCount: freezed == postCount
-          ? _value.postCount
-          : postCount // ignore: cast_nullable_to_non_nullable
-              as String?,
-      followerCount: freezed == followerCount
-          ? _value.followerCount
-          : followerCount // ignore: cast_nullable_to_non_nullable
-              as String?,
-      followingCount: freezed == followingCount
-          ? _value.followingCount
-          : followingCount // ignore: cast_nullable_to_non_nullable
-              as String?,
+      followers: freezed == followers
+          ? _value._followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      followings: freezed == followings
+          ? _value._followings
+          : followings // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       images: freezed == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
@@ -392,13 +379,14 @@ class _$UserDetailsImpl implements _UserDetails {
       {this.fullName = '',
       this.userName = '',
       this.description = '',
-      this.postCount = '',
-      this.followerCount = '',
-      this.followingCount = '',
+      final List<String>? followers = const [],
+      final List<String>? followings = const [],
       final List<ImageDetails>? images = const [],
       final List<VideoDetails>? videos = const [],
       final List<HighlightItem>? highlights = const []})
-      : _images = images,
+      : _followers = followers,
+        _followings = followings,
+        _images = images,
         _videos = videos,
         _highlights = highlights;
 
@@ -414,15 +402,28 @@ class _$UserDetailsImpl implements _UserDetails {
   @override
   @JsonKey()
   final String? description;
+  final List<String>? _followers;
   @override
   @JsonKey()
-  final String? postCount;
+  List<String>? get followers {
+    final value = _followers;
+    if (value == null) return null;
+    if (_followers is EqualUnmodifiableListView) return _followers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<String>? _followings;
   @override
   @JsonKey()
-  final String? followerCount;
-  @override
-  @JsonKey()
-  final String? followingCount;
+  List<String>? get followings {
+    final value = _followings;
+    if (value == null) return null;
+    if (_followings is EqualUnmodifiableListView) return _followings;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final List<ImageDetails>? _images;
   @override
   @JsonKey()
@@ -458,7 +459,7 @@ class _$UserDetailsImpl implements _UserDetails {
 
   @override
   String toString() {
-    return 'UserDetails(fullName: $fullName, userName: $userName, description: $description, postCount: $postCount, followerCount: $followerCount, followingCount: $followingCount, images: $images, videos: $videos, highlights: $highlights)';
+    return 'UserDetails(fullName: $fullName, userName: $userName, description: $description, followers: $followers, followings: $followings, images: $images, videos: $videos, highlights: $highlights)';
   }
 
   @override
@@ -472,12 +473,10 @@ class _$UserDetailsImpl implements _UserDetails {
                 other.userName == userName) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.postCount, postCount) ||
-                other.postCount == postCount) &&
-            (identical(other.followerCount, followerCount) ||
-                other.followerCount == followerCount) &&
-            (identical(other.followingCount, followingCount) ||
-                other.followingCount == followingCount) &&
+            const DeepCollectionEquality()
+                .equals(other._followers, _followers) &&
+            const DeepCollectionEquality()
+                .equals(other._followings, _followings) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality().equals(other._videos, _videos) &&
             const DeepCollectionEquality()
@@ -491,9 +490,8 @@ class _$UserDetailsImpl implements _UserDetails {
       fullName,
       userName,
       description,
-      postCount,
-      followerCount,
-      followingCount,
+      const DeepCollectionEquality().hash(_followers),
+      const DeepCollectionEquality().hash(_followings),
       const DeepCollectionEquality().hash(_images),
       const DeepCollectionEquality().hash(_videos),
       const DeepCollectionEquality().hash(_highlights));
@@ -517,9 +515,8 @@ abstract class _UserDetails implements UserDetails {
       {final String? fullName,
       final String? userName,
       final String? description,
-      final String? postCount,
-      final String? followerCount,
-      final String? followingCount,
+      final List<String>? followers,
+      final List<String>? followings,
       final List<ImageDetails>? images,
       final List<VideoDetails>? videos,
       final List<HighlightItem>? highlights}) = _$UserDetailsImpl;
@@ -534,11 +531,9 @@ abstract class _UserDetails implements UserDetails {
   @override
   String? get description;
   @override
-  String? get postCount;
+  List<String>? get followers;
   @override
-  String? get followerCount;
-  @override
-  String? get followingCount;
+  List<String>? get followings;
   @override
   List<ImageDetails>? get images;
   @override

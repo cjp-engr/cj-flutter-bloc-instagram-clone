@@ -9,8 +9,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ScrollDisplayAddedMediaWidget extends ConsumerWidget {
-  const ScrollDisplayAddedMediaWidget({super.key});
+class AddedMediaWebWidget extends ConsumerWidget {
+  const AddedMediaWebWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

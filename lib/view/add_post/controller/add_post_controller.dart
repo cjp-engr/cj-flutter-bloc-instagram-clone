@@ -11,6 +11,7 @@ class AddPostController {
 
   final ImagePicker _picker = ImagePicker();
 
+  //! START - For mobile and web when picking images from gallery and file
   Future<void> pickImages() async {
     final updateState = ref.read(addPostProvider.notifier);
     try {
@@ -21,7 +22,9 @@ class AddPostController {
       updateState.pickErrorMessage(e.toString());
     }
   }
+  //! END - For mobile and web when picking images from gallery and file
 
+  //! START - For mobile when picking a video from gallery
   Future<void> pickVideo() async {
     List<XFile> video = [];
     final updateState = ref.read(addPostProvider.notifier);
@@ -35,28 +38,7 @@ class AddPostController {
       updateState.pickErrorMessage(e.toString());
     }
   }
-
-  Future<void> droppedImages(
-    dynamic event,
-    DropzoneViewController dropZoneController,
-  ) async {
-    final updateState = ref.read(addPostProvider.notifier);
-
-    final name = event.name;
-    final mime = await dropZoneController.getFileMIME(event);
-    final bytes = await dropZoneController.getFileSize(event);
-    final url = await dropZoneController.createFileUrl(event);
-
-    final droppedImage = DroppedFile(
-      url: url,
-      name: name,
-      mime: mime,
-      bytes: bytes,
-    );
-
-    updateState.pickDroppedImages(
-        [...ref.watch(addPostProvider).droppedImages ?? [], droppedImage]);
-  }
+  //! END - For mobile when picking a video from gallery
 
   void removeMedia(int index) {
     final updateState = ref.read(addPostProvider.notifier);
@@ -82,4 +64,29 @@ class AddPostController {
           .pickPreviewImage(state.mediaFileList![newIndex], newIndex);
     }
   }
+
+  //! START - For web when dropping images
+  Future<void> droppedImages(
+    dynamic event,
+    DropzoneViewController dropZoneController,
+  ) async {
+    final updateState = ref.read(addPostProvider.notifier);
+
+    final name = event.name;
+    final mime = await dropZoneController.getFileMIME(event);
+    final bytes = await dropZoneController.getFileSize(event);
+    final url = await dropZoneController.createFileUrl(event);
+
+    final droppedImage = DroppedFile(
+      url: url,
+      name: name,
+      mime: mime,
+      bytes: bytes,
+    );
+
+    updateState.pickDroppedImages(
+        [...ref.watch(addPostProvider).droppedImages ?? [], droppedImage]);
+  }
+
+  //! END - For web when dropping images
 }

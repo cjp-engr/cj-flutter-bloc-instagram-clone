@@ -7,9 +7,9 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/scroll_added_media.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/widgets/added_media_mobile_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/provider/add_post_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/select_dialog_widget.dart';
 import 'package:flutter/material.dart';
@@ -38,21 +38,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
           Container(
             padding: const EdgeInsets.all(InstaSpacing.small),
             child: state.mediaFileList?.isNotEmpty ?? false
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const ScrollDisplayAddedMediaWidget(),
-                      const SizedBox(height: InstaSpacing.extraLarge),
-                      GestureDetector(
-                        onTap: () {},
-                        child: InstaText(
-                          text: 'Write something...',
-                          color: applyColor[InstaColor.disabled],
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ],
-                  )
+                ? const _ImagesPickedWidget()
                 : const _NoImageWidget(),
           ),
         ],
@@ -78,6 +64,29 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
           },
         );
       },
+    );
+  }
+}
+
+class _ImagesPickedWidget extends StatelessWidget {
+  const _ImagesPickedWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const AddedMediaMobileWidget(),
+        const SizedBox(height: InstaSpacing.extraLarge),
+        GestureDetector(
+          onTap: () {},
+          child: InstaText(
+            text: 'Write something...',
+            color: applyColor[InstaColor.disabled],
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -25,9 +25,14 @@ _$UserDetailsImpl _$$UserDetailsImplFromJson(Map<String, dynamic> json) =>
       fullName: json['fullName'] as String? ?? '',
       userName: json['userName'] as String? ?? '',
       description: json['description'] as String? ?? '',
-      postCount: json['postCount'] as String? ?? '',
-      followerCount: json['followerCount'] as String? ?? '',
-      followingCount: json['followingCount'] as String? ?? '',
+      followers: (json['followers'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      followings: (json['followings'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => ImageDetails.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -47,9 +52,8 @@ Map<String, dynamic> _$$UserDetailsImplToJson(_$UserDetailsImpl instance) =>
       'fullName': instance.fullName,
       'userName': instance.userName,
       'description': instance.description,
-      'postCount': instance.postCount,
-      'followerCount': instance.followerCount,
-      'followingCount': instance.followingCount,
+      'followers': instance.followers,
+      'followings': instance.followings,
       'images': instance.images,
       'videos': instance.videos,
       'highlights': instance.highlights,

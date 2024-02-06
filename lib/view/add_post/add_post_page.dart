@@ -14,6 +14,5 @@ class AddPostPage extends StatelessWidget {
     return kIsWeb && (!isAndroid || !isIos)
         ? const AddPostWebPage()
         : const AddPostMobilePage();
-    // return const MyHomePage();
   }
 }
