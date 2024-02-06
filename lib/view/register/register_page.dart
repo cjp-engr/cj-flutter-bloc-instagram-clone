@@ -4,6 +4,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart'
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/auth/auth_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
@@ -61,8 +62,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
               reverse: true,
               children: [
                 const SizedBox(height: InstaSpacing.small),
-                _buildAppName(),
-                const SizedBox(height: InstaSpacing.extraLarge),
+                _buildHeader(),
+                const SizedBox(height: InstaSpacing.veryLarge),
                 _buildSubHeader(),
                 const SizedBox(height: InstaSpacing.extraLarge),
                 _buildRegisterIdentifier(),
@@ -88,10 +89,19 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
     );
   }
 
-  Widget _buildAppName() => const InstaText(
-        text: 'Instaclone',
-        fontSize: InstaFontSize.extraLarge,
-        fontWeight: FontWeight.bold,
+  Widget _buildHeader() => Column(
+        children: [
+          Image.asset(
+            IconRes.instagram,
+            scale: 1,
+            color: applyColor[InstaColor.tertiary],
+          ),
+          const InstaText(
+            text: 'Instaclone',
+            fontSize: InstaFontSize.extraLarge,
+            fontWeight: FontWeight.bold,
+          ),
+        ],
       );
 
   Widget _buildSubHeader() => InstaText(

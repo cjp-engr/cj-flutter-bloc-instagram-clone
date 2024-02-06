@@ -4,6 +4,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart'
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/auth/auth_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
@@ -57,7 +58,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               children: [
                 const SizedBox(height: InstaSpacing.small),
                 _buildHeader(),
-                const SizedBox(height: InstaSpacing.extraLarge * 2),
+                const SizedBox(height: InstaSpacing.extraLarge),
                 _buildLoginIdentifiers(),
                 const SizedBox(height: InstaSpacing.small),
                 _buildPassword(),
@@ -73,10 +74,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     );
   }
 
-  Widget _buildHeader() => const InstaText(
-        text: 'Instaclone',
-        fontSize: InstaFontSize.extraLarge,
-        fontWeight: FontWeight.bold,
+  Widget _buildHeader() => Column(
+        children: [
+          Image.asset(
+            IconRes.instagram,
+            scale: 1,
+            color: applyColor[InstaColor.tertiary],
+          ),
+          const InstaText(
+            text: 'Instaclone',
+            fontSize: InstaFontSize.extraLarge,
+            fontWeight: FontWeight.bold,
+          ),
+        ],
       );
 
   Widget _buildLoginIdentifiers() => InstaTextField(

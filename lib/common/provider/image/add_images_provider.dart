@@ -17,5 +17,9 @@ class AddImages extends _$AddImages {
     state = await AsyncValue.guard<void>(
       () => ref.read(imageRepositoryProvider).addImagesSet(details),
     );
+
+    state = await AsyncValue.guard(() async {
+      await ref.read(imageRepositoryProvider).addImagesSet(details);
+    });
   }
 }

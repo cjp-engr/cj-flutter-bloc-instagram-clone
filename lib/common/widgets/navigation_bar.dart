@@ -8,6 +8,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avat
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class InstaNavigationBar extends StatelessWidget {
@@ -40,7 +41,7 @@ class InstaNavigationBar extends StatelessWidget {
           config: <Breakpoint, SlotLayoutConfig>{
             Breakpoints.small: SlotLayout.from(
               key: const Key('smallBottomNavigation'),
-              builder: (_) => _buildBottomNavigation(context),
+              builder: (_) => _CustomBottomNavigation(navigationShell),
             ),
           },
         ),
@@ -48,17 +49,23 @@ class InstaNavigationBar extends StatelessWidget {
           config: <Breakpoint, SlotLayoutConfig>{
             Breakpoints.mediumAndUp: SlotLayout.from(
               key: const Key('mediumAndUpNavigationRail'),
-              builder: (_) => _buildNavigationRail(context),
+              builder: (_) => _CustomNavigationRail(navigationShell),
             ),
           },
         ));
   }
+}
 
-  Widget _buildBottomNavigation(BuildContext context) {
+class _CustomBottomNavigation extends ConsumerWidget {
+  final StatefulNavigationShell? navigationShell;
+  const _CustomBottomNavigation(this.navigationShell);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: navigationShell!.currentIndex,
-      onTap: (index) => _onDestinationSelected(index),
+      onTap: (index) => _onDestinationSelected(index, ref),
       selectedItemColor: applyColor[InstaColor.alert],
       unselectedItemColor: applyColor[InstaColor.disabled],
       items: _bottomNavigationList(context),
@@ -68,7 +75,39 @@ class InstaNavigationBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavigationRail(BuildContext context) {
+  List<BottomNavigationBarItem> _bottomNavigationList(BuildContext context) {
+    return [
+      BottomNavigationBarItem(icon: _icon(IconRes.home), label: ''),
+      BottomNavigationBarItem(icon: _icon(IconRes.notification), label: ''),
+      BottomNavigationBarItem(icon: _icon(IconRes.newPost), label: ''),
+      BottomNavigationBarItem(icon: _profileIcon(context), label: ''),
+    ];
+  }
+
+  Widget _icon(String assetName) => Image.asset(assetName,
+      color: applyColor[InstaColor.tertiary], scale: 2.3);
+
+  Widget _profileIcon(BuildContext context) {
+    return const InstaCircleAvatar(
+      image: IconRes.testOnly,
+      radius: InstaCircleAvatarSize.small,
+    );
+  }
+
+  void _onDestinationSelected(int index, WidgetRef ref) {
+    navigationShell!.goBranch(
+      index,
+      initialLocation: index == navigationShell!.currentIndex,
+    );
+  }
+}
+
+class _CustomNavigationRail extends ConsumerWidget {
+  final StatefulNavigationShell? navigationShell;
+  const _CustomNavigationRail(this.navigationShell);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     return IntrinsicWidth(
       child: Row(
         children: [
@@ -83,15 +122,7 @@ class InstaNavigationBar extends StatelessWidget {
                   top: InstaSpacing.large, bottom: InstaSpacing.veryLarge * 2),
               child: _instacloneIcon(context),
             ),
-            trailing: Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: InstaSpacing.large),
-                  child: _profileIcon(context),
-                ),
-              ),
-            ),
+            trailing: _profileIcon(context, ref),
           ),
         ],
       ),
@@ -127,19 +158,18 @@ class InstaNavigationBar extends StatelessWidget {
     ];
   }
 
-  List<BottomNavigationBarItem> _bottomNavigationList(BuildContext context) {
-    return [
-      BottomNavigationBarItem(icon: _icon(IconRes.home), label: ''),
-      BottomNavigationBarItem(icon: _icon(IconRes.notification), label: ''),
-      BottomNavigationBarItem(icon: _icon(IconRes.newPost), label: ''),
-      BottomNavigationBarItem(icon: _profileIcon(context), label: ''),
-    ];
-  }
-
-  Widget _profileIcon(BuildContext context) {
-    return const InstaCircleAvatar(
-      image: IconRes.testOnly,
-      radius: InstaCircleAvatarSize.small,
+  Widget _profileIcon(BuildContext context, WidgetRef ref) {
+    return const Expanded(
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Padding(
+          padding: EdgeInsets.only(bottom: InstaSpacing.large),
+          child: InstaCircleAvatar(
+            image: IconRes.testOnly,
+            radius: InstaCircleAvatarSize.small,
+          ),
+        ),
+      ),
     );
   }
 

@@ -18,6 +18,13 @@ class ContentsWidget extends ConsumerStatefulWidget {
 }
 
 class _ContentsWidgetState extends ConsumerState<ContentsWidget> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => ref.read(displayImagesProvider.notifier).getImages());
+  }
+
   int _selectedTabBar = 0;
   @override
   Widget build(BuildContext context) {
@@ -40,9 +47,6 @@ class _ContentsWidgetState extends ConsumerState<ContentsWidget> {
       onTap: (index) => setState(
         () {
           _selectedTabBar = index;
-          if (_selectedTabBar == 0) {
-            ref.read(displayImagesProvider.notifier).getImages();
-          }
         },
       ),
       indicator: BoxDecoration(
