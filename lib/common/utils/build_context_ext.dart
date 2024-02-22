@@ -1,6 +1,7 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 extension BuildContextExtension on BuildContext {
   double get screenHeight => MediaQuery.of(this).size.height;
@@ -10,4 +11,6 @@ extension BuildContextExtension on BuildContext {
       : Breakpoints.medium.isActive(this)
           ? screenWidth * 0.12
           : screenWidth * 0.3;
+
+  AppLocalizations get appLocalization => AppLocalizations.of(this)!;
 }
