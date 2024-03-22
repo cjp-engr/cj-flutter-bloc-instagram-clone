@@ -13,6 +13,8 @@
     "userNameOrEmail": "Username or email",
     "dontHaveAnAccount": "Don''t have an account?",
 
+    "description": "Description",
+
     "posts": "Posts",
     "followers":"Followers",
     "following":"Following",

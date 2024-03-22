@@ -175,9 +175,7 @@ class _CustomNavigationRail extends ConsumerWidget {
 
   Widget _instacloneIcon(BuildContext context) {
     return InkWell(
-      onTap: () {
-        context.goNamed(InstaRouteNames.home);
-      },
+      onTap: () => context.goNamed(InstaRouteNames.home),
       child: _icon(IconRes.instagram),
     );
   }

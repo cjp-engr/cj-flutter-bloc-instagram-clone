@@ -1,6 +1,7 @@
 class InstaRouteNames {
   static const String addPostPreview = 'add-post-preview';
   static const String addPost = 'add-post';
+  static const String editProfile = 'edit-profile';
   static const String home = 'home';
   static const String login = 'login';
   static const String notification = 'notification';

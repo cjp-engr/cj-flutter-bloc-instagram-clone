@@ -8,6 +8,7 @@ class InstaTextField extends StatelessWidget {
   final String label;
   final bool obscureText;
   final int maxLines;
+  final String initialValue;
   final TextEditingController? controller;
   final Widget? prefixIcon;
   final Function(String)? onSubmitted;
@@ -16,6 +17,7 @@ class InstaTextField extends StatelessWidget {
     required this.label,
     this.obscureText = false,
     this.maxLines = 1,
+    this.initialValue = '',
     this.controller,
     this.prefixIcon,
     this.onSubmitted,
@@ -23,10 +25,10 @@ class InstaTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
-      onSubmitted: onSubmitted,
       maxLines: maxLines,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -37,6 +39,7 @@ class InstaTextField extends StatelessWidget {
         ),
         prefixIcon: prefixIcon,
         labelText: label,
+        alignLabelWithHint: true,
         labelStyle: TextStyle(fontSize: InstaFontSize.medium.value),
         enabledBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(

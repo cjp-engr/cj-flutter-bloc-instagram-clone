@@ -20,17 +20,20 @@ class SettingsPage extends ConsumerWidget {
         fontSize: InstaFontSize.large,
         fontWeight: FontWeight.bold,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            PrimaryButton(
-              color: InstaColor.primary,
-              text: 'Log out',
-              onPressed: () async {
-                ref.read(authProvider.notifier).signout();
-              },
-            ),
-          ],
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Center(
+          child: Column(
+            children: [
+              PrimaryButton(
+                color: InstaColor.primary,
+                text: 'Log out',
+                onPressed: () async {
+                  ref.read(authProvider.notifier).signout();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

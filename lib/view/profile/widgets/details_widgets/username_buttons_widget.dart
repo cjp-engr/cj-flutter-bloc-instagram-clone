@@ -1,26 +1,29 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/user_details_action_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class UserNameAndButtonsWidget extends StatefulWidget {
+class UserNameAndButtonsWidget extends ConsumerStatefulWidget {
   final String? id;
   const UserNameAndButtonsWidget({super.key, this.id});
 
   @override
-  State<UserNameAndButtonsWidget> createState() =>
+  ConsumerState<UserNameAndButtonsWidget> createState() =>
       _UserNameAndButtonsWidgetState();
 }
 
-class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
+class _UserNameAndButtonsWidgetState
+    extends ConsumerState<UserNameAndButtonsWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -45,24 +48,33 @@ class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
   }
 
   Widget _buildUserNameAndButton(bool hasId) {
-    return Wrap(
-      spacing: 8.0,
-      runSpacing: 4.0,
-      children: [
-        const InstaText(
-          text: 'user_name',
-          fontWeight: FontWeight.bold,
-          fontSize: InstaFontSize.veryLarge,
-        ),
-        hasId
-            ? const SecondaryButton(
-                assetName: IconRes.ellipsis,
-              )
-            : SecondaryButton(
-                assetName: IconRes.settings,
-                onPressed: () => context.goNamed(InstaRouteNames.settings),
-              )
-      ],
+    final user = ref.watch(userDetailsActionProvider);
+    return user.when(
+      data: (data) {
+        return Wrap(
+          spacing: 8.0,
+          runSpacing: 4.0,
+          children: [
+            InstaText(
+              text: data?.userName ?? 'Walang username',
+              fontWeight: FontWeight.bold,
+              fontSize: InstaFontSize.veryLarge,
+            ),
+            hasId
+                ? const SecondaryButton(
+                    assetName: IconRes.ellipsis,
+                  )
+                : SecondaryButton(
+                    assetName: IconRes.settings,
+                    onPressed: () => context.goNamed(InstaRouteNames.settings),
+                  )
+          ],
+        );
+      },
+      error: (error, stackTrace) {
+        return const Text('there is an error');
+      },
+      loading: () => const CircularProgressIndicator(),
     );
   }
 
@@ -76,7 +88,7 @@ class _UserNameAndButtonsWidgetState extends State<UserNameAndButtonsWidget> {
           text: hasId
               ? AppLocalizations.of(context)!.following
               : AppLocalizations.of(context)!.editProfile,
-          onPressed: () {},
+          onPressed: () => context.goNamed(InstaRouteNames.editProfile),
         ),
         hasId
             ? const SizedBox()

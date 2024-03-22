@@ -205,14 +205,12 @@ UserDetails _$UserDetailsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserDetails {
+  String? get email => throw _privateConstructorUsedError;
   String? get fullName => throw _privateConstructorUsedError;
   String? get userName => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   List<String>? get followers => throw _privateConstructorUsedError;
   List<String>? get followings => throw _privateConstructorUsedError;
-  List<ImageDetails>? get images => throw _privateConstructorUsedError;
-  List<VideoDetails>? get videos => throw _privateConstructorUsedError;
-  List<HighlightItem>? get highlights => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -227,14 +225,12 @@ abstract class $UserDetailsCopyWith<$Res> {
       _$UserDetailsCopyWithImpl<$Res, UserDetails>;
   @useResult
   $Res call(
-      {String? fullName,
+      {String? email,
+      String? fullName,
       String? userName,
       String? description,
       List<String>? followers,
-      List<String>? followings,
-      List<ImageDetails>? images,
-      List<VideoDetails>? videos,
-      List<HighlightItem>? highlights});
+      List<String>? followings});
 }
 
 /// @nodoc
@@ -250,16 +246,18 @@ class _$UserDetailsCopyWithImpl<$Res, $Val extends UserDetails>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? email = freezed,
     Object? fullName = freezed,
     Object? userName = freezed,
     Object? description = freezed,
     Object? followers = freezed,
     Object? followings = freezed,
-    Object? images = freezed,
-    Object? videos = freezed,
-    Object? highlights = freezed,
   }) {
     return _then(_value.copyWith(
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
       fullName: freezed == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
@@ -280,18 +278,6 @@ class _$UserDetailsCopyWithImpl<$Res, $Val extends UserDetails>
           ? _value.followings
           : followings // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      images: freezed == images
-          ? _value.images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<ImageDetails>?,
-      videos: freezed == videos
-          ? _value.videos
-          : videos // ignore: cast_nullable_to_non_nullable
-              as List<VideoDetails>?,
-      highlights: freezed == highlights
-          ? _value.highlights
-          : highlights // ignore: cast_nullable_to_non_nullable
-              as List<HighlightItem>?,
     ) as $Val);
   }
 }
@@ -305,14 +291,12 @@ abstract class _$$UserDetailsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? fullName,
+      {String? email,
+      String? fullName,
       String? userName,
       String? description,
       List<String>? followers,
-      List<String>? followings,
-      List<ImageDetails>? images,
-      List<VideoDetails>? videos,
-      List<HighlightItem>? highlights});
+      List<String>? followings});
 }
 
 /// @nodoc
@@ -326,16 +310,18 @@ class __$$UserDetailsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? email = freezed,
     Object? fullName = freezed,
     Object? userName = freezed,
     Object? description = freezed,
     Object? followers = freezed,
     Object? followings = freezed,
-    Object? images = freezed,
-    Object? videos = freezed,
-    Object? highlights = freezed,
   }) {
     return _then(_$UserDetailsImpl(
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
       fullName: freezed == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
@@ -356,18 +342,6 @@ class __$$UserDetailsImplCopyWithImpl<$Res>
           ? _value._followings
           : followings // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      images: freezed == images
-          ? _value._images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<ImageDetails>?,
-      videos: freezed == videos
-          ? _value._videos
-          : videos // ignore: cast_nullable_to_non_nullable
-              as List<VideoDetails>?,
-      highlights: freezed == highlights
-          ? _value._highlights
-          : highlights // ignore: cast_nullable_to_non_nullable
-              as List<HighlightItem>?,
     ));
   }
 }
@@ -376,23 +350,21 @@ class __$$UserDetailsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserDetailsImpl implements _UserDetails {
   const _$UserDetailsImpl(
-      {this.fullName = '',
+      {this.email = '',
+      this.fullName = '',
       this.userName = '',
       this.description = '',
       final List<String>? followers = const [],
-      final List<String>? followings = const [],
-      final List<ImageDetails>? images = const [],
-      final List<VideoDetails>? videos = const [],
-      final List<HighlightItem>? highlights = const []})
+      final List<String>? followings = const []})
       : _followers = followers,
-        _followings = followings,
-        _images = images,
-        _videos = videos,
-        _highlights = highlights;
+        _followings = followings;
 
   factory _$UserDetailsImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDetailsImplFromJson(json);
 
+  @override
+  @JsonKey()
+  final String? email;
   @override
   @JsonKey()
   final String? fullName;
@@ -424,42 +396,9 @@ class _$UserDetailsImpl implements _UserDetails {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<ImageDetails>? _images;
-  @override
-  @JsonKey()
-  List<ImageDetails>? get images {
-    final value = _images;
-    if (value == null) return null;
-    if (_images is EqualUnmodifiableListView) return _images;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<VideoDetails>? _videos;
-  @override
-  @JsonKey()
-  List<VideoDetails>? get videos {
-    final value = _videos;
-    if (value == null) return null;
-    if (_videos is EqualUnmodifiableListView) return _videos;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<HighlightItem>? _highlights;
-  @override
-  @JsonKey()
-  List<HighlightItem>? get highlights {
-    final value = _highlights;
-    if (value == null) return null;
-    if (_highlights is EqualUnmodifiableListView) return _highlights;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
   @override
   String toString() {
-    return 'UserDetails(fullName: $fullName, userName: $userName, description: $description, followers: $followers, followings: $followings, images: $images, videos: $videos, highlights: $highlights)';
+    return 'UserDetails(email: $email, fullName: $fullName, userName: $userName, description: $description, followers: $followers, followings: $followings)';
   }
 
   @override
@@ -467,6 +406,7 @@ class _$UserDetailsImpl implements _UserDetails {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserDetailsImpl &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.userName, userName) ||
@@ -476,25 +416,19 @@ class _$UserDetailsImpl implements _UserDetails {
             const DeepCollectionEquality()
                 .equals(other._followers, _followers) &&
             const DeepCollectionEquality()
-                .equals(other._followings, _followings) &&
-            const DeepCollectionEquality().equals(other._images, _images) &&
-            const DeepCollectionEquality().equals(other._videos, _videos) &&
-            const DeepCollectionEquality()
-                .equals(other._highlights, _highlights));
+                .equals(other._followings, _followings));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      email,
       fullName,
       userName,
       description,
       const DeepCollectionEquality().hash(_followers),
-      const DeepCollectionEquality().hash(_followings),
-      const DeepCollectionEquality().hash(_images),
-      const DeepCollectionEquality().hash(_videos),
-      const DeepCollectionEquality().hash(_highlights));
+      const DeepCollectionEquality().hash(_followings));
 
   @JsonKey(ignore: true)
   @override
@@ -512,18 +446,18 @@ class _$UserDetailsImpl implements _UserDetails {
 
 abstract class _UserDetails implements UserDetails {
   const factory _UserDetails(
-      {final String? fullName,
+      {final String? email,
+      final String? fullName,
       final String? userName,
       final String? description,
       final List<String>? followers,
-      final List<String>? followings,
-      final List<ImageDetails>? images,
-      final List<VideoDetails>? videos,
-      final List<HighlightItem>? highlights}) = _$UserDetailsImpl;
+      final List<String>? followings}) = _$UserDetailsImpl;
 
   factory _UserDetails.fromJson(Map<String, dynamic> json) =
       _$UserDetailsImpl.fromJson;
 
+  @override
+  String? get email;
   @override
   String? get fullName;
   @override
@@ -534,12 +468,6 @@ abstract class _UserDetails implements UserDetails {
   List<String>? get followers;
   @override
   List<String>? get followings;
-  @override
-  List<ImageDetails>? get images;
-  @override
-  List<VideoDetails>? get videos;
-  @override
-  List<HighlightItem>? get highlights;
   @override
   @JsonKey(ignore: true)
   _$$UserDetailsImplCopyWith<_$UserDetailsImpl> get copyWith =>

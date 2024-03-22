@@ -22,6 +22,7 @@ Map<String, dynamic> _$$UserItemImplToJson(_$UserItemImpl instance) =>
 
 _$UserDetailsImpl _$$UserDetailsImplFromJson(Map<String, dynamic> json) =>
     _$UserDetailsImpl(
+      email: json['email'] as String? ?? '',
       fullName: json['fullName'] as String? ?? '',
       userName: json['userName'] as String? ?? '',
       description: json['description'] as String? ?? '',
@@ -33,28 +34,14 @@ _$UserDetailsImpl _$$UserDetailsImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           const [],
-      images: (json['images'] as List<dynamic>?)
-              ?.map((e) => ImageDetails.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      videos: (json['videos'] as List<dynamic>?)
-              ?.map((e) => VideoDetails.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      highlights: (json['highlights'] as List<dynamic>?)
-              ?.map((e) => HighlightItem.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
     );
 
 Map<String, dynamic> _$$UserDetailsImplToJson(_$UserDetailsImpl instance) =>
     <String, dynamic>{
+      'email': instance.email,
       'fullName': instance.fullName,
       'userName': instance.userName,
       'description': instance.description,
       'followers': instance.followers,
       'followings': instance.followings,
-      'images': instance.images,
-      'videos': instance.videos,
-      'highlights': instance.highlights,
     };
