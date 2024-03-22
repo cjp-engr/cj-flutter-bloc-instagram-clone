@@ -1,6 +1,7 @@
 import 'package:cj_flutter_riverpod_instagram_clone/repository/auth/auth_repository_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/add_post_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post_preview/add_post_preview_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/user_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -76,6 +77,13 @@ StatefulShellBranch _profile() {
         name: InstaRouteNames.profile,
         pageBuilder: (context, state) => const NoTransitionPage(
           child: ProfilePage(),
+        ),
+      ),
+      GoRoute(
+        path: '/${InstaRouteNames.userHomePage}',
+        name: InstaRouteNames.userHomePage,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: UserHomePage(),
         ),
       ),
       GoRoute(

@@ -8,4 +8,5 @@ class InstaRouteNames {
   static const String register = 'register';
   static const String settings = 'settings';
   static const String userDetails = 'user';
+  static const String userHomePage = 'user-home-page';
 }
