@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'display_images_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class DisplayImages extends _$DisplayImages {
   @override
   FutureOr<List<ImageDetails>?> build() {

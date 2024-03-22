@@ -53,8 +53,6 @@ class _OwnerDetailsWidget extends ConsumerWidget {
                   data: data!,
                   index: index,
                 ),
-                const SizedBox(height: InstaSpacing.extraSmall),
-                const _IconsWidget(),
                 const SizedBox(height: InstaSpacing.medium),
                 const LikeAndCommentWidget(),
                 const SizedBox(height: InstaSpacing.medium),
@@ -137,16 +135,25 @@ class _ContentMediaWidget extends StatelessWidget {
             }),
           ),
         ),
+        const SizedBox(height: 335.0),
+        const Positioned.fill(
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: _IconsWidget(),
+          ),
+        ),
         Positioned.fill(
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.all(InstaSpacing.tiny),
-              child: InstaDotsIndicator(
-                controller: pageController,
-                dotSize: InstaSpacing.tiny,
-                count: data[index].images?.length ?? 0,
-              ),
+              padding: const EdgeInsets.only(bottom: InstaSpacing.medium),
+              child: data[index].images!.length <= 1
+                  ? const SizedBox()
+                  : InstaDotsIndicator(
+                      controller: pageController,
+                      dotSize: InstaSpacing.tiny,
+                      count: data[index].images?.length ?? 0,
+                    ),
             ),
           ),
         ),
@@ -164,10 +171,12 @@ class _IconsWidget extends StatelessWidget {
       children: [
         SecondaryButton(
           assetName: IconRes.heart,
+          scale: 3,
         ),
-        SizedBox(width: InstaSpacing.small),
+        SizedBox(width: InstaSpacing.tiny),
         SecondaryButton(
           assetName: IconRes.saved,
+          scale: 3,
         ),
       ],
     );
