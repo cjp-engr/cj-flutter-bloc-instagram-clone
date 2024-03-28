@@ -1,16 +1,24 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/user_details_action_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/update_user_details_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 class EditProfilePage extends ConsumerStatefulWidget {
   const EditProfilePage({super.key});
@@ -22,11 +30,15 @@ class EditProfilePage extends ConsumerStatefulWidget {
 class _SettingsPageState extends ConsumerState<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
+  final _fullNameController = TextEditingController();
+  final _userNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(userDetailsActionProvider);
-
+    final user = ref.watch(displayUserDetailsProvider);
+    _updateUserListener();
     return user.when(
       data: (data) {
         return InstaAppBar(
@@ -49,6 +61,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
                         shrinkWrap: true,
                         reverse: true,
                         children: [
+                          _buildImage(),
                           const SizedBox(height: InstaSpacing.small),
                           _buildFullName(data?.fullName ?? ''),
                           const SizedBox(height: InstaSpacing.small),
@@ -80,26 +93,63 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
     );
   }
 
-  Widget _buildFullName(String fullName) => InstaTextField(
-        label: AppLocalizations.of(context)!.fullName,
-        initialValue: fullName,
-      );
+  Widget _buildImage() {
+    return const InstaCircleAvatar(
+      image: IconRes.testOnly,
+      radius: InstaCircleAvatarSize.large,
+    );
+  }
 
-  Widget _buildUserName(String userName) => InstaTextField(
-        label: AppLocalizations.of(context)!.userName,
-        initialValue: userName,
-      );
+  Widget _buildFullName(String fullName) {
+    return InstaTextField(
+      label: AppLocalizations.of(context)!.fullName,
+      controller: _fullNameController,
+      initialValue: fullName,
+      onChanged: (value) {
+        _fullNameController.text == value;
+      },
+    );
+  }
 
-  Widget _buildEmail(String email) => InstaTextField(
-        label: AppLocalizations.of(context)!.email,
-        initialValue: email,
-      );
+  Widget _buildUserName(String userName) {
+    return InstaTextField(
+      label: AppLocalizations.of(context)!.userName,
+      controller: _userNameController,
+      initialValue: userName,
+      onChanged: (value) {
+        setState(() {
+          _userNameController.text == value;
+        });
+      },
+    );
+  }
 
-  Widget _buildDescription(String description) => InstaTextField(
-        label: AppLocalizations.of(context)!.description,
-        maxLines: 4,
-        initialValue: description,
-      );
+  Widget _buildEmail(String email) {
+    return InstaTextField(
+      label: AppLocalizations.of(context)!.email,
+      controller: _emailController,
+      initialValue: email,
+      onChanged: (value) {
+        setState(() {
+          _emailController.text = value;
+        });
+      },
+    );
+  }
+
+  Widget _buildDescription(String description) {
+    return InstaTextField(
+      label: AppLocalizations.of(context)!.description,
+      maxLines: 4,
+      controller: _descriptionController,
+      initialValue: description,
+      onChanged: (value) {
+        setState(() {
+          _descriptionController.text = value;
+        });
+      },
+    );
+  }
 
   void _submit() {
     setState(() {
@@ -108,5 +158,34 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
     final form = _formKey.currentState;
 
     if (form == null || !form.validate()) return;
+
+    ref.read(updateUserDetailsProvider.notifier).updateDetails(
+          UserDetails(
+            email: _emailController.text.trim(),
+            fullName: _fullNameController.text.trim(),
+            userName: _userNameController.text.trim(),
+            description: _descriptionController.text.trim(),
+          ),
+        );
+  }
+
+  void _updateUserListener() {
+    ref.listen<AsyncValue<void>>(
+      updateUserDetailsProvider,
+      (prev, next) {
+        next.whenOrNull(
+          data: (_) {
+            context.goNamed(InstaRouteNames.profile);
+          },
+          error: (e, st) {
+            showAlertDialog(
+              context,
+              title: e.toString(),
+              buttonCancelText: 'OK',
+            );
+          },
+        );
+      },
+    );
   }
 }

@@ -4,10 +4,10 @@ import 'package:cj_flutter_riverpod_instagram_clone/repository/user/user_reposit
 // ignore: depend_on_referenced_packages
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'user_details_action_provider.g.dart';
+part 'display_user_details_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-class UserDetailsAction extends _$UserDetailsAction {
+class DisplayUserDetails extends _$DisplayUserDetails {
   @override
   FutureOr<UserDetails?> build() {
     return Future<UserDetails?>.value(null);
@@ -17,16 +17,8 @@ class UserDetailsAction extends _$UserDetailsAction {
     state = const AsyncLoading();
 
     state = await AsyncValue.guard(() async {
-      final images = await ref.read(userRepositoryProvider).getDetails();
-      return images;
-    });
-  }
-
-  Future<void> updateUserDetails(UserDetails details) async {
-    state = const AsyncLoading();
-    state = await AsyncValue.guard(() async {
-      await ref.read(userRepositoryProvider).updateDetails(details);
-      return null;
+      final details = await ref.read(userRepositoryProvider).getDetails();
+      return details;
     });
   }
 }

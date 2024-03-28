@@ -26,7 +26,7 @@ class LoginPage extends ConsumerStatefulWidget {
 
 class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _autovalidateMode = AutovalidateMode.always;
+  AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -114,6 +114,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   }
 
   void _submit() {
+    setState(() {
+      _autovalidateMode = AutovalidateMode.always;
+    });
+
     final form = _formKey.currentState;
 
     if (form == null || !form.validate()) return;

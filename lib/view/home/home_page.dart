@@ -1,7 +1,7 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/user_details_action_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
@@ -25,8 +25,8 @@ class _HomePageState extends ConsumerState<HomePage> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
+      ref.read(displayUserDetailsProvider.notifier).getUserDetails();
       ref.read(displayImagesProvider.notifier).getImages();
-      ref.read(userDetailsActionProvider.notifier).getUserDetails();
     });
   }
 

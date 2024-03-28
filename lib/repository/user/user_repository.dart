@@ -8,11 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 final fbUserId = fbAuth.currentUser!.uid;
 final userCollection = FirebaseFirestore.instance.collection('users');
 
-const String email = 'email';
-const String fullName = 'fullName';
-const String userName = 'userName';
-const String description = 'description';
-
 class UserRepository {
   //! START - Read operation
   FutureOr<UserDetails?> getDetails() async {
@@ -21,10 +16,10 @@ class UserRepository {
       final userData = userDoc.data() as Map<String, dynamic>?;
       if (userDoc.exists) {
         return UserDetails(
-          email: userData![email],
-          fullName: userData[fullName],
-          userName: userData[userName],
-          description: userData[description],
+          email: userData!['email'],
+          fullName: userData['fullName'],
+          userName: userData['userName'],
+          description: userData['description'],
         );
       }
       throw 'User not found';
@@ -39,10 +34,10 @@ class UserRepository {
   Future<void> updateDetails(UserDetails details) async {
     try {
       await userCollection.doc(fbUserId).update({
-        email: details.email,
-        fullName: details.fullName,
-        userName: details.userName,
-        description: details.description,
+        'email': details.email,
+        'fullName': details.fullName,
+        'userName': details.userName,
+        'description': details.description,
       });
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
