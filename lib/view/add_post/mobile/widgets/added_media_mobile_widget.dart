@@ -47,10 +47,12 @@ class AddedMediaMobileWidget extends ConsumerWidget {
             ),
           ),
         ),
-        InstaDotsIndicator(
-          controller: pageController,
-          count: state.mediaFileList?.length ?? 0,
-        ),
+        state.mediaFileList!.length <= 1
+            ? const SizedBox()
+            : InstaDotsIndicator(
+                controller: pageController,
+                count: state.mediaFileList?.length ?? 0,
+              ),
       ],
     );
   }

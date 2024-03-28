@@ -3,7 +3,6 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart'
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/details_widgets/counts_widget.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/details_widgets/highlights_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/details_widgets/name_description_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/details_widgets/username_buttons_widget.dart';
 
@@ -35,8 +34,6 @@ class ProfilePage extends StatelessWidget {
             UserNameAndButtonsWidget(id: id),
             const SizedBox(height: InstaSpacing.veryLarge),
             const NameAndDescriptionWidget(),
-            const SizedBox(height: InstaSpacing.verySmall),
-            const HighlightsWidget(),
             const SizedBox(height: InstaSpacing.verySmall),
             const CountsWidget(),
             const SizedBox(height: InstaSpacing.verySmall),

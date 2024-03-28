@@ -26,7 +26,6 @@ class UserDetails with _$UserDetails {
     @Default([]) List<String>? followings,
     // @Default([]) List<ImageDetails>? images,
     // @Default([]) List<VideoDetails>? videos,
-    // @Default([]) List<HighlightItem>? highlights,
   }) = _UserDetails;
 
   factory UserDetails.fromJson(Map<String, Object?> json) =>

@@ -4,18 +4,23 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class LikeAndCommentWidget extends StatefulWidget {
-  const LikeAndCommentWidget({super.key});
+class DetailsBlockWidget extends StatefulWidget {
+  final ImageDetails details;
+  const DetailsBlockWidget({
+    super.key,
+    required this.details,
+  });
 
   @override
-  State<LikeAndCommentWidget> createState() => _LikeAndCommentWidgetState();
+  State<DetailsBlockWidget> createState() => _DetailsBlockWidgetState();
 }
 
-class _LikeAndCommentWidgetState extends State<LikeAndCommentWidget> {
+class _DetailsBlockWidgetState extends State<DetailsBlockWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,10 +45,8 @@ class _LikeAndCommentWidgetState extends State<LikeAndCommentWidget> {
   }
 
   Widget _buildDescription() {
-    return const InstaText(
-        text:
-            'description descriptiondescription descriptiondescription descriptiondescription descriptiondescription description',
-        textAlign: TextAlign.start);
+    return InstaText(
+        text: widget.details.description!, textAlign: TextAlign.start);
   }
 
   Widget _buildViewComment() {

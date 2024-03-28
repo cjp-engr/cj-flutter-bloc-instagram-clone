@@ -11,7 +11,7 @@ class InstaDotsIndicator extends StatelessWidget {
     super.key,
     required this.controller,
     this.count = 0,
-    this.dotSize = InstaSpacing.extraSmall,
+    this.dotSize = InstaSpacing.tiny,
   });
 
   @override

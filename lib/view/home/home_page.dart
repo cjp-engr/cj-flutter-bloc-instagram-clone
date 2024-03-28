@@ -6,8 +6,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_e
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/highlight_widget.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/posted_media_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/display_media_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,9 +47,8 @@ class _HomePageState extends ConsumerState<HomePage> {
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HighlightWidget(),
               SizedBox(height: InstaSpacing.medium),
-              PostedMediaWidget(),
+              DisplayMediaWidget(),
             ],
           ),
         ),

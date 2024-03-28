@@ -117,9 +117,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
       controller: _userNameController,
       initialValue: userName,
       onChanged: (value) {
-        setState(() {
-          _userNameController.text == value;
-        });
+        _userNameController.text == value;
       },
     );
   }
@@ -130,9 +128,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
       controller: _emailController,
       initialValue: email,
       onChanged: (value) {
-        setState(() {
-          _emailController.text = value;
-        });
+        _emailController.text = value;
       },
     );
   }
@@ -144,9 +140,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
       controller: _descriptionController,
       initialValue: description,
       onChanged: (value) {
-        setState(() {
-          _descriptionController.text = value;
-        });
+        _descriptionController.text = value;
       },
     );
   }

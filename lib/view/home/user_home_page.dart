@@ -2,7 +2,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart'
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/posted_media_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/display_media_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
@@ -26,7 +26,7 @@ class UserHomePage extends StatelessWidget {
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PostedMediaWidget(),
+              DisplayMediaWidget(),
             ],
           ),
         ),
