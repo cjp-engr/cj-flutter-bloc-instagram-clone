@@ -7,6 +7,8 @@ part 'image_details.g.dart';
 class ImageDetails with _$ImageDetails {
   const factory ImageDetails({
     String? userId,
+    String? userName,
+    String? location,
     String? imagesId,
     List<String>? images,
     int? likeCount,

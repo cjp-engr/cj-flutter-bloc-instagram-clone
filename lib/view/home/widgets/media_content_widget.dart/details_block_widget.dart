@@ -41,7 +41,7 @@ class _DetailsBlockWidgetState extends State<DetailsBlockWidget> {
   }
 
   Widget _buildUserName() {
-    return const InstaText(text: 'user_name');
+    return InstaText(text: widget.details.userName!);
   }
 
   Widget _buildDescription() {

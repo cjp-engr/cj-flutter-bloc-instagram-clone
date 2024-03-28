@@ -5,11 +5,13 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.da
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class UserBioWidget extends StatelessWidget {
-  const UserBioWidget({super.key});
+  final ImageDetails details;
+  const UserBioWidget({super.key, required this.details});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class UserBioWidget extends StatelessWidget {
       onTap: () {
         context.goNamed(
           InstaRouteNames.userDetails,
-          pathParameters: {'id': '1'},
+          pathParameters: {'id': details.userId!},
         );
       },
       child: Row(
@@ -29,9 +31,9 @@ class UserBioWidget extends StatelessWidget {
           const SizedBox(width: InstaSpacing.extraSmall),
           Column(
             children: [
-              const InstaText(text: 'user_name'),
+              InstaText(text: details.userName!),
               InstaText(
-                text: 'Afghanistan',
+                text: details.location ?? '',
                 color: applyColor[InstaColor.disabled],
               ),
             ],

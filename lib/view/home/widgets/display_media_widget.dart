@@ -40,9 +40,9 @@ class _OwnerDetailsWidget extends ConsumerWidget {
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: [
-                const UserBioWidget(),
+                UserBioWidget(details: details![index]),
                 const SizedBox(height: InstaSpacing.extraSmall),
-                MediaWidget(images: details![index].images!),
+                MediaWidget(images: details[index].images!),
                 const SizedBox(height: InstaSpacing.medium),
                 DetailsBlockWidget(details: details[index]),
                 const SizedBox(height: InstaSpacing.medium),

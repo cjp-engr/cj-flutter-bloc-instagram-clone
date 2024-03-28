@@ -9,6 +9,8 @@ part of 'image_details.dart';
 _$ImageDetailsImpl _$$ImageDetailsImplFromJson(Map<String, dynamic> json) =>
     _$ImageDetailsImpl(
       userId: json['userId'] as String?,
+      userName: json['userName'] as String?,
+      location: json['location'] as String?,
       imagesId: json['imagesId'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
@@ -22,6 +24,8 @@ _$ImageDetailsImpl _$$ImageDetailsImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ImageDetailsImplToJson(_$ImageDetailsImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
+      'userName': instance.userName,
+      'location': instance.location,
       'imagesId': instance.imagesId,
       'images': instance.images,
       'likeCount': instance.likeCount,

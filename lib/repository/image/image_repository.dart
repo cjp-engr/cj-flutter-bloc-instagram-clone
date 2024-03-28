@@ -24,6 +24,8 @@ class ImageRepository {
         'userId': fbUserId,
         'folderName': folderName,
         'likeCount': 0,
+        'userName': d.userName,
+        'location': d.location,
         'description': d.description,
         'comments': d.comments,
         'dateCreated': DateTime.now().millisecondsSinceEpoch,
@@ -62,6 +64,8 @@ class ImageRepository {
         imageDetails.add(
           ImageDetails(
             userId: data['userId'],
+            userName: data['userName'],
+            location: data['location'],
             images: imageUrl,
             likeCount: data['likeCount'],
             description: data['description'],

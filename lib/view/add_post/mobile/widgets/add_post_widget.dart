@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -105,6 +106,8 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
 
   void _submit() {
     final images = ref.watch(addPostProvider).mediaFileList;
+    final userName =
+        ref.watch(displayUserDetailsProvider).asData!.value?.userName;
     final path = <String>[];
     if (images?.isNotEmpty ?? false) {
       for (var i = 0; i < images!.length; i++) {
@@ -114,7 +117,9 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
 
     ref.read(addImagesProvider.notifier).addImages(
           ImageDetails(
+            userName: userName,
             images: path,
+            location: 'Philippines',
             description: _descriptionController.text.trim(),
             comments: [
               'Hardcoded comments only!!! 0',
