@@ -26,48 +26,24 @@ class _UserNameAndButtonsWidgetState
     extends ConsumerState<UserNameAndButtonsWidget> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const InstaCircleAvatar(
-          image: IconRes.testOnly,
-          radius: 50,
-        ),
-        const SizedBox(width: InstaSpacing.small),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildUserNameAndButton(widget.id != null),
-            const SizedBox(height: InstaSpacing.large),
-            _buildButtons(widget.id != null),
-          ],
-        )
-      ],
-    );
-  }
-
-  Widget _buildUserNameAndButton(bool hasId) {
     final user = ref.watch(displayUserDetailsProvider);
+
     return user.when(
       data: (data) {
-        return Wrap(
-          spacing: 8.0,
-          runSpacing: 4.0,
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InstaText(
-              text: data?.userName ?? 'Walang username',
-              fontWeight: FontWeight.bold,
-              fontSize: InstaFontSize.veryLarge,
-            ),
-            hasId
-                ? const SecondaryButton(
-                    assetName: IconRes.ellipsis,
-                  )
-                : SecondaryButton(
-                    assetName: IconRes.settings,
-                    onPressed: () => context.goNamed(InstaRouteNames.settings),
-                  )
+            _buildUserImage(data?.imageUrl),
+            const SizedBox(width: InstaSpacing.small),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildUserNameAndButton(data?.userName, widget.id != null),
+                const SizedBox(height: InstaSpacing.large),
+                _buildButtons(widget.id != null),
+              ],
+            )
           ],
         );
       },
@@ -75,6 +51,35 @@ class _UserNameAndButtonsWidgetState
         return const Text('there is an error');
       },
       loading: () => const CircularProgressIndicator(),
+    );
+  }
+
+  Widget _buildUserImage(String? image) {
+    return InstaCircleAvatar(
+      image: image ?? IconRes.testOnly,
+      radius: 50,
+    );
+  }
+
+  Widget _buildUserNameAndButton(String? userName, bool hasId) {
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 4.0,
+      children: [
+        InstaText(
+          text: userName ?? 'Username not displayed',
+          fontWeight: FontWeight.bold,
+          fontSize: InstaFontSize.veryLarge,
+        ),
+        hasId
+            ? const SecondaryButton(
+                assetName: IconRes.ellipsis,
+              )
+            : SecondaryButton(
+                assetName: IconRes.settings,
+                onPressed: () => context.goNamed(InstaRouteNames.settings),
+              )
+      ],
     );
   }
 

@@ -17,4 +17,12 @@ class UpdateUserDetails extends _$UpdateUserDetails {
       () => ref.read(userRepositoryProvider).updateDetails(details),
     );
   }
+
+  Future<void> updatePhoto(UserDetails details) async {
+    state = const AsyncLoading<void>();
+    state = await AsyncValue.guard<void>(
+      () =>
+          ref.read(userRepositoryProvider).updatePhoto(details, details.image!),
+    );
+  }
 }

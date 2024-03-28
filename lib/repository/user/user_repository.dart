@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/firebase_constant.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/firebase_exception.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/random_name.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 final fbUserId = fbAuth.currentUser!.uid;
 final userCollection = FirebaseFirestore.instance.collection('users');
@@ -13,13 +16,17 @@ class UserRepository {
   FutureOr<UserDetails?> getDetails() async {
     try {
       final DocumentSnapshot userDoc = await userCollection.doc(fbUserId).get();
-      final userData = userDoc.data() as Map<String, dynamic>?;
+      final data = userDoc.data() as Map<String, dynamic>?;
+      final ref = FirebaseStorage.instance.ref().child(data!['image']);
+      final imageUrl = await ref.getDownloadURL();
       if (userDoc.exists) {
         return UserDetails(
-          email: userData!['email'],
-          fullName: userData['fullName'],
-          userName: userData['userName'],
-          description: userData['description'],
+          email: data['email'],
+          fullName: data['fullName'],
+          userName: data['userName'],
+          description: data['description'],
+          image: data['image'],
+          imageUrl: imageUrl,
         );
       }
       throw 'User not found';
@@ -38,10 +45,26 @@ class UserRepository {
         'fullName': details.fullName,
         'userName': details.userName,
         'description': details.description,
+        'image': details.image,
       });
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {
+      firebaseHandleException(e);
+    }
+  }
+
+  Future<void> updatePhoto(UserDetails details, String path) async {
+    String folderName = 'profile_photo';
+    File image = File(path);
+    int dotIndex = path.lastIndexOf('.');
+    String fileName = '${randomName()}${path.substring(dotIndex, path.length)}';
+
+    try {
+      Reference storageRef = storageReference.child('$folderName/$fileName');
+      updateDetails(details.copyWith(image: '$folderName/$fileName'));
+      await storageRef.putFile(image);
+    } on FirebaseException catch (e) {
       firebaseHandleException(e);
     }
   }

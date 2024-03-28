@@ -208,6 +208,8 @@ mixin _$UserDetails {
   String? get email => throw _privateConstructorUsedError;
   String? get fullName => throw _privateConstructorUsedError;
   String? get userName => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   List<String>? get followers => throw _privateConstructorUsedError;
   List<String>? get followings => throw _privateConstructorUsedError;
@@ -228,6 +230,8 @@ abstract class $UserDetailsCopyWith<$Res> {
       {String? email,
       String? fullName,
       String? userName,
+      String? image,
+      String? imageUrl,
       String? description,
       List<String>? followers,
       List<String>? followings});
@@ -249,6 +253,8 @@ class _$UserDetailsCopyWithImpl<$Res, $Val extends UserDetails>
     Object? email = freezed,
     Object? fullName = freezed,
     Object? userName = freezed,
+    Object? image = freezed,
+    Object? imageUrl = freezed,
     Object? description = freezed,
     Object? followers = freezed,
     Object? followings = freezed,
@@ -265,6 +271,14 @@ class _$UserDetailsCopyWithImpl<$Res, $Val extends UserDetails>
       userName: freezed == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       description: freezed == description
           ? _value.description
@@ -294,6 +308,8 @@ abstract class _$$UserDetailsImplCopyWith<$Res>
       {String? email,
       String? fullName,
       String? userName,
+      String? image,
+      String? imageUrl,
       String? description,
       List<String>? followers,
       List<String>? followings});
@@ -313,6 +329,8 @@ class __$$UserDetailsImplCopyWithImpl<$Res>
     Object? email = freezed,
     Object? fullName = freezed,
     Object? userName = freezed,
+    Object? image = freezed,
+    Object? imageUrl = freezed,
     Object? description = freezed,
     Object? followers = freezed,
     Object? followings = freezed,
@@ -329,6 +347,14 @@ class __$$UserDetailsImplCopyWithImpl<$Res>
       userName: freezed == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       description: freezed == description
           ? _value.description
@@ -353,6 +379,8 @@ class _$UserDetailsImpl implements _UserDetails {
       {this.email = '',
       this.fullName = '',
       this.userName = '',
+      this.image = '',
+      this.imageUrl = '',
       this.description = '',
       final List<String>? followers = const [],
       final List<String>? followings = const []})
@@ -371,6 +399,12 @@ class _$UserDetailsImpl implements _UserDetails {
   @override
   @JsonKey()
   final String? userName;
+  @override
+  @JsonKey()
+  final String? image;
+  @override
+  @JsonKey()
+  final String? imageUrl;
   @override
   @JsonKey()
   final String? description;
@@ -398,7 +432,7 @@ class _$UserDetailsImpl implements _UserDetails {
 
   @override
   String toString() {
-    return 'UserDetails(email: $email, fullName: $fullName, userName: $userName, description: $description, followers: $followers, followings: $followings)';
+    return 'UserDetails(email: $email, fullName: $fullName, userName: $userName, image: $image, imageUrl: $imageUrl, description: $description, followers: $followers, followings: $followings)';
   }
 
   @override
@@ -411,6 +445,9 @@ class _$UserDetailsImpl implements _UserDetails {
                 other.fullName == fullName) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality()
@@ -426,6 +463,8 @@ class _$UserDetailsImpl implements _UserDetails {
       email,
       fullName,
       userName,
+      image,
+      imageUrl,
       description,
       const DeepCollectionEquality().hash(_followers),
       const DeepCollectionEquality().hash(_followings));
@@ -449,6 +488,8 @@ abstract class _UserDetails implements UserDetails {
       {final String? email,
       final String? fullName,
       final String? userName,
+      final String? image,
+      final String? imageUrl,
       final String? description,
       final List<String>? followers,
       final List<String>? followings}) = _$UserDetailsImpl;
@@ -462,6 +503,10 @@ abstract class _UserDetails implements UserDetails {
   String? get fullName;
   @override
   String? get userName;
+  @override
+  String? get image;
+  @override
+  String? get imageUrl;
   @override
   String? get description;
   @override

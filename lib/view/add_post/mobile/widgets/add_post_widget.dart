@@ -90,7 +90,6 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
         next.whenOrNull(
           data: (data) {
             context.goNamed(InstaRouteNames.home);
-            ref.invalidate(addPostProvider);
           },
           error: (e, st) {
             showAlertDialog(
@@ -99,6 +98,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
               buttonCancelText: 'OK',
             );
           },
+          loading: () => const CircularProgressIndicator(),
         );
       },
     );

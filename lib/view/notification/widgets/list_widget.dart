@@ -37,9 +37,9 @@ class ListWidget extends StatelessWidget {
         ),
         SizedBox(width: InstaSpacing.verySmall),
         SizedBox(
-          width: 240,
+          width: 220,
           child: InstaText(
-            text: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum',
+            text: 'Lorem Ipsum Lorem Ipsum',
             maxLines: 2,
             textAlign: TextAlign.start,
           ),

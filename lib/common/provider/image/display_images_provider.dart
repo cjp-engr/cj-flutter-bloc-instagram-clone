@@ -19,7 +19,7 @@ class DisplayImages extends _$DisplayImages {
     state = const AsyncLoading();
 
     state = await AsyncValue.guard(() async {
-      final images = await ref.read(imageRepositoryProvider).getImagesSet();
+      final images = await ref.read(imageRepositoryProvider).getImages();
       return images;
     });
   }

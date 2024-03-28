@@ -14,7 +14,7 @@ final imagesCollection = FirebaseFirestore.instance.collection('images');
 
 class ImageRepository {
   //! START - Add operation
-  Future<void> addImagesSet(ImageDetails d) async {
+  Future<void> addImages(ImageDetails d) async {
     String folderName = 'uploads/images_${randomName()}';
     try {
       for (var image in d.images!) {
@@ -53,7 +53,7 @@ class ImageRepository {
   //! END - Add operation
 
   //! START - Read operation
-  FutureOr<List<ImageDetails>?> getImagesSet() async {
+  FutureOr<List<ImageDetails>?> getImages() async {
     List<ImageDetails> imageDetails = [];
     List<String> imageUrl = [];
     try {

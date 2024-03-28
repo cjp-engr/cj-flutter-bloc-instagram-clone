@@ -14,6 +14,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text_field.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/edit_profile/widgets/change_profile_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -61,7 +62,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
                         shrinkWrap: true,
                         reverse: true,
                         children: [
-                          _buildImage(),
+                          _buildImage(data?.imageUrl ?? IconRes.testOnly),
                           const SizedBox(height: InstaSpacing.small),
                           _buildFullName(data?.fullName ?? ''),
                           const SizedBox(height: InstaSpacing.small),
@@ -77,7 +78,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
                     PrimaryButton(
                       color: InstaColor.primary,
                       text: 'Save',
-                      onPressed: _submit,
+                      onPressed: () => _submit(data!),
                     ),
                   ],
                 ),
@@ -93,10 +94,14 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
     );
   }
 
-  Widget _buildImage() {
-    return const InstaCircleAvatar(
-      image: IconRes.testOnly,
-      radius: InstaCircleAvatarSize.large,
+  Widget _buildImage(String photo) {
+    return GestureDetector(
+      onTap: () =>
+          showChangeProfileDialog(context, title: 'Change Profile Photo'),
+      child: InstaCircleAvatar(
+        image: photo,
+        radius: InstaCircleAvatarSize.large,
+      ),
     );
   }
 
@@ -145,7 +150,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
     );
   }
 
-  void _submit() {
+  void _submit(UserDetails details) {
     setState(() {
       _autovalidateMode = AutovalidateMode.always;
     });
@@ -159,6 +164,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
             fullName: _fullNameController.text.trim(),
             userName: _userNameController.text.trim(),
             description: _descriptionController.text.trim(),
+            image: details.image,
           ),
         );
   }
@@ -170,6 +176,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
         next.whenOrNull(
           data: (_) {
             context.goNamed(InstaRouteNames.profile);
+            ref.read(displayUserDetailsProvider.notifier).getUserDetails();
           },
           error: (e, st) {
             showAlertDialog(

@@ -6,7 +6,7 @@ part of 'update_user_details_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$updateUserDetailsHash() => r'93e82231dab49a03f78deda9691955d48f3e1e29';
+String _$updateUserDetailsHash() => r'd5e4954329f9ebf0aa8e43b5db9f5748e8f3e8df';
 
 /// See also [UpdateUserDetails].
 @ProviderFor(UpdateUserDetails)
