@@ -1,6 +1,7 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
@@ -8,8 +9,9 @@ import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.da
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DetailsBlockWidget extends StatefulWidget {
+class DetailsBlockWidget extends ConsumerStatefulWidget {
   final ImageDetails details;
   const DetailsBlockWidget({
     super.key,
@@ -17,10 +19,10 @@ class DetailsBlockWidget extends StatefulWidget {
   });
 
   @override
-  State<DetailsBlockWidget> createState() => _DetailsBlockWidgetState();
+  ConsumerState<DetailsBlockWidget> createState() => _DetailsBlockWidgetState();
 }
 
-class _DetailsBlockWidgetState extends State<DetailsBlockWidget> {
+class _DetailsBlockWidgetState extends ConsumerState<DetailsBlockWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +33,7 @@ class _DetailsBlockWidgetState extends State<DetailsBlockWidget> {
         _buildDescription(),
         _buildViewComment(),
         const SizedBox(height: InstaSpacing.extraSmall),
-        _buildAddComment(),
+        const _AddCommentWidget(),
       ],
     );
   }
@@ -41,12 +43,17 @@ class _DetailsBlockWidgetState extends State<DetailsBlockWidget> {
   }
 
   Widget _buildUserName() {
-    return InstaText(text: widget.details.userName!);
+    return InstaText(
+      text: widget.details.userName!,
+      fontWeight: FontWeight.bold,
+    );
   }
 
   Widget _buildDescription() {
-    return InstaText(
-        text: widget.details.description!, textAlign: TextAlign.start);
+    return widget.details.description!.isEmpty
+        ? const SizedBox()
+        : InstaText(
+            text: widget.details.description!, textAlign: TextAlign.start);
   }
 
   Widget _buildViewComment() {
@@ -55,8 +62,18 @@ class _DetailsBlockWidgetState extends State<DetailsBlockWidget> {
             text: AppLocalizations.of(context)!.viewAllCountComment(3000)),
         onTap: () {});
   }
+}
 
-  Widget _buildAddComment() {
+class _AddCommentWidget extends ConsumerStatefulWidget {
+  const _AddCommentWidget();
+
+  @override
+  ConsumerState<_AddCommentWidget> createState() => _AddCommentWidgetState();
+}
+
+class _AddCommentWidgetState extends ConsumerState<_AddCommentWidget> {
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         _displayAvatar(),
@@ -67,9 +84,17 @@ class _DetailsBlockWidgetState extends State<DetailsBlockWidget> {
   }
 
   Widget _displayAvatar() {
-    return const InstaCircleAvatar(
-      image: IconRes.testOnly,
-      radius: InstaCircleAvatarSize.small,
+    final user = ref.watch(displayUserDetailsProvider);
+
+    return user.when(
+      data: (data) {
+        return InstaCircleAvatar(
+          image: data?.imageUrl ?? IconRes.testOnly,
+          radius: InstaCircleAvatarSize.small,
+        );
+      },
+      error: (error, stackTrace) => const Text('there is an error'),
+      loading: () => const CircularProgressIndicator(),
     );
   }
 

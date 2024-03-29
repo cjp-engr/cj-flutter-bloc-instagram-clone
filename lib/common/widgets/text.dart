@@ -1,9 +1,9 @@
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/font_size.dart';
 import 'package:flutter/material.dart';
 
 class InstaText extends StatelessWidget {
   final String text;
-  final InstaFontSize fontSize;
+  final double fontSize;
   final FontWeight fontWeight;
   final Color? color;
   final int? maxLines;
@@ -23,7 +23,7 @@ class InstaText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: fontSize.value,
+        fontSize: fontSize,
         fontWeight: fontWeight,
         color: color,
       ),

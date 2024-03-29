@@ -27,9 +27,7 @@ class NameAndDescriptionWidget extends ConsumerWidget {
           ],
         );
       },
-      error: (error, stackTrace) {
-        return const Text('there is an error');
-      },
+      error: (error, stackTrace) => const Text('there is an error'),
       loading: () => const CircularProgressIndicator(),
     );
   }

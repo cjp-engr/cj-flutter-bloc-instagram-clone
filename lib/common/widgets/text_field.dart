@@ -1,7 +1,7 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/enums/font_size.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -43,6 +43,7 @@ class _InstaTextFieldState extends State<InstaTextField> {
       obscureText: widget.obscureText,
       maxLines: widget.maxLines,
       onChanged: _onChanged,
+      style: const TextStyle(fontSize: InstaFontSize.medium),
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         floatingLabelStyle: TextStyle(color: applyColor[InstaColor.disabled]),
@@ -53,7 +54,7 @@ class _InstaTextFieldState extends State<InstaTextField> {
         prefixIcon: widget.prefixIcon,
         labelText: widget.label,
         alignLabelWithHint: true,
-        labelStyle: TextStyle(fontSize: InstaFontSize.medium.value),
+        labelStyle: const TextStyle(fontSize: InstaFontSize.medium),
         enabledBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
             Radius.circular(InstaBorderRadius.small),

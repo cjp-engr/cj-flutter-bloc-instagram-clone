@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
@@ -80,24 +81,37 @@ class _CustomBottomNavigation extends ConsumerWidget {
       BottomNavigationBarItem(icon: _icon(IconRes.home), label: ''),
       BottomNavigationBarItem(icon: _icon(IconRes.notification), label: ''),
       BottomNavigationBarItem(icon: _icon(IconRes.newPost), label: ''),
-      BottomNavigationBarItem(icon: _profileIcon(context), label: ''),
+      const BottomNavigationBarItem(icon: _ProfileIconWidget(), label: ''),
     ];
   }
 
   Widget _icon(String assetName) => Image.asset(assetName,
       color: applyColor[InstaColor.tertiary], scale: 2.3);
 
-  Widget _profileIcon(BuildContext context) {
-    return const InstaCircleAvatar(
-      image: IconRes.testOnly,
-      radius: InstaCircleAvatarSize.small,
-    );
-  }
-
   void _onDestinationSelected(int index, WidgetRef ref) {
     navigationShell!.goBranch(
       index,
       initialLocation: index == navigationShell!.currentIndex,
+    );
+  }
+}
+
+class _ProfileIconWidget extends ConsumerWidget {
+  const _ProfileIconWidget();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(displayUserDetailsProvider);
+
+    return user.when(
+      data: (data) {
+        return InstaCircleAvatar(
+          image: data?.imageUrl ?? IconRes.testOnly,
+          radius: InstaCircleAvatarSize.small,
+        );
+      },
+      error: (error, stackTrace) => const Text('there is an error'),
+      loading: () => const CircularProgressIndicator(),
     );
   }
 }
