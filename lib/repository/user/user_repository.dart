@@ -17,8 +17,6 @@ class UserRepository {
     try {
       final DocumentSnapshot userDoc = await userCollection.doc(fbUserId).get();
       final data = userDoc.data() as Map<String, dynamic>?;
-      // final ref = FirebaseStorage.instance.ref().child(data!['image']);
-      // final imageUrl = await ref.getDownloadURL();
       if (userDoc.exists) {
         return UserDetails(
           email: data!['email'],

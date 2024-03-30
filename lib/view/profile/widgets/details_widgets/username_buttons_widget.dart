@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
@@ -57,7 +58,7 @@ class _UserNameAndButtonsWidgetState
   Widget _buildUserImage(String? image) {
     return InstaCircleAvatar(
       image: image ?? IconRes.testOnly,
-      radius: 50,
+      radius: InstaCircleAvatarSize.large,
     );
   }
 

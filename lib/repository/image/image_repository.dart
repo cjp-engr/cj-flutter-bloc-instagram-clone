@@ -11,6 +11,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 final fbUserId = fbAuth.currentUser!.uid;
 final imagesCollection = FirebaseFirestore.instance.collection('images');
+final userCollection = FirebaseFirestore.instance.collection('users');
 
 class ImageRepository {
   //! START - Add operation
@@ -61,10 +62,12 @@ class ImageRepository {
       for (var image in images.docs) {
         var data = image.data() as Map<String, dynamic>;
         imageUrl = await _getImageUrls(data['folderName']);
+        String? userName = await _getUserName(data['userId']);
         imageDetails.add(
           ImageDetails(
             userId: data['userId'],
-            userName: data['userName'],
+            // userName: data['userName'],
+            userName: userName,
             location: data['location'],
             images: imageUrl,
             likeCount: data['likeCount'],
@@ -74,6 +77,22 @@ class ImageRepository {
         );
       }
       return imageDetails;
+    } on FirebaseException catch (e) {
+      firebaseHandleException(e);
+    } catch (e) {
+      firebaseHandleException(e);
+    }
+    return null;
+  }
+
+  FutureOr<String?> _getUserName(String id) async {
+    try {
+      final DocumentSnapshot userDoc = await userCollection.doc(fbUserId).get();
+      final data = userDoc.data() as Map<String, dynamic>?;
+      if (userDoc.exists) {
+        return data!['userName'];
+      }
+      throw 'User not found';
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {

@@ -98,7 +98,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
           showChangeProfileDialog(context, title: 'Change Profile Photo'),
       child: InstaCircleAvatar(
         image: photo,
-        radius: InstaCircleAvatarSize.large,
+        radius: InstaCircleAvatarSize.veryLarge,
       ),
     );
   }
