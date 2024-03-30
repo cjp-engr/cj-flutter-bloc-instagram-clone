@@ -74,10 +74,12 @@ class _UserNameAndButtonsWidgetState
         hasId
             ? const SecondaryButton(
                 assetName: IconRes.ellipsis,
+                scale: 3.5,
               )
             : SecondaryButton(
                 assetName: IconRes.settings,
                 onPressed: () => context.goNamed(InstaRouteNames.settings),
+                scale: 3,
               )
       ],
     );
@@ -96,7 +98,7 @@ class _UserNameAndButtonsWidgetState
           onPressed: () => context.goNamed(InstaRouteNames.editProfile),
         ),
         hasId
-            ? const SizedBox()
+            ? const SizedBox(width: 110)
             : PrimaryButton(
                 color: InstaColor.primary,
                 text: AppLocalizations.of(context)!.viewArchive,

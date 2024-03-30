@@ -3,6 +3,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dar
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
@@ -15,31 +16,49 @@ class UserBioWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.goNamed(
-          InstaRouteNames.userDetails,
-          pathParameters: {'id': details.userId!},
-        );
-      },
-      child: Row(
-        children: [
-          const InstaCircleAvatar(
-            image: IconRes.testOnly,
-            radius: InstaCircleAvatarSize.small,
-          ),
-          const SizedBox(width: InstaSpacing.extraSmall),
-          Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        InkWell(
+          onTap: () {
+            context.goNamed(
+              InstaRouteNames.userDetails,
+              pathParameters: {'id': details.userId!},
+            );
+          },
+          child: Row(
             children: [
-              InstaText(text: details.userName!),
-              InstaText(
-                text: details.location ?? '',
-                color: applyColor[InstaColor.disabled],
+              const InstaCircleAvatar(
+                image: IconRes.testOnly,
+                radius: InstaCircleAvatarSize.small,
+              ),
+              const SizedBox(width: InstaSpacing.extraSmall),
+              Column(
+                children: [
+                  InstaText(text: details.userName!),
+                  InstaText(
+                    text: details.location ?? '',
+                    color: applyColor[InstaColor.disabled],
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
+        ),
+        const _DisplayOptionsWidget(),
+      ],
+    );
+  }
+}
+
+class _DisplayOptionsWidget extends StatelessWidget {
+  const _DisplayOptionsWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return const SecondaryButton(
+      assetName: IconRes.menuVertical,
+      scale: 3.5,
     );
   }
 }

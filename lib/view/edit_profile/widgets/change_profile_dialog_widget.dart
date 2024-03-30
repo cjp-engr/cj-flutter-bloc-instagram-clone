@@ -6,7 +6,6 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/edit_profile/controller
 import 'package:flutter/material.dart';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -73,10 +72,9 @@ class _InstaDialogState extends ConsumerState<_InstaDialog> {
           ),
           actionsAlignment: MainAxisAlignment.center,
           actions: [
-            PrimaryButton(
-              color: InstaColor.primary,
-              text: 'Cancel',
-              onPressed: () => Navigator.of(context).pop(),
+            InkWell(
+              onTap: () => Navigator.of(context).pop(),
+              child: const InstaText(text: 'Cancel'),
             ),
           ],
         ),
@@ -88,9 +86,14 @@ class _InstaDialogState extends ConsumerState<_InstaDialog> {
     required int index,
     required Color color,
   }) {
-    return GestureDetector(
-      onTap: () =>
-          index == 0 ? _controller.pickImage() : _controller.removeImage(),
+    return InkWell(
+      onTap: index == 0
+          ? () async {
+              final navigator = Navigator.of(context);
+              await _controller.pickImage();
+              navigator.pop();
+            }
+          : _controller.removeImage,
       child: Padding(
         padding: const EdgeInsets.all(InstaSpacing.tiny),
         child: SizedBox(

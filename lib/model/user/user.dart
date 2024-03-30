@@ -21,7 +21,6 @@ class UserDetails with _$UserDetails {
     @Default('') String? email,
     @Default('') String? fullName,
     @Default('') String? userName,
-    @Default('') String? image,
     @Default('') String? imageUrl,
     @Default('') String? description,
     @Default([]) List<String>? followers,

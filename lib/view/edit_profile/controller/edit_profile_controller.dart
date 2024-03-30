@@ -16,7 +16,8 @@ class EditProfileController {
       final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
       ref
           .read(updateUserDetailsProvider.notifier)
-          .updatePhoto(user!.copyWith(image: pickedImage!.path));
+          .updatePhoto(user!, pickedImage!.path);
+
       // ignore: empty_catches
     } catch (e) {}
   }

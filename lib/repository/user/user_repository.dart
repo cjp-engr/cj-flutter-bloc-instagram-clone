@@ -17,16 +17,15 @@ class UserRepository {
     try {
       final DocumentSnapshot userDoc = await userCollection.doc(fbUserId).get();
       final data = userDoc.data() as Map<String, dynamic>?;
-      final ref = FirebaseStorage.instance.ref().child(data!['image']);
-      final imageUrl = await ref.getDownloadURL();
+      // final ref = FirebaseStorage.instance.ref().child(data!['image']);
+      // final imageUrl = await ref.getDownloadURL();
       if (userDoc.exists) {
         return UserDetails(
-          email: data['email'],
+          email: data!['email'],
           fullName: data['fullName'],
           userName: data['userName'],
           description: data['description'],
-          image: data['image'],
-          imageUrl: imageUrl,
+          imageUrl: data['imageUrl'],
         );
       }
       throw 'User not found';
@@ -45,7 +44,7 @@ class UserRepository {
         'fullName': details.fullName,
         'userName': details.userName,
         'description': details.description,
-        'image': details.image,
+        'imageUrl': details.imageUrl,
       });
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
@@ -62,8 +61,9 @@ class UserRepository {
 
     try {
       Reference storageRef = storageReference.child('$folderName/$fileName');
-      updateDetails(details.copyWith(image: '$folderName/$fileName'));
       await storageRef.putFile(image);
+      String url = await storageRef.getDownloadURL();
+      await updateDetails(details.copyWith(imageUrl: url));
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     }

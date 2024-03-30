@@ -25,7 +25,6 @@ _$UserDetailsImpl _$$UserDetailsImplFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String? ?? '',
       fullName: json['fullName'] as String? ?? '',
       userName: json['userName'] as String? ?? '',
-      image: json['image'] as String? ?? '',
       imageUrl: json['imageUrl'] as String? ?? '',
       description: json['description'] as String? ?? '',
       followers: (json['followers'] as List<dynamic>?)
@@ -43,7 +42,6 @@ Map<String, dynamic> _$$UserDetailsImplToJson(_$UserDetailsImpl instance) =>
       'email': instance.email,
       'fullName': instance.fullName,
       'userName': instance.userName,
-      'image': instance.image,
       'imageUrl': instance.imageUrl,
       'description': instance.description,
       'followers': instance.followers,

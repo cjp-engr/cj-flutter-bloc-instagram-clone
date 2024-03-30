@@ -18,11 +18,10 @@ class UpdateUserDetails extends _$UpdateUserDetails {
     );
   }
 
-  Future<void> updatePhoto(UserDetails details) async {
+  Future<void> updatePhoto(UserDetails details, String path) async {
     state = const AsyncLoading<void>();
     state = await AsyncValue.guard<void>(
-      () =>
-          ref.read(userRepositoryProvider).updatePhoto(details, details.image!),
+      () => ref.read(userRepositoryProvider).updatePhoto(details, path),
     );
   }
 }

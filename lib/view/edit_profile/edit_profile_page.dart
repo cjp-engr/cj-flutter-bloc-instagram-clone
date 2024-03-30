@@ -4,7 +4,6 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dar
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/update_user_details_provider.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
@@ -19,7 +18,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 
 class EditProfilePage extends ConsumerStatefulWidget {
   const EditProfilePage({super.key});
@@ -90,12 +88,12 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
       error: (error, stackTrace) {
         return const Text('there is an error');
       },
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const Center(child: CircularProgressIndicator()),
     );
   }
 
   Widget _buildImage(String photo) {
-    return GestureDetector(
+    return InkWell(
       onTap: () =>
           showChangeProfileDialog(context, title: 'Change Profile Photo'),
       child: InstaCircleAvatar(
@@ -164,7 +162,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
             fullName: _fullNameController.text.trim(),
             userName: _userNameController.text.trim(),
             description: _descriptionController.text.trim(),
-            image: details.image,
+            imageUrl: details.imageUrl,
           ),
         );
   }
@@ -175,7 +173,6 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
       (prev, next) {
         next.whenOrNull(
           data: (_) {
-            context.goNamed(InstaRouteNames.profile);
             ref.read(displayUserDetailsProvider.notifier).getUserDetails();
           },
           error: (e, st) {
@@ -185,6 +182,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
               buttonCancelText: 'OK',
             );
           },
+          loading: () => const CircularProgressIndicator(),
         );
       },
     );
