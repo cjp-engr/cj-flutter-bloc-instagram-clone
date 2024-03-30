@@ -6,6 +6,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/firebase_exception.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/random_name.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -56,20 +57,20 @@ class ImageRepository {
   //! START - Read operation
   FutureOr<List<ImageDetails>?> getImages() async {
     List<ImageDetails> imageDetails = [];
-    List<String> imageUrl = [];
+    List<String> imageUrls = [];
     try {
       QuerySnapshot images = await imagesCollection.get();
       for (var image in images.docs) {
         var data = image.data() as Map<String, dynamic>;
-        imageUrl = await _getImageUrls(data['folderName']);
-        String? userName = await _getUserName(data['userId']);
+        imageUrls = await _getImageUrls(data['folderName']);
+        final user = await _getUserDetails(data['userId']);
         imageDetails.add(
           ImageDetails(
             userId: data['userId'],
-            // userName: data['userName'],
-            userName: userName,
+            userName: user?.userName,
+            userImage: user?.imageUrl,
             location: data['location'],
-            images: imageUrl,
+            images: imageUrls,
             likeCount: data['likeCount'],
             description: data['description'],
             comments: _getComments(data['comments']),
@@ -85,12 +86,15 @@ class ImageRepository {
     return null;
   }
 
-  FutureOr<String?> _getUserName(String id) async {
+  FutureOr<UserDetails?> _getUserDetails(String id) async {
     try {
       final DocumentSnapshot userDoc = await userCollection.doc(fbUserId).get();
       final data = userDoc.data() as Map<String, dynamic>?;
       if (userDoc.exists) {
-        return data!['userName'];
+        return UserDetails(
+          userName: data!['userName'],
+          imageUrl: data['imageUrl'],
+        );
       }
       throw 'User not found';
     } on FirebaseException catch (e) {
@@ -126,4 +130,30 @@ class ImageRepository {
   }
 
   //! END - Read operation
+
+  //! START - Delete operation
+
+  FutureOr<void> deleteImages() async {
+    try {} on FirebaseException catch (e) {
+      firebaseHandleException(e);
+    } catch (e) {
+      firebaseHandleException(e);
+    }
+    return null;
+  }
+
+  //! END - Delete operation
+
+  //! START - Update operation
+
+  FutureOr<void> updateImages() async {
+    try {} on FirebaseException catch (e) {
+      firebaseHandleException(e);
+    } catch (e) {
+      firebaseHandleException(e);
+    }
+    return null;
+  }
+
+  //! END - Update operation
 }

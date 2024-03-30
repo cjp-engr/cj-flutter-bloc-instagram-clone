@@ -54,6 +54,7 @@ GoRouter router(RouterRef ref) {
     routes: [
       _login(),
       _register(),
+      _editProfile(),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return InstaNavigationBar(navigationShell: navigationShell);
@@ -92,13 +93,6 @@ StatefulShellBranch _profile() {
         name: InstaRouteNames.settings,
         pageBuilder: (context, state) => const NoTransitionPage(
           child: SettingsPage(),
-        ),
-      ),
-      GoRoute(
-        path: '/${InstaRouteNames.editProfile}',
-        name: InstaRouteNames.editProfile,
-        pageBuilder: (context, state) => const NoTransitionPage(
-          child: EditProfilePage(),
         ),
       ),
     ],
@@ -180,6 +174,16 @@ GoRoute _register() {
     name: InstaRouteNames.register,
     pageBuilder: (context, state) => const NoTransitionPage(
       child: RegisterPage(),
+    ),
+  );
+}
+
+GoRoute _editProfile() {
+  return GoRoute(
+    path: '/${InstaRouteNames.editProfile}',
+    name: InstaRouteNames.editProfile,
+    pageBuilder: (context, state) => const NoTransitionPage(
+      child: EditProfilePage(),
     ),
   );
 }

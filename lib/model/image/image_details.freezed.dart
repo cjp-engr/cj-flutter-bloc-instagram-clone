@@ -22,6 +22,7 @@ ImageDetails _$ImageDetailsFromJson(Map<String, dynamic> json) {
 mixin _$ImageDetails {
   String? get userId => throw _privateConstructorUsedError;
   String? get userName => throw _privateConstructorUsedError;
+  String? get userImage => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
   String? get imagesId => throw _privateConstructorUsedError;
   List<String>? get images => throw _privateConstructorUsedError;
@@ -44,6 +45,7 @@ abstract class $ImageDetailsCopyWith<$Res> {
   $Res call(
       {String? userId,
       String? userName,
+      String? userImage,
       String? location,
       String? imagesId,
       List<String>? images,
@@ -67,6 +69,7 @@ class _$ImageDetailsCopyWithImpl<$Res, $Val extends ImageDetails>
   $Res call({
     Object? userId = freezed,
     Object? userName = freezed,
+    Object? userImage = freezed,
     Object? location = freezed,
     Object? imagesId = freezed,
     Object? images = freezed,
@@ -82,6 +85,10 @@ class _$ImageDetailsCopyWithImpl<$Res, $Val extends ImageDetails>
       userName: freezed == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userImage: freezed == userImage
+          ? _value.userImage
+          : userImage // ignore: cast_nullable_to_non_nullable
               as String?,
       location: freezed == location
           ? _value.location
@@ -122,6 +129,7 @@ abstract class _$$ImageDetailsImplCopyWith<$Res>
   $Res call(
       {String? userId,
       String? userName,
+      String? userImage,
       String? location,
       String? imagesId,
       List<String>? images,
@@ -143,6 +151,7 @@ class __$$ImageDetailsImplCopyWithImpl<$Res>
   $Res call({
     Object? userId = freezed,
     Object? userName = freezed,
+    Object? userImage = freezed,
     Object? location = freezed,
     Object? imagesId = freezed,
     Object? images = freezed,
@@ -158,6 +167,10 @@ class __$$ImageDetailsImplCopyWithImpl<$Res>
       userName: freezed == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userImage: freezed == userImage
+          ? _value.userImage
+          : userImage // ignore: cast_nullable_to_non_nullable
               as String?,
       location: freezed == location
           ? _value.location
@@ -193,6 +206,7 @@ class _$ImageDetailsImpl implements _ImageDetails {
   const _$ImageDetailsImpl(
       {this.userId,
       this.userName,
+      this.userImage,
       this.location,
       this.imagesId,
       final List<String>? images,
@@ -209,6 +223,8 @@ class _$ImageDetailsImpl implements _ImageDetails {
   final String? userId;
   @override
   final String? userName;
+  @override
+  final String? userImage;
   @override
   final String? location;
   @override
@@ -239,7 +255,7 @@ class _$ImageDetailsImpl implements _ImageDetails {
 
   @override
   String toString() {
-    return 'ImageDetails(userId: $userId, userName: $userName, location: $location, imagesId: $imagesId, images: $images, likeCount: $likeCount, description: $description, comments: $comments)';
+    return 'ImageDetails(userId: $userId, userName: $userName, userImage: $userImage, location: $location, imagesId: $imagesId, images: $images, likeCount: $likeCount, description: $description, comments: $comments)';
   }
 
   @override
@@ -250,6 +266,8 @@ class _$ImageDetailsImpl implements _ImageDetails {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
+            (identical(other.userImage, userImage) ||
+                other.userImage == userImage) &&
             (identical(other.location, location) ||
                 other.location == location) &&
             (identical(other.imagesId, imagesId) ||
@@ -268,6 +286,7 @@ class _$ImageDetailsImpl implements _ImageDetails {
       runtimeType,
       userId,
       userName,
+      userImage,
       location,
       imagesId,
       const DeepCollectionEquality().hash(_images),
@@ -293,6 +312,7 @@ abstract class _ImageDetails implements ImageDetails {
   const factory _ImageDetails(
       {final String? userId,
       final String? userName,
+      final String? userImage,
       final String? location,
       final String? imagesId,
       final List<String>? images,
@@ -307,6 +327,8 @@ abstract class _ImageDetails implements ImageDetails {
   String? get userId;
   @override
   String? get userName;
+  @override
+  String? get userImage;
   @override
   String? get location;
   @override

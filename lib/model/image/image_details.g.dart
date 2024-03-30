@@ -10,6 +10,7 @@ _$ImageDetailsImpl _$$ImageDetailsImplFromJson(Map<String, dynamic> json) =>
     _$ImageDetailsImpl(
       userId: json['userId'] as String?,
       userName: json['userName'] as String?,
+      userImage: json['userImage'] as String?,
       location: json['location'] as String?,
       imagesId: json['imagesId'] as String?,
       images:
@@ -25,6 +26,7 @@ Map<String, dynamic> _$$ImageDetailsImplToJson(_$ImageDetailsImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
       'userName': instance.userName,
+      'userImage': instance.userImage,
       'location': instance.location,
       'imagesId': instance.imagesId,
       'images': instance.images,

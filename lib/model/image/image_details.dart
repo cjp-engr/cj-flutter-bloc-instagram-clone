@@ -8,6 +8,7 @@ class ImageDetails with _$ImageDetails {
   const factory ImageDetails({
     String? userId,
     String? userName,
+    String? userImage,
     String? location,
     String? imagesId,
     List<String>? images,

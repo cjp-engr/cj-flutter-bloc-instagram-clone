@@ -1,4 +1,3 @@
-import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/circle_avatar_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
@@ -6,11 +5,11 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.da
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/circle_avatar.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/modal_bottom_sheet.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class UserBioWidget extends StatelessWidget {
   final ImageDetails details;
@@ -30,8 +29,8 @@ class UserBioWidget extends StatelessWidget {
           },
           child: Row(
             children: [
-              const InstaCircleAvatar(
-                image: IconRes.testOnly,
+              InstaCircleAvatar(
+                image: details.userImage ?? IconRes.testOnly,
                 radius: InstaCircleAvatarSize.small,
               ),
               const SizedBox(width: InstaSpacing.extraSmall),
@@ -61,62 +60,37 @@ class _DisplayOptionsWidget extends StatelessWidget {
     return SecondaryButton(
       assetName: IconRes.menuVertical,
       scale: 4,
-      onPressed: () async {
-        showMaterialModalBottomSheet(
-          context: context,
-          backgroundColor: applyColor[InstaColor.transparent],
-          builder: (context) => SingleChildScrollView(
-            controller: ModalScrollController.of(context),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: InstaSpacing.tiny,
-                right: InstaSpacing.tiny,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: applyColor[InstaColor.primary],
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(InstaBorderRadius.small),
-                      topRight: Radius.circular(InstaBorderRadius.small),
-                    )),
-                child: Column(
-                  children: [
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: InstaSpacing.extraLarge * 4,
-                            vertical: InstaSpacing.tiny),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.white,
-                                width: 4,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: InstaSpacing.verySmall),
-                    _buildOption(asset: IconRes.edit, text: 'Edit'),
-                    const Divider(),
-                    _buildOption(asset: IconRes.delete, text: 'Delete'),
-                    const SizedBox(height: InstaSpacing.small),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        );
-      },
+      onPressed: () async => showCustomBottomSheet(context, widget: _test()),
+    );
+  }
+
+  Widget _test() {
+    return Column(
+      children: [
+        const SizedBox(height: InstaSpacing.verySmall),
+        _buildOption(
+          asset: IconRes.edit,
+          text: 'Edit',
+        ),
+        const Divider(),
+        _buildOption(
+          asset: IconRes.delete,
+          text: 'Delete',
+          isDelete: true,
+        ),
+        const SizedBox(height: InstaSpacing.small),
+      ],
     );
   }
 
   Widget _buildOption({
     required String asset,
     required String text,
+    bool isDelete = false,
   }) {
+    Color? color = isDelete
+        ? applyColor[InstaColor.alert]
+        : applyColor[InstaColor.tertiary];
     return Padding(
       padding: const EdgeInsets.all(InstaSpacing.tiny),
       child: Row(
@@ -124,11 +98,12 @@ class _DisplayOptionsWidget extends StatelessWidget {
           Image.asset(
             asset,
             scale: 4,
-            color: applyColor[InstaColor.tertiary],
+            color: color,
           ),
           const SizedBox(width: InstaSpacing.medium),
           InstaText(
             text: text,
+            color: color,
           ),
         ],
       ),

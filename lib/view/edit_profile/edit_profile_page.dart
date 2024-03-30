@@ -4,6 +4,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dar
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/update_user_details_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
@@ -18,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 class EditProfilePage extends ConsumerStatefulWidget {
   const EditProfilePage({super.key});
@@ -41,11 +43,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
     return user.when(
       data: (data) {
         return InstaAppBar(
-          appBarTitle: const InstaText(
-            text: 'Edit Profile',
-            fontSize: InstaFontSize.large,
-            fontWeight: FontWeight.bold,
-          ),
+          appBarTitle: const _AppBarWidget(),
           body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Padding(
@@ -185,6 +183,29 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
           loading: () => const CircularProgressIndicator(),
         );
       },
+    );
+  }
+}
+
+class _AppBarWidget extends StatelessWidget {
+  const _AppBarWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SecondaryButton(
+          assetName: IconRes.back,
+          scale: 4,
+          onPressed: () => context.goNamed(InstaRouteNames.profile),
+        ),
+        const SizedBox(width: InstaSpacing.verySmall),
+        const InstaText(
+          text: 'Edit Profile',
+          fontSize: InstaFontSize.large,
+          fontWeight: FontWeight.bold,
+        ),
+      ],
     );
   }
 }
