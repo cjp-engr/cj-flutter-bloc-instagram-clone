@@ -35,6 +35,7 @@ class UserBioWidget extends StatelessWidget {
               ),
               const SizedBox(width: InstaSpacing.extraSmall),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InstaText(text: details.userName!),
                   InstaText(

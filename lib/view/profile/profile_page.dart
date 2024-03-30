@@ -10,6 +10,8 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/profile/widgets/content
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ProfilePage extends StatelessWidget {
   final String? id;
   const ProfilePage({super.key, this.id});
@@ -19,8 +21,8 @@ class ProfilePage extends StatelessWidget {
     return InstaAppBar(
       appBarTitle: Breakpoints.mediumAndUp.isActive(context)
           ? const SizedBox()
-          : const InstaText(
-              text: 'Instaclone',
+          : InstaText(
+              text: AppLocalizations.of(context)!.appTitle,
               fontSize: InstaFontSize.veryLarge,
               fontWeight: FontWeight.bold,
             ),

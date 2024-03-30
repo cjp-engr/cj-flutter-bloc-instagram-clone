@@ -81,8 +81,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             scale: 1,
             color: applyColor[InstaColor.tertiary],
           ),
-          const InstaText(
-            text: 'Instaclone',
+          InstaText(
+            text: AppLocalizations.of(context)!.appTitle,
             fontSize: InstaFontSize.extraLarge,
             fontWeight: FontWeight.bold,
           ),

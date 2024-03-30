@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class AddPostWebPage extends ConsumerWidget {
   const AddPostWebPage({super.key});
 
@@ -18,8 +20,8 @@ class AddPostWebPage extends ConsumerWidget {
     return InstaAppBar(
         appBarTitle: Breakpoints.mediumAndUp.isActive(context)
             ? const SizedBox()
-            : const InstaText(
-                text: 'Instaclone',
+            : InstaText(
+                text: AppLocalizations.of(context)!.appTitle,
                 fontSize: InstaFontSize.veryLarge,
                 fontWeight: FontWeight.bold,
               ),
