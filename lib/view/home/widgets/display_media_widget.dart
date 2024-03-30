@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/routes_provider.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget.dart/details_block_widget.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget.dart/media_widget.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget.dart/user_bio_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/actions_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/details_block_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/media_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/bio_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,15 +19,15 @@ class DisplayMediaWidget extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     if (router.routeInformationProvider.value.uri.toString() ==
         '/${InstaRouteNames.userHomePage}') {
-      return const _OwnerDetailsWidget();
+      return const _UserDetailsWidget();
     } else {
-      return const SizedBox();
+      return const _HomeDetailsWidget();
     }
   }
 }
 
-class _OwnerDetailsWidget extends ConsumerWidget {
-  const _OwnerDetailsWidget();
+class _UserDetailsWidget extends ConsumerWidget {
+  const _UserDetailsWidget();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,7 +41,13 @@ class _OwnerDetailsWidget extends ConsumerWidget {
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: [
-                UserBioWidget(details: details![index]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BioWidget(details: details![index]),
+                    ActionsWidget(details: details[index]),
+                  ],
+                ),
                 const SizedBox(height: InstaSpacing.extraSmall),
                 MediaWidget(images: details[index].images!),
                 const SizedBox(height: InstaSpacing.medium),
@@ -56,5 +63,14 @@ class _OwnerDetailsWidget extends ConsumerWidget {
       },
       loading: () => const CircularProgressIndicator(),
     );
+  }
+}
+
+class _HomeDetailsWidget extends StatelessWidget {
+  const _HomeDetailsWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

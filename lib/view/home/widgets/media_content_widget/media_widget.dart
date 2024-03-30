@@ -1,7 +1,7 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/dots_indicator.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget.dart/icons_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/icons_widget.dart';
 import 'package:flutter/material.dart';
 
 class MediaWidget extends StatelessWidget {

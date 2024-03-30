@@ -5,17 +5,24 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:cj_flutter_riverpod_instagram_clone/repository/image/image_repository_provider.dart';
 
-part 'add_images_provider.g.dart';
+part 'images_provider.g.dart';
 
 @riverpod
-class AddImages extends _$AddImages {
+class Images extends _$Images {
   @override
   FutureOr<void> build() {}
 
-  Future<void> addImages(ImageDetails details) async {
+  FutureOr<void> addImages(ImageDetails details) async {
     state = const AsyncLoading<void>();
     state = await AsyncValue.guard<void>(
       () => ref.read(imageRepositoryProvider).addImages(details),
+    );
+  }
+
+  Future<void> deleteImages(String id) async {
+    state = const AsyncLoading<void>();
+    state = await AsyncValue.guard<void>(
+      () => ref.read(imageRepositoryProvider).deleteImages(id),
     );
   }
 }

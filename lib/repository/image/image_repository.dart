@@ -60,8 +60,9 @@ class ImageRepository {
     List<String> imageUrls = [];
     try {
       QuerySnapshot images = await imagesCollection.get();
-      for (var image in images.docs) {
-        var data = image.data() as Map<String, dynamic>;
+      for (var imagesSet in images.docs) {
+        var data = imagesSet.data() as Map<String, dynamic>;
+
         imageUrls = await _getImageUrls(data['folderName']);
         final user = await _getUserDetails(data['userId']);
         imageDetails.add(
@@ -70,6 +71,7 @@ class ImageRepository {
             userName: user?.userName,
             userImage: user?.imageUrl,
             location: data['location'],
+            imagesId: imagesSet.id,
             images: imageUrls,
             likeCount: data['likeCount'],
             description: data['description'],
@@ -133,13 +135,13 @@ class ImageRepository {
 
   //! START - Delete operation
 
-  FutureOr<void> deleteImages() async {
+  Future<void> deleteImages(String id) async {
+    await imagesCollection.doc(id).delete();
     try {} on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {
       firebaseHandleException(e);
     }
-    return null;
   }
 
   //! END - Delete operation

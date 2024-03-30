@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +7,6 @@ import 'package:go_router/go_router.dart';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/add_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
@@ -50,7 +50,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
   }
 
   Widget _buildPostButton() {
-    final postState = ref.watch(addImagesProvider);
+    final postState = ref.watch(imagesProvider);
     return postState.maybeWhen(
       orElse: () => InkWell(
         onTap: _submit,
@@ -85,7 +85,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
 
   void _addPostListener() {
     ref.listen<AsyncValue<void>>(
-      addImagesProvider,
+      imagesProvider,
       (prev, next) {
         next.whenOrNull(
           data: (data) {
@@ -115,7 +115,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
       }
     }
 
-    ref.read(addImagesProvider.notifier).addImages(
+    ref.read(imagesProvider.notifier).addImages(
           ImageDetails(
             userName: userName,
             images: path,
