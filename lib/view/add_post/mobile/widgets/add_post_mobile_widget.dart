@@ -19,14 +19,14 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/mobile/widgets
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/provider/add_post_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/widgets/select_dialog_widget.dart';
 
-class AddPostWidget extends ConsumerStatefulWidget {
-  const AddPostWidget({super.key});
+class AddPostMobileWidget extends ConsumerStatefulWidget {
+  const AddPostMobileWidget({super.key});
 
   @override
-  ConsumerState<AddPostWidget> createState() => _AddPostWidgetState();
+  ConsumerState<AddPostMobileWidget> createState() => _AddPostWidgetState();
 }
 
-class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
+class _AddPostWidgetState extends ConsumerState<AddPostMobileWidget> {
   final _descriptionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
           Container(
             padding: const EdgeInsets.all(InstaSpacing.small),
             child: state.mediaFileList?.isNotEmpty ?? false
-                ? _buildDescription()
+                ? _buildImagesUploaded()
                 : const _NoImageWidget(),
           ),
         ],
@@ -65,7 +65,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
     );
   }
 
-  Widget _buildDescription() {
+  Widget _buildImagesUploaded() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

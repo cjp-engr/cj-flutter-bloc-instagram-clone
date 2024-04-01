@@ -40,6 +40,7 @@ class AddPostController {
   }
   //! END - For mobile when picking a video from gallery
 
+  //! START - For mobile when removing an image from preview
   void removeMedia(int index) {
     final updateState = ref.read(addPostProvider.notifier);
     final state = ref.watch(addPostProvider);
@@ -64,6 +65,7 @@ class AddPostController {
           .pickPreviewImage(state.mediaFileList![newIndex], newIndex);
     }
   }
+  //! END - For mobile when removing an image from preview
 
   //! START - For web when dropping images
   Future<void> droppedImages(

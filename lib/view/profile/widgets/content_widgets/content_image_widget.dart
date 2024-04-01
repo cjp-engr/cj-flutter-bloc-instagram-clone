@@ -36,19 +36,17 @@ class ContentImageWidget extends ConsumerWidget {
                       data![index].images![0],
                     ),
                   ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: const EdgeInsets.all(InstaSpacing.extraSmall),
-                        child: data[index].images?.length == 1
-                            ? const SizedBox()
-                            : Image.asset(
-                                IconRes.stack,
-                                color: applyColor[InstaColor.tertiary],
-                                scale: 3.5,
-                              ),
-                      ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(InstaSpacing.extraSmall),
+                      child: data[index].images?.length == 1
+                          ? const SizedBox()
+                          : Image.asset(
+                              IconRes.stack,
+                              color: applyColor[InstaColor.tertiary],
+                              scale: 3.5,
+                            ),
                     ),
                   ),
                 ],
