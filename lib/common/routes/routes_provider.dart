@@ -56,6 +56,7 @@ GoRouter router(RouterRef ref) {
       _register(),
       _editProfile(),
       _userHome(),
+      _settings(),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return InstaNavigationBar(navigationShell: navigationShell);
@@ -80,13 +81,6 @@ StatefulShellBranch _profile() {
         name: InstaRouteNames.profile,
         pageBuilder: (context, state) => const NoTransitionPage(
           child: ProfilePage(),
-        ),
-      ),
-      GoRoute(
-        path: '/${InstaRouteNames.settings}',
-        name: InstaRouteNames.settings,
-        pageBuilder: (context, state) => const NoTransitionPage(
-          child: SettingsPage(),
         ),
       ),
     ],
@@ -188,6 +182,16 @@ GoRoute _userHome() {
     name: InstaRouteNames.userHomePage,
     pageBuilder: (context, state) => const NoTransitionPage(
       child: UserHomePage(),
+    ),
+  );
+}
+
+GoRoute _settings() {
+  return GoRoute(
+    path: '/${InstaRouteNames.settings}',
+    name: InstaRouteNames.settings,
+    pageBuilder: (context, state) => const NoTransitionPage(
+      child: SettingsPage(),
     ),
   );
 }

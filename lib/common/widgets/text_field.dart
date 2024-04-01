@@ -11,6 +11,7 @@ class InstaTextField extends StatefulWidget {
   final bool obscureText;
   final int maxLines;
   final String initialValue;
+  final Color? color;
 
   final Widget? prefixIcon;
   final Function(String)? onChanged;
@@ -21,6 +22,7 @@ class InstaTextField extends StatefulWidget {
     this.obscureText = false,
     this.maxLines = 1,
     this.initialValue = '',
+    this.color,
     this.prefixIcon,
     this.onChanged,
   });
@@ -60,14 +62,15 @@ class _InstaTextFieldState extends State<InstaTextField> {
             Radius.circular(InstaBorderRadius.small),
           ),
           borderSide: BorderSide(
-            color: applyColor[InstaColor.tertiary]!,
+            color: widget.color ?? applyColor[InstaColor.tertiary]!,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
             Radius.circular(InstaBorderRadius.small),
           ),
-          borderSide: BorderSide(color: applyColor[InstaColor.disabled]!),
+          borderSide: BorderSide(
+              color: widget.color ?? applyColor[InstaColor.disabled]!),
         ),
       ),
     );

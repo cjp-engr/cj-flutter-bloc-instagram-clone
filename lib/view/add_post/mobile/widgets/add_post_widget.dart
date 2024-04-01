@@ -75,6 +75,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostWidget> {
           label: 'Write Something',
           maxLines: 4,
           controller: _descriptionController,
+          color: applyColor[InstaColor.transparent],
           onChanged: (value) {
             _descriptionController.text = value;
           },
