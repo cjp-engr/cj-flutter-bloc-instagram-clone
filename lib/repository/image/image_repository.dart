@@ -148,13 +148,16 @@ class ImageRepository {
 
   //! START - Update operation
 
-  FutureOr<void> updateImages() async {
-    try {} on FirebaseException catch (e) {
+  Future<void> updateImages(List<String> images) async {
+    try {
+      await Future.forEach(images, (value) async {
+        await FirebaseStorage.instance.refFromURL(value).delete();
+      });
+    } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {
       firebaseHandleException(e);
     }
-    return null;
   }
 
   //! END - Update operation

@@ -2,24 +2,28 @@
 import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
 
 class EditPostState {
-  final ImageDetails? images;
+  final ImageDetails? imageDetails;
   final int previewImageIndex;
+  final List<String> mediaToRemove;
   final String errorMessage;
 
   EditPostState({
-    this.images,
+    this.imageDetails,
     this.previewImageIndex = 0,
+    this.mediaToRemove = const [],
     this.errorMessage = '',
   });
 
   EditPostState copyWith({
-    ImageDetails? images,
+    ImageDetails? imageDetails,
     int? previewImageIndex,
+    List<String>? mediaToRemove,
     String? errorMessage,
   }) {
     return EditPostState(
-      images: images ?? this.images,
+      imageDetails: imageDetails ?? this.imageDetails,
       previewImageIndex: previewImageIndex ?? this.previewImageIndex,
+      mediaToRemove: mediaToRemove ?? this.mediaToRemove,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
