@@ -22,10 +22,9 @@ class EditPost extends _$EditPost {
   }
 
   void removeImages(List<String> images, String url) {
-    List<String> urls = [];
     state = state.copyWith(
         imageDetails: state.imageDetails!.copyWith(images: images));
-    state = state.copyWith(mediaToRemove: [...urls, url]);
+    state = state.copyWith(mediaToRemove: [...state.mediaToRemove, url]);
   }
 }
 

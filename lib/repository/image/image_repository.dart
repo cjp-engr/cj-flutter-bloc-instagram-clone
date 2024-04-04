@@ -148,10 +148,14 @@ class ImageRepository {
 
   //! START - Update operation
 
-  Future<void> updateImages(List<String> images) async {
+  Future<void> updateImages(
+      ImageDetails details, List<String> deleteImages) async {
     try {
-      await Future.forEach(images, (value) async {
-        await FirebaseStorage.instance.refFromURL(value).delete();
+      await Future.forEach(deleteImages, (imageUrl) async {
+        await FirebaseStorage.instance.refFromURL(imageUrl).delete();
+      });
+      imagesCollection.doc(details.imagesId).update({
+        'description': details.description,
       });
     } on FirebaseException catch (e) {
       firebaseHandleException(e);

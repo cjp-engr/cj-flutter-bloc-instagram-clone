@@ -17,8 +17,10 @@ class EditPostController {
   }
   //! END - For mobile when removing an image from preview
 
-  void updateImages() {
+  //! START - For mobile when updating the uploaded media
+  void updateImages(ImageDetails details) {
     final deleteImages = ref.watch(editPostProvider).mediaToRemove;
-    ref.read(imagesProvider.notifier).updateImages(deleteImages);
+    ref.read(imagesProvider.notifier).updateImages(details, deleteImages);
   }
+  //! END - For mobile when updating the uploaded media
 }

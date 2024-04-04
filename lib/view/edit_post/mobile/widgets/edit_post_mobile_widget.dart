@@ -45,24 +45,24 @@ class _EditPostWidgetState extends ConsumerState<EditPostMobileWidget> {
     return InstaAppBar(
       appBarTitle: const _AppBarWidget(),
       appBarActions: [
-        _buildPostButton(),
+        _buildPostButton(details!),
       ],
       body: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(InstaSpacing.small),
-            child: _buildMediaWidget(details!),
+            child: _buildMediaWidget(details),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildPostButton() {
+  Widget _buildPostButton(ImageDetails details) {
     final postState = ref.watch(imagesProvider);
     return postState.maybeWhen(
       orElse: () => InkWell(
-        onTap: _submit,
+        onTap: () async => _submit(details),
         child: InstaText(
           text: 'Update',
           color: applyColor[InstaColor.secondary],
@@ -181,8 +181,12 @@ class _EditPostWidgetState extends ConsumerState<EditPostMobileWidget> {
     );
   }
 
-  void _submit() {
-    _controller.updateImages();
+  void _submit(ImageDetails details) {
+    _controller.updateImages(
+      details.copyWith(
+        description: _descriptionController.text.trim(),
+      ),
+    );
   }
 }
 

@@ -26,10 +26,12 @@ class Images extends _$Images {
     );
   }
 
-  Future<void> updateImages(List<String> images) async {
+  Future<void> updateImages(
+      ImageDetails details, List<String> deleteImages) async {
     state = const AsyncLoading<void>();
     state = await AsyncValue.guard<void>(
-      () => ref.read(imageRepositoryProvider).updateImages(images),
+      () =>
+          ref.read(imageRepositoryProvider).updateImages(details, deleteImages),
     );
   }
 }
