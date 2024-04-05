@@ -1,15 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/routes_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/actions_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/details_block_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/media_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/bio_widget.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/profile/provider/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
+import 'package:go_router/go_router.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class DisplayMediaWidget extends ConsumerWidget {
   const DisplayMediaWidget({super.key});
@@ -26,36 +33,59 @@ class DisplayMediaWidget extends ConsumerWidget {
   }
 }
 
-class _UserDetailsWidget extends ConsumerWidget {
+class _UserDetailsWidget extends ConsumerStatefulWidget {
   const _UserDetailsWidget();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_UserDetailsWidget> createState() => _UserDetailsWidgetState();
+}
+
+class _UserDetailsWidgetState extends ConsumerState<_UserDetailsWidget> {
+  final ItemScrollController scrollController = ItemScrollController();
+
+  @override
+  Widget build(BuildContext context) {
     final image = ref.watch(displayImagesProvider);
+    final viewIndex = ref.watch(profileProvider).scrollToIndex;
+
     return image.when(
       data: (details) {
-        return ListView.builder(
-          shrinkWrap: true,
-          itemCount: details?.length ?? 0,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            return Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    BioWidget(details: details![index]),
-                    ActionsWidget(details: details[index]),
-                  ],
+        return Material(
+          child: Column(
+            children: <Widget>[
+              AppBar(
+                title: const _AppBarWidget(),
+              ),
+              Expanded(
+                child: ScrollablePositionedList.builder(
+                  initialScrollIndex: viewIndex ?? 0,
+                  itemCount: details?.length ?? 0,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: InstaSpacing.verySmall),
+                    child: Column(
+                      key: ValueKey(index),
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BioWidget(details: details![index]),
+                            ActionsWidget(details: details[index]),
+                          ],
+                        ),
+                        const SizedBox(height: InstaSpacing.extraSmall),
+                        MediaWidget(images: details[index].images!),
+                        const SizedBox(height: InstaSpacing.medium),
+                        DetailsBlockWidget(details: details[index]),
+                        const SizedBox(height: InstaSpacing.medium),
+                      ],
+                    ),
+                  ),
                 ),
-                const SizedBox(height: InstaSpacing.extraSmall),
-                MediaWidget(images: details[index].images!),
-                const SizedBox(height: InstaSpacing.medium),
-                DetailsBlockWidget(details: details[index]),
-                const SizedBox(height: InstaSpacing.medium),
-              ],
-            );
-          },
+              ),
+            ],
+          ),
         );
       },
       error: (error, stackTrace) {
@@ -72,5 +102,28 @@ class _HomeDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container();
+  }
+}
+
+class _AppBarWidget extends StatelessWidget {
+  const _AppBarWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SecondaryButton(
+          assetName: IconRes.back,
+          scale: 4,
+          onPressed: () => context.goNamed(InstaRouteNames.profile),
+        ),
+        const SizedBox(width: InstaSpacing.verySmall),
+        const InstaText(
+          text: 'Hello World',
+          fontSize: InstaFontSize.large,
+          fontWeight: FontWeight.bold,
+        ),
+      ],
+    );
   }
 }

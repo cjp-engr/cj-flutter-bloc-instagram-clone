@@ -22,7 +22,7 @@ final previewEditMediaIdProvider = AutoDisposeProvider<String>.internal(
 );
 
 typedef PreviewEditMediaIdRef = AutoDisposeProviderRef<String>;
-String _$editPostHash() => r'e4d670b70e7468e126b56baa6c6f9716517891ae';
+String _$editPostHash() => r'28e4d69a3b05173e7ce88ec01c81fa386576dcd8';
 
 /// See also [EditPost].
 @ProviderFor(EditPost)

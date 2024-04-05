@@ -3,6 +3,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,6 +14,7 @@ class ContentImageWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final image = ref.watch(displayImagesProvider);
+    final controller = ProfileController(ref: ref);
 
     return image.when(
       data: (data) {
@@ -27,7 +29,10 @@ class ContentImageWidget extends ConsumerWidget {
           itemCount: data?.length ?? 0,
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () => context.goNamed(InstaRouteNames.userHomePage),
+              onTap: () {
+                context.goNamed(InstaRouteNames.userHomePage);
+                controller.getMediaIndexToView(index);
+              },
               child: Stack(
                 children: [
                   Container(
