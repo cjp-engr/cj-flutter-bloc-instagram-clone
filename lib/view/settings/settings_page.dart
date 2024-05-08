@@ -2,6 +2,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/font_size.d
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/auth/auth_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
@@ -12,11 +13,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class SettingsPage extends ConsumerWidget {
+class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends ConsumerState<SettingsPage> {
+  @override
+  Widget build(BuildContext context) {
     _settingsListener(context, ref);
     return InstaAppBar(
       appBarTitle: const _AppBarWidget(),
@@ -25,13 +31,7 @@ class SettingsPage extends ConsumerWidget {
         child: Center(
           child: Column(
             children: [
-              PrimaryButton(
-                color: InstaColor.primary,
-                text: 'Log out',
-                onPressed: () async {
-                  ref.read(authProvider.notifier).signout();
-                },
-              ),
+              _buildSignOut(),
             ],
           ),
         ),
@@ -39,11 +39,33 @@ class SettingsPage extends ConsumerWidget {
     );
   }
 
+  Widget _buildSignOut() {
+    final signOutState = ref.watch(authProvider);
+    return signOutState.isLoading
+        ? const CircularProgressIndicator()
+        : PrimaryButton(
+            color: InstaColor.primary,
+            text: 'Log out',
+            onPressed: () {
+              signOutState.maybeWhen(
+                orElse: () => _submit(ref),
+                loading: null,
+              );
+            },
+          );
+  }
+
+  void _submit(WidgetRef ref) {
+    ref.invalidate(displayUserDetailsProvider);
+    ref.read(authProvider.notifier).signout();
+  }
+
   void _settingsListener(BuildContext context, WidgetRef ref) {
     ref.listen<AsyncValue<void>>(
       authProvider,
       (prev, next) {
         next.whenOrNull(
+          skipLoadingOnRefresh: false,
           error: (e, st) {
             showAlertDialog(
               context,

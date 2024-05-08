@@ -10,19 +10,19 @@ import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-final fbUserId = fbAuth.currentUser!.uid;
-final imagesCollection = FirebaseFirestore.instance.collection('images');
+final imagesCollection = FirebaseFirestore.instance.collection('image');
 final userCollection = FirebaseFirestore.instance.collection('users');
 
 class ImageRepository {
   //! START - Add operation
   Future<void> addImages(ImageDetails d) async {
+    final fbUserId = fbAuth.currentUser!.uid;
     String folderName = 'uploads/images_${randomName()}';
     try {
       for (var image in d.images!) {
         _uploadImage(image, folderName);
       }
-      await imagesCollection.add({
+      await imagesCollection.doc(fbUserId).collection('images').add({
         'userId': fbUserId,
         'folderName': folderName,
         'likeCount': 0,
@@ -56,10 +56,12 @@ class ImageRepository {
 
   //! START - Read operation
   FutureOr<List<ImageDetails>?> getImages() async {
+    final fbUserId = fbAuth.currentUser!.uid;
     List<ImageDetails> imageDetails = [];
     List<String> imageUrls = [];
     try {
-      QuerySnapshot images = await imagesCollection.get();
+      QuerySnapshot images =
+          await imagesCollection.doc(fbUserId).collection('images').get();
       for (var imagesSet in images.docs) {
         var data = imagesSet.data() as Map<String, dynamic>;
 

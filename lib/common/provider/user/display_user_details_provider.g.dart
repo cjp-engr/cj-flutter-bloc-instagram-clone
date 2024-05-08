@@ -7,12 +7,12 @@ part of 'display_user_details_provider.dart';
 // **************************************************************************
 
 String _$displayUserDetailsHash() =>
-    r'05528748360f09ccfcbcf2991af0650b2288579f';
+    r'73797e1c9da74e3c574d19ff8ed5b08fe7d6b8f2';
 
 /// See also [DisplayUserDetails].
 @ProviderFor(DisplayUserDetails)
 final displayUserDetailsProvider =
-    AsyncNotifierProvider<DisplayUserDetails, UserDetails?>.internal(
+    AutoDisposeAsyncNotifierProvider<DisplayUserDetails, UserDetails?>.internal(
   DisplayUserDetails.new,
   name: r'displayUserDetailsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final displayUserDetailsProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$DisplayUserDetails = AsyncNotifier<UserDetails?>;
+typedef _$DisplayUserDetails = AutoDisposeAsyncNotifier<UserDetails?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

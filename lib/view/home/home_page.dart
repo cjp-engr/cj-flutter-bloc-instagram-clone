@@ -63,6 +63,7 @@ class _HomePageState extends ConsumerState<HomePage> {
       displayImagesProvider,
       (prev, next) {
         next.whenOrNull(
+          skipLoadingOnRefresh: false,
           error: (e, st) {
             showAlertDialog(
               context,

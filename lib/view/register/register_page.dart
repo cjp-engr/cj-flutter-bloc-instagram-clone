@@ -186,6 +186,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
       authProvider,
       (prev, next) {
         next.whenOrNull(
+          skipLoadingOnRefresh: false,
           error: (e, st) {
             showAlertDialog(
               context,

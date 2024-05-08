@@ -102,15 +102,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   Widget _buildLogin() {
     final loginState = ref.watch(authProvider);
-    return PrimaryButton(
-      color: InstaColor.secondary,
-      width: double.infinity,
-      text: AppLocalizations.of(context)!.login,
-      onPressed: loginState.maybeWhen(
-        orElse: () => _submit,
-        loading: null,
-      ),
-    );
+
+    return loginState.isLoading
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : PrimaryButton(
+            color: InstaColor.secondary,
+            width: double.infinity,
+            text: AppLocalizations.of(context)!.login,
+            onPressed: loginState.maybeWhen(
+              orElse: () => _submit,
+              loading: null,
+            ),
+          );
   }
 
   void _submit() {
@@ -149,6 +154,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       authProvider,
       (prev, next) {
         next.whenOrNull(
+          skipLoadingOnRefresh: false,
           error: (e, st) {
             showAlertDialog(
               context,

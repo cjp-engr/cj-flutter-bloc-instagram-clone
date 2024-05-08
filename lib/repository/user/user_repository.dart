@@ -8,13 +8,13 @@ import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-final fbUserId = fbAuth.currentUser!.uid;
 final userCollection = FirebaseFirestore.instance.collection('users');
 
 class UserRepository {
   //! START - Read operation
   FutureOr<UserDetails?> getDetails() async {
     try {
+      final fbUserId = fbAuth.currentUser!.uid;
       final DocumentSnapshot userDoc = await userCollection.doc(fbUserId).get();
       final data = userDoc.data() as Map<String, dynamic>?;
       if (userDoc.exists) {

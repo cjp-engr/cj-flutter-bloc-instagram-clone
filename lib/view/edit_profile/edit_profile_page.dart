@@ -170,6 +170,7 @@ class _SettingsPageState extends ConsumerState<EditProfilePage> {
       updateUserDetailsProvider,
       (prev, next) {
         next.whenOrNull(
+          skipLoadingOnRefresh: false,
           data: (_) {
             ref.read(displayUserDetailsProvider.notifier).getUserDetails();
           },

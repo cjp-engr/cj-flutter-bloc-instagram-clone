@@ -165,6 +165,7 @@ class _EditPostWidgetState extends ConsumerState<EditPostMobileWidget> {
       imagesProvider,
       (prev, next) {
         next.whenOrNull(
+          skipLoadingOnRefresh: false,
           data: (data) {
             context.goNamed(InstaRouteNames.home);
           },
