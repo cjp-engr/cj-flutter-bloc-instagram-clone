@@ -10,7 +10,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-final imagesCollection = FirebaseFirestore.instance.collection('image');
+// final imagesCollection = FirebaseFirestore.instance.collection('image');
 final userCollection = FirebaseFirestore.instance.collection('users');
 
 class ImageRepository {
@@ -22,7 +22,8 @@ class ImageRepository {
       for (var image in d.images!) {
         _uploadImage(image, folderName);
       }
-      await imagesCollection.doc(fbUserId).collection('images').add({
+
+      await userCollection.doc(fbUserId).collection('images').add({
         'userId': fbUserId,
         'folderName': folderName,
         'likeCount': 0,
@@ -61,7 +62,8 @@ class ImageRepository {
     List<String> imageUrls = [];
     try {
       QuerySnapshot images =
-          await imagesCollection.doc(fbUserId).collection('images').get();
+          await userCollection.doc(fbUserId).collection('images').get();
+
       for (var imagesSet in images.docs) {
         var data = imagesSet.data() as Map<String, dynamic>;
 
@@ -138,8 +140,9 @@ class ImageRepository {
   //! START - Delete operation
 
   Future<void> deleteImages(String id) async {
-    await imagesCollection.doc(id).delete();
-    try {} on FirebaseException catch (e) {
+    try {
+      await userCollection.doc(fbUserId).collection('images').doc(id).delete();
+    } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {
       firebaseHandleException(e);
@@ -156,7 +159,11 @@ class ImageRepository {
       await Future.forEach(deleteImages, (imageUrl) async {
         await FirebaseStorage.instance.refFromURL(imageUrl).delete();
       });
-      imagesCollection.doc(details.imagesId).update({
+      await userCollection
+          .doc(fbUserId)
+          .collection('images')
+          .doc(details.imagesId)
+          .update({
         'description': details.description,
       });
     } on FirebaseException catch (e) {

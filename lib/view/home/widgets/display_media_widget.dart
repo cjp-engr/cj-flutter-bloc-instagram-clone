@@ -119,7 +119,7 @@ class _AppBarWidget extends StatelessWidget {
         ),
         const SizedBox(width: InstaSpacing.verySmall),
         const InstaText(
-          text: 'Hello World',
+          text: 'Posts',
           fontSize: InstaFontSize.large,
           fontWeight: FontWeight.bold,
         ),
