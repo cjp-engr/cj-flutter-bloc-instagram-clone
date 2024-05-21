@@ -48,7 +48,9 @@ class _InstaDialog extends StatelessWidget {
                 : PrimaryButton(
                     color: InstaColor.secondary,
                     text: buttonConfirmText ?? 'Confirm',
-                    onPressed: () {},
+                    onPressed: () async {
+                      onPressed!();
+                    },
                   )
           ],
         ),

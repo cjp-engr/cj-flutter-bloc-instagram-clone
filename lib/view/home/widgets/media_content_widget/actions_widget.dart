@@ -3,6 +3,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/modal_bottom_sheet.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
@@ -54,9 +55,18 @@ class _ActionsWidgetState extends ConsumerState<ActionsWidget> {
           isDelete: true,
           onTap: () async {
             Navigator.pop(context);
-            ref
-                .read(displayImagesProvider.notifier)
-                .deleteImages(widget.details.imagesId ?? '');
+            showAlertDialog(
+              context,
+              title: 'Are you sure you want to delete?',
+              buttonConfirmText: 'Yes',
+              buttonCancelText: 'No!',
+              onPressed: () async {
+                ref
+                    .read(displayImagesProvider.notifier)
+                    .deleteImages(widget.details.imagesId ?? '');
+                Navigator.pop(context);
+              },
+            );
           },
         ),
         const SizedBox(height: InstaSpacing.small),
