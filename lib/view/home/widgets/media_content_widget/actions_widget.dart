@@ -1,6 +1,6 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/images_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/buttons.dart';
@@ -40,6 +40,7 @@ class _ActionsWidgetState extends ConsumerState<ActionsWidget> {
           text: 'Edit',
           details: widget.details,
           onTap: () async {
+            Navigator.pop(context);
             context.goNamed(InstaRouteNames.editPost,
                 pathParameters: {'id': widget.details.imagesId!});
             ref.read(editPostProvider.notifier).displayImages(widget.details);
@@ -51,9 +52,12 @@ class _ActionsWidgetState extends ConsumerState<ActionsWidget> {
           text: 'Delete',
           details: widget.details,
           isDelete: true,
-          onTap: () async => ref
-              .read(imagesProvider.notifier)
-              .deleteImages(widget.details.imagesId ?? ''),
+          onTap: () async {
+            Navigator.pop(context);
+            ref
+                .read(displayImagesProvider.notifier)
+                .deleteImages(widget.details.imagesId ?? '');
+          },
         ),
         const SizedBox(height: InstaSpacing.small),
       ],
@@ -81,9 +85,6 @@ class _OptionWidget extends StatelessWidget {
         ? applyColor[InstaColor.alert]
         : applyColor[InstaColor.tertiary];
     return InkWell(
-      // onTap: () async {
-      //   ref.read(imagesProvider.notifier).deleteImages(details.imagesId ?? '');
-      // },
       onTap: () async {
         onTap!();
       },

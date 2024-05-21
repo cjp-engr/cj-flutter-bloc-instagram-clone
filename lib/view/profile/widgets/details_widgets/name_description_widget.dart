@@ -18,9 +18,9 @@ class NameAndDescriptionWidget extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildDisplayName(data?.fullName ?? ''),
-                const SizedBox(height: InstaSpacing.medium),
+                const SizedBox(height: InstaSpacing.tiny),
                 _buildDescription(data?.description ?? ''),
-                const SizedBox(height: InstaSpacing.small),
+                const SizedBox(height: InstaSpacing.tiny),
               ],
             ),
             const SizedBox(),

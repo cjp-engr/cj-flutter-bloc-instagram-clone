@@ -39,4 +39,16 @@ class DisplayImages extends _$DisplayImages {
       return list;
     });
   }
+
+  Future<void> deleteImages(String id) async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      ref.read(imageRepositoryProvider).deleteImages(id);
+
+      List<ImageDetails>? list =
+          state.value?.where((ImageDetails d) => d.imagesId != id).toList();
+
+      return list;
+    });
+  }
 }

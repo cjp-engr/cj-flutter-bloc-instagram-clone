@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/controller/add_post_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -85,12 +86,14 @@ class _AddPostWidgetState extends ConsumerState<AddPostMobileWidget> {
   }
 
   void _addPostListener() {
+    final controller = AddPostController(ref: ref);
     ref.listen<AsyncValue<void>>(
       displayImagesProvider,
       (prev, next) {
         next.whenOrNull(
           data: (data) {
             context.goNamed(InstaRouteNames.home);
+            controller.clearMedia();
           },
           error: (e, st) {
             showAlertDialog(
