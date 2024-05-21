@@ -33,27 +33,37 @@ class AddedMediaMobileWidget extends ConsumerWidget {
             decoration: BoxDecoration(
               color: applyColor[InstaColor.primary]!,
             ),
-            child: PageView(
-              physics: const ClampingScrollPhysics(),
-              controller: pageController,
-              children: List.generate(state.mediaFileList!.length, (index) {
-                return kIsWeb && (!isAndroid || !isIos)
-                    ? Image.network(
-                        state.mediaFileList![index].path,
-                      )
-                    : Stack(
-                        children: [
-                          Center(
-                            child: Image.file(
-                              File(
-                                state.mediaFileList![index].path,
+            child: Stack(
+              children: [
+                PageView(
+                  physics: const ClampingScrollPhysics(),
+                  controller: pageController,
+                  children: List.generate(
+                    state.mediaFileList!.length,
+                    (index) {
+                      return kIsWeb && (!isAndroid || !isIos)
+                          ? Image.network(
+                              state.mediaFileList![index].path,
+                            )
+                          : Center(
+                              child: Image.file(
+                                File(
+                                  state.mediaFileList![index].path,
+                                ),
+                                width: double.infinity,
+                                height: 320,
+                                fit: BoxFit.cover,
                               ),
-                            ),
-                          ),
-                          _buildRemoveButton(ref, state.previewImageIndex),
-                        ],
-                      );
-              }),
+                            );
+                    },
+                  ),
+                ),
+                Positioned(
+                  top: InstaSpacing.tiny,
+                  right: InstaSpacing.tiny,
+                  child: _buildRemoveButton(ref, state.previewImageIndex),
+                ),
+              ],
             ),
           ),
         ),
@@ -81,7 +91,7 @@ class AddedMediaMobileWidget extends ConsumerWidget {
           child: Image.asset(
             IconRes.delete,
             color: applyColor[InstaColor.alert],
-            scale: 3.5,
+            scale: 2.8,
           ),
         ),
       ),
