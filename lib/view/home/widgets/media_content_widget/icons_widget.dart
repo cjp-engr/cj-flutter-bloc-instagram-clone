@@ -17,7 +17,7 @@ class IconsWidget extends StatelessWidget {
         SizedBox(width: InstaSpacing.tiny),
         SecondaryButton(
           assetName: IconRes.saved,
-          scale: 3,
+          scale: 2.7,
         ),
       ],
     );

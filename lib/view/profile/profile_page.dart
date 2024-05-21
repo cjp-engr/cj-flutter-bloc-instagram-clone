@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
           ? const SizedBox()
           : InstaText(
               text: AppLocalizations.of(context)!.appTitle,
-              fontSize: InstaFontSize.veryLarge,
+              fontSize: InstaFontSize.large,
               fontWeight: FontWeight.bold,
             ),
       body: Padding(

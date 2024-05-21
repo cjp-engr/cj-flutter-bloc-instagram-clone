@@ -26,8 +26,10 @@ class _DetailsBlockWidgetState extends ConsumerState<DetailsBlockWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildLike(),
-        _buildUserName(),
         _buildDescription(),
+        widget.details.description!.isEmpty
+            ? const SizedBox()
+            : const SizedBox(height: InstaSpacing.extraSmall),
         _buildViewComment(),
         const SizedBox(height: InstaSpacing.extraSmall),
         const AddCommentWidget(),
@@ -37,13 +39,6 @@ class _DetailsBlockWidgetState extends ConsumerState<DetailsBlockWidget> {
 
   Widget _buildLike() {
     return InstaText(text: AppLocalizations.of(context)!.likesCount(1234));
-  }
-
-  Widget _buildUserName() {
-    return InstaText(
-      text: widget.details.userName!,
-      fontWeight: FontWeight.bold,
-    );
   }
 
   Widget _buildDescription() {

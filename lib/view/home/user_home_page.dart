@@ -1,4 +1,3 @@
-import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/display_media_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -9,9 +8,6 @@ class UserHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imagesState = ref.watch(displayImagesProvider);
-    return imagesState.isLoading
-        ? const CircularProgressIndicator()
-        : const DisplayMediaWidget();
+    return const DisplayMediaWidget();
   }
 }

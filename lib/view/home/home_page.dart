@@ -1,16 +1,9 @@
-import 'package:cj_flutter_riverpod_instagram_clone/common/constants/font_size.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/display_media_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   final String? id;
@@ -32,27 +25,6 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return InstaAppBar(
-      appBarTitle: Breakpoints.mediumAndUp.isActive(context)
-          ? const SizedBox()
-          : InstaText(
-              text: AppLocalizations.of(context)!.appTitle,
-              fontSize: InstaFontSize.veryLarge,
-              fontWeight: FontWeight.bold,
-            ),
-      body: TapRegion(
-        onTapOutside: (event) => FocusScope.of(context).unfocus(),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.padding),
-          child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: InstaSpacing.medium),
-              DisplayMediaWidget(),
-            ],
-          ),
-        ),
-      ),
-    );
+    return const DisplayMediaWidget();
   }
 }

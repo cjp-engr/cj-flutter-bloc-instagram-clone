@@ -31,8 +31,8 @@ class _AddPostWidgetState extends ConsumerState<AddPostMobileWidget> {
   final _descriptionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(addPostProvider);
     _addPostListener();
+    final state = ref.watch(addPostProvider);
     return InstaAppBar(
       appBarActions: [
         _buildPostButton(),
@@ -92,7 +92,6 @@ class _AddPostWidgetState extends ConsumerState<AddPostMobileWidget> {
       (prev, next) {
         next.whenOrNull(
           data: (data) {
-            context.goNamed(InstaRouteNames.home);
             controller.clearMedia();
           },
           error: (e, st) {
@@ -102,7 +101,6 @@ class _AddPostWidgetState extends ConsumerState<AddPostMobileWidget> {
               buttonCancelText: 'OK',
             );
           },
-          loading: () => const CircularProgressIndicator(),
         );
       },
     );
@@ -133,6 +131,8 @@ class _AddPostWidgetState extends ConsumerState<AddPostMobileWidget> {
             ],
           ),
         );
+
+    context.goNamed(InstaRouteNames.home);
   }
 }
 
