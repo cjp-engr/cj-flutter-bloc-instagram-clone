@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'display_user_details_provider.g.dart';
 
-@Riverpod(keepAlive: false)
+@Riverpod(keepAlive: true)
 class DisplayUserDetails extends _$DisplayUserDetails {
   @override
   FutureOr<UserDetails?> build() {

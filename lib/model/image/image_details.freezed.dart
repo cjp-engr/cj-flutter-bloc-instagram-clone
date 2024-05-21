@@ -29,6 +29,7 @@ mixin _$ImageDetails {
   int? get likeCount => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   List<String>? get comments => throw _privateConstructorUsedError;
+  num? get dateCreated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +52,8 @@ abstract class $ImageDetailsCopyWith<$Res> {
       List<String>? images,
       int? likeCount,
       String? description,
-      List<String>? comments});
+      List<String>? comments,
+      num? dateCreated});
 }
 
 /// @nodoc
@@ -76,6 +78,7 @@ class _$ImageDetailsCopyWithImpl<$Res, $Val extends ImageDetails>
     Object? likeCount = freezed,
     Object? description = freezed,
     Object? comments = freezed,
+    Object? dateCreated = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -114,6 +117,10 @@ class _$ImageDetailsCopyWithImpl<$Res, $Val extends ImageDetails>
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      dateCreated: freezed == dateCreated
+          ? _value.dateCreated
+          : dateCreated // ignore: cast_nullable_to_non_nullable
+              as num?,
     ) as $Val);
   }
 }
@@ -135,7 +142,8 @@ abstract class _$$ImageDetailsImplCopyWith<$Res>
       List<String>? images,
       int? likeCount,
       String? description,
-      List<String>? comments});
+      List<String>? comments,
+      num? dateCreated});
 }
 
 /// @nodoc
@@ -158,6 +166,7 @@ class __$$ImageDetailsImplCopyWithImpl<$Res>
     Object? likeCount = freezed,
     Object? description = freezed,
     Object? comments = freezed,
+    Object? dateCreated = freezed,
   }) {
     return _then(_$ImageDetailsImpl(
       userId: freezed == userId
@@ -196,6 +205,10 @@ class __$$ImageDetailsImplCopyWithImpl<$Res>
           ? _value._comments
           : comments // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      dateCreated: freezed == dateCreated
+          ? _value.dateCreated
+          : dateCreated // ignore: cast_nullable_to_non_nullable
+              as num?,
     ));
   }
 }
@@ -212,7 +225,8 @@ class _$ImageDetailsImpl implements _ImageDetails {
       final List<String>? images,
       this.likeCount,
       this.description,
-      final List<String>? comments})
+      final List<String>? comments,
+      this.dateCreated})
       : _images = images,
         _comments = comments;
 
@@ -254,8 +268,11 @@ class _$ImageDetailsImpl implements _ImageDetails {
   }
 
   @override
+  final num? dateCreated;
+
+  @override
   String toString() {
-    return 'ImageDetails(userId: $userId, userName: $userName, userImage: $userImage, location: $location, imagesId: $imagesId, images: $images, likeCount: $likeCount, description: $description, comments: $comments)';
+    return 'ImageDetails(userId: $userId, userName: $userName, userImage: $userImage, location: $location, imagesId: $imagesId, images: $images, likeCount: $likeCount, description: $description, comments: $comments, dateCreated: $dateCreated)';
   }
 
   @override
@@ -277,7 +294,9 @@ class _$ImageDetailsImpl implements _ImageDetails {
                 other.likeCount == likeCount) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            const DeepCollectionEquality().equals(other._comments, _comments));
+            const DeepCollectionEquality().equals(other._comments, _comments) &&
+            (identical(other.dateCreated, dateCreated) ||
+                other.dateCreated == dateCreated));
   }
 
   @JsonKey(ignore: true)
@@ -292,7 +311,8 @@ class _$ImageDetailsImpl implements _ImageDetails {
       const DeepCollectionEquality().hash(_images),
       likeCount,
       description,
-      const DeepCollectionEquality().hash(_comments));
+      const DeepCollectionEquality().hash(_comments),
+      dateCreated);
 
   @JsonKey(ignore: true)
   @override
@@ -318,7 +338,8 @@ abstract class _ImageDetails implements ImageDetails {
       final List<String>? images,
       final int? likeCount,
       final String? description,
-      final List<String>? comments}) = _$ImageDetailsImpl;
+      final List<String>? comments,
+      final num? dateCreated}) = _$ImageDetailsImpl;
 
   factory _ImageDetails.fromJson(Map<String, dynamic> json) =
       _$ImageDetailsImpl.fromJson;
@@ -341,6 +362,8 @@ abstract class _ImageDetails implements ImageDetails {
   String? get description;
   @override
   List<String>? get comments;
+  @override
+  num? get dateCreated;
   @override
   @JsonKey(ignore: true)
   _$$ImageDetailsImplCopyWith<_$ImageDetailsImpl> get copyWith =>

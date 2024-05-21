@@ -12,13 +12,6 @@ class Images extends _$Images {
   @override
   FutureOr<void> build() {}
 
-  FutureOr<void> addImages(ImageDetails details) async {
-    state = const AsyncLoading<void>();
-    state = await AsyncValue.guard<void>(
-      () => ref.read(imageRepositoryProvider).addImages(details),
-    );
-  }
-
   Future<void> deleteImages(String id) async {
     state = const AsyncLoading<void>();
     state = await AsyncValue.guard<void>(

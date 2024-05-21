@@ -15,14 +15,18 @@ final userCollection = FirebaseFirestore.instance.collection('users');
 
 class ImageRepository {
   //! START - Add operation
-  Future<void> addImages(ImageDetails d) async {
+  Future<ImageDetails?> addImages(ImageDetails d) async {
     final fbUserId = fbAuth.currentUser!.uid;
     String folderName = 'uploads/images_${randomName()}';
+    List<String> imagesUrl = [];
+    ImageDetails details;
+    String imageId = '';
+
     try {
       for (var image in d.images!) {
-        _uploadImage(image, folderName);
+        String? url = await _uploadImage(image, folderName);
+        imagesUrl.add(url!);
       }
-
       await userCollection.doc(fbUserId).collection('images').add({
         'userId': fbUserId,
         'folderName': folderName,
@@ -32,15 +36,20 @@ class ImageRepository {
         'description': d.description,
         'comments': d.comments,
         'dateCreated': DateTime.now().millisecondsSinceEpoch,
+      }).then((value) async {
+        imageId = value.id;
       });
+      details = (await _getImage(imageId, imagesUrl))!;
+      return details;
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {
       firebaseHandleException(e);
     }
+    return null;
   }
 
-  Future<void> _uploadImage(String path, String folderName) async {
+  Future<String?> _uploadImage(String path, String folderName) async {
     File image = File(path);
     int dotIndex = path.lastIndexOf('.');
     String fileName = '${randomName()}${path.substring(dotIndex, path.length)}';
@@ -48,9 +57,12 @@ class ImageRepository {
     try {
       Reference storageRef = storageReference.child('$folderName/$fileName');
       await storageRef.putFile(image);
+      String url = await storageRef.getDownloadURL();
+      return url;
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     }
+    return null;
   }
 
   //! END - Add operation
@@ -80,10 +92,48 @@ class ImageRepository {
             likeCount: data['likeCount'],
             description: data['description'],
             comments: _getComments(data['comments']),
+            dateCreated: data['dateCreated'],
           ),
         );
       }
       return imageDetails;
+    } on FirebaseException catch (e) {
+      firebaseHandleException(e);
+    } catch (e) {
+      firebaseHandleException(e);
+    }
+    return null;
+  }
+
+  FutureOr<ImageDetails?> _getImage(
+    String imageId,
+    List<String> imageUrls,
+  ) async {
+    final fbUserId = fbAuth.currentUser!.uid;
+    try {
+      final DocumentSnapshot imageDoc = await userCollection
+          .doc(fbUserId)
+          .collection('images')
+          .doc(imageId)
+          .get();
+      final data = imageDoc.data() as Map<String, dynamic>?;
+      final user = await _getUserDetails(data!['userId']);
+
+      if (imageDoc.exists) {
+        return ImageDetails(
+          userId: data['userId'],
+          userName: user?.userName,
+          userImage: user?.imageUrl,
+          location: data['location'],
+          imagesId: imageId,
+          images: imageUrls,
+          likeCount: data['likeCount'],
+          description: data['description'],
+          comments: _getComments(data['comments']),
+          dateCreated: data['dateCreated'] ?? 0,
+        );
+      }
+      throw 'Image not found';
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {
@@ -131,8 +181,8 @@ class ImageRepository {
       return imageUrl;
     } catch (e) {
       firebaseHandleException(e);
+      return [IconRes.testOnly];
     }
-    return [IconRes.testOnly];
   }
 
   //! END - Read operation

@@ -15,6 +15,7 @@ class ImageDetails with _$ImageDetails {
     int? likeCount,
     String? description,
     List<String>? comments,
+    num? dateCreated,
   }) = _ImageDetails;
 
   factory ImageDetails.fromJson(Map<String, Object?> json) =>

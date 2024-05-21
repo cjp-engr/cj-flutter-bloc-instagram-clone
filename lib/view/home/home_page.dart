@@ -3,7 +3,6 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dar
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/alert_dialog.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/app_bar.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/display_media_widget.dart';
@@ -33,7 +32,6 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    _displayImagesListener();
     return InstaAppBar(
       appBarTitle: Breakpoints.mediumAndUp.isActive(context)
           ? const SizedBox()
@@ -55,24 +53,6 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ),
       ),
-    );
-  }
-
-  void _displayImagesListener() {
-    ref.listen<AsyncValue<void>>(
-      displayImagesProvider,
-      (prev, next) {
-        next.whenOrNull(
-          skipLoadingOnRefresh: false,
-          error: (e, st) {
-            showAlertDialog(
-              context,
-              title: e.toString(),
-              buttonCancelText: 'OK',
-            );
-          },
-        );
-      },
     );
   }
 }

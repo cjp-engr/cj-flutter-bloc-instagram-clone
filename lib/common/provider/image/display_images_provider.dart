@@ -20,7 +20,23 @@ class DisplayImages extends _$DisplayImages {
 
     state = await AsyncValue.guard(() async {
       final images = await ref.read(imageRepositoryProvider).getImages();
+      images?.sort((a, b) => b.dateCreated!.compareTo(a.dateCreated!));
       return images;
+    });
+  }
+
+  Future<void> addImages(ImageDetails details) async {
+    state = const AsyncLoading();
+
+    state = await AsyncValue.guard(() async {
+      final image = await ref.read(imageRepositoryProvider).addImages(details);
+      List<ImageDetails>? list = [
+        ...state.value ?? [],
+        image ?? const ImageDetails()
+      ];
+      list.sort((a, b) => b.dateCreated!.compareTo(a.dateCreated!));
+
+      return list;
     });
   }
 }

@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/images_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/user/display_user_details_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,7 +50,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostMobileWidget> {
   }
 
   Widget _buildPostButton() {
-    final postState = ref.watch(imagesProvider);
+    final postState = ref.watch(displayImagesProvider);
     return postState.maybeWhen(
       orElse: () => InkWell(
         onTap: _submit,
@@ -86,10 +86,9 @@ class _AddPostWidgetState extends ConsumerState<AddPostMobileWidget> {
 
   void _addPostListener() {
     ref.listen<AsyncValue<void>>(
-      imagesProvider,
+      displayImagesProvider,
       (prev, next) {
         next.whenOrNull(
-          skipLoadingOnRefresh: false,
           data: (data) {
             context.goNamed(InstaRouteNames.home);
           },
@@ -117,7 +116,7 @@ class _AddPostWidgetState extends ConsumerState<AddPostMobileWidget> {
       }
     }
 
-    ref.read(imagesProvider.notifier).addImages(
+    ref.read(displayImagesProvider.notifier).addImages(
           ImageDetails(
             userName: userName,
             images: path,

@@ -20,6 +20,7 @@ _$ImageDetailsImpl _$$ImageDetailsImplFromJson(Map<String, dynamic> json) =>
       comments: (json['comments'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      dateCreated: json['dateCreated'] as num?,
     );
 
 Map<String, dynamic> _$$ImageDetailsImplToJson(_$ImageDetailsImpl instance) =>
@@ -33,4 +34,5 @@ Map<String, dynamic> _$$ImageDetailsImplToJson(_$ImageDetailsImpl instance) =>
       'likeCount': instance.likeCount,
       'description': instance.description,
       'comments': instance.comments,
+      'dateCreated': instance.dateCreated,
     };
