@@ -22,6 +22,8 @@ class ImageRepository {
     String imagesId = '';
     int dateCreated = DateTime.now().millisecondsSinceEpoch;
 
+    final user = await _getUserDetails();
+
     try {
       for (var image in d.images!) {
         String? url = await _uploadImage(image, folderName);
@@ -40,7 +42,8 @@ class ImageRepository {
       });
       return ImageDetails(
         userId: fbUserId,
-        userName: d.userName,
+        userName: user!.userName,
+        userImage: user.imageUrl,
         location: d.location,
         imagesId: imagesId,
         images: imagesUrl,
@@ -87,7 +90,7 @@ class ImageRepository {
         var data = imagesSet.data() as Map<String, dynamic>;
 
         imageUrls = await _getImageUrls(data['folderName']);
-        final user = await _getUserDetails(data['userId']);
+        final user = await _getUserDetails();
         imageDetails.add(
           ImageDetails(
             userId: data['userId'],
@@ -112,7 +115,7 @@ class ImageRepository {
     return null;
   }
 
-  FutureOr<UserDetails?> _getUserDetails(String id) async {
+  FutureOr<UserDetails?> _getUserDetails() async {
     try {
       final DocumentSnapshot userDoc = await userCollection.doc(fbUserId).get();
       final data = userDoc.data() as Map<String, dynamic>?;
