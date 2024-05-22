@@ -14,6 +14,7 @@ class InstaTextField extends StatefulWidget {
   final Color? color;
 
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final Function(String)? onChanged;
   InstaTextField({
     this.controller,
@@ -24,6 +25,7 @@ class InstaTextField extends StatefulWidget {
     this.initialValue = '',
     this.color,
     this.prefixIcon,
+    this.suffixIcon,
     this.onChanged,
   });
 
@@ -47,13 +49,15 @@ class _InstaTextFieldState extends State<InstaTextField> {
       onChanged: _onChanged,
       style: const TextStyle(fontSize: InstaFontSize.medium),
       decoration: InputDecoration(
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        hintText: widget.label,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
         floatingLabelStyle: TextStyle(color: applyColor[InstaColor.disabled]),
         contentPadding: const EdgeInsets.symmetric(
           vertical: InstaSpacing.verySmall,
           horizontal: InstaSpacing.verySmall,
         ),
         prefixIcon: widget.prefixIcon,
+        suffixIcon: widget.suffixIcon,
         labelText: widget.label,
         alignLabelWithHint: true,
         labelStyle: const TextStyle(fontSize: InstaFontSize.medium),

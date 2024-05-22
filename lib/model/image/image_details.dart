@@ -14,7 +14,6 @@ class ImageDetails with _$ImageDetails {
     List<String>? images,
     int? likeCount,
     String? description,
-    List<String>? comments,
     num? dateCreated,
   }) = _ImageDetails;
 

@@ -35,7 +35,6 @@ class ImageRepository {
         'likeCount': 0,
         'location': d.location,
         'description': d.description,
-        'comments': d.comments,
         'dateCreated': dateCreated,
       }).then((value) async {
         imagesId = value.id;
@@ -101,7 +100,6 @@ class ImageRepository {
             images: imageUrls,
             likeCount: data['likeCount'],
             description: data['description'],
-            comments: _getComments(data['comments']),
             dateCreated: data['dateCreated'],
           ),
         );

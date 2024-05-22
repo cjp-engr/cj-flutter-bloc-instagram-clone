@@ -123,12 +123,6 @@ class _AddPostWidgetState extends ConsumerState<AddPostMobileWidget> {
             images: path,
             location: 'Philippines',
             description: _descriptionController.text.trim(),
-            comments: [
-              'Hardcoded comments only!!! 0',
-              'Hardcoded comments only!!! 1',
-              'Hardcoded comments only!!! 2',
-              'Hardcoded comments only!!! 3',
-            ],
           ),
         );
 

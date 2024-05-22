@@ -28,7 +28,6 @@ mixin _$ImageDetails {
   List<String>? get images => throw _privateConstructorUsedError;
   int? get likeCount => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  List<String>? get comments => throw _privateConstructorUsedError;
   num? get dateCreated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +51,6 @@ abstract class $ImageDetailsCopyWith<$Res> {
       List<String>? images,
       int? likeCount,
       String? description,
-      List<String>? comments,
       num? dateCreated});
 }
 
@@ -77,7 +75,6 @@ class _$ImageDetailsCopyWithImpl<$Res, $Val extends ImageDetails>
     Object? images = freezed,
     Object? likeCount = freezed,
     Object? description = freezed,
-    Object? comments = freezed,
     Object? dateCreated = freezed,
   }) {
     return _then(_value.copyWith(
@@ -113,10 +110,6 @@ class _$ImageDetailsCopyWithImpl<$Res, $Val extends ImageDetails>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      comments: freezed == comments
-          ? _value.comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       dateCreated: freezed == dateCreated
           ? _value.dateCreated
           : dateCreated // ignore: cast_nullable_to_non_nullable
@@ -142,7 +135,6 @@ abstract class _$$ImageDetailsImplCopyWith<$Res>
       List<String>? images,
       int? likeCount,
       String? description,
-      List<String>? comments,
       num? dateCreated});
 }
 
@@ -165,7 +157,6 @@ class __$$ImageDetailsImplCopyWithImpl<$Res>
     Object? images = freezed,
     Object? likeCount = freezed,
     Object? description = freezed,
-    Object? comments = freezed,
     Object? dateCreated = freezed,
   }) {
     return _then(_$ImageDetailsImpl(
@@ -201,10 +192,6 @@ class __$$ImageDetailsImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      comments: freezed == comments
-          ? _value._comments
-          : comments // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       dateCreated: freezed == dateCreated
           ? _value.dateCreated
           : dateCreated // ignore: cast_nullable_to_non_nullable
@@ -225,10 +212,8 @@ class _$ImageDetailsImpl implements _ImageDetails {
       final List<String>? images,
       this.likeCount,
       this.description,
-      final List<String>? comments,
       this.dateCreated})
-      : _images = images,
-        _comments = comments;
+      : _images = images;
 
   factory _$ImageDetailsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ImageDetailsImplFromJson(json);
@@ -257,22 +242,12 @@ class _$ImageDetailsImpl implements _ImageDetails {
   final int? likeCount;
   @override
   final String? description;
-  final List<String>? _comments;
-  @override
-  List<String>? get comments {
-    final value = _comments;
-    if (value == null) return null;
-    if (_comments is EqualUnmodifiableListView) return _comments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
   @override
   final num? dateCreated;
 
   @override
   String toString() {
-    return 'ImageDetails(userId: $userId, userName: $userName, userImage: $userImage, location: $location, imagesId: $imagesId, images: $images, likeCount: $likeCount, description: $description, comments: $comments, dateCreated: $dateCreated)';
+    return 'ImageDetails(userId: $userId, userName: $userName, userImage: $userImage, location: $location, imagesId: $imagesId, images: $images, likeCount: $likeCount, description: $description, dateCreated: $dateCreated)';
   }
 
   @override
@@ -294,7 +269,6 @@ class _$ImageDetailsImpl implements _ImageDetails {
                 other.likeCount == likeCount) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            const DeepCollectionEquality().equals(other._comments, _comments) &&
             (identical(other.dateCreated, dateCreated) ||
                 other.dateCreated == dateCreated));
   }
@@ -311,7 +285,6 @@ class _$ImageDetailsImpl implements _ImageDetails {
       const DeepCollectionEquality().hash(_images),
       likeCount,
       description,
-      const DeepCollectionEquality().hash(_comments),
       dateCreated);
 
   @JsonKey(ignore: true)
@@ -338,7 +311,6 @@ abstract class _ImageDetails implements ImageDetails {
       final List<String>? images,
       final int? likeCount,
       final String? description,
-      final List<String>? comments,
       final num? dateCreated}) = _$ImageDetailsImpl;
 
   factory _ImageDetails.fromJson(Map<String, dynamic> json) =
@@ -360,8 +332,6 @@ abstract class _ImageDetails implements ImageDetails {
   int? get likeCount;
   @override
   String? get description;
-  @override
-  List<String>? get comments;
   @override
   num? get dateCreated;
   @override

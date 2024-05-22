@@ -33,7 +33,7 @@ class _DetailsBlockWidgetState extends ConsumerState<DetailsBlockWidget> {
             : const SizedBox(height: InstaSpacing.extraSmall),
         _buildViewComment(),
         const SizedBox(height: InstaSpacing.extraSmall),
-        const AddCommentWidget(),
+        AddCommentWidget(details: widget.details),
       ],
     );
   }

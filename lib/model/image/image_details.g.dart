@@ -17,9 +17,6 @@ _$ImageDetailsImpl _$$ImageDetailsImplFromJson(Map<String, dynamic> json) =>
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       likeCount: json['likeCount'] as int?,
       description: json['description'] as String?,
-      comments: (json['comments'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
       dateCreated: json['dateCreated'] as num?,
     );
 
@@ -33,6 +30,5 @@ Map<String, dynamic> _$$ImageDetailsImplToJson(_$ImageDetailsImpl instance) =>
       'images': instance.images,
       'likeCount': instance.likeCount,
       'description': instance.description,
-      'comments': instance.comments,
       'dateCreated': instance.dateCreated,
     };
