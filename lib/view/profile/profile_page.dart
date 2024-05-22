@@ -38,7 +38,7 @@ class ProfilePage extends StatelessWidget {
             const NameAndDescriptionWidget(),
             const SizedBox(height: InstaSpacing.verySmall),
             const CountsWidget(),
-            const SizedBox(height: InstaSpacing.verySmall),
+            const SizedBox(height: InstaSpacing.tiny),
             const ContentsWidget(),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
@@ -44,8 +45,26 @@ class _DetailsBlockWidgetState extends ConsumerState<DetailsBlockWidget> {
   Widget _buildDescription() {
     return widget.details.description!.isEmpty
         ? const SizedBox()
-        : InstaText(
-            text: widget.details.description!, textAlign: TextAlign.start);
+        : Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: widget.details.userName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: InstaFontSize.medium,
+                  ),
+                ),
+                const TextSpan(text: ' '),
+                TextSpan(
+                    text: widget.details.description,
+                    style: const TextStyle(
+                      fontSize: InstaFontSize.medium,
+                    )),
+              ],
+            ),
+            textAlign: TextAlign.start,
+          );
   }
 
   Widget _buildViewComment() {

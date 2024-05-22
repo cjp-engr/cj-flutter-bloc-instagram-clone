@@ -124,8 +124,9 @@ class _HomeDetailsWidgetState extends ConsumerState<_HomeDetailsWidget> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: InstaSpacing.verySmall),
                   child: LinearProgressIndicator(
-                      minHeight: 2,
-                      backgroundColor: applyColor[InstaColor.primary]),
+                    minHeight: 2,
+                    color: applyColor[InstaColor.secondary],
+                  ),
                 )
               : const SizedBox(),
           image.when(

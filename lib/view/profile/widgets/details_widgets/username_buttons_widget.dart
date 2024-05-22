@@ -70,7 +70,7 @@ class _UserNameAndButtonsWidgetState
         InstaText(
           text: userName ?? 'Username not displayed',
           fontWeight: FontWeight.bold,
-          fontSize: InstaFontSize.veryLarge,
+          fontSize: InstaFontSize.large,
         ),
         hasId
             ? const SecondaryButton(

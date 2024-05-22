@@ -86,7 +86,7 @@ class _CustomBottomNavigation extends ConsumerWidget {
   }
 
   Widget _icon(String assetName) => Image.asset(assetName,
-      color: applyColor[InstaColor.tertiary], scale: 2.3);
+      color: applyColor[InstaColor.tertiary], scale: 2.5);
 
   void _onDestinationSelected(int index, WidgetRef ref) {
     navigationShell!.goBranch(
@@ -107,7 +107,7 @@ class _ProfileIconWidget extends ConsumerWidget {
       data: (data) {
         return InstaCircleAvatar(
           image: data?.imageUrl ?? IconRes.testOnly,
-          radius: InstaCircleAvatarSize.small,
+          radius: InstaCircleAvatarSize.verySmall,
         );
       },
       error: (error, stackTrace) => const Text('there is an error'),
@@ -180,7 +180,7 @@ class _CustomNavigationRail extends ConsumerWidget {
           padding: EdgeInsets.only(bottom: InstaSpacing.large),
           child: InstaCircleAvatar(
             image: IconRes.testOnly,
-            radius: InstaCircleAvatarSize.small,
+            radius: InstaCircleAvatarSize.verySmall,
           ),
         ),
       ),
