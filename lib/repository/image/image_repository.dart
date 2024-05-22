@@ -19,8 +19,8 @@ class ImageRepository {
     final fbUserId = fbAuth.currentUser!.uid;
     String folderName = 'uploads/images_${randomName()}';
     List<String> imagesUrl = [];
-    ImageDetails details;
-    String imageId = '';
+    String imagesId = '';
+    int dateCreated = DateTime.now().millisecondsSinceEpoch;
 
     try {
       for (var image in d.images!) {
@@ -31,16 +31,23 @@ class ImageRepository {
         'userId': fbUserId,
         'folderName': folderName,
         'likeCount': 0,
-        'userName': d.userName,
         'location': d.location,
         'description': d.description,
         'comments': d.comments,
-        'dateCreated': DateTime.now().millisecondsSinceEpoch,
+        'dateCreated': dateCreated,
       }).then((value) async {
-        imageId = value.id;
+        imagesId = value.id;
       });
-      details = (await _getImage(imageId, imagesUrl))!;
-      return details;
+      return ImageDetails(
+        userId: fbUserId,
+        userName: d.userName,
+        location: d.location,
+        imagesId: imagesId,
+        images: imagesUrl,
+        likeCount: 0,
+        description: d.description,
+        dateCreated: dateCreated,
+      );
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {
@@ -97,43 +104,6 @@ class ImageRepository {
         );
       }
       return imageDetails;
-    } on FirebaseException catch (e) {
-      firebaseHandleException(e);
-    } catch (e) {
-      firebaseHandleException(e);
-    }
-    return null;
-  }
-
-  FutureOr<ImageDetails?> _getImage(
-    String imageId,
-    List<String> imageUrls,
-  ) async {
-    final fbUserId = fbAuth.currentUser!.uid;
-    try {
-      final DocumentSnapshot imageDoc = await userCollection
-          .doc(fbUserId)
-          .collection('images')
-          .doc(imageId)
-          .get();
-      final data = imageDoc.data() as Map<String, dynamic>?;
-      final user = await _getUserDetails(data!['userId']);
-
-      if (imageDoc.exists) {
-        return ImageDetails(
-          userId: data['userId'],
-          userName: user?.userName,
-          userImage: user?.imageUrl,
-          location: data['location'],
-          imagesId: imageId,
-          images: imageUrls,
-          likeCount: data['likeCount'],
-          description: data['description'],
-          comments: _getComments(data['comments']),
-          dateCreated: data['dateCreated'] ?? 0,
-        );
-      }
-      throw 'Image not found';
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {
