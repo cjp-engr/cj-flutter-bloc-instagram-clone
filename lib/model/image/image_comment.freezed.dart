@@ -20,6 +20,7 @@ ImageComment _$ImageCommentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ImageComment {
+  String? get id => throw _privateConstructorUsedError;
   String? get recipientId => throw _privateConstructorUsedError;
   String? get commenterId => throw _privateConstructorUsedError;
   num? get dateCreated => throw _privateConstructorUsedError;
@@ -39,7 +40,8 @@ abstract class $ImageCommentCopyWith<$Res> {
       _$ImageCommentCopyWithImpl<$Res, ImageComment>;
   @useResult
   $Res call(
-      {String? recipientId,
+      {String? id,
+      String? recipientId,
       String? commenterId,
       num? dateCreated,
       String? imagesId,
@@ -59,6 +61,7 @@ class _$ImageCommentCopyWithImpl<$Res, $Val extends ImageComment>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? recipientId = freezed,
     Object? commenterId = freezed,
     Object? dateCreated = freezed,
@@ -66,6 +69,10 @@ class _$ImageCommentCopyWithImpl<$Res, $Val extends ImageComment>
     Object? comment = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       recipientId: freezed == recipientId
           ? _value.recipientId
           : recipientId // ignore: cast_nullable_to_non_nullable
@@ -99,7 +106,8 @@ abstract class _$$ImageCommentImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? recipientId,
+      {String? id,
+      String? recipientId,
       String? commenterId,
       num? dateCreated,
       String? imagesId,
@@ -117,6 +125,7 @@ class __$$ImageCommentImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? recipientId = freezed,
     Object? commenterId = freezed,
     Object? dateCreated = freezed,
@@ -124,6 +133,10 @@ class __$$ImageCommentImplCopyWithImpl<$Res>
     Object? comment = freezed,
   }) {
     return _then(_$ImageCommentImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       recipientId: freezed == recipientId
           ? _value.recipientId
           : recipientId // ignore: cast_nullable_to_non_nullable
@@ -152,7 +165,8 @@ class __$$ImageCommentImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ImageCommentImpl implements _ImageComment {
   const _$ImageCommentImpl(
-      {this.recipientId,
+      {this.id,
+      this.recipientId,
       this.commenterId,
       this.dateCreated,
       this.imagesId,
@@ -161,6 +175,8 @@ class _$ImageCommentImpl implements _ImageComment {
   factory _$ImageCommentImpl.fromJson(Map<String, dynamic> json) =>
       _$$ImageCommentImplFromJson(json);
 
+  @override
+  final String? id;
   @override
   final String? recipientId;
   @override
@@ -174,7 +190,7 @@ class _$ImageCommentImpl implements _ImageComment {
 
   @override
   String toString() {
-    return 'ImageComment(recipientId: $recipientId, commenterId: $commenterId, dateCreated: $dateCreated, imagesId: $imagesId, comment: $comment)';
+    return 'ImageComment(id: $id, recipientId: $recipientId, commenterId: $commenterId, dateCreated: $dateCreated, imagesId: $imagesId, comment: $comment)';
   }
 
   @override
@@ -182,6 +198,7 @@ class _$ImageCommentImpl implements _ImageComment {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ImageCommentImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.recipientId, recipientId) ||
                 other.recipientId == recipientId) &&
             (identical(other.commenterId, commenterId) ||
@@ -195,8 +212,8 @@ class _$ImageCommentImpl implements _ImageComment {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, recipientId, commenterId, dateCreated, imagesId, comment);
+  int get hashCode => Object.hash(runtimeType, id, recipientId, commenterId,
+      dateCreated, imagesId, comment);
 
   @JsonKey(ignore: true)
   @override
@@ -214,7 +231,8 @@ class _$ImageCommentImpl implements _ImageComment {
 
 abstract class _ImageComment implements ImageComment {
   const factory _ImageComment(
-      {final String? recipientId,
+      {final String? id,
+      final String? recipientId,
       final String? commenterId,
       final num? dateCreated,
       final String? imagesId,
@@ -223,6 +241,8 @@ abstract class _ImageComment implements ImageComment {
   factory _ImageComment.fromJson(Map<String, dynamic> json) =
       _$ImageCommentImpl.fromJson;
 
+  @override
+  String? get id;
   @override
   String? get recipientId;
   @override

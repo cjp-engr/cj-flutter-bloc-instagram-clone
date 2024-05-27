@@ -6,6 +6,7 @@ part 'image_comment.g.dart';
 @freezed
 class ImageComment with _$ImageComment {
   const factory ImageComment({
+    String? id,
     String? recipientId,
     String? commenterId,
     num? dateCreated,

@@ -1,5 +1,6 @@
 class IconRes {
   static const String _iconBase = 'assets/icons';
+  static const String addMedia = '$_iconBase/add-media.png';
   static const String adjust = '$_iconBase/adjust.png';
   static const String arrowUp = '$_iconBase/arrow-up.png';
   static const String back = '$_iconBase/back.png';

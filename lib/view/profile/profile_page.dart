@@ -30,7 +30,6 @@ class ProfilePage extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: Breakpoints.mediumAndUp.isActive(context) ? 80 : 15),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: InstaSpacing.verySmall),
             UserNameAndButtonsWidget(id: id),

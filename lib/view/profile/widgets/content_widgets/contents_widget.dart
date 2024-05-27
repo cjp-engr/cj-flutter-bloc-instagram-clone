@@ -63,13 +63,11 @@ class _ContentsWidgetState extends State<ContentsWidget> {
     );
   }
 
-  Widget _tab(String assetName) {
-    return Tab(
-      icon: SecondaryButton(
-        assetName: assetName,
-      ),
-    );
-  }
+  Widget _tab(String assetName) => Tab(
+        icon: SecondaryButton(
+          assetName: assetName,
+        ),
+      );
 
   List<Widget> get _tabs => [
         _tab(IconRes.grid),

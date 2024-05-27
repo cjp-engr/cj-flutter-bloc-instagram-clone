@@ -3,6 +3,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/routes/route_names.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/icon_res.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,48 +25,68 @@ class _ContentImageWidgetState extends ConsumerState<ContentImageWidget> {
         ? const CircularProgressIndicator()
         : images.when(
             data: (data) {
-              return GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                ),
-                itemCount: data?.length ?? 0,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      context.goNamed(InstaRouteNames.userHomePage);
-                      controller.getMediaIndexToView(index);
-                    },
-                    child: Stack(
+              return data!.isEmpty
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Container(
-                          alignment: Alignment.center,
-                          child: Image.network(
-                            data![index].images?[0] ?? IconRes.testOnly,
-                          ),
+                        const SizedBox(height: InstaSpacing.extraLarge * 2),
+                        Image.asset(
+                          IconRes.emptyGallery,
+                          color: applyColor[InstaColor.disabled],
+                          scale: 1,
                         ),
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.all(InstaSpacing.extraSmall),
-                            child: data[index].images?.length == 1
-                                ? const SizedBox()
-                                : Image.asset(
-                                    IconRes.stack,
-                                    color: applyColor[InstaColor.tertiary],
-                                    scale: 3.5,
-                                  ),
-                          ),
-                        ),
+                        const SizedBox(height: InstaSpacing.small),
+                        InstaText(
+                          text: 'Wow, such empty!',
+                          color: applyColor[InstaColor.disabled],
+                          fontWeight: FontWeight.bold,
+                        )
                       ],
-                    ),
-                  );
-                },
-              );
+                    )
+                  : GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                      ),
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            context.goNamed(InstaRouteNames.userHomePage);
+                            controller.getMediaIndexToView(index);
+                          },
+                          child: Stack(
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                child: Image.network(
+                                  data[index].images?[0] ?? IconRes.testOnly,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(
+                                      InstaSpacing.extraSmall),
+                                  child: data[index].images?.length == 1
+                                      ? const SizedBox()
+                                      : Image.asset(
+                                          IconRes.stack,
+                                          color:
+                                              applyColor[InstaColor.tertiary],
+                                          scale: 3.5,
+                                        ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
             },
             error: (error, stackTrace) {
               return const Text('there is an error');

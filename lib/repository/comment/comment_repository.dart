@@ -14,9 +14,10 @@ class CommentRepository {
         .collection('comments');
   }
 
-  //! START - Add operation
-  Future<ImageComment?> addComment(ImageComment d) async {
+  //! START - Add comment operation to images
+  Future<ImageComment?> addImagesComment(ImageComment d) async {
     int dateCreated = DateTime.now().millisecondsSinceEpoch;
+    String commentId = '';
 
     try {
       await commentCollection(d.imagesId!).add({
@@ -25,8 +26,14 @@ class CommentRepository {
         'imagesId': d.imagesId,
         'comment': d.comment,
         'recipientId': d.recipientId,
-      }).then((value) async {});
-      return const ImageComment();
+      }).then((value) async {
+        commentId = value.id;
+      });
+      return d.copyWith(
+        id: commentId,
+        commenterId: _commenterId,
+        dateCreated: dateCreated,
+      );
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {

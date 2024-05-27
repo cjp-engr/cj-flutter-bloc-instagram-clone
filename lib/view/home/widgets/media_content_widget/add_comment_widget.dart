@@ -98,17 +98,25 @@ class _AddCommentWidgetState extends ConsumerState<AddCommentWidget> {
                     radius: InstaCircleAvatarSize.verySmall,
                   ),
                 ),
-                suffixIcon: SecondaryButton(
-                    assetName: IconRes.arrowUp,
-                    onPressed: () async {
-                      ref.read(commentImagesProvider.notifier).addComment(
-                            ImageComment(
-                              comment: _commentController.text.trim(),
-                              imagesId: widget.details.imagesId,
-                              recipientId: widget.details.userId,
-                            ),
-                          );
-                    }),
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.all(InstaSpacing.tiny),
+                  child: TertiaryButton(
+                      text: '',
+                      width: InstaSpacing.tiny,
+                      height: InstaSpacing.verySmall,
+                      scale: 3.5,
+                      color: applyColor[InstaColor.secondary],
+                      assetName: IconRes.arrowUp,
+                      onPressed: () async {
+                        ref.read(commentImagesProvider.notifier).addComment(
+                              ImageComment(
+                                comment: _commentController.text.trim(),
+                                imagesId: widget.details.imagesId,
+                                recipientId: widget.details.userId,
+                              ),
+                            );
+                      }),
+                ),
               ),
             ),
           ],

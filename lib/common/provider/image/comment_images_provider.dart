@@ -1,5 +1,5 @@
 import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_comment.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/repository/image/comment_repository_provider.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/repository/comment/comment_repository_provider.dart';
 
 // ignore: depend_on_referenced_packages
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -18,7 +18,7 @@ class CommentImages extends _$CommentImages {
 
     state = await AsyncValue.guard(() async {
       final image =
-          await ref.read(commentRepositoryProvider).addComment(details);
+          await ref.read(commentRepositoryProvider).addImagesComment(details);
       List<ImageComment>? list = [
         ...state.value ?? [],
         image ?? const ImageComment()

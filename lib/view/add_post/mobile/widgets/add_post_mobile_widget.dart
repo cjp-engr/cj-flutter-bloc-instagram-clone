@@ -145,7 +145,7 @@ class _NoImageWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              IconRes.emptyGallery,
+              IconRes.addMedia,
               color: applyColor[InstaColor.disabled],
               scale: 0.9,
             ),

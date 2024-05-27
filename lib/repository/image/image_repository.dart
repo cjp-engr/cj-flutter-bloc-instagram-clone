@@ -132,15 +132,6 @@ class ImageRepository {
     return null;
   }
 
-  List<String> _getComments(Iterable<dynamic> elements) {
-    List<String> comments = [];
-
-    for (var comment in List.from(elements)) {
-      comments.add(comment);
-    }
-    return comments;
-  }
-
   FutureOr<List<String>> _getImageUrls(String folderName) async {
     List<String> imageUrl = [];
     try {

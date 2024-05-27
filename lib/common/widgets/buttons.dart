@@ -1,3 +1,4 @@
+import 'package:cj_flutter_riverpod_instagram_clone/common/constants/border_radius.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/utils/build_context_ext.dart';
@@ -92,6 +93,8 @@ class TertiaryButton extends StatelessWidget {
   final Function()? onPressed;
   final double? width;
   final double? height;
+  final double? scale;
+  final Color? color;
   const TertiaryButton({
     super.key,
     required this.text,
@@ -99,6 +102,8 @@ class TertiaryButton extends StatelessWidget {
     this.onPressed,
     this.width,
     this.height,
+    this.scale,
+    this.color,
   });
 
   @override
@@ -109,12 +114,12 @@ class TertiaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: applyColor[InstaColor.primary],
+          backgroundColor: color ?? applyColor[InstaColor.primary],
           minimumSize: Size.zero,
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 5),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(InstaBorderRadius.small),
           ),
         ),
         child: Row(
@@ -122,15 +127,21 @@ class TertiaryButton extends StatelessWidget {
           children: [
             Image.asset(
               assetName,
-              scale: 2.7,
+              scale: scale,
               color: applyColor[InstaColor.tertiary],
             ),
-            const SizedBox(width: InstaSpacing.verySmall),
-            InstaText(
-              text: text,
-              color: applyColor[InstaColor.tertiary],
-              fontWeight: FontWeight.bold,
-            ),
+            text.isEmpty
+                ? const SizedBox()
+                : Row(
+                    children: [
+                      const SizedBox(width: InstaSpacing.verySmall),
+                      InstaText(
+                        text: text,
+                        color: applyColor[InstaColor.tertiary],
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ],
+                  ),
           ],
         ),
       ),
