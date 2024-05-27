@@ -9,6 +9,7 @@ class InstaRouteNames {
   static const String profile = 'profile';
   static const String register = 'register';
   static const String settings = 'settings';
+  static const String search = 'search';
   static const String userDetails = 'user';
   static const String userHomePage = 'user-home-page';
 }

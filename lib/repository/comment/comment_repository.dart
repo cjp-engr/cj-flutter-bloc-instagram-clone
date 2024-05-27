@@ -5,7 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CommentRepository {
   String get _commenterId => fbAuth.currentUser!.uid;
-  CollectionReference<Map<String, dynamic>> commentCollection(String imagesId) {
+  CollectionReference<Map<String, dynamic>> _commentCollection(
+      String imagesId) {
     return FirebaseFirestore.instance
         .collection('users')
         .doc(_commenterId)
@@ -20,7 +21,7 @@ class CommentRepository {
     String commentId = '';
 
     try {
-      await commentCollection(d.imagesId!).add({
+      await _commentCollection(d.imagesId!).add({
         'commenterId': _commenterId,
         'dateCreated': dateCreated,
         'imagesId': d.imagesId,

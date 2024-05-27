@@ -28,6 +28,7 @@ class IconRes {
   static const String remove = '$_iconBase/remove.png';
   static const String saved = '$_iconBase/saved.png';
   static const String savedFilled = '$_iconBase/saved-filled.png';
+  static const String search = '$_iconBase/search.png';
   static const String settings = '$_iconBase/settings.png';
   static const String stack = '$_iconBase/stack.png';
   static const String upload = '$_iconBase/upload.png';

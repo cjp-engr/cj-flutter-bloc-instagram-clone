@@ -50,7 +50,9 @@
             }
         }
     },
-    "addAComment": "Add a comment..."
+    "addAComment": "Add a comment...",
+
+    "search": "Search"
 
 
 }

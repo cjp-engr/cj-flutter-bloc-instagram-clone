@@ -81,12 +81,13 @@ class _CustomBottomNavigation extends ConsumerWidget {
       BottomNavigationBarItem(icon: _icon(IconRes.home), label: ''),
       BottomNavigationBarItem(icon: _icon(IconRes.notification), label: ''),
       BottomNavigationBarItem(icon: _icon(IconRes.newPost), label: ''),
+      BottomNavigationBarItem(icon: _icon(IconRes.search, 2.8), label: ''),
       const BottomNavigationBarItem(icon: _ProfileIconWidget(), label: ''),
     ];
   }
 
-  Widget _icon(String assetName) => Image.asset(assetName,
-      color: applyColor[InstaColor.tertiary], scale: 2.5);
+  Widget _icon(String assetName, [double? scale]) => Image.asset(assetName,
+      color: applyColor[InstaColor.tertiary], scale: scale ?? 2.5);
 
   void _onDestinationSelected(int index, WidgetRef ref) {
     navigationShell!.goBranch(
@@ -162,6 +163,10 @@ class _CustomNavigationRail extends ConsumerWidget {
       ),
       NavigationRailDestination(
         icon: _icon(IconRes.newPost),
+        label: const SizedBox(),
+      ),
+      NavigationRailDestination(
+        icon: _icon(IconRes.search),
         label: const SizedBox(),
       ),
       const NavigationRailDestination(

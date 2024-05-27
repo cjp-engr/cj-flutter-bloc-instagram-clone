@@ -18,6 +18,7 @@ dependencies:
   firebase_auth_platform_interface: ^7.0.9
   firebase_core: ^2.27.2
   firebase_storage: ^11.6.11
+  firebase_storage_web: ^3.9.6
   flutter:
     sdk: flutter
   flutter_adaptive_scaffold: ^0.1.10+1

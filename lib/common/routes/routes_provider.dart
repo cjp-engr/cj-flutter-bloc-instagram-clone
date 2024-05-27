@@ -3,6 +3,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/view/add_post/add_post_page.
 import 'package:cj_flutter_riverpod_instagram_clone/view/edit_post/edit_post_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/edit_profile/edit_profile_page.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/user_home_page.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,8 +27,10 @@ GlobalKey<NavigatorState> _shellNavigatorHomeKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorHomeKey');
 GlobalKey<NavigatorState> _shellNavigatorNotificationKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorNotificationKey');
-GlobalKey<NavigatorState> _shellNavigatorPostsKey =
+GlobalKey<NavigatorState> _shellNavigatorAddPostsKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorPostsKey');
+GlobalKey<NavigatorState> _shellNavigatorSearchKey =
+    GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorSearchKey');
 GlobalKey<NavigatorState> _shellNavigatorProfileKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorProfileKey');
 
@@ -65,7 +68,8 @@ GoRouter router(RouterRef ref) {
         branches: [
           _home(),
           _notification(),
-          _post(),
+          _addPost(),
+          _search(),
           _profile(),
         ],
       ),
@@ -125,15 +129,30 @@ StatefulShellBranch _notification() {
   );
 }
 
-StatefulShellBranch _post() {
+StatefulShellBranch _addPost() {
   return StatefulShellBranch(
-    navigatorKey: _shellNavigatorPostsKey,
+    navigatorKey: _shellNavigatorAddPostsKey,
     routes: [
       GoRoute(
         path: '/${InstaRouteNames.addPost}',
         name: InstaRouteNames.addPost,
         pageBuilder: (context, state) => const NoTransitionPage(
           child: AddPostPage(),
+        ),
+      ),
+    ],
+  );
+}
+
+StatefulShellBranch _search() {
+  return StatefulShellBranch(
+    navigatorKey: _shellNavigatorSearchKey,
+    routes: [
+      GoRoute(
+        path: '/${InstaRouteNames.search}',
+        name: InstaRouteNames.search,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: SearchPage(),
         ),
       ),
     ],

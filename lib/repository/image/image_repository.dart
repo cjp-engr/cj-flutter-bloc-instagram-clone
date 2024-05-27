@@ -10,13 +10,19 @@ import 'package:cj_flutter_riverpod_instagram_clone/model/user/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-// final imagesCollection = FirebaseFirestore.instance.collection('image');
-final userCollection = FirebaseFirestore.instance.collection('users');
+final _userCollection = FirebaseFirestore.instance.collection('users');
+
+String get _userId => fbAuth.currentUser!.uid;
+CollectionReference<Map<String, dynamic>> _imageCollection() {
+  return FirebaseFirestore.instance
+      .collection('users')
+      .doc(_userId)
+      .collection('images');
+}
 
 class ImageRepository {
   //! START - Add operation
   Future<ImageDetails?> addImages(ImageDetails d) async {
-    final fbUserId = fbAuth.currentUser!.uid;
     String folderName = 'uploads/images_${randomName()}';
     List<String> imagesUrl = [];
     String imagesId = '';
@@ -29,7 +35,7 @@ class ImageRepository {
         String? url = await _uploadImage(image, folderName);
         imagesUrl.add(url!);
       }
-      await userCollection.doc(fbUserId).collection('images').add({
+      await _imageCollection().add({
         'userId': fbUserId,
         'folderName': folderName,
         'likeCount': 0,
@@ -78,12 +84,10 @@ class ImageRepository {
 
   //! START - Read operation
   FutureOr<List<ImageDetails>?> getImages() async {
-    final fbUserId = fbAuth.currentUser!.uid;
     List<ImageDetails> imageDetails = [];
     List<String> imageUrls = [];
     try {
-      QuerySnapshot images =
-          await userCollection.doc(fbUserId).collection('images').get();
+      QuerySnapshot images = await _imageCollection().get();
 
       for (var imagesSet in images.docs) {
         var data = imagesSet.data() as Map<String, dynamic>;
@@ -115,7 +119,8 @@ class ImageRepository {
 
   FutureOr<UserDetails?> _getUserDetails() async {
     try {
-      final DocumentSnapshot userDoc = await userCollection.doc(fbUserId).get();
+      final DocumentSnapshot userDoc =
+          await _userCollection.doc(fbUserId).get();
       final data = userDoc.data() as Map<String, dynamic>?;
       if (userDoc.exists) {
         return UserDetails(
@@ -153,7 +158,7 @@ class ImageRepository {
 
   Future<void> deleteImages(String id) async {
     try {
-      await userCollection.doc(fbUserId).collection('images').doc(id).delete();
+      await _imageCollection().doc(id).delete();
     } on FirebaseException catch (e) {
       firebaseHandleException(e);
     } catch (e) {
@@ -171,11 +176,7 @@ class ImageRepository {
       await Future.forEach(deleteImages, (imageUrl) async {
         await FirebaseStorage.instance.refFromURL(imageUrl).delete();
       });
-      await userCollection
-          .doc(fbUserId)
-          .collection('images')
-          .doc(details.imagesId)
-          .update({
+      await _imageCollection().doc(details.imagesId).update({
         'description': details.description,
       });
     } on FirebaseException catch (e) {
