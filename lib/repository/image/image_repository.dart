@@ -45,15 +45,13 @@ class ImageRepository {
       }).then((value) async {
         imagesId = value.id;
       });
-      return ImageDetails(
+      return d.copyWith(
         userId: fbUserId,
         userName: user!.userName,
         userImage: user.imageUrl,
-        location: d.location,
         imagesId: imagesId,
         images: imagesUrl,
         likeCount: 0,
-        description: d.description,
         dateCreated: dateCreated,
       );
     } on FirebaseException catch (e) {
@@ -89,8 +87,8 @@ class ImageRepository {
     try {
       QuerySnapshot images = await _imageCollection().get();
 
-      for (var imagesSet in images.docs) {
-        var data = imagesSet.data() as Map<String, dynamic>;
+      for (var imagesList in images.docs) {
+        var data = imagesList.data() as Map<String, dynamic>;
 
         imageUrls = await _getImageUrls(data['folderName']);
         final user = await _getUserDetails();
@@ -100,7 +98,7 @@ class ImageRepository {
             userName: user?.userName,
             userImage: user?.imageUrl,
             location: data['location'],
-            imagesId: imagesSet.id,
+            imagesId: imagesList.id,
             images: imageUrls,
             likeCount: data['likeCount'],
             description: data['description'],

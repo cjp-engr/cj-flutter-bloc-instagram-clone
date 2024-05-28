@@ -13,6 +13,22 @@ class CommentImages extends _$CommentImages {
     return Future<List<ImageComment>?>.value(null);
   }
 
+  Future<void> getComments({
+    required String recipientId,
+    required String imagesId,
+  }) async {
+    state = const AsyncLoading();
+
+    state = await AsyncValue.guard(() async {
+      final comments = await ref.read(commentRepositoryProvider).getComments(
+            recipientId: recipientId,
+            imagesId: imagesId,
+          );
+      // images?.sort((a, b) => b.dateCreated!.compareTo(a.dateCreated!));
+      return comments;
+    });
+  }
+
   Future<void> addComment(ImageComment details) async {
     state = const AsyncLoading();
 

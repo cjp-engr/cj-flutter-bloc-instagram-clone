@@ -21,10 +21,13 @@ ImageComment _$ImageCommentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ImageComment {
   String? get id => throw _privateConstructorUsedError;
+  String? get ownerId => throw _privateConstructorUsedError;
+  String? get imagesId => throw _privateConstructorUsedError;
   String? get recipientId => throw _privateConstructorUsedError;
   String? get commenterId => throw _privateConstructorUsedError;
-  num? get dateCreated => throw _privateConstructorUsedError;
-  String? get imagesId => throw _privateConstructorUsedError;
+  String? get commenterImage => throw _privateConstructorUsedError;
+  String? get commenterUsername => throw _privateConstructorUsedError;
+  String? get timeDifference => throw _privateConstructorUsedError;
   String? get comment => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,10 +44,13 @@ abstract class $ImageCommentCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
+      String? ownerId,
+      String? imagesId,
       String? recipientId,
       String? commenterId,
-      num? dateCreated,
-      String? imagesId,
+      String? commenterImage,
+      String? commenterUsername,
+      String? timeDifference,
       String? comment});
 }
 
@@ -62,16 +68,27 @@ class _$ImageCommentCopyWithImpl<$Res, $Val extends ImageComment>
   @override
   $Res call({
     Object? id = freezed,
+    Object? ownerId = freezed,
+    Object? imagesId = freezed,
     Object? recipientId = freezed,
     Object? commenterId = freezed,
-    Object? dateCreated = freezed,
-    Object? imagesId = freezed,
+    Object? commenterImage = freezed,
+    Object? commenterUsername = freezed,
+    Object? timeDifference = freezed,
     Object? comment = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ownerId: freezed == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imagesId: freezed == imagesId
+          ? _value.imagesId
+          : imagesId // ignore: cast_nullable_to_non_nullable
               as String?,
       recipientId: freezed == recipientId
           ? _value.recipientId
@@ -81,13 +98,17 @@ class _$ImageCommentCopyWithImpl<$Res, $Val extends ImageComment>
           ? _value.commenterId
           : commenterId // ignore: cast_nullable_to_non_nullable
               as String?,
-      dateCreated: freezed == dateCreated
-          ? _value.dateCreated
-          : dateCreated // ignore: cast_nullable_to_non_nullable
-              as num?,
-      imagesId: freezed == imagesId
-          ? _value.imagesId
-          : imagesId // ignore: cast_nullable_to_non_nullable
+      commenterImage: freezed == commenterImage
+          ? _value.commenterImage
+          : commenterImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      commenterUsername: freezed == commenterUsername
+          ? _value.commenterUsername
+          : commenterUsername // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeDifference: freezed == timeDifference
+          ? _value.timeDifference
+          : timeDifference // ignore: cast_nullable_to_non_nullable
               as String?,
       comment: freezed == comment
           ? _value.comment
@@ -107,10 +128,13 @@ abstract class _$$ImageCommentImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
+      String? ownerId,
+      String? imagesId,
       String? recipientId,
       String? commenterId,
-      num? dateCreated,
-      String? imagesId,
+      String? commenterImage,
+      String? commenterUsername,
+      String? timeDifference,
       String? comment});
 }
 
@@ -126,16 +150,27 @@ class __$$ImageCommentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? ownerId = freezed,
+    Object? imagesId = freezed,
     Object? recipientId = freezed,
     Object? commenterId = freezed,
-    Object? dateCreated = freezed,
-    Object? imagesId = freezed,
+    Object? commenterImage = freezed,
+    Object? commenterUsername = freezed,
+    Object? timeDifference = freezed,
     Object? comment = freezed,
   }) {
     return _then(_$ImageCommentImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ownerId: freezed == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imagesId: freezed == imagesId
+          ? _value.imagesId
+          : imagesId // ignore: cast_nullable_to_non_nullable
               as String?,
       recipientId: freezed == recipientId
           ? _value.recipientId
@@ -145,13 +180,17 @@ class __$$ImageCommentImplCopyWithImpl<$Res>
           ? _value.commenterId
           : commenterId // ignore: cast_nullable_to_non_nullable
               as String?,
-      dateCreated: freezed == dateCreated
-          ? _value.dateCreated
-          : dateCreated // ignore: cast_nullable_to_non_nullable
-              as num?,
-      imagesId: freezed == imagesId
-          ? _value.imagesId
-          : imagesId // ignore: cast_nullable_to_non_nullable
+      commenterImage: freezed == commenterImage
+          ? _value.commenterImage
+          : commenterImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      commenterUsername: freezed == commenterUsername
+          ? _value.commenterUsername
+          : commenterUsername // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeDifference: freezed == timeDifference
+          ? _value.timeDifference
+          : timeDifference // ignore: cast_nullable_to_non_nullable
               as String?,
       comment: freezed == comment
           ? _value.comment
@@ -166,10 +205,13 @@ class __$$ImageCommentImplCopyWithImpl<$Res>
 class _$ImageCommentImpl implements _ImageComment {
   const _$ImageCommentImpl(
       {this.id,
+      this.ownerId,
+      this.imagesId,
       this.recipientId,
       this.commenterId,
-      this.dateCreated,
-      this.imagesId,
+      this.commenterImage,
+      this.commenterUsername,
+      this.timeDifference,
       this.comment});
 
   factory _$ImageCommentImpl.fromJson(Map<String, dynamic> json) =>
@@ -178,19 +220,25 @@ class _$ImageCommentImpl implements _ImageComment {
   @override
   final String? id;
   @override
+  final String? ownerId;
+  @override
+  final String? imagesId;
+  @override
   final String? recipientId;
   @override
   final String? commenterId;
   @override
-  final num? dateCreated;
+  final String? commenterImage;
   @override
-  final String? imagesId;
+  final String? commenterUsername;
+  @override
+  final String? timeDifference;
   @override
   final String? comment;
 
   @override
   String toString() {
-    return 'ImageComment(id: $id, recipientId: $recipientId, commenterId: $commenterId, dateCreated: $dateCreated, imagesId: $imagesId, comment: $comment)';
+    return 'ImageComment(id: $id, ownerId: $ownerId, imagesId: $imagesId, recipientId: $recipientId, commenterId: $commenterId, commenterImage: $commenterImage, commenterUsername: $commenterUsername, timeDifference: $timeDifference, comment: $comment)';
   }
 
   @override
@@ -199,21 +247,35 @@ class _$ImageCommentImpl implements _ImageComment {
         (other.runtimeType == runtimeType &&
             other is _$ImageCommentImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
+            (identical(other.imagesId, imagesId) ||
+                other.imagesId == imagesId) &&
             (identical(other.recipientId, recipientId) ||
                 other.recipientId == recipientId) &&
             (identical(other.commenterId, commenterId) ||
                 other.commenterId == commenterId) &&
-            (identical(other.dateCreated, dateCreated) ||
-                other.dateCreated == dateCreated) &&
-            (identical(other.imagesId, imagesId) ||
-                other.imagesId == imagesId) &&
+            (identical(other.commenterImage, commenterImage) ||
+                other.commenterImage == commenterImage) &&
+            (identical(other.commenterUsername, commenterUsername) ||
+                other.commenterUsername == commenterUsername) &&
+            (identical(other.timeDifference, timeDifference) ||
+                other.timeDifference == timeDifference) &&
             (identical(other.comment, comment) || other.comment == comment));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, recipientId, commenterId,
-      dateCreated, imagesId, comment);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      ownerId,
+      imagesId,
+      recipientId,
+      commenterId,
+      commenterImage,
+      commenterUsername,
+      timeDifference,
+      comment);
 
   @JsonKey(ignore: true)
   @override
@@ -232,10 +294,13 @@ class _$ImageCommentImpl implements _ImageComment {
 abstract class _ImageComment implements ImageComment {
   const factory _ImageComment(
       {final String? id,
+      final String? ownerId,
+      final String? imagesId,
       final String? recipientId,
       final String? commenterId,
-      final num? dateCreated,
-      final String? imagesId,
+      final String? commenterImage,
+      final String? commenterUsername,
+      final String? timeDifference,
       final String? comment}) = _$ImageCommentImpl;
 
   factory _ImageComment.fromJson(Map<String, dynamic> json) =
@@ -244,13 +309,19 @@ abstract class _ImageComment implements ImageComment {
   @override
   String? get id;
   @override
+  String? get ownerId;
+  @override
+  String? get imagesId;
+  @override
   String? get recipientId;
   @override
   String? get commenterId;
   @override
-  num? get dateCreated;
+  String? get commenterImage;
   @override
-  String? get imagesId;
+  String? get commenterUsername;
+  @override
+  String? get timeDifference;
   @override
   String? get comment;
   @override

@@ -7,10 +7,12 @@ part 'image_comment.g.dart';
 class ImageComment with _$ImageComment {
   const factory ImageComment({
     String? id,
+    String? imagesId,
     String? recipientId,
     String? commenterId,
-    num? dateCreated,
-    String? imagesId,
+    String? commenterImage,
+    String? commenterUsername,
+    String? timeDifference,
     String? comment,
   }) = _ImageComment;
 
