@@ -4,6 +4,7 @@ import 'package:cj_flutter_riverpod_instagram_clone/common/enums/color.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/provider/image/display_images_provider.dart';
 
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/controller/home_controller.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/bio_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/details_block_widget.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/media_widget.dart';
@@ -24,7 +25,7 @@ class HomeDetailsWidget extends ConsumerStatefulWidget {
 class HomeDetailsWidgetState extends ConsumerState<HomeDetailsWidget> {
   @override
   Widget build(BuildContext context) {
-    //TODO: display all the images that the user follows
+    final controller = HomeController(ref: ref);
     final image = ref.watch(displayImagesProvider);
     final viewIndex = ref.watch(profileProvider).scrollToIndex;
     return Material(
@@ -49,22 +50,25 @@ class HomeDetailsWidgetState extends ConsumerState<HomeDetailsWidget> {
                 child: ScrollablePositionedList.builder(
                   initialScrollIndex: viewIndex ?? 0,
                   itemCount: details?.length ?? 0,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: InstaSpacing.verySmall),
-                    child: Column(
-                      key: ValueKey(index),
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        BioWidget(details: details![index]),
-                        const SizedBox(height: InstaSpacing.extraSmall),
-                        MediaWidget(images: details[index].images!),
-                        const SizedBox(height: InstaSpacing.medium),
-                        DetailsBlockWidget(details: details[index]),
-                        const SizedBox(height: InstaSpacing.medium),
-                      ],
-                    ),
-                  ),
+                  itemBuilder: (context, index) {
+                    controller.displayImageDetails(details![index]);
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: InstaSpacing.verySmall),
+                      child: Column(
+                        key: ValueKey(index),
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: const [
+                          BioWidget(),
+                          SizedBox(height: InstaSpacing.extraSmall),
+                          MediaWidget(),
+                          SizedBox(height: InstaSpacing.medium),
+                          DetailsBlockWidget(),
+                          SizedBox(height: InstaSpacing.medium),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               );
             },

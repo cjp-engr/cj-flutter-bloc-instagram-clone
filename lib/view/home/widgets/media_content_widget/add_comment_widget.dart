@@ -77,7 +77,7 @@ class _ShowCommentsWidgetState extends ConsumerState<_ShowCommentsWidget> {
         text: AppLocalizations.of(context)!.addAComment,
         color: applyColor[InstaColor.disabled],
       ),
-      onTap: () {
+      onTap: () async {
         ref.read(commentImagesProvider.notifier).getComments(
               recipientId: widget.details.userId!,
               imagesId: widget.details.imagesId!,
@@ -191,57 +191,60 @@ class _DisplayCommentWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final comment = ref.watch(commentImagesProvider);
     return comment.when(
-        data: (data) {
-          return ListView.builder(
-            itemCount: data?.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: InstaSpacing.extraSmall),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    InstaCircleAvatar(
-                      image: data![index].commenterImage!,
-                      radius: InstaCircleAvatarSize.small,
-                    ),
-                    const SizedBox(width: InstaSpacing.small),
-                    SizedBox(
-                      width: context.screenWidth / 1.3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              InstaText(
-                                text: data[index].commenterUsername ?? '',
+      data: (data) {
+        return ListView.builder(
+          itemCount: data?.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: InstaSpacing.extraSmall),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  InstaCircleAvatar(
+                    image: data![index].commenterImage!,
+                    radius: InstaCircleAvatarSize.small,
+                  ),
+                  const SizedBox(width: InstaSpacing.small),
+                  SizedBox(
+                    width: context.screenWidth / 1.3,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            InstaText(
+                              text: data[index].commenterUsername ?? '',
+                              textAlign: TextAlign.start,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            const SizedBox(
+                              width: InstaSpacing.extraSmall,
+                            ),
+                            InstaText(
+                                text: data[index].timeDifference ?? '',
                                 textAlign: TextAlign.start,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              const SizedBox(
-                                width: InstaSpacing.extraSmall,
-                              ),
-                              InstaText(
-                                  text: data[index].timeDifference ?? '',
-                                  textAlign: TextAlign.start,
-                                  color: applyColor[InstaColor.disabled]),
-                            ],
-                          ),
-                          InstaText(
-                            text: data[index].comment ?? '',
-                            textAlign: TextAlign.start,
-                          ),
-                        ],
-                      ),
+                                color: applyColor[InstaColor.disabled]),
+                          ],
+                        ),
+                        InstaText(
+                          text: data[index].comment ?? '',
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-        error: (error, stackTrace) {
-          return const Text('there is an error');
-        },
-        loading: () => const CircularProgressIndicator());
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+      error: (error, stackTrace) {
+        return const Text('there is an error');
+      },
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 }

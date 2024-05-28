@@ -21,7 +21,6 @@ ImageComment _$ImageCommentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ImageComment {
   String? get id => throw _privateConstructorUsedError;
-  String? get ownerId => throw _privateConstructorUsedError;
   String? get imagesId => throw _privateConstructorUsedError;
   String? get recipientId => throw _privateConstructorUsedError;
   String? get commenterId => throw _privateConstructorUsedError;
@@ -44,7 +43,6 @@ abstract class $ImageCommentCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
-      String? ownerId,
       String? imagesId,
       String? recipientId,
       String? commenterId,
@@ -68,7 +66,6 @@ class _$ImageCommentCopyWithImpl<$Res, $Val extends ImageComment>
   @override
   $Res call({
     Object? id = freezed,
-    Object? ownerId = freezed,
     Object? imagesId = freezed,
     Object? recipientId = freezed,
     Object? commenterId = freezed,
@@ -81,10 +78,6 @@ class _$ImageCommentCopyWithImpl<$Res, $Val extends ImageComment>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ownerId: freezed == ownerId
-          ? _value.ownerId
-          : ownerId // ignore: cast_nullable_to_non_nullable
               as String?,
       imagesId: freezed == imagesId
           ? _value.imagesId
@@ -128,7 +121,6 @@ abstract class _$$ImageCommentImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
-      String? ownerId,
       String? imagesId,
       String? recipientId,
       String? commenterId,
@@ -150,7 +142,6 @@ class __$$ImageCommentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? ownerId = freezed,
     Object? imagesId = freezed,
     Object? recipientId = freezed,
     Object? commenterId = freezed,
@@ -163,10 +154,6 @@ class __$$ImageCommentImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ownerId: freezed == ownerId
-          ? _value.ownerId
-          : ownerId // ignore: cast_nullable_to_non_nullable
               as String?,
       imagesId: freezed == imagesId
           ? _value.imagesId
@@ -205,7 +192,6 @@ class __$$ImageCommentImplCopyWithImpl<$Res>
 class _$ImageCommentImpl implements _ImageComment {
   const _$ImageCommentImpl(
       {this.id,
-      this.ownerId,
       this.imagesId,
       this.recipientId,
       this.commenterId,
@@ -219,8 +205,6 @@ class _$ImageCommentImpl implements _ImageComment {
 
   @override
   final String? id;
-  @override
-  final String? ownerId;
   @override
   final String? imagesId;
   @override
@@ -238,7 +222,7 @@ class _$ImageCommentImpl implements _ImageComment {
 
   @override
   String toString() {
-    return 'ImageComment(id: $id, ownerId: $ownerId, imagesId: $imagesId, recipientId: $recipientId, commenterId: $commenterId, commenterImage: $commenterImage, commenterUsername: $commenterUsername, timeDifference: $timeDifference, comment: $comment)';
+    return 'ImageComment(id: $id, imagesId: $imagesId, recipientId: $recipientId, commenterId: $commenterId, commenterImage: $commenterImage, commenterUsername: $commenterUsername, timeDifference: $timeDifference, comment: $comment)';
   }
 
   @override
@@ -247,7 +231,6 @@ class _$ImageCommentImpl implements _ImageComment {
         (other.runtimeType == runtimeType &&
             other is _$ImageCommentImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.imagesId, imagesId) ||
                 other.imagesId == imagesId) &&
             (identical(other.recipientId, recipientId) ||
@@ -265,17 +248,8 @@ class _$ImageCommentImpl implements _ImageComment {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      ownerId,
-      imagesId,
-      recipientId,
-      commenterId,
-      commenterImage,
-      commenterUsername,
-      timeDifference,
-      comment);
+  int get hashCode => Object.hash(runtimeType, id, imagesId, recipientId,
+      commenterId, commenterImage, commenterUsername, timeDifference, comment);
 
   @JsonKey(ignore: true)
   @override
@@ -294,7 +268,6 @@ class _$ImageCommentImpl implements _ImageComment {
 abstract class _ImageComment implements ImageComment {
   const factory _ImageComment(
       {final String? id,
-      final String? ownerId,
       final String? imagesId,
       final String? recipientId,
       final String? commenterId,
@@ -308,8 +281,6 @@ abstract class _ImageComment implements ImageComment {
 
   @override
   String? get id;
-  @override
-  String? get ownerId;
   @override
   String? get imagesId;
   @override

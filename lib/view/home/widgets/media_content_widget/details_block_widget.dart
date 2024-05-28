@@ -1,7 +1,7 @@
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/font_size.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/constants/spacing.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/common/widgets/text.dart';
-import 'package:cj_flutter_riverpod_instagram_clone/model/image/image_details.dart';
+import 'package:cj_flutter_riverpod_instagram_clone/view/home/provider/home_provider.dart';
 import 'package:cj_flutter_riverpod_instagram_clone/view/home/widgets/media_content_widget/add_comment_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -10,11 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailsBlockWidget extends ConsumerStatefulWidget {
-  final ImageDetails details;
-  const DetailsBlockWidget({
-    super.key,
-    required this.details,
-  });
+  const DetailsBlockWidget({super.key});
 
   @override
   ConsumerState<DetailsBlockWidget> createState() => _DetailsBlockWidgetState();
@@ -23,17 +19,18 @@ class DetailsBlockWidget extends ConsumerStatefulWidget {
 class _DetailsBlockWidgetState extends ConsumerState<DetailsBlockWidget> {
   @override
   Widget build(BuildContext context) {
+    final details = ref.watch(homeProvider).imageDetails;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildLike(),
         _buildDescription(),
-        widget.details.description!.isEmpty
+        details!.description!.isEmpty
             ? const SizedBox()
             : const SizedBox(height: InstaSpacing.extraSmall),
         _buildViewComment(),
         const SizedBox(height: InstaSpacing.extraSmall),
-        AddCommentWidget(details: widget.details),
+        AddCommentWidget(details: details),
       ],
     );
   }
@@ -43,13 +40,14 @@ class _DetailsBlockWidgetState extends ConsumerState<DetailsBlockWidget> {
   }
 
   Widget _buildDescription() {
-    return widget.details.description!.isEmpty
+    final details = ref.watch(homeProvider).imageDetails;
+    return details!.description!.isEmpty
         ? const SizedBox()
         : Text.rich(
             TextSpan(
               children: [
                 TextSpan(
-                  text: widget.details.userName,
+                  text: details.userName,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: InstaFontSize.medium,
@@ -57,7 +55,7 @@ class _DetailsBlockWidgetState extends ConsumerState<DetailsBlockWidget> {
                 ),
                 const TextSpan(text: ' '),
                 TextSpan(
-                    text: widget.details.description,
+                    text: details.description,
                     style: const TextStyle(
                       fontSize: InstaFontSize.medium,
                     )),

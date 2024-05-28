@@ -76,7 +76,7 @@ class SecondaryButton extends StatelessWidget {
         splashFactory: NoSplash.splashFactory,
       ).copyWith(
           overlayColor:
-              MaterialStateProperty.all(applyColor[InstaColor.transparent])),
+              WidgetStateProperty.all(applyColor[InstaColor.transparent])),
       child: Image.asset(
         assetName,
         scale: scale ?? 2.7,

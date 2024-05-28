@@ -9,7 +9,6 @@ part of 'image_comment.dart';
 _$ImageCommentImpl _$$ImageCommentImplFromJson(Map<String, dynamic> json) =>
     _$ImageCommentImpl(
       id: json['id'] as String?,
-      ownerId: json['ownerId'] as String?,
       imagesId: json['imagesId'] as String?,
       recipientId: json['recipientId'] as String?,
       commenterId: json['commenterId'] as String?,
@@ -22,7 +21,6 @@ _$ImageCommentImpl _$$ImageCommentImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ImageCommentImplToJson(_$ImageCommentImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'ownerId': instance.ownerId,
       'imagesId': instance.imagesId,
       'recipientId': instance.recipientId,
       'commenterId': instance.commenterId,

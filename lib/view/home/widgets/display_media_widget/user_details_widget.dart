@@ -52,14 +52,14 @@ class UserDetailsWidgetState extends ConsumerState<UserDetailsWidget> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            BioWidget(details: details![index]),
-                            ActionsWidget(details: details[index]),
+                            const BioWidget(),
+                            ActionsWidget(details: details![index]),
                           ],
                         ),
                         const SizedBox(height: InstaSpacing.extraSmall),
-                        MediaWidget(images: details[index].images!),
+                        const MediaWidget(),
                         const SizedBox(height: InstaSpacing.medium),
-                        DetailsBlockWidget(details: details[index]),
+                        const DetailsBlockWidget(),
                         const SizedBox(height: InstaSpacing.medium),
                       ],
                     ),
